@@ -5,7 +5,6 @@ function MySphere(scene, radius, slices, stacks) {
   this.radius = radius || 0;
   this.slices = slices || 0;
   this.stacks = stacks || 0;
-  this.semisphere = new MySemiSphere(this.scene, 30, 30);
   this.initBuffers();
 
 }

@@ -112,6 +112,8 @@ XMLscene.prototype.display = function() {
     this.applyViewMatrix();
 
     this.pushMatrix();
+
+  
     
     if (this.graph.loadedOk) 
     {        
