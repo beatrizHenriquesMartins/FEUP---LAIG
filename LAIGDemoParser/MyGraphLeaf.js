@@ -7,7 +7,7 @@ function MyGraphLeaf(graph, xmlelem) {
 
     this.graph = graph;
     var type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
-    this.xmlelem = xmlelem
+    this.xmlelem = xmlelem;
     this.primitive;
     this.initBuffers(type);
 

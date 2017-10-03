@@ -5,10 +5,8 @@
  */
 function MyQuad(scene, minX, minY, maxX, maxY) {
 	CGFobject.call(this, scene);
-	this.minS = 0;
-	this.maxS = 1;
-	this.minT = 0;
-	this.maxT = 1;
+	this.lengths = 1;
+	this.lengtht = 1;
 
 	this.minX = minX;
 	this.maxX = maxX;
@@ -44,13 +42,22 @@ MyQuad.prototype.initBuffers = function () {
 	]
 
 	this.texCoords = [
-		this.minS, this.maxT,
-		this.maxS, this.maxT,
-		this.minS, this.minT,
-		this.maxS, this.minT
+		0,this.lengtht,
+		this.lengths,this.lengtht,
+		0,0, 
+		this.lengths,0 
+		
 
 
 	]
 	this.primitiveType = this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
 };
+
+
+MyQuad.prototype.loadTexture = function(texture)
+{
+	this.lengths = texture[1];
+	this.lengtht = texture[2];
+	this.initBuffers();
+}

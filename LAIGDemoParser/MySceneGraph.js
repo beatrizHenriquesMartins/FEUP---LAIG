@@ -1366,12 +1366,11 @@ MySceneGraph.prototype.displayScene = function () {
 
 MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) {
 
-    var material = initialMat;
-    var texture = initialText;
+    let material = initialMat;
+    let texture = initialText;
 
     var currnode = this.nodes[nodeID];
 
-    console.log(currnode,"ajshdas");
 
     //procurar nodeID no conjunto de nos e ver se existe
     if (currnode == null) {
@@ -1380,33 +1379,33 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
     }
 
     //se o material desse no for null usa o definido
-    if (currnode.materialID != null) {
+    if (currnode.materialID != "null") {
         material = this.materials[currnode.materialID];
     }
 
-    if (currnode.textureID != null) {
+    if (currnode.textureID != "null") {
         if (currnode.textureID == "clear") {
             texture = null;
-        } else
+        } else {
             texture = this.textures[currnode.textureID];
+
+        }
+
     }
 
 
     this.scene.multMatrix(currnode.transformMatrix);
-    
+
 
     //ciclo que percorre os nos filho nao folha 
     //pushmatrix
-    //apply de texture e material
     //processNode() por cada no
     //popmatrix
 
-    for(var i = 0; i < currnode.children.length; i++) 
-    {
+    for (let i = 0; i < currnode.children.length; i++) {
         this.scene.pushMatrix();
-        //this.scene.applyTexture(texture);
-        //this.scene.applyMaterial(material);
-        this.processNode(currnode.children[i],this.materials[currnode.children[i].materialID], this.textures[currnode.children[i].textureID]);
+        //this.processNode(currnode.children[i],this.materials[currnode.children[i].materialID], this.textures[currnode.children[i].textureID]);
+        this.processNode(currnode.children[i], material, texture);
         this.scene.popMatrix();
     }
 
@@ -1416,14 +1415,27 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
     //leaf.display
     //pop
 
-    for(let i = 0; i < currnode.leaves.length;i++)
-    {
+    for (let i = 0; i < currnode.leaves.length; i++) {
+
         this.scene.pushMatrix();
-           /* if(material != null)
-            {
-                material.apply();
-            }*/
-            
+
+
+        if (material != null) {
+            material.apply();
+
+        }
+
+        if (texture != null) {
+
+
+            // var src = this.reader.getString(texture[0].image,'src');
+            //console.log(src,"ajshdas");
+            currnode.leaves[i].primitive.loadTexture(texture);
+            texture[0].bind(1);
+
+        }
+
+
         currnode.leaves[i].primitive.display();
         this.scene.popMatrix();
     }

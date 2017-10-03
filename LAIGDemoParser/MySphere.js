@@ -42,3 +42,8 @@ MySphere.prototype.initBuffers = function () {
   this.initGLBuffers();
 
 }
+
+MySphere.prototype.loadTexture = function(texture){
+  this.lengths = texture[1];
+	this.lengtht = texture[2];
+}

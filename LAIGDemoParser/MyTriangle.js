@@ -1,10 +1,9 @@
 function MyTriangle(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
 
 
-  this.minS = 0;
-  this.minT = 0;
-  this.maxS = 1;
-  this.maxT = 1;
+
+  this.lengths = 1;
+  this.lengtht = 1;
 
   this.v1 = vec3.fromValues(x1, y1, z1);
   this.v2 = vec3.fromValues(x2, y2, z2);
@@ -34,19 +33,22 @@ MyTriangle.prototype.initBuffers = function () {
   ];
 
   this.normals = [
-    0, 0, 1,
-    0, 0, 1,
-    0, 0, 1
+    0,1,0,
+    0, 1,0,
+    0, 1, 0
 
   ]
 
   this.texCoords = [
-    this.minS, this.maxT,
-    this.maxS, this.maxT,
-    this.maxS, this.maxT,
-    this.minS, this.maxT
+    0,this.lengtht,this.lengths,this.lengtht,0,0,this.lengths,0
 
   ]
   this.primitiveType = this.scene.gl.TRIANGLES;
   this.initGLBuffers();
+}
+
+MyTriangle.prototype.loadTexture = function(texture){
+  this.lengths = texture[1];
+  this.lengtht = texture[2];
+  this.initBuffers();
 }
