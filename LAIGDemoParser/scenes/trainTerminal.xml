@@ -104,16 +104,14 @@
     <NODE id="root">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-
       <DESCENDANTS>
-        <NODEREF id="floor">
+        <NODEREF id="floor"/>
       </DESCENDANTS>
     </NODE>
 
     <NODE id="floor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-
       <SCALE sx="6" sy="1" sz="5" />
       <TRANSLATION x="0" y="0" z="4" />
       <ROTATION axis="x" angle="-90" />
