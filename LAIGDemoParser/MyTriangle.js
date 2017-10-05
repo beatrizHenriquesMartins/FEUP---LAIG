@@ -2,6 +2,17 @@ function MyTriangle(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
 
 
 
+  this.x1 =x1;
+  this.x2 = x2;
+  this.x3 = x3;
+  this.y1 = y1;
+  this.y2=y2;
+  this.y3=y3;
+  this.z1=z1;
+  this.z2 = z2;
+  this.z3 = z3;
+
+
   this.lengths = 1;
   this.lengtht = 1;
 
@@ -21,9 +32,9 @@ MyTriangle.prototype.initBuffers = function () {
 
 
   this.vertices = [
-    this.v1[0], this.v1[1], this.v1[2],
-    this.v2[0], this.v2[1], this.v2[2],
-    this.v3[0], this.v3[1], this.v3[2]
+    this.x1,this.y1,this.z1,
+    this.x2,this.y2,this.z2,
+    this.x3,this.y3,this.z3
   ];
 
 
@@ -50,5 +61,5 @@ MyTriangle.prototype.initBuffers = function () {
 MyTriangle.prototype.loadTexture = function(texture){
   this.lengths = texture[1];
   this.lengtht = texture[2];
-  this.initBuffers();
+  
 }

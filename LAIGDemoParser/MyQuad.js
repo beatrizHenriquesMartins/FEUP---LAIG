@@ -59,5 +59,5 @@ MyQuad.prototype.loadTexture = function(texture)
 {
 	this.lengths = texture[1];
 	this.lengtht = texture[2];
-	this.initBuffers();
+	
 }

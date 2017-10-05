@@ -1359,7 +1359,8 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
 
-    this.processNode("root", null, null);
+    this.processNode(this.idRoot, this.materials[this.nodes[this.idRoot].materialID], this.textures[this.nodes[this.idRoot].textureID]);
+    console.log("Cenas de material",this.materials[this.nodes[this.idRoot].materialID]);
     this.log("Graph should be rendered here...");
 
 }
@@ -1431,7 +1432,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
             // var src = this.reader.getString(texture[0].image,'src');
             //console.log(src,"ajshdas");
             currnode.leaves[i].primitive.loadTexture(texture);
-            texture[0].bind(1);
+            texture[0].bind();
 
         }
 
