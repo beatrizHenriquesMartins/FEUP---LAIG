@@ -52,4 +52,75 @@
     </LIGHT>
   </LIGHTS>
 
+  <TEXTURES>
+    <!-- Tree trunk -->
+    <TEXTURE id="trunk">
+      <file path="images/trunk-image.jpg" />
+      <amplif_factor s="2" t="2" />
+    </TEXTURE>
+
+    <!-- Tree leaves -->
+    <TEXTURE id="folhas">
+      <file path="images/leaves.jpg" />
+      <amplif_factor s="3" t="4" />
+    </TEXTURE>
+
+    <!-- Rocks -->
+    <TEXTURE id="rocks">
+      <file path="images/rocks.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <!-- Glass work -->
+    <TEXTURE id="vidral">
+      <file path="images/vidral.jpg" />
+      <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <!-- Street bench -->
+    <TEXTURE id="banco">
+      <file path="images/bank.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+  </TEXTURES>
+
+  <MATERIALS>
+    <!-- A default material -->
+    <MATERIAL id="defaultMaterial">
+      <shininess value="1" />
+      <specular r="0.0" g="0.0" b="0.0" a="1" />
+      <diffuse r="0.4" g="0.4" b="0.4" a="1" />
+      <ambient r="0.4" g="0.4" b="0.4" a="1" />
+      <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+  </MATERIALS>
+
+  <LEAVES>
+  </LEAVES>
+
+  <NODES>
+    <ROOT id="root"/>
+
+    <NODE id="root">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="floor">
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="floor">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="6" sy="1" sz="5" />
+      <TRANSLATION x="0" y="0" z="4" />
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 4 5 0"/>
+      </DESCENDANTS>
+    </NODE>
+  </NODES>
 </SCENE>
