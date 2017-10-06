@@ -1,5 +1,4 @@
 <SCENE>
-
   <!-- Inicial values -->
   <INITIALS>
     <frustum near="0.1" far="500"/>
@@ -101,24 +100,164 @@
   <NODES>
     <ROOT id="root"/>
 
+    <!-- raiz -->
     <NODE id="root">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
       <DESCENDANTS>
         <NODEREF id="floor"/>
+        <NODEREF id="asides"/>
       </DESCENDANTS>
     </NODE>
 
+    <!-- chão -->
     <NODE id="floor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
+
       <SCALE sx="6" sy="1" sz="5" />
-      <TRANSLATION x="0" y="0" z="4" />
+      <TRANSLATION x="0" y="0" z="0" />
       <ROTATION axis="x" angle="-90" />
 
       <DESCENDANTS>
-        <LEAF type="rectangle" args="0 4 5 0"/>
+        <LEAF type="rectangle" args="0 6.5 7 0"/>
       </DESCENDANTS>
     </NODE>
+
+    <!-- cais laterais -->
+    <NODE id="asides">
+      <!-- definir materiais e texturas aqui-->
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="asideLeft"/>
+        <NODEREF id="asideRigth"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- cais do lado esquerdo -->
+    <NODE id="asideLeft">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <!--
+      <TRANSLATION x="7.5" y="-2" z="21" />
+      -->
+
+      <DESCENDANTS>
+        <NODEREF id="aside"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- cais do lado direito -->
+    <NODE id="asideRigth">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <!--
+      <TRANSLATION x="7.5" y="-2" z="21" />
+      -->
+
+      <DESCENDANTS>
+        <NODEREF id="aside"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- cais genrico -->
+    <NODE id="aside">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <ROTATION axis="y" angle="90" />
+      <SCALE sx="0.5" sy="0.5" sz="1.5" />
+
+      <DESCENDANTS>
+        <NODEREF id="faceCubo1" />
+        <NODEREF id="faceCubo2" />
+        <NODEREF id="faceCubo3" />
+        <NODEREF id="faceCubo4" />
+        <NODEREF id="faceCubo5" />
+        <NODEREF id="faceCubo6" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- A cube face -->
+    <NODE id="faceCubo1">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="1.5" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo2">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0.5" />
+		  <ROTATION axis="y" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo3">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="1" y="0" z="1.5" />
+		  <ROTATION axis="y" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo4">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="1" y="0" z="0.5" />
+      <ROTATION axis="y" angle="180" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo5">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="x" angle="-90" />
+      <TRANSLATION x="0" y="-1.5" z="1" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo6">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0.5" />
+      <ROTATION axis="x" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
   </NODES>
 </SCENE>
