@@ -115,12 +115,12 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="6" sy="1" sz="5" />
-      <TRANSLATION x="0" y="0" z="0" />
+      <SCALE sx="35" sy="0" sz="45" />
+      <TRANSLATION x="0" y="0" z="1" />
       <ROTATION axis="x" angle="-90" />
 
       <DESCENDANTS>
-        <LEAF type="rectangle" args="0 6.5 7 0"/>
+        <LEAF type="rectangle" args="0 1 1 0"/>
       </DESCENDANTS>
     </NODE>
 
@@ -141,12 +141,10 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <!--
-      <TRANSLATION x="7.5" y="-2" z="21" />
-      -->
+      <SCALE sx="70" sy="5" sz="10" />
 
       <DESCENDANTS>
-        <NODEREF id="aside"/>
+        <NODEREF id="myRectangle"/>
       </DESCENDANTS>
     </NODE>
 
@@ -155,22 +153,20 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <!--
-      <TRANSLATION x="7.5" y="-2" z="21" />
-      -->
+      <TRANSLATION x="0" y="0" z="20" />
 
       <DESCENDANTS>
-        <NODEREF id="aside"/>
+        <NODEREF id="myRectangle"/>
       </DESCENDANTS>
     </NODE>
 
     <!-- cais genrico -->
-    <NODE id="aside">
+    <NODE id="myRectangle">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <ROTATION axis="y" angle="90" />
       <SCALE sx="0.5" sy="0.5" sz="1.5" />
+      <TRANSLATION x="0" y="0" z="-0.5" />
 
       <DESCENDANTS>
         <NODEREF id="faceCubo1" />
