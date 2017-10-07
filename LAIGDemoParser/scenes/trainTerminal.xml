@@ -105,18 +105,18 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
       <DESCENDANTS>
-        <NODEREF id="floor"/>
-        <NODEREF id="asides"/>
+        <NODEREF id="chaoCarris"/>
+        <NODEREF id="laterias"/>
       </DESCENDANTS>
     </NODE>
 
     <!-- chão -->
-    <NODE id="floor">
+    <NODE id="chaoCarris">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="35" sy="0" sz="45" />
-      <TRANSLATION x="0" y="0" z="1" />
+      <SCALE sx="35" sy="0" sz="40" />
+      <TRANSLATION x="0" y="0" z="1.5" />
       <ROTATION axis="x" angle="-90" />
 
       <DESCENDANTS>
@@ -125,23 +125,23 @@
     </NODE>
 
     <!-- cais laterais -->
-    <NODE id="asides">
+    <NODE id="laterias">
       <!-- definir materiais e texturas aqui-->
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="asideLeft"/>
-        <NODEREF id="asideRigth"/>
+        <NODEREF id="lateralEsquerda"/>
+        <NODEREF id="lateralDireita"/>
       </DESCENDANTS>
     </NODE>
 
     <!-- cais do lado esquerdo -->
-    <NODE id="asideLeft">
+    <NODE id="lateralEsquerda">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="70" sy="5" sz="10" />
+      <SCALE sx="70" sy="5" sz="15" />
 
       <DESCENDANTS>
         <NODEREF id="myRectangle"/>
@@ -149,11 +149,12 @@
     </NODE>
 
     <!-- cais do lado direito -->
-    <NODE id="asideRigth">
+    <NODE id="lateralDireita">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="0" y="0" z="20" />
+      <SCALE sx="70" sy="5" sz="15" />
+      <TRANSLATION x="0" y="0" z="2.5"/>
 
       <DESCENDANTS>
         <NODEREF id="myRectangle"/>
