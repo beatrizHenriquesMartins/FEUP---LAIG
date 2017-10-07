@@ -216,12 +216,9 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="5" sy="1" sz="1" />
-      <TRANSLATION x="0" y="2.5" z="0.5"/>
-      <ROTATION axis="y" angle="-270"/>
-
       <DESCENDANTS>
-        <NODEREF id="myRectangle"/>
+        <NODEREF id="parte1"/>
+        <NODEREF id="parte2"/>
       </DESCENDANTS>
     </NODE>
 
@@ -229,10 +226,34 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <!--
-      <SCALE sx="70" sy="5" sz="15" />
-      <TRANSLATION x="0" y="0" z="2.5"/>
-    -->
+      <TRANSLATION x="12.5" y="0.35" z="60"/>
+
+      <DESCENDANTS>
+        <NODEREF id="parte1"/>
+        <NODEREF id="parte2"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="parte1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="15" sy="14" sz="0.5" />
+      <TRANSLATION x="0" y="0.15" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="parte2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="15" sy="14" sz="0.5" />
+      <TRANSLATION x="0" y="0.3" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
 
       <DESCENDANTS>
         <NODEREF id="myRectangle"/>
