@@ -147,10 +147,11 @@
         <NODEREF id="chaoCarris"/>
         <NODEREF id="laterias"/>
         <NODEREF id="paredes"/>
+        <NODEREF id="rebordoPorta"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- chão -->
+    <!-- chão onde passam os carris -->
     <NODE id="chaoCarris">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="gravilha"/>
@@ -212,6 +213,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- parede esquerda -->
     <NODE id="paredeEsquerda">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -222,6 +224,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- parede direita -->
     <NODE id="paredeDireita">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -234,6 +237,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- 1ºparte da parede -->
     <NODE id="parte1">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -247,6 +251,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- 2ºparte da parede -->
     <NODE id="parte2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -254,6 +259,60 @@
       <SCALE sx="15" sy="14" sz="0.5" />
       <TRANSLATION x="0" y="0.3" z="0.5"/>
       <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- redordo da porta -->
+    <NODE id="rebordoPorta">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="rebordoEsquerda"/>
+        <NODEREF id="rebordoDireita"/>
+        <NODEREF id="rebordoCima"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rebordo da porta, parte do lado esquerdo -->
+    <NODE id="rebordoEsquerda">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="0.25" sy="14" sz="1" />
+      <TRANSLATION x="0" y="0.15" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rebordo da porta, parte do lado direito -->
+    <NODE id="rebordoDireita">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="0.25" sy="14" sz="1" />
+      <TRANSLATION x="15" y="0.15" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rebordo da porta, parte de cima -->
+    <NODE id="rebordoCima">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="8.25" sy="0.25" sz="1" />
+      <TRANSLATION x="0" y="37" z="0"/>
+      <ROTATION axis="x" angle="-270"/>
 
       <DESCENDANTS>
         <NODEREF id="myRectangle"/>
