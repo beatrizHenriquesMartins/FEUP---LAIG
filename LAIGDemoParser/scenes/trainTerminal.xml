@@ -117,7 +117,7 @@
     <!-- gravilha para chão comboio -->
     <TEXTURE id="gravilha">
       <file path="images/gravilha.jpg" />
-      <amplif_factor s="1" t="1" />
+      <amplif_factor s="0.25" t="0.25" />
     </TEXTURE>
   </TEXTURES>
 
