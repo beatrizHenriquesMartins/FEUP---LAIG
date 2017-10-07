@@ -1,18 +1,16 @@
-function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices, texture) {
+function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices) {
     CGFobject.call(this, scene);
-    top = typeof top !== 'undefined' ? top : false;
-    bottom = typeof bottom !== 'undefined' ? bottom : false;
-    texture = typeof texture !== 'undefined' ? texture : false;
-    this.top = top;
-    this.bottom = bottom;
-    this.texture = texture;
+
+    this.scene = scene;
+   
+    this.texture;
     this.topRad = topRadius;
     this.bottomRad = bottomRadius;
     this.height = height;
     this.slices = slices;
     this.stacks = stacks;
-    this.type = 'MyCylinder';
 
+    
     this.initBuffers();
 };
 
@@ -92,14 +90,9 @@ MyCylinder.prototype.initBuffers = function () {
 };
 
 
-MyCylinder.prototype.scaleTexCoords = function (ampS, ampT) {
-    for (var i = 0; i < this.texCoords.length; i += 2) {
-        this.texCoords[i] = this.originalTexCoords[i] / ampS;
-        this.texCoords[i + 1] = this.originalTexCoords[i + 1] / ampT;
-    }
-    this.updateTexCoordsGLBuffers();
-}
 
-MyCylinder.prototype.loadTexture = function(){
+
+
+MyCylinder.prototype.loadTexture = function (texture) {
     
 }

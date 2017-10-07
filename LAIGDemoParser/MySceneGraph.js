@@ -1369,7 +1369,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
 
     let material = initialMat;
     let texture = initialText;
-
+    let clear = 0;
     var currnode = this.nodes[nodeID];
 
 
@@ -1386,7 +1386,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
 
     if (currnode.textureID != "null") {
         if (currnode.textureID == "clear") {
-            texture = null;
+            clear =1;
         } else {
             texture = this.textures[currnode.textureID];
 
@@ -1398,10 +1398,6 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
     this.scene.multMatrix(currnode.transformMatrix);
 
 
-    //ciclo que percorre os nos filho nao folha 
-    //pushmatrix
-    //processNode() por cada no
-    //popmatrix
 
     for (let i = 0; i < currnode.children.length; i++) {
         this.scene.pushMatrix();
@@ -1411,10 +1407,6 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
     }
 
 
-    //ciclo para os folha
-    //push
-    //leaf.display
-    //pop
 
     for (let i = 0; i < currnode.leaves.length; i++) {
 
@@ -1428,11 +1420,16 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
 
         if (texture != null) {
 
-
-            // var src = this.reader.getString(texture[0].image,'src');
-            //console.log(src,"ajshdas");
-            currnode.leaves[i].primitive.loadTexture(texture);
-            texture[0].bind();
+            if(clear ==1)
+            {
+                texture[0].unbind();
+                clear = 0;
+            }else{
+                currnode.leaves[i].primitive.loadTexture(texture);
+                texture[0].bind();
+            }
+            
+            
 
         }
 

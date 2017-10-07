@@ -93,6 +93,32 @@
       <ambient r="0.4" g="0.4" b="0.4" a="1" />
       <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
+
+    <MATERIAL id="separatorMaterial">
+      <shininess value="1"/>
+      <specular r="0.1" g="0.1" b="0.1" a="1"/>
+      <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+      <ambient r="0.0" g="0.0" b="0.0" a="1" />
+      <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <MATERIAL id="carriageMaterial">
+      <shininess value="1"/>
+      <specular r="0.807" g="0.807" b="0.0" a="1"/>
+      <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+      <ambient r="0.0" g="0.0" b="0.0" a="1" />
+      <emission r="0.1" g="0.1" b="0.1" a="1" />
+    </MATERIAL>
+
+    <MATERIAL id="wheelMaterial">
+      <shininess value="1"/>
+      <specular r="0.268" g="0.274" b="0.294" a="1"/>
+      <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+      <ambient r="0.0" g="0.0" b="0.0" a="1" />
+      <emission r="0.1" g="0.1" b="0.1" a="1" />
+
+    </MATERIAL>
+
   </MATERIALS>
 
   <LEAVES>
@@ -106,13 +132,14 @@
       <TEXTURE id="null"/>
       <DESCENDANTS>
         <NODEREF id="floor"/>
+        <NODEREF id="train"/>
       </DESCENDANTS>
     </NODE>
 
     <NODE id="floor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-      <SCALE sx="6" sy="1" sz="5" />
+      <SCALE sx="6" sy="1.05" sz="5" />
       <TRANSLATION x="0" y="0" z="4" />
       <ROTATION axis="x" angle="-90" />
 
@@ -120,5 +147,583 @@
         <LEAF type="rectangle" args="0 4 5 0"/>
       </DESCENDANTS>
     </NODE>
+
+    <NODE id="train">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+      <DESCENDANTS>
+        <NODEREF id="carriage_1"/>
+        <NODEREF id="carriage_2"/>
+        <NODEREF id="carriage_3"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="carriage_1">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="carriage"/>
+        <NODEREF id="separator"/>
+        <NODEREF id="top-light"/>
+        <NODEREF id="left-light"/>
+        <NODEREF id="right-light"/>
+        <NODEREF id="front-window"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+     <NODE id="carriage_2">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="-13" y="0" z="0" />
+      <DESCENDANTS>
+        <NODEREF id="carriage"/>
+        <NODEREF id="separator"/>
+      </DESCENDANTS>
+
+      </NODE>
+
+     <NODE id="carriage_3">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="-26" y="0" z="0"/>
+      <DESCENDANTS>
+        <NODEREF id="carriage"/>
+      </DESCENDANTS>
+
+      </NODE>
+
+    <NODE id="carriage">
+      <MATERIAL id="carriageMaterial"/>
+      <TEXTURE id="null"/>
+
+
+      <SCALE sx="2.5" sy="1" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="left-side"/>
+        <NODEREF id="right-side"/>
+        <NODEREF id="top-side"/>
+        <NODEREF id="bottom-side"/>
+        <NODEREF id="back-side"/>
+        <NODEREF id="front-side"/>
+
+        <NODEREF id="left-wheel1"/>
+        <NODEREF id="left-wheel2"/>
+        <NODEREF id="left-wheel3"/>
+        <NODEREF id="right-wheel1"/>
+        <NODEREF id="right-wheel2"/>
+        <NODEREF id="right-wheel3"/>
+
+        <NODEREF id="left-window"/>
+        <NODEREF id="right-window"/>
+
+        <NODEREF id="left-door"/>
+        <NODEREF id="right-door"/>
+
+
+        <NODEREF id="smooth-roof"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="left-side">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="2.5" y="4" z="7.5" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 7 5 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="right-side">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="7.5" y="4" z="0.5" />
+      <ROTATION axis="y" angle="180" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 7 5 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="top-side">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="x" angle="-90" />
+      <TRANSLATION x="2.5" y="-7.5" z="11" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 7 5 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bottom-side">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="2.5" y="4" z="0.5" />
+      <ROTATION axis="x" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 7 5 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="front-side">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="7.5" y="4" z="7.5" />
+		  <ROTATION axis="y" angle="90" />
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 7 7 0 "/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="back-side">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="2.5" y="4" z="0.5" />
+		  <ROTATION axis="y" angle="-90" />
+      
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 7 7 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="separator">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="5.2" y="0.49" z="0.5"/>
+      <SCALE sx="0.15" sy="0.95" sz="0.85"/>
+
+      <DESCENDANTS>
+        <NODEREF id="left-side"/>
+        <NODEREF id="top-side"/>
+        <NODEREF id="right-side"/>
+        <NODEREF id="bottom-side"/>
+
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="top-light">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+       <TRANSLATION x="18.5" y="10" z="4"/> 
+       <ROTATION axis="y" angle="90"/>
+       <SCALE sx="1" sy="0.5" sz="0.5"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="1 1 1 20 20 1 1"/> 
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="left-wheel1">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="6.5"/>
+      <DESCENDANTS>
+        <NODEREF id="wheel"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="left-wheel2">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="-1" y="0" z="6.5"/>
+      <DESCENDANTS>
+        <NODEREF id="wheel"/>
+      </DESCENDANTS>
+    </NODE>
+
+     <NODE id="left-wheel3">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="-1.75" y="0" z="6.5"/>
+      <DESCENDANTS>
+        <NODEREF id="wheel"/>
+      </DESCENDANTS>
+    </NODE>
+
+     <NODE id="right-wheel1">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      
+      <DESCENDANTS>
+        <NODEREF id="wheel"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="right-wheel2">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="-0.75" y="0" z="0"/>
+      <DESCENDANTS>
+        <NODEREF id="wheel"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="right-wheel3">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      
+      
+      
+      <TRANSLATION x="-1.75" y="0" z="0"/>
+      
+      
+      <DESCENDANTS>
+        <NODEREF id="wheel"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="wheel">
+      <MATERIAL id="wheelMaterial"/>
+      <TEXTURE id="null"/>
+
+      
+      <TRANSLATION x="6.5" y="4" z="0.75" />
+      <SCALE sx="0.35" sy="1" sz="0.25"/>
+      <ROTATION axis="y" angle="90"/>
+      
+      
+
+      <DESCENDANTS>
+        <LEAF type="sphere" args="1 20 20"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="smooth-roof">
+      <MATERIAL id="carriageMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="5" y="9.5" z="0.8"/>
+      <SCALE sx="0.5" sy="0.5" sz="0.41"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="16 5 5 20 20 1 1"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="left-light">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+       <TRANSLATION x="18.5" y="5" z="6"/> 
+       <ROTATION axis="y" angle="90"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.5 0.5 0.5 20 20 1 1"/> 
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="right-light">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+       <TRANSLATION x="18.5" y="5" z="2"/> 
+       <ROTATION axis="y" angle="90"/>
+       
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.5 0.5 0.5 20 20 1 1"/> 
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="front-window">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="clear"/>
+
+
+      <TRANSLATION x="18.8" y="9" z="0.5"/>
+      
+
+      <DESCENDANTS>
+        <NODEREF id="top-window-separator"/>
+        <NODEREF id="bot-window-separator"/>
+        <NODEREF id="window-plate"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="top-window-separator">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="0.025"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="6.95 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="bot-window-separator">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="0" y="-3" z="0.025"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="6.95 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+     <NODE id="right-window-separator">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      
+      
+      <ROTATION axis="x" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="2 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+    <NODE id="left-window-separator">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="0" y="0" z="7"/>
+      <ROTATION axis="x" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="2 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+     <NODE id="window-plate">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="0" y="-3" z="7"/>
+      <ROTATION axis="y" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 3 7 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="left-window">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="4.25" y="6" z="7.6"/>
+       
+      <DESCENDANTS>
+        <NODEREF id="lateral-window"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="right-window">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="7.25" y="6" z="0.4"/>
+      
+      <ROTATION axis="y" angle="180"/>
+      <DESCENDANTS>
+        <NODEREF id="lateral-window"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="lateral-window">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="top-separator"/>
+        <NODEREF id="left-separator"/>
+        <NODEREF id="right-separator"/>
+        <NODEREF id="bot-separator"/>
+        <NODEREF id="window-glass"/>
+
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="window-glass">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="0" y="0" z="0"/>
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 4 3 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="top-separator">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="4" z="0"/>
+      <ROTATION axis="y" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="3 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="bot-separator">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+
+      
+      <ROTATION axis="y" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="3 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="left-separator">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+
+      
+      <ROTATION axis="x" angle="-90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="4 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="right-separator">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="3" y="0" z="0"/>
+      <ROTATION axis="x" angle="-90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="4 0.25 0.25 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="left-door">
+      <MATERIAL id="carriageMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="2.75" y="4" z="7.75"/>
+      <DESCENDANTS>
+        <NODEREF id="train-door"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="right-door">
+      <MATERIAL id="carriageMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="3.75" y="4" z="0.1"/>
+      <ROTATION axis="y" angle="180"/>
+      <DESCENDANTS>
+        <NODEREF id="train-door"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="train-door">
+      <MATERIAL id="carriageMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="door-plate"/>
+        <NODEREF id="door-border-left"/>
+        <NODEREF id="door-border-right"/>
+        <NODEREF id="door-border-top"/>
+        <NODEREF id="door-train-window"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="door-plate">
+      <MATERIAL id="carriageMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 5 1 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="door-border-top">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="0" y="5" z="0"/>
+      <ROTATION axis="y" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="1 0.1 0.1 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="door-border-left">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <SCALE sx="0.5" sy="1" sz="1"/>
+      <TRANSLATION x="0" y="5.1" z="0"/>
+      <ROTATION axis="x" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="5.1 0.1 0.1 20 20 1 1"/>
+      </DESCENDANTS>
+
+      
+
+    </NODE>
+
+    <NODE id="door-border-right">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <SCALE sx="0.5" sy="1" sz="1"/>
+      <TRANSLATION x="2" y="5.1" z="0"/>
+      <ROTATION axis="x" angle="90"/>
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="5.1 0.1 0.1 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="door-train-window">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="0.5" y="4" z="-0.2"/>
+      <SCALE sx="0.4" sy="1" sz="1"/>
+    
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.25 0.5 0.5 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    
+
+    
+
+    
   </NODES>
 </SCENE>

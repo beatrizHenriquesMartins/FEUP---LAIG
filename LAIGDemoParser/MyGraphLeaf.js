@@ -24,7 +24,7 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
                 this.primitive = new MyQuad(this.graph.scene, args[0], args[1], args[2], args[3]);
                 break;
             case 'cylinder':
-                this.primitive = new MyCylinder(this.graph.scene, args[0], args[1], args[2], args[3], args[4]);
+                this.primitive = new MyCompleteCylinder(this.graph.scene, args[0], args[1], args[2], args[3], args[4],args[5],args[6]);
                 break;
             case 'sphere':
                 this.primitive = new MySphere(this.graph.scene, args[0], args[1], args[2]);
