@@ -20,7 +20,7 @@
   <LIGHTS>
     <LIGHT id="light0">
       <enable value ="1" />
-      <position  x="0" y="10" z="0" w="1" />
+      <position  x="0" y="12.5" z="0" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -28,7 +28,7 @@
 
     <LIGHT id="light1">
       <enable value ="1" />
-      <position x="30" y="10" z="0" w="1" />
+      <position x="30" y="12.5" z="0" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -36,7 +36,7 @@
 
     <LIGHT id="light2">
       <enable value ="1" />
-      <position x="0" y="10" z="20" w="1" />
+      <position x="0" y="12.5" z="20" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -44,7 +44,39 @@
 
     <LIGHT id="light3">
       <enable value ="1" />
-      <position x="30" y="10" z="20" w="1" />
+      <position x="30" y="12.5" z="20" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light4">
+      <enable value ="1" />
+      <position x="0" y="12.5" z="40" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light5">
+      <enable value ="1" />
+      <position x="30" y="12.5" z="40" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light6">
+      <enable value ="1" />
+      <position x="0" y="12.5" z="60" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light7">
+      <enable value ="1" />
+      <position x="30" y="12.5" z="60" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
       <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -81,6 +113,12 @@
       <file path="images/bank.jpg" />
       <amplif_factor s="1" t="1" />
     </TEXTURE>
+
+    <!-- gravilha para chão comboio -->
+    <TEXTURE id="gravilha">
+      <file path="images/gravilha.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
   </TEXTURES>
 
   <MATERIALS>
@@ -104,16 +142,18 @@
     <NODE id="root">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
+
       <DESCENDANTS>
         <NODEREF id="chaoCarris"/>
         <NODEREF id="laterias"/>
+        <NODEREF id="paredes"/>
       </DESCENDANTS>
     </NODE>
 
     <!-- chão -->
     <NODE id="chaoCarris">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="gravilha"/>
 
       <SCALE sx="35" sy="0" sz="40" />
       <TRANSLATION x="0" y="0" z="1.5" />
@@ -161,7 +201,45 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- cais genrico -->
+    <!-- paredes -->
+    <NODE id="paredes">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="paredeEsquerda"/>
+        <NODEREF id="paredeDireita"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="paredeEsquerda">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="5" sy="1" sz="1" />
+      <TRANSLATION x="0" y="2.5" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="paredeDireita">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <!--
+      <SCALE sx="70" sy="5" sz="15" />
+      <TRANSLATION x="0" y="0" z="2.5"/>
+    -->
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rectangulo genrico -->
     <NODE id="myRectangle">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
