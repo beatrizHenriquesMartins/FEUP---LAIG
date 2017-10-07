@@ -1,5 +1,4 @@
 <SCENE>
-
   <!-- Inicial values -->
   <INITIALS>
     <frustum near="0.1" far="500"/>
@@ -21,7 +20,7 @@
   <LIGHTS>
     <LIGHT id="light0">
       <enable value ="1" />
-      <position  x="0" y="10" z="0" w="1" />
+      <position  x="0" y="12.5" z="0" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -29,7 +28,7 @@
 
     <LIGHT id="light1">
       <enable value ="1" />
-      <position x="30" y="10" z="0" w="1" />
+      <position x="30" y="12.5" z="0" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -37,7 +36,7 @@
 
     <LIGHT id="light2">
       <enable value ="1" />
-      <position x="0" y="10" z="20" w="1" />
+      <position x="0" y="12.5" z="20" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -45,7 +44,39 @@
 
     <LIGHT id="light3">
       <enable value ="1" />
-      <position x="30" y="10" z="20" w="1" />
+      <position x="30" y="12.5" z="20" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light4">
+      <enable value ="1" />
+      <position x="0" y="12.5" z="40" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light5">
+      <enable value ="1" />
+      <position x="30" y="12.5" z="40" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light6">
+      <enable value ="1" />
+      <position x="0" y="12.5" z="60" w="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+      <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light7">
+      <enable value ="1" />
+      <position x="30" y="12.5" z="60" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
       <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -81,6 +112,12 @@
     <TEXTURE id="banco">
       <file path="images/bank.jpg" />
       <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <!-- gravilha para chão comboio -->
+    <TEXTURE id="gravilha">
+      <file path="images/gravilha.jpg" />
+      <amplif_factor s="0.25" t="0.25" />
     </TEXTURE>
   </TEXTURES>
 
@@ -127,32 +164,280 @@
   <NODES>
     <ROOT id="root"/>
 
+    <!-- raiz -->
     <NODE id="root">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
+
       <DESCENDANTS>
-        <NODEREF id="floor"/>
+        <NODEREF id="chaoCarris"/>
+        <NODEREF id="laterias"/>
+        <NODEREF id="paredes"/>
+        <NODEREF id="rebordoPorta"/>
         <NODEREF id="train"/>
+
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="floor">
+    <!-- chão onde passam os carris -->
+    <NODE id="chaoCarris">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="gravilha"/>
+
+      <SCALE sx="35" sy="0" sz="40" />
+      <TRANSLATION x="0" y="0" z="1.5" />
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- cais laterais -->
+    <NODE id="laterias">
+      <!-- definir materiais e texturas aqui-->
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="lateralEsquerda"/>
+        <NODEREF id="lateralDireita"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- cais do lado esquerdo -->
+    <NODE id="lateralEsquerda">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="70" sy="5" sz="15" />
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- cais do lado direito -->
+    <NODE id="lateralDireita">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="70" sy="5" sz="15" />
+      <TRANSLATION x="0" y="0" z="2.5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- paredes -->
+    <NODE id="paredes">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="paredeEsquerda"/>
+        <NODEREF id="paredeDireita"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- parede esquerda -->
+    <NODE id="paredeEsquerda">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="parte1"/>
+        <NODEREF id="parte2"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- parede direita -->
+    <NODE id="paredeDireita">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="12.5" y="0.35" z="60"/>
+
+      <DESCENDANTS>
+        <NODEREF id="parte1"/>
+        <NODEREF id="parte2"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- 1ºparte da parede -->
+    <NODE id="parte1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="15" sy="14" sz="0.5" />
+      <TRANSLATION x="0" y="0.15" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- 2ºparte da parede -->
+    <NODE id="parte2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="15" sy="14" sz="0.5" />
+      <TRANSLATION x="0" y="0.3" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="floor"/>
+    
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- redordo da porta -->
+    <NODE id="rebordoPorta">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
       <SCALE sx="6" sy="1.05" sz="5" />
       <TRANSLATION x="0" y="0" z="4" />
-      <ROTATION axis="x" angle="-90" />
 
       <DESCENDANTS>
-        <LEAF type="rectangle" args="0 4 5 0"/>
+        <NODEREF id="rebordoEsquerda"/>
+        <NODEREF id="rebordoDireita"/>
+        <NODEREF id="rebordoCima"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rebordo da porta, parte do lado esquerdo -->
+    <NODE id="rebordoEsquerda">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="0.25" sy="14" sz="1" />
+      <TRANSLATION x="0" y="0.15" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rebordo da porta, parte do lado direito -->
+    <NODE id="rebordoDireita">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="0.25" sy="14" sz="1" />
+      <TRANSLATION x="15" y="0.15" z="0.5"/>
+      <ROTATION axis="y" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rebordo da porta, parte de cima -->
+    <NODE id="rebordoCima">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="8.25" sy="0.25" sz="1" />
+      <TRANSLATION x="0" y="37" z="0"/>
+      <ROTATION axis="x" angle="-270"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- rectangulo genrico -->
+    <NODE id="myRectangle">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="0.5" sy="0.5" sz="1.5" />
+      <TRANSLATION x="0" y="0" z="-0.5" />
+
+      <DESCENDANTS>
+        <NODEREF id="faceCubo1" />
+        <NODEREF id="faceCubo2" />
+        <NODEREF id="faceCubo3" />
+        <NODEREF id="faceCubo4" />
+        <NODEREF id="faceCubo5" />
+        <NODEREF id="faceCubo6" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- A cube face -->
+    <NODE id="faceCubo1">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="1.5" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo2">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0.5" />
+		  <ROTATION axis="y" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo3">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="1" y="0" z="1.5" />
+		  <ROTATION axis="y" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo4">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="1" y="0" z="0.5" />
+      <ROTATION axis="y" angle="180" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="faceCubo5">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="x" angle="-90" />
+      <TRANSLATION x="0" y="-1.5" z="1" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
       </DESCENDANTS>
     </NODE>
 
     <NODE id="train">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-
-      <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+      <TRANSLATION x="18" y="-3" z="23"/>
+      
       <DESCENDANTS>
         <NODEREF id="carriage_1"/>
         <NODEREF id="carriage_2"/>
@@ -725,5 +1010,18 @@
     
 
     
+    <!-- Another cube face -->
+    <NODE id="faceCubo6">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0.5" />
+      <ROTATION axis="x" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 1 1 0" />
+      </DESCENDANTS>
+    </NODE>
+
   </NODES>
 </SCENE>
