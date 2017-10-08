@@ -502,7 +502,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="18" y="-3" z="23"/>
+      <TRANSLATION x="18" y="-2.5" z="25.75"/>
 
       <DESCENDANTS>
         <NODEREF id="carriage_1"/>
