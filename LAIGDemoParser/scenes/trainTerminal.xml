@@ -181,10 +181,8 @@
         <NODEREF id="laterias"/>
         <NODEREF id="paredes"/>
         <NODEREF id="train"/>
-<!--
-        <NODEREF id="rebordoPorta"/>
--->
         <NODEREF id="carris"/>
+        <NODEREF id="portasEstacao"/>
       </DESCENDANTS>
     </NODE>
 
@@ -285,13 +283,70 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- redordo da porta -->
-    <NODE id="rebordoPorta">
+    <!-- portas da estação -->
+    <NODE id="portasEstacao">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="6" sy="1.05" sz="5" />
-      <TRANSLATION x="0" y="0" z="4" />
+      <DESCENDANTS>
+        <NODEREF id="portaEstacaoEsquerda"/>
+        <NODEREF id="portaEstacaoDireita"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- portado lado esquerdo -->
+    <NODE id="portaEstacaoEsquerda">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+      
+      <TRANSLATION x="22.5" y="0.32" z="0"/>
+
+      <DESCENDANTS>
+        <NODEREF id="portaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- portado lado direita -->
+    <NODE id="portaEstacaoDireita">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="8.4" y="0.32" z="59.5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="portaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- portado lado direita -->
+    <NODE id="portaGenerica">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="rebordoPorta"/>
+        <NODEREF id="paredePorta"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- redordo da porta -->
+    <NODE id="paredePorta">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="2.3" sy="13.6" sz="0.5"/>
+      <TRANSLATION x="1.61" y="0.155" z="0"/>
+      <ROTATION axis="y" angle="-90"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- redordo da porta -->
+    <NODE id="rebordoPorta">
+      <MATERIAL id="null"/>
+      <TEXTURE id="madeiraCarris"/>
 
       <DESCENDANTS>
         <NODEREF id="rebordoEsquerda"/>
