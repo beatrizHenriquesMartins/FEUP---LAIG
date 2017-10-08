@@ -84,28 +84,10 @@
   </LIGHTS>
 
   <TEXTURES>
-    <!-- Tree trunk -->
-    <TEXTURE id="trunk">
-      <file path="images/trunk-image.jpg" />
-      <amplif_factor s="2" t="2" />
-    </TEXTURE>
-
-    <!-- Tree leaves -->
-    <TEXTURE id="folhas">
-      <file path="images/leaves.jpg" />
-      <amplif_factor s="3" t="4" />
-    </TEXTURE>
-
     <!-- Rocks -->
     <TEXTURE id="rocks">
       <file path="images/rocks.jpg" />
       <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <!-- Glass work -->
-    <TEXTURE id="vidral">
-      <file path="images/vidral.jpg" />
-      <amplif_factor s="15" t="10" />
     </TEXTURE>
 
     <!-- Street bench -->
@@ -124,6 +106,18 @@
     <TEXTURE id="azulejo">
       <file path="images/azulejoPortuguesColorido.png" />
       <amplif_factor s="0.05" t="0.05" />
+    </TEXTURE>
+
+    <!-- madeira para as tabuas -->
+    <TEXTURE id="madeiraCarris">
+      <file path="images/madeira.png" />
+      <amplif_factor s="0.5" t="0.5" />
+    </TEXTURE>
+
+    <!-- madeira para as tabuas -->
+    <TEXTURE id="metalCarris">
+      <file path="images/carris.png" />
+      <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
   </TEXTURES>
 
@@ -348,8 +342,7 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- FAZER
-    CARRIS -->
+    <!-- CARRIS -->
     <NODE id="carris">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -387,8 +380,8 @@
 
     <!-- carril genrico -->
     <NODE id="carrilGenerico">
-      <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <MATERIAL id="null"/>
+      <TEXTURE id="metalCarris"/>
 
       <SCALE sx="75" sy="1" sz="0.5" />
 
@@ -494,8 +487,8 @@
 
     <!-- tabua genrica -->
     <NODE id="tabuaGenerica">
-      <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <MATERIAL id="null"/>
+      <TEXTURE id="madeiraCarris"/>
 
       <SCALE sx="2.5" sy="0.5" sz="5" />
 
