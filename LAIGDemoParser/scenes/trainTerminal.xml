@@ -265,7 +265,8 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="paredeDimensoes"/>
+        <NODEREF id="paredeGrande"/>
+        <NODEREF id="paredeCimaPorta"/>
       </DESCENDANTS>
     </NODE>
 
@@ -274,20 +275,21 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="12.5" y="0.35" z="59.75"/>
+      <TRANSLATION x="0" y="0" z="59.8"/>
 
       <DESCENDANTS>
-        <NODEREF id="paredeDimensoes"/>
+        <NODEREF id="paredeGrande"/>
+        <NODEREF id="paredeCimaPorta"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- parece com dimensoes correctas -->
-    <NODE id="paredeDimensoes">
+    <!-- parece grande -->
+    <NODE id="paredeGrande">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="15" sy="22.5" sz="0.5" />
-      <TRANSLATION x="0" y="0" z="0.5"/>
+      <SCALE sx="23.35" sy="22.5" sz="0.5" />
+      <TRANSLATION x="0" y="0.11" z="0.5"/>
       <ROTATION axis="y" angle="-270"/>
 
       <DESCENDANTS>
@@ -310,8 +312,8 @@
     <NODE id="portaEstacaoEsquerda">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-      
-      <TRANSLATION x="22.5" y="0.32" z="0"/>
+
+      <TRANSLATION x="22.5" y="0.32" z="0.5"/>
 
       <DESCENDANTS>
         <NODEREF id="portaGenerica"/>
@@ -323,7 +325,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="8.4" y="0.32" z="59.5"/>
+      <TRANSLATION x="8.4" y="0.32" z="59"/>
 
       <DESCENDANTS>
         <NODEREF id="portaGenerica"/>
@@ -346,7 +348,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="2.3" sy="13.6" sz="0.5"/>
+      <SCALE sx="2.3" sy="13.6" sz="1"/>
       <TRANSLATION x="1.61" y="0.155" z="0"/>
       <ROTATION axis="y" angle="-90"/>
 
