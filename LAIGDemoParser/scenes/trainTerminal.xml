@@ -194,7 +194,9 @@
         <NODEREF id="carris"/>
         <NODEREF id="portasEstacao"/>
         <NODEREF id="wood-seat-left1"/>
+        <NODEREF id="wood-seat-left2"/>
         <NODEREF id="wood-seat-right1"/>
+        <NODEREF id="wood-seat-right2"/>
       </DESCENDANTS>
     </NODE>
 
@@ -1217,12 +1219,25 @@
     <NODE id="wood-seat-left1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
+
       <TRANSLATION x="20" y="-0.5" z="40"/>
       <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-seat"/>
       </DESCENDANTS>
+    </NODE>
 
+    <NODE id="wood-seat-left2">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="15" y="-0.5" z="40"/>
+      <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="wood-seat"/>
+      </DESCENDANTS>
     </NODE>
 
     <NODE id="wood-seat-right1">
@@ -1232,10 +1247,23 @@
       <TRANSLATION x="15" y="-0.5" z="21"/>
       <SCALE sx="0.5" sy="0.5" sz="0.5"/>
       <ROTATION axis="y" angle="180"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-seat"/>
       </DESCENDANTS>
+    </NODE>
 
+    <NODE id="wood-seat-right2">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="20" y="-0.5" z="21"/>
+      <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+      <ROTATION axis="y" angle="180"/>
+
+      <DESCENDANTS>
+        <NODEREF id="wood-seat"/>
+      </DESCENDANTS>
     </NODE>
 
     <NODE id="wood-seat">
