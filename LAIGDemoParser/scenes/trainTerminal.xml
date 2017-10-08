@@ -117,7 +117,13 @@
     <!-- gravilha para chão comboio -->
     <TEXTURE id="gravilha">
       <file path="images/gravilha.jpg" />
-      <amplif_factor s="0.25" t="0.25" />
+      <amplif_factor s="0.15" t="0.15" />
+    </TEXTURE>
+
+    <!-- azulejo para paredes da estação -->
+    <TEXTURE id="azulejo">
+      <file path="images/azulejoPortuguesColorido.png" />
+      <amplif_factor s="0.05" t="0.05" />
     </TEXTURE>
   </TEXTURES>
 
@@ -126,6 +132,15 @@
     <MATERIAL id="defaultMaterial">
       <shininess value="1" />
       <specular r="0.0" g="0.0" b="0.0" a="1" />
+      <diffuse r="0.4" g="0.4" b="0.4" a="1" />
+      <ambient r="0.4" g="0.4" b="0.4" a="1" />
+      <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- gravilha -->
+    <MATERIAL id="materialGravilha">
+      <shininess value="0.50" />
+      <specular r="0.45" g="0.45" b="0.35" a="1" />
       <diffuse r="0.4" g="0.4" b="0.4" a="1" />
       <ambient r="0.4" g="0.4" b="0.4" a="1" />
       <emission r="0.0" g="0.0" b="0.0" a="1" />
@@ -173,7 +188,9 @@
         <NODEREF id="chaoCarris"/>
         <NODEREF id="laterias"/>
         <NODEREF id="paredes"/>
+<!--
         <NODEREF id="rebordoPorta"/>
+-->
         <NODEREF id="train"/>
 
       </DESCENDANTS>
@@ -181,10 +198,10 @@
 
     <!-- chão onde passam os carris -->
     <NODE id="chaoCarris">
-      <MATERIAL id="defaultMaterial"/>
+      <MATERIAL id="materialGravilha"/>
       <TEXTURE id="gravilha"/>
 
-      <SCALE sx="35" sy="0" sz="40" />
+      <SCALE sx="35" sy="0" sz="39.5" />
       <TRANSLATION x="0" y="0" z="1.5" />
       <ROTATION axis="x" angle="-90" />
 
@@ -195,7 +212,7 @@
 
     <!-- cais laterais -->
     <NODE id="laterias">
-      <!-- definir materiais e texturas aqui-->
+      /* definir materiais e texturas aqui */
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
@@ -233,7 +250,7 @@
     <!-- paredes -->
     <NODE id="paredes">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="azulejo"/>
 
       <DESCENDANTS>
         <NODEREF id="paredeEsquerda"/>
@@ -247,8 +264,7 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="parte1"/>
-        <NODEREF id="parte2"/>
+        <NODEREF id="paredeDimensoes"/>
       </DESCENDANTS>
     </NODE>
 
@@ -257,40 +273,23 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="12.5" y="0.35" z="60"/>
+      <TRANSLATION x="12.5" y="0.35" z="59.75"/>
 
       <DESCENDANTS>
-        <NODEREF id="parte1"/>
-        <NODEREF id="parte2"/>
+        <NODEREF id="paredeDimensoes"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- 1ºparte da parede -->
-    <NODE id="parte1">
+    <!-- parece com dimensoes correctas -->
+    <NODE id="paredeDimensoes">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="15" sy="14" sz="0.5" />
-      <TRANSLATION x="0" y="0.15" z="0.5"/>
+      <SCALE sx="15" sy="22.5" sz="0.5" />
+      <TRANSLATION x="0" y="0" z="0.5"/>
       <ROTATION axis="y" angle="-270"/>
 
       <DESCENDANTS>
-        <NODEREF id="myRectangle"/>
-      </DESCENDANTS>
-    </NODE>
-
-    <!-- 2ºparte da parede -->
-    <NODE id="parte2">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <SCALE sx="15" sy="14" sz="0.5" />
-      <TRANSLATION x="0" y="0.3" z="0.5"/>
-      <ROTATION axis="y" angle="-270"/>
-
-      <DESCENDANTS>
-        <NODEREF id="floor"/>
-    
         <NODEREF id="myRectangle"/>
       </DESCENDANTS>
     </NODE>
