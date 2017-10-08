@@ -190,6 +190,7 @@
 <!--
         <NODEREF id="rebordoPorta"/>
 -->
+        <NODEREF id="carris"/>
       </DESCENDANTS>
     </NODE>
 
@@ -347,6 +348,163 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- FAZER
+    CARRIS -->
+    <NODE id="carris">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="carrilEsquerda"/>
+        <NODEREF id="carrilDireita"/>
+        <NODEREF id="tabuas"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- carril esquerda -->
+    <NODE id="carrilEsquerda">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0.25" z="26.75" />
+
+      <DESCENDANTS>
+        <NODEREF id="carrilGenerico"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- carril direita -->
+    <NODE id="carrilDireita">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0.25" z="32.25" />
+
+      <DESCENDANTS>
+        <NODEREF id="carrilGenerico"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- carril genrico -->
+    <NODE id="carrilGenerico">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="75" sy="1" sz="0.5" />
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- conjunto de tabuas -->
+    <NODE id="tabuas">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="tabua1"/>
+        <NODEREF id="tabua2"/>
+        <NODEREF id="tabua3"/>
+        <NODEREF id="tabua4"/>
+        <NODEREF id="tabua5"/>
+        <NODEREF id="tabua6"/>
+        <NODEREF id="tabua7"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- tabua 1 -->
+    <NODE id="tabua1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="1.5" y="0" z="26.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="tabuaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- tabua 2 -->
+    <NODE id="tabua2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="7" y="0" z="26.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="tabuaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="tabua3">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="12.5" y="0" z="26.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="tabuaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="tabua4">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="18" y="0" z="26.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="tabuaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="tabua5">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="23.5" y="0" z="26.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="tabuaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="tabua6">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="29" y="0" z="26.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="tabuaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="tabua7">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="34.5" y="0" z="26.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="tabuaGenerica"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- tabua genrica -->
+    <NODE id="tabuaGenerica">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <SCALE sx="2.5" sy="0.5" sz="5" />
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- antes -->
     <NODE id="train">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
