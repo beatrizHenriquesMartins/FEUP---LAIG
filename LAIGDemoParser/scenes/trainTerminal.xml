@@ -93,7 +93,7 @@
     <!-- Street bench -->
     <TEXTURE id="banco">
       <file path="images/bank.jpg" />
-      <amplif_factor s="1" t="1" />
+      <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
 
     <!-- gravilha para chão comboio -->
@@ -214,8 +214,8 @@
 
     <!-- cais laterais -->
     <NODE id="laterias">
-      <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <MATERIAL id="null"/>
+      <TEXTURE id="banco"/>
 
       <DESCENDANTS>
         <NODEREF id="lateralEsquerda"/>
@@ -228,7 +228,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="70" sy="5" sz="15" />
+      <SCALE sx="70" sy="5" sz="16.5" />
 
       <DESCENDANTS>
         <NODEREF id="myRectangle"/>
@@ -240,8 +240,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="70" sy="5" sz="15" />
-      <TRANSLATION x="0" y="0" z="2.5"/>
+      <SCALE sx="70" sy="5" sz="17.5" />
+      <TRANSLATION x="0" y="0" z="2"/>
 
       <DESCENDANTS>
         <NODEREF id="myRectangle"/>
@@ -275,7 +275,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="0" y="0" z="59.8"/>
+      <TRANSLATION x="0" y="0" z="61"/>
 
       <DESCENDANTS>
         <NODEREF id="paredeGrande"/>
@@ -325,7 +325,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="8.4" y="0.32" z="59"/>
+      <TRANSLATION x="8.4" y="0.32" z="60.5"/>
 
       <DESCENDANTS>
         <NODEREF id="portaGenerica"/>
@@ -1228,7 +1228,7 @@
     <NODE id="wood-seat-right1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-      
+
       <TRANSLATION x="15" y="-0.5" z="21"/>
       <SCALE sx="0.5" sy="0.5" sz="0.5"/>
       <ROTATION axis="y" angle="180"/>
@@ -1287,7 +1287,7 @@
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="wood-plate2">
+    <NODE id="wood-plate2">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
@@ -1297,7 +1297,7 @@
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="wood-plate3">
+    <NODE id="wood-plate3">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
@@ -1307,20 +1307,20 @@
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="wood-plate4">
+    <NODE id="wood-plate4">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-      
-      
+
+
       <TRANSLATION x="9.5" y="9.5" z="6"/>
       <ROTATION axis="x" angle="-25"/>
-      
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="wood-plate5">
+    <NODE id="wood-plate5">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
@@ -1331,7 +1331,7 @@
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="wood-plate6">
+    <NODE id="wood-plate6">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
@@ -1381,7 +1381,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      
+
       <TRANSLATION x="10" y="10" z="10"/>
       <ROTATION axis="x" angle="65"/>
 
@@ -1391,11 +1391,11 @@
 
     </NODE>
 
-      <NODE id="seat-body-cylinder2">
+    <NODE id="seat-body-cylinder2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      
+
       <TRANSLATION x="10" y="10" z="10"/>
       <ROTATION axis="x" angle="125"/>
 
@@ -1409,9 +1409,9 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      
+
       <TRANSLATION x="10" y="8" z="8.5"/>
-      
+
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="2.5 0.25 0.25 10 10 1 1"/>
@@ -1419,33 +1419,30 @@
 
     </NODE>
 
-     <NODE id="seat-body-cylinder4">
+    <NODE id="seat-body-cylinder4">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      
+
       <TRANSLATION x="10" y="10" z="7"/>
-      
+
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="6 0.25 0.25 10 10 1 1"/>
       </DESCENDANTS>
-
     </NODE>
 
-
-     <NODE id="seat-body-cylinder5">
+    <NODE id="seat-body-cylinder5">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      
+
       <TRANSLATION x="10" y="15.5" z="12.5"/>
       <ROTATION axis="x" angle="90"/>
-      
+
       <DESCENDANTS>
         <LEAF type="cylinder" args="5.5 0.25 0.25 10 10 1 1"/>
       </DESCENDANTS>
-
     </NODE>
 
     <NODE id="wood-plate">
