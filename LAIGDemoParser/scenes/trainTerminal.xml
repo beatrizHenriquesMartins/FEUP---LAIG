@@ -119,6 +119,12 @@
       <file path="images/carris.png" />
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
+
+    <!-- porta -->
+    <TEXTURE id="portaIMG">
+      <file path="images/portaImagem.png" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
   </TEXTURES>
 
   <MATERIALS>
@@ -197,6 +203,7 @@
         <NODEREF id="wood-seat-left2"/>
         <NODEREF id="wood-seat-right1"/>
         <NODEREF id="wood-seat-right2"/>
+
       </DESCENDANTS>
     </NODE>
 
@@ -268,7 +275,6 @@
 
       <DESCENDANTS>
         <NODEREF id="paredeGrande"/>
-        <NODEREF id="paredeCimaPorta"/>
       </DESCENDANTS>
     </NODE>
 
@@ -281,7 +287,6 @@
 
       <DESCENDANTS>
         <NODEREF id="paredeGrande"/>
-        <NODEREF id="paredeCimaPorta"/>
       </DESCENDANTS>
     </NODE>
 
@@ -337,7 +342,7 @@
     <!-- portado lado direita -->
     <NODE id="portaGenerica">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="portaIMG"/>
 
       <DESCENDANTS>
         <NODEREF id="rebordoPorta"/>
