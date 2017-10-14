@@ -550,7 +550,7 @@ MySceneGraph.prototype.parseLights = function (lightsNode) {
 
         nodeNames = [];
         for (var j = 0; j < grandChildren.length; j++) {
-            console.log(grandChildren[j].nodeName);
+            //console.log(grandChildren[j].nodeName);
             nodeNames.push(grandChildren[j].nodeName);
         }
 
@@ -1278,7 +1278,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                     }
                 } else
                 if (descendants[j].nodeName == "LEAF") {
-                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']);
 
                     if (type != null)
                         this.log("   Leaf: " + type);
@@ -1360,8 +1360,7 @@ MySceneGraph.generateRandomString = function (length) {
 MySceneGraph.prototype.displayScene = function () {
 
     this.processNode(this.idRoot, this.materials[this.nodes[this.idRoot].materialID], this.textures[this.nodes[this.idRoot].textureID]);
-    console.log("Cenas de material",this.materials[this.nodes[this.idRoot].materialID]);
-    this.log("Graph should be rendered here...");
+    //console.log("Cenas de material",this.materials[this.nodes[this.idRoot].materialID]);
 
 }
 
@@ -1425,6 +1424,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
                 texture[0].unbind();
                 clear = 0;
             }else{
+                if(currnode.leaves[i].loadTextureFlag == 0)
                 currnode.leaves[i].primitive.loadTexture(texture);
                 texture[0].bind();
             }
