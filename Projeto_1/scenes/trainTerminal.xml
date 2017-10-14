@@ -20,7 +20,7 @@
   <LIGHTS>
     <LIGHT id="light0">
       <enable value ="1" />
-      <position  x="0" y="12.5" z="0" w="1" />
+      <position  x="3.5" y="11" z="12.5" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -68,7 +68,7 @@
 
     <LIGHT id="light6">
       <enable value ="1" />
-      <position x="0" y="12.5" z="60" w="1" />
+      <position x="0" y="11" z="60" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
       <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -76,7 +76,7 @@
 
     <LIGHT id="light7">
       <enable value ="1" />
-      <position x="30" y="12.5" z="60" w="1" />
+      <position x="31.5" y="11" z="48.5" w="1" />
       <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
       <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
       <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -124,6 +124,12 @@
     <TEXTURE id="portaIMG">
       <file path="images/portaImagem.png" />
       <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <!-- porta -->
+    <TEXTURE id="metalCandeeiro">
+      <file path="images/metal.png" />
+      <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
   </TEXTURES>
 
@@ -177,12 +183,7 @@
       <ambient r="0.0" g="0.0" b="0.0" a="1" />
       <emission r="0.1" g="0.1" b="0.1" a="1" />
     </MATERIAL>
-
-
   </MATERIALS>
-
-  <LEAVES>
-  </LEAVES>
 
   <NODES>
     <ROOT id="root"/>
@@ -203,7 +204,7 @@
         <NODEREF id="wood-seat-left2"/>
         <NODEREF id="wood-seat-right1"/>
         <NODEREF id="wood-seat-right2"/>
-
+        <NODEREF id="candeeiros"/>
       </DESCENDANTS>
     </NODE>
 
@@ -1359,6 +1360,7 @@
 
       <TRANSLATION x="9.5" y="12" z="12"/>
       <ROTATION axis="x" angle="90"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
@@ -1381,6 +1383,7 @@
 
       <TRANSLATION x="9.5" y="15" z="12"/>
       <ROTATION axis="x" angle="90"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
@@ -1392,6 +1395,7 @@
 
       <TRANSLATION x="9.5" y="16.5" z="12.75"/>
       <ROTATION axis="x" angle="115"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
@@ -1491,9 +1495,72 @@
         <NODEREF id="faceCubo5"/>
         <NODEREF id="faceCubo6"/>
       </DESCENDANTS>
-
     </NODE>
 
-  </NODES>
+    <NODE id="candeeiros">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
 
+      <DESCENDANTS>
+        <NODEREF id="candeeiroEsquerda"/>
+        <NODEREF id="candeeiroDireita"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="candeeiroEsquerda">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="3.5" y="2.5" z="12.5" />
+
+      <DESCENDANTS>
+        <NODEREF id="candeeiroGenerico"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="candeeiroDireita">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="31.5" y="2.5" z="48.5" />
+
+      <DESCENDANTS>
+        <NODEREF id="candeeiroGenerico"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="candeeiroGenerico">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="suporte"/>
+        <NODEREF id="abajur"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="suporte">
+      <MATERIAL id="null"/>
+      <TEXTURE id="metalCandeeiro"/>
+
+      <SCALE sx="0.25" sy="1.85" sz="0.25" />
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="4 1 1 20 20 0 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="abajur">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="8.85" z="0" />
+      <SCALE sx="-0.75" sy="0.75" sz="0.75" />
+
+      <DESCENDANTS>
+        <LEAF type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+  </NODES>
 </SCENE>
