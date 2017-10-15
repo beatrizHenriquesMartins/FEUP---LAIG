@@ -90,51 +90,51 @@
       <amplif_factor s="1" t="1" />
     </TEXTURE>
 
-    <!-- Street bench -->
-    <TEXTURE id="banco">
+    <!-- floor texture for laterals -->
+    <TEXTURE id="floorTexture">
       <file path="images/bank.jpg" />
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
 
-    <!-- gravilha para chão comboio -->
-    <TEXTURE id="gravilha">
+    <!-- gravel for rails floor -->
+    <TEXTURE id="gravelTexture">
       <file path="images/gravilha.jpg" />
       <amplif_factor s="0.15" t="0.15" />
     </TEXTURE>
 
-    <!-- azulejo para paredes da estação -->
-    <TEXTURE id="azulejo">
+    <!-- portuguese tile for the station walls  -->
+    <TEXTURE id="tile">
       <file path="images/azulejoPortuguesColorido.png" />
       <amplif_factor s="0.05" t="0.05" />
     </TEXTURE>
 
-    <!-- madeira para as tabuas -->
-    <TEXTURE id="madeiraCarris">
+    <!-- wood for the boards -->
+    <TEXTURE id="woodRailsTexture">
       <file path="images/madeira.png" />
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
 
-    <!-- madeira para as tabuas -->
-    <TEXTURE id="metalCarris">
+    <!-- metal for the boards -->
+    <TEXTURE id="metalRails">
       <file path="images/carris.png" />
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
 
-    <!-- porta -->
-    <TEXTURE id="portaIMG">
+    <!-- door img -->
+    <TEXTURE id="doorIMG">
       <file path="images/portaImagem.png" />
       <amplif_factor s="1" t="1" />
     </TEXTURE>
 
-    <!-- porta -->
-    <TEXTURE id="metalCandeeiro">
+    <!-- metal for the lamp support -->
+    <TEXTURE id="metalLamp">
       <file path="images/metal.png" />
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
   </TEXTURES>
 
   <MATERIALS>
-    <!-- A default material -->
+    <!-- A default material, most use for draw -->
     <MATERIAL id="defaultMaterial">
       <shininess value="1" />
       <specular r="0.0" g="0.0" b="0.0" a="1" />
@@ -143,8 +143,8 @@
       <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
-    <!-- gravilha -->
-    <MATERIAL id="materialGravilha">
+    <!-- gravelMaterial is a selected material to the floor under rails -->
+    <MATERIAL id="gravelMaterial">
       <shininess value="0.50" />
       <specular r="0.45" g="0.45" b="0.35" a="1" />
       <diffuse r="0.4" g="0.4" b="0.4" a="1" />
@@ -152,6 +152,7 @@
       <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
+    <!-- separatorMaterial is a selected material to carriage separator -->
     <MATERIAL id="separatorMaterial">
       <shininess value="1"/>
       <specular r="0.1" g="0.1" b="0.1" a="1"/>
@@ -160,6 +161,7 @@
       <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
+    <!-- carriageMaterial is a selected material to carriages -->
     <MATERIAL id="carriageMaterial">
       <shininess value="1"/>
       <specular r="0.807" g="0.807" b="0.0" a="1"/>
@@ -168,6 +170,7 @@
       <emission r="0.1" g="0.1" b="0.1" a="1" />
     </MATERIAL>
 
+    <!-- wheelMaterial is a selected material to the wheels -->
     <MATERIAL id="wheelMaterial">
       <shininess value="1"/>
       <specular r="0.268" g="0.274" b="0.294" a="1"/>
@@ -176,6 +179,7 @@
       <emission r="0.1" g="0.1" b="0.1" a="1" />
     </MATERIAL>
 
+    <!-- seatMaterial is a selected material to the station seats -->
     <MATERIAL id="seatMaterial">
       <shininess value="1"/>
       <specular r="0.333" g="0.419" b="0.184" a="1"/>
@@ -194,12 +198,12 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="chaoCarris"/>
-        <NODEREF id="laterias"/>
-        <NODEREF id="paredes"/>
+        <NODEREF id="railsFloor"/>
+        <NODEREF id="sides"/>
+        <NODEREF id="walls"/>
         <NODEREF id="train"/>
-        <NODEREF id="carris"/>
-        <NODEREF id="portasEstacao"/>
+        <NODEREF id="rails"/>
+        <NODEREF id="stationDoors"/>
         <NODEREF id="wood-seat-left1"/>
         <NODEREF id="wood-seat-left2"/>
         <NODEREF id="wood-seat-right1"/>
@@ -208,10 +212,10 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- chão onde passam os carris -->
-    <NODE id="chaoCarris">
-      <MATERIAL id="materialGravilha"/>
-      <TEXTURE id="gravilha"/>
+    <!-- railsFloor is the floor under the rails and train -->
+    <NODE id="railsFloor">
+      <MATERIAL id="gravelMaterial"/>
+      <TEXTURE id="gravelTexture"/>
 
       <SCALE sx="35" sy="0" sz="39.5" />
       <TRANSLATION x="0" y="0" z="1.5" />
@@ -222,19 +226,19 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- cais laterais -->
-    <NODE id="laterias">
+    <!-- sides -->
+    <NODE id="sides">
       <MATERIAL id="null"/>
-      <TEXTURE id="banco"/>
+      <TEXTURE id="floorTexture"/>
 
       <DESCENDANTS>
-        <NODEREF id="lateralEsquerda"/>
-        <NODEREF id="lateralDireita"/>
+        <NODEREF id="sideLeft"/>
+        <NODEREF id="sideRight"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- cais do lado esquerdo -->
-    <NODE id="lateralEsquerda">
+    <!-- side left -->
+    <NODE id="sideLeft">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -245,8 +249,8 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- cais do lado direito -->
-    <NODE id="lateralDireita">
+    <!-- side right -->
+    <NODE id="sideRight">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -258,41 +262,41 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- paredes -->
-    <NODE id="paredes">
+    <!-- walls -->
+    <NODE id="walls">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="azulejo"/>
+      <TEXTURE id="tile"/>
 
       <DESCENDANTS>
-        <NODEREF id="paredeEsquerda"/>
-        <NODEREF id="paredeDireita"/>
+        <NODEREF id="leftWall"/>
+        <NODEREF id="rightWall"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- parede esquerda -->
-    <NODE id="paredeEsquerda">
+    <!-- leftWall -->
+    <NODE id="leftWall">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="paredeGrande"/>
+        <NODEREF id="bigWall"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- parede direita -->
-    <NODE id="paredeDireita">
+    <!-- rightWall -->
+    <NODE id="rightWall">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0" z="61"/>
 
       <DESCENDANTS>
-        <NODEREF id="paredeGrande"/>
+        <NODEREF id="bigWall"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- parece grande -->
-    <NODE id="paredeGrande">
+    <!-- big wall -->
+    <NODE id="bigWall">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -305,54 +309,54 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- portas da estação -->
-    <NODE id="portasEstacao">
+    <!-- station doors -->
+    <NODE id="stationDoors">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="portaEstacaoEsquerda"/>
-        <NODEREF id="portaEstacaoDireita"/>
+        <NODEREF id="leftStationDoor"/>
+        <NODEREF id="rightStationDoor"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- portado lado esquerdo -->
-    <NODE id="portaEstacaoEsquerda">
+    <!-- left Station Door -->
+    <NODE id="leftStationDoor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="22.5" y="0.32" z="0.5"/>
 
       <DESCENDANTS>
-        <NODEREF id="portaGenerica"/>
+        <NODEREF id="genericDoor"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- portado lado direita -->
-    <NODE id="portaEstacaoDireita">
+    <!-- right Station Door -->
+    <NODE id="rightStationDoor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="8.4" y="0.32" z="60.5"/>
 
       <DESCENDANTS>
-        <NODEREF id="portaGenerica"/>
+        <NODEREF id="genericDoor"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- portado lado direita -->
-    <NODE id="portaGenerica">
+    <!-- genric door -->
+    <NODE id="genericDoor">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="portaIMG"/>
+      <TEXTURE id="doorIMG"/>
 
       <DESCENDANTS>
-        <NODEREF id="rebordoPorta"/>
-        <NODEREF id="paredePorta"/>
+        <NODEREF id="wallDoor"/>
+        <NODEREF id="doorCollar"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- redordo da porta -->
-    <NODE id="paredePorta">
+    <!-- wall Door -->
+    <NODE id="wallDoor">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -365,20 +369,20 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- redordo da porta -->
-    <NODE id="rebordoPorta">
+    <!-- door Collar -->
+    <NODE id="doorCollar">
       <MATERIAL id="null"/>
-      <TEXTURE id="madeiraCarris"/>
+      <TEXTURE id="woodRailsTexture"/>
 
       <DESCENDANTS>
-        <NODEREF id="rebordoEsquerda"/>
-        <NODEREF id="rebordoDireita"/>
-        <NODEREF id="rebordoCima"/>
+        <NODEREF id="leftDoorCollar"/>
+        <NODEREF id="rightDoorCollar"/>
+        <NODEREF id="topDoorCollar"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- rebordo da porta, parte do lado esquerdo -->
-    <NODE id="rebordoEsquerda">
+    <!-- left Door Collar -->
+    <NODE id="leftDoorCollar">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -391,8 +395,8 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- rebordo da porta, parte do lado direito -->
-    <NODE id="rebordoDireita">
+    <!-- right Door Collar -->
+    <NODE id="rightDoorCollar">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -405,8 +409,8 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- rebordo da porta, parte de cima -->
-    <NODE id="rebordoCima">
+    <!-- top Door Collar -->
+    <NODE id="topDoorCollar">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -419,46 +423,46 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- CARRIS -->
-    <NODE id="carris">
+    <!-- rails -->
+    <NODE id="rails">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="carrilEsquerda"/>
-        <NODEREF id="carrilDireita"/>
-        <NODEREF id="tabuas"/>
+        <NODEREF id="leftRails"/>
+        <NODEREF id="rightRails"/>
+        <NODEREF id="boards"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- carril esquerda -->
-    <NODE id="carrilEsquerda">
+    <!-- left Rails -->
+    <NODE id="leftRails">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0.25" z="26.75" />
 
       <DESCENDANTS>
-        <NODEREF id="carrilGenerico"/>
+        <NODEREF id="genericRail"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- carril direita -->
-    <NODE id="carrilDireita">
+    <!-- right Rails -->
+    <NODE id="rightRails">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0.25" z="32.25" />
 
       <DESCENDANTS>
-        <NODEREF id="carrilGenerico"/>
+        <NODEREF id="genericRail"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- carril genrico -->
-    <NODE id="carrilGenerico">
+    <!-- generic Rail -->
+    <NODE id="genericRail">
       <MATERIAL id="null"/>
-      <TEXTURE id="metalCarris"/>
+      <TEXTURE id="metalRails"/>
 
       <SCALE sx="75" sy="1" sz="0.5" />
 
@@ -467,105 +471,110 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- conjunto de tabuas -->
-    <NODE id="tabuas">
+    <!-- board set -->
+    <NODE id="boards">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="tabua1"/>
-        <NODEREF id="tabua2"/>
-        <NODEREF id="tabua3"/>
-        <NODEREF id="tabua4"/>
-        <NODEREF id="tabua5"/>
-        <NODEREF id="tabua6"/>
-        <NODEREF id="tabua7"/>
+        <NODEREF id="board1"/>
+        <NODEREF id="board2"/>
+        <NODEREF id="board3"/>
+        <NODEREF id="board4"/>
+        <NODEREF id="board5"/>
+        <NODEREF id="board6"/>
+        <NODEREF id="board7"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- tabua 1 -->
-    <NODE id="tabua1">
+    <!-- board 1 -->
+    <NODE id="board1">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="1.5" y="0" z="26.1" />
 
       <DESCENDANTS>
-        <NODEREF id="tabuaGenerica"/>
+        <NODEREF id="genericBoard"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- tabua 2 -->
-    <NODE id="tabua2">
+    <!-- boards 2 -->
+    <NODE id="board2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="7" y="0" z="26.1" />
 
       <DESCENDANTS>
-        <NODEREF id="tabuaGenerica"/>
+        <NODEREF id="genericBoard"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="tabua3">
+    <!-- boards 3 -->
+    <NODE id="board3">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="12.5" y="0" z="26.1" />
 
       <DESCENDANTS>
-        <NODEREF id="tabuaGenerica"/>
+        <NODEREF id="genericBoard"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="tabua4">
+    <!-- boards 4 -->
+    <NODE id="board4">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="18" y="0" z="26.1" />
 
       <DESCENDANTS>
-        <NODEREF id="tabuaGenerica"/>
+        <NODEREF id="genericBoard"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="tabua5">
+    <!-- boards 5 -->
+    <NODE id="board5">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="23.5" y="0" z="26.1" />
 
       <DESCENDANTS>
-        <NODEREF id="tabuaGenerica"/>
+        <NODEREF id="genericBoard"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="tabua6">
+    <!-- boards 6 -->
+    <NODE id="board6">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="29" y="0" z="26.1" />
 
       <DESCENDANTS>
-        <NODEREF id="tabuaGenerica"/>
+        <NODEREF id="genericBoard"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="tabua7">
+    <!-- boards 7 -->
+    <NODE id="board7">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="34.5" y="0" z="26.1" />
 
       <DESCENDANTS>
-        <NODEREF id="tabuaGenerica"/>
+        <NODEREF id="genericBoard"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- tabua genrica -->
-    <NODE id="tabuaGenerica">
+    <!-- generic Board -->
+    <NODE id="genericBoard">
       <MATERIAL id="null"/>
-      <TEXTURE id="madeiraCarris"/>
+      <TEXTURE id="woodRailsTexture"/>
 
       <SCALE sx="2.5" sy="0.5" sz="5" />
 
@@ -574,7 +583,7 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- antes -->
+    <!-- train -->
     <NODE id="train">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -588,6 +597,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- carriage 1 -->
     <NODE id="carriage_1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -602,6 +612,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- carriage 2 -->
     <NODE id="carriage_2">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -614,6 +625,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- carriage 3 -->
     <NODE id="carriage_3">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -625,6 +637,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- carriage -->
     <NODE id="carriage">
       <MATERIAL id="carriageMaterial"/>
       <TEXTURE id="null"/>
@@ -656,6 +669,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: left-side -->
     <NODE id="left-side">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
@@ -667,6 +681,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-side -->
     <NODE id="right-side">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
@@ -679,6 +694,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: top-side -->
     <NODE id="top-side">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
@@ -691,6 +707,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: bottom-side -->
     <NODE id="bottom-side">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
@@ -703,6 +720,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: front-side -->
     <NODE id="front-side">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
@@ -715,6 +733,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: back-side -->
     <NODE id="back-side">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -727,6 +746,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: separator -->
     <NODE id="separator">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -742,6 +762,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: top-light -->
     <NODE id="top-light">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -755,6 +776,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: left-wheel1 -->
     <NODE id="left-wheel1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -766,6 +788,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: left-wheel2 -->
     <NODE id="left-wheel2">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -777,6 +800,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: left-wheel3 -->
     <NODE id="left-wheel3">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -788,6 +812,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-wheel1 -->
     <NODE id="right-wheel1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -797,6 +822,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-wheel2 -->
     <NODE id="right-wheel2">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -807,6 +833,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-wheel3 -->
     <NODE id="right-wheel3">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -818,6 +845,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: wheel -->
     <NODE id="wheel">
       <MATERIAL id="wheelMaterial"/>
       <TEXTURE id="null"/>
@@ -831,6 +859,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: smooth-roof -->
     <NODE id="smooth-roof">
       <MATERIAL id="carriageMaterial"/>
       <TEXTURE id="null"/>
@@ -843,6 +872,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: left-light-->
     <NODE id="left-light">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -855,6 +885,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-light -->
     <NODE id="right-light">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -867,6 +898,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: front-window -->
     <NODE id="front-window">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="clear"/>
@@ -880,6 +912,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: top-window-separator -->
     <NODE id="top-window-separator">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -891,6 +924,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: bot-window-separator -->
     <NODE id="bot-window-separator">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -902,6 +936,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-window-separator -->
     <NODE id="right-window-separator">
        <MATERIAL id="null"/>
        <TEXTURE id="null"/>
@@ -913,6 +948,7 @@
        </DESCENDANTS>
      </NODE>
 
+     <!-- train: left-window-separator -->
     <NODE id="left-window-separator">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -925,6 +961,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: window-plate -->
     <NODE id="window-plate">
        <MATERIAL id="defaultMaterial"/>
        <TEXTURE id="null"/>
@@ -937,6 +974,7 @@
        </DESCENDANTS>
      </NODE>
 
+     <!-- train: left-window -->
     <NODE id="left-window">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -948,6 +986,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-window -->
     <NODE id="right-window">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -962,6 +1001,7 @@
 
     </NODE>
 
+    <!-- train: lateral-window -->
     <NODE id="lateral-window">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1541,7 +1581,7 @@
 
     <NODE id="suporte">
       <MATERIAL id="null"/>
-      <TEXTURE id="metalCandeeiro"/>
+      <TEXTURE id="metalLamp"/>
 
       <SCALE sx="0.25" sy="1.85" sz="0.25" />
       <ROTATION axis="x" angle="-90" />
