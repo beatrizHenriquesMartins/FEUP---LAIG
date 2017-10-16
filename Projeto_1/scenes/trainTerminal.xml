@@ -208,7 +208,7 @@
         <NODEREF id="wood-seat-left2"/>
         <NODEREF id="wood-seat-right1"/>
         <NODEREF id="wood-seat-right2"/>
-        <NODEREF id="candeeiros"/>
+        <NODEREF id="lamps"/>
       </DESCENDANTS>
     </NODE>
 
@@ -948,7 +948,7 @@
        </DESCENDANTS>
      </NODE>
 
-     <!-- train: left-window-separator -->
+    <!-- train: left-window-separator -->
     <NODE id="left-window-separator">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -974,7 +974,7 @@
        </DESCENDANTS>
      </NODE>
 
-     <!-- train: left-window -->
+    <!-- train: left-window -->
     <NODE id="left-window">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1015,6 +1015,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: window-glass -->
     <NODE id="window-glass">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1026,6 +1027,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: top-separator -->
     <NODE id="top-separator">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1038,6 +1040,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: bot-separator -->
     <NODE id="bot-separator">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1049,6 +1052,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: left-separator -->
     <NODE id="left-separator">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1060,6 +1064,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-separator -->
     <NODE id="right-separator">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1072,6 +1077,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: left-door -->
     <NODE id="left-door">
       <MATERIAL id="carriageMaterial"/>
       <TEXTURE id="null"/>
@@ -1083,6 +1089,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: right-door -->
     <NODE id="right-door">
       <MATERIAL id="carriageMaterial"/>
       <TEXTURE id="null"/>
@@ -1095,6 +1102,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: train-door -->
     <NODE id="train-door">
       <MATERIAL id="carriageMaterial"/>
       <TEXTURE id="null"/>
@@ -1108,6 +1116,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: door-plate -->
     <NODE id="door-plate">
       <MATERIAL id="carriageMaterial"/>
       <TEXTURE id="null"/>
@@ -1117,6 +1126,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: door-border-top -->
     <NODE id="door-border-top">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1129,6 +1139,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: door-border-left -->
     <NODE id="door-border-left">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1142,6 +1153,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: door-border-right -->
     <NODE id="door-border-right">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1155,6 +1167,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- train: door-train-window -->
     <NODE id="door-train-window">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1167,7 +1180,7 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- rectangulo genrico -->
+    <!-- generic rectangle -->
     <NODE id="myRectangle">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -1262,6 +1275,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-seat-left1 -->
     <NODE id="wood-seat-left1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1274,6 +1288,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-seat-left2 -->
     <NODE id="wood-seat-left2">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1286,6 +1301,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-seat-right1 -->
     <NODE id="wood-seat-right1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1299,6 +1315,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-seat-right2 -->
     <NODE id="wood-seat-right2">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1312,6 +1329,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-seat -->
     <NODE id="wood-seat">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1328,9 +1346,9 @@
         <NODEREF id="wood-plate7"/>
         <NODEREF id="wood-plate8"/>
       </DESCENDANTS>
-
     </NODE>
 
+    <!-- seat: left-body -->
     <NODE id="left-body">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1340,6 +1358,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: right-body -->
     <NODE id="right-body">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
@@ -1351,6 +1370,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate1 -->
     <NODE id="wood-plate1">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1361,6 +1381,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate2 -->
     <NODE id="wood-plate2">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1371,6 +1392,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate3 -->
     <NODE id="wood-plate3">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1381,10 +1403,10 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate4 -->
     <NODE id="wood-plate4">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-
 
       <TRANSLATION x="9.5" y="9.5" z="6"/>
       <ROTATION axis="x" angle="-25"/>
@@ -1394,6 +1416,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate5 -->
     <NODE id="wood-plate5">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1406,17 +1429,20 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate6 -->
     <NODE id="wood-plate6">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="9.5" y="13.5" z="12"/>
       <ROTATION axis="x" angle="90"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate7 -->
     <NODE id="wood-plate7">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1429,6 +1455,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate8 -->
     <NODE id="wood-plate8">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1441,6 +1468,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: seat-body -->
     <NODE id="seat-body">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -1454,6 +1482,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: seat-body-cylinder1 -->
     <NODE id="seat-body-cylinder1">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -1465,9 +1494,9 @@
       <DESCENDANTS>
         <LEAF type="cylinder" args="5 0.25 0.25 10 10 1 1"/>
       </DESCENDANTS>
-
     </NODE>
 
+    <!-- seat: seat-body-cylinder2 -->
     <NODE id="seat-body-cylinder2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -1479,40 +1508,36 @@
       <DESCENDANTS>
         <LEAF type="cylinder" args="5 0.25 0.25 10 10 1 1"/>
       </DESCENDANTS>
-
     </NODE>
 
+    <!-- seat: seat-body-cylinder3 -->
     <NODE id="seat-body-cylinder3">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-
       <TRANSLATION x="10" y="8" z="8.5"/>
-
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="2.5 0.25 0.25 10 10 1 1"/>
       </DESCENDANTS>
-
     </NODE>
 
+    <!-- seat: seat-body-cylinder4 -->
     <NODE id="seat-body-cylinder4">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-
       <TRANSLATION x="10" y="10" z="7"/>
-
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="6 0.25 0.25 10 10 1 1"/>
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: seat-body-cylinder5 -->
     <NODE id="seat-body-cylinder5">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
-
 
       <TRANSLATION x="10" y="15.5" z="12.5"/>
       <ROTATION axis="x" angle="90"/>
@@ -1522,6 +1547,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- seat: wood-plate -->
     <NODE id="wood-plate">
       <MATERIAL id="seatMaterial"/>
       <TEXTURE id="null"/>
@@ -1537,49 +1563,54 @@
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="candeeiros">
+    <!-- lamps -->
+    <NODE id="lamps">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="candeeiroEsquerda"/>
-        <NODEREF id="candeeiroDireita"/>
+        <NODEREF id="leftLamp"/>
+        <NODEREF id="rightLamp"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="candeeiroEsquerda">
+    <!-- lamps: leftLamp -->
+    <NODE id="leftLamp">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="3.5" y="2.5" z="12.5" />
 
       <DESCENDANTS>
-        <NODEREF id="candeeiroGenerico"/>
+        <NODEREF id="genericLamp"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="candeeiroDireita">
+    <!-- lamps: rightLamp -->
+    <NODE id="rightLamp">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="31.5" y="2.5" z="48.5" />
 
       <DESCENDANTS>
-        <NODEREF id="candeeiroGenerico"/>
+        <NODEREF id="genericLamp"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="candeeiroGenerico">
+    <!-- lamps: genericLamp -->
+    <NODE id="genericLamp">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="suporte"/>
-        <NODEREF id="abajur"/>
+        <NODEREF id="support"/>
+        <NODEREF id="lampshade"/>
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="suporte">
+    <!-- lamps: support -->
+    <NODE id="support">
       <MATERIAL id="null"/>
       <TEXTURE id="metalLamp"/>
 
@@ -1591,7 +1622,8 @@
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="abajur">
+    <!-- lamps: lampshade -->
+    <NODE id="lampshade">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
