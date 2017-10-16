@@ -131,6 +131,43 @@
       <file path="images/metal.png" />
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
+
+    <!--texture of rear lights of train-->
+    <TEXTURE id="reartrainlights">
+  	  <file path="images/headlight.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="trainmetaltexture">
+  	  <file path="images/teste2.jpg"/>
+      <amplif_factor s="7" t="5"/>
+    </TEXTURE>
+
+      <TEXTURE id="wheeltexture">
+  	  <file path="images/wheeltexture.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="toptrainlights">
+  	  <file path="images/headlighttop.png"/>
+      <amplif_factor s="4" t="4"/>
+    </TEXTURE>
+
+    <TEXTURE id="windowtexture1">
+  	  <file path="images/window1.jpg"/>
+      <amplif_factor s="7" t="7"/>
+    </TEXTURE>
+
+    <TEXTURE id="windowtexture2">
+  	  <file path="images/window2.jpg"/>
+      <amplif_factor s="4" t="4"/>
+    </TEXTURE>
+
+    <TEXTURE id="rubbertexture">
+  	  <file path="images/rubbertexture.jpg"/>
+      <amplif_factor s="4" t="4"/>
+    </TEXTURE>
+
   </TEXTURES>
 
   <MATERIALS>
@@ -181,7 +218,7 @@
 
     <!-- seatMaterial is a selected material to the station seats -->
     <MATERIAL id="seatMaterial">
-      <shininess value="1"/>
+      <shininess value="5"/>
       <specular r="0.333" g="0.419" b="0.184" a="1"/>
       <diffuse r="0.0" g="0.0" b="0.0" a="1" />
       <ambient r="0.0" g="0.0" b="0.0" a="1" />
@@ -586,7 +623,7 @@
     <!-- train -->
     <NODE id="train">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="trainmetaltexture"/>
 
       <TRANSLATION x="18" y="-2.5" z="25.75"/>
 
@@ -639,7 +676,7 @@
 
     <!-- carriage -->
     <NODE id="carriage">
-      <MATERIAL id="carriageMaterial"/>
+      <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <SCALE sx="2.5" sy="1" sz="1"/>
@@ -749,7 +786,7 @@
     <!-- train: separator -->
     <NODE id="separator">
       <MATERIAL id="separatorMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="rubbertexture"/>
 
       <TRANSLATION x="5.2" y="0.49" z="0.5"/>
       <SCALE sx="0.15" sy="0.95" sz="0.85"/>
@@ -765,7 +802,7 @@
     <!-- train: top-light -->
     <NODE id="top-light">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="toptrainlights"/>
 
        <TRANSLATION x="18.5" y="10" z="4"/>
        <ROTATION axis="y" angle="90"/>
@@ -848,7 +885,7 @@
     <!-- train: wheel -->
     <NODE id="wheel">
       <MATERIAL id="wheelMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="wheeltexture"/>
 
       <TRANSLATION x="6.5" y="4" z="0.75" />
       <SCALE sx="0.35" sy="1" sz="0.25"/>
@@ -861,7 +898,7 @@
 
     <!-- train: smooth-roof -->
     <NODE id="smooth-roof">
-      <MATERIAL id="carriageMaterial"/>
+      <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="5" y="9.5" z="0.8"/>
@@ -875,7 +912,7 @@
     <!-- train: left-light-->
     <NODE id="left-light">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="reartrainlights"/>
 
        <TRANSLATION x="18.5" y="5" z="6"/>
        <ROTATION axis="y" angle="90"/>
@@ -888,7 +925,7 @@
     <!-- train: right-light -->
     <NODE id="right-light">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="reartrainlights"/>
 
       <TRANSLATION x="18.5" y="5" z="2"/>
       <ROTATION axis="y" angle="90"/>
@@ -901,7 +938,7 @@
     <!-- train: front-window -->
     <NODE id="front-window">
       <MATERIAL id="separatorMaterial"/>
-      <TEXTURE id="clear"/>
+      <TEXTURE id="windowtexture1"/>
 
       <TRANSLATION x="18.8" y="9" z="0.5"/>
 
@@ -915,7 +952,7 @@
     <!-- train: top-window-separator -->
     <NODE id="top-window-separator">
       <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="rubbertexture"/>
 
       <TRANSLATION x="0" y="0" z="0.025"/>
 
@@ -927,7 +964,7 @@
     <!-- train: bot-window-separator -->
     <NODE id="bot-window-separator">
       <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="rubbertexture"/>
 
       <TRANSLATION x="0" y="-3" z="0.025"/>
 
@@ -1004,7 +1041,7 @@
     <!-- train: lateral-window -->
     <NODE id="lateral-window">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="rubbertexture"/>
 
       <DESCENDANTS>
         <NODEREF id="top-separator"/>
@@ -1018,7 +1055,7 @@
     <!-- train: window-glass -->
     <NODE id="window-glass">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="windowtexture2"/>
 
       <TRANSLATION x="0" y="0" z="0"/>
 
@@ -1105,7 +1142,7 @@
     <!-- train: train-door -->
     <NODE id="train-door">
       <MATERIAL id="carriageMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="rubbertexture"/>
 
       <DESCENDANTS>
         <NODEREF id="door-plate"/>
@@ -1118,8 +1155,8 @@
 
     <!-- train: door-plate -->
     <NODE id="door-plate">
-      <MATERIAL id="carriageMaterial"/>
-      <TEXTURE id="null"/>
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="trainmetaltexture"/>
 
       <DESCENDANTS>
         <LEAF type="rectangle" args="0 5 1 0"/>
@@ -1170,7 +1207,7 @@
     <!-- train: door-train-window -->
     <NODE id="door-train-window">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="windowtexture1"/>
 
       <TRANSLATION x="0.5" y="4" z="-0.2"/>
       <SCALE sx="0.4" sy="1" sz="1"/>

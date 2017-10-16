@@ -171,7 +171,7 @@
     </MATERIAL>
 
     <MATERIAL id="seatMaterial">
-      <shininess value="1"/>
+      <shininess value="0.1"/>
       <specular r="0.333" g="0.419" b="0.184" a="1"/>
       <diffuse r="0.0" g="0.0" b="0.0" a="1" />
       <ambient r="0.0" g="0.0" b="0.0" a="1" />
