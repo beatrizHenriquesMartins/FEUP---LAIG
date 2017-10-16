@@ -251,6 +251,7 @@
         <NODEREF id="wood-seat-right1"/>
         <NODEREF id="wood-seat-right2"/>
         <NODEREF id="lamps"/>
+        <NODEREF id="tunnel"/>
       </DESCENDANTS>
     </NODE>
 
@@ -1675,6 +1676,50 @@
       <DESCENDANTS>
         <LEAF type="sphere" args="2 20 20" />
       </DESCENDANTS>
+    </NODE>
+
+    <NODE id="tunnel">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null"/>
+
+        <TRANSLATION x="-2" y="0" z="30"/>
+        <SCALE sx="1" sy="2" sz="2"/>
+
+        <DESCENDANTS>
+            <LEAF type="patch" args="2 4">
+
+               <CPLINE>
+                    <CPOINT xx="0" yy="0" zz="8" ww="1"/>
+                    <CPOINT xx="0" yy="9" zz="8" ww="1"/>
+                     <CPOINT xx="0" yy="15" zz="0" ww="1"/>
+                     <CPOINT xx="0" yy="9" zz="-8" ww="1"/>
+                    <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
+                   
+                    
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="1" yy="0" zz="8" ww="1"/>
+                    <CPOINT xx="1" yy="9" zz="8" ww="1"/>
+                    <CPOINT xx="1" yy="15" zz="0" ww="1"/>
+                    <CPOINT xx="1" yy="9" zz="-8" ww="1"/>
+                    <CPOINT xx="1" yy="0" zz="-8" ww="1"/>
+                    
+                
+                </CPLINE>
+
+                  <CPLINE>
+                    <CPOINT xx="1" yy="0" zz="7" ww="1"/>
+                    <CPOINT xx="1" yy="8" zz="7" ww="1"/>
+                    <CPOINT xx="1" yy="14" zz="0" ww="1"/>
+                    <CPOINT xx="1" yy="8" zz="-7" ww="1"/>
+                    <CPOINT xx="1" yy="0" zz="-7" ww="1"/>
+                    
+                
+                </CPLINE>
+
+             
+            </LEAF>
+        </DESCENDANTS>
     </NODE>
   </NODES>
 </SCENE>

@@ -194,28 +194,39 @@
       </DESCENDANTS>
 
       </NODE>
-
+  
     <NODE id="patch">
         <MATERIAL id="defaultMaterial"/>
-        <TEXTURE id="gravilha"/>
+        <TEXTURE id="null"/>
 
 
         <DESCENDANTS>
-            <LEAF type="patch" args="2 1">
+            <LEAF type="patch" args="2 2">
+
+               <CPLINE>
+                    <CPOINT xx="0" yy="0" zz="8" ww="1"/>
+                     <CPOINT xx="0" yy="15" zz="0" ww="1"/>
+                    <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
+                   
+                    
+                </CPLINE>
                 <CPLINE>
-                    <CPOINT xx="-1.5" yy="-1.5" zz="0.0" ww="1"/>
-                    <CPOINT xx="-1.5" yy="1.5" zz="0.0" ww="1"/>
+                    <CPOINT xx="1" yy="0" zz="8" ww="1"/>
+                    <CPOINT xx="1" yy="15" zz="0" ww="1"/>
+                    <CPOINT xx="1" yy="0" zz="-8" ww="1"/>
+                    
+                
                 </CPLINE>
 
-                <CPLINE>
-                    <CPOINT xx="0.0" yy="-1.5" zz="3.0" ww="1"/>
-                    <CPOINT xx="0.0" yy="1.5" zz="3.0" ww="1"/>
+                  <CPLINE>
+                    <CPOINT xx="1" yy="0" zz="7" ww="1"/>
+                    <CPOINT xx="1" yy="14" zz="0" ww="1"/>
+                    <CPOINT xx="1" yy="0" zz="-7" ww="1"/>
+                    
+                
                 </CPLINE>
 
-                <CPLINE>
-                    <CPOINT xx="1.5" yy="-1.5" zz="0.0" ww="1"/>
-                    <CPOINT xx="1.5" yy="1.5" zz="0.0" ww="1"/>
-                </CPLINE>
+             
             </LEAF>
         </DESCENDANTS>
     </NODE>
