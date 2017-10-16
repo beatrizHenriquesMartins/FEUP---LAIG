@@ -168,6 +168,11 @@
       <amplif_factor s="4" t="4"/>
     </TEXTURE>
 
+    <TEXTURE id="woodtexture">
+  	  <file path="images/wood.jpg"/>
+      <amplif_factor s="10" t="10"/>
+    </TEXTURE>
+
   </TEXTURES>
 
   <MATERIALS>
@@ -1586,8 +1591,8 @@
 
     <!-- seat: wood-plate -->
     <NODE id="wood-plate">
-      <MATERIAL id="seatMaterial"/>
-      <TEXTURE id="null"/>
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="woodtexture"/>
 
       <SCALE sx="11" sy="0.25" sz="1"/>
       <DESCENDANTS>
