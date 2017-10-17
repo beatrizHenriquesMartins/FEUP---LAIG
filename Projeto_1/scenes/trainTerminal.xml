@@ -173,6 +173,17 @@
       <amplif_factor s="10" t="10"/>
     </TEXTURE>
 
+    <!-- text for cais 1 -->
+    <TEXTURE id="cais1">
+  	  <file path="images/cais1.png"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <!-- text for cais 2 -->
+    <TEXTURE id="cais2">
+      <file path="images/cais2.png"/>
+      <amplif_factor s="10" t="10"/>
+    </TEXTURE>
   </TEXTURES>
 
   <MATERIALS>
@@ -229,6 +240,15 @@
       <ambient r="0.0" g="0.0" b="0.0" a="1" />
       <emission r="0.1" g="0.1" b="0.1" a="1" />
     </MATERIAL>
+
+    <!-- arrow material -->
+    <MATERIAL id="arrowMaterial">
+      <shininess value="5"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.01568" g="0.22745" b="0.58039" a="1" />
+      <ambient r="0.0" g="0.0" b="0.0" a="1" />
+      <emission r="0.1" g="0.1" b="0.1" a="1" />
+    </MATERIAL>
   </MATERIALS>
 
   <NODES>
@@ -252,6 +272,7 @@
         <NODEREF id="wood-seat-right2"/>
         <NODEREF id="lamps"/>
         <NODEREF id="tunnel"/>
+-->
         <NODEREF id="boardsInformation"/>
       </DESCENDANTS>
     </NODE>
@@ -1680,49 +1701,35 @@
     </NODE>
 
     <NODE id="tunnel">
-        <MATERIAL id="defaultMaterial"/>
-        <TEXTURE id="null"/>
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="-2" y="0" z="30"/>
-        <SCALE sx="1" sy="2" sz="2"/>
+      <TRANSLATION x="-2" y="0" z="30"/>
+      <SCALE sx="1" sy="2" sz="2"/>
 
         <DESCENDANTS>
             <LEAF type="patch" args="20 20">
 
-               <CPLINE>
-                    <CPOINT xx="0" yy="0" zz="8" ww="1"/>
-                    <CPOINT xx="0" yy="9" zz="8" ww="1"/>
-                     <CPOINT xx="0" yy="15" zz="0" ww="1"/>
-                     <CPOINT xx="0" yy="9" zz="-8" ww="1"/>
-                    <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
-                   
-                    
-                </CPLINE>
-                <CPLINE>
-                    <CPOINT xx="1" yy="0" zz="8" ww="1"/>
-                    <CPOINT xx="1" yy="9" zz="8" ww="1"/>
-                    <CPOINT xx="1" yy="15" zz="0" ww="1"/>
-                    <CPOINT xx="1" yy="9" zz="-8" ww="1"/>
-                    <CPOINT xx="1" yy="0" zz="-8" ww="1"/>
-                    
-                
-                </CPLINE>
+          <CPLINE>
+            <CPOINT xx="1" yy="0" zz="8" ww="1"/>
+            <CPOINT xx="1" yy="9" zz="8" ww="1"/>
+            <CPOINT xx="1" yy="15" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="9" zz="-8" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="-8" ww="1"/>
+          </CPLINE>
 
-                  <CPLINE>
-                    <CPOINT xx="1" yy="0" zz="7" ww="1"/>
-                    <CPOINT xx="1" yy="8" zz="7" ww="1"/>
-                    <CPOINT xx="1" yy="14" zz="0" ww="1"/>
-                    <CPOINT xx="1" yy="8" zz="-7" ww="1"/>
-                    <CPOINT xx="1" yy="0" zz="-7" ww="1"/>
-                    
-                
-                </CPLINE>
-
-             
-            </LEAF>
-        </DESCENDANTS>
+          <CPLINE>
+            <CPOINT xx="1" yy="0" zz="7" ww="1"/>
+            <CPOINT xx="1" yy="8" zz="7" ww="1"/>
+            <CPOINT xx="1" yy="14" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="8" zz="-7" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="-7" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
     </NODE>
 
+    <!-- board information: Boards Information pack -->
     <NODE id="boardsInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1733,15 +1740,18 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- board information: left Board Information -->
     <NODE id="leftBoardInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
         <NODEREF id="genericBoardInformation"/>
+        <NODEREF id="leftBoardText"/>
       </DESCENDANTS>
     </NODE>
 
+    <!-- board information: right Board Information -->
     <NODE id="rightBoardInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1751,22 +1761,70 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- board information: generic Board Information -->
     <NODE id="genericBoardInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
         <NODEREF id="arrow"/>
+        <NODEREF id="box"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- board information: arrow -->
+    <NODE id="arrow">
+      <MATERIAL id="arrowMaterial"/>
+      <TEXTURE id="null"/>
+
+      <ROTATION axis="y" angle="-180" />
+      <TRANSLATION x="-2" y="0.5" z="-0.002" />
+      <SCALE sx="0.75" sy="0.75" sz="0.75" />
+
+      <DESCENDANTS>
+        <LEAF type="triangle" args="0 0 0 -2 4 0 2 4 0" />
       </DESCENDANTS>
     </NODE>
 
     <!-- board information: lampshade -->
-    <NODE id="arrow">
+    <NODE id="box">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <LEAF type="triangle" args="0 0 0 -2 0 4 2 0 4" />
+        <LEAF type="rectangle" args="0 3 4.5 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- board information: right Board Text -->
+<!--
+    <NODE id="rightBoardText">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="genericBoardText"/>
+      </DESCENDANTS>
+    </NODE>
+-->
+
+    <!-- board information: left Board Text-->
+    <NODE id="leftBoardText">
+      <MATERIAL id="cais1"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="genericBoardText"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- board information: generic Board Information -->
+    <NODE id="genericBoardText">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 4 12 0"/>
       </DESCENDANTS>
     </NODE>
   </NODES>
