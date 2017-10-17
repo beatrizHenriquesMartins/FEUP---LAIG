@@ -1810,8 +1810,8 @@
 
     <!-- board information: left Board Text-->
     <NODE id="leftBoardText">
-      <MATERIAL id="cais1"/>
-      <TEXTURE id="null"/>
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="cais1"/>
 
       <DESCENDANTS>
         <NODEREF id="genericBoardText"/>
