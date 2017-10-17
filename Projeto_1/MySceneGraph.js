@@ -1424,7 +1424,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
                 texture[0].unbind();
                 clear = 0;
             }else{
-                if(currnode.leaves[i].loadTextureFlag == 0)
+               
                 currnode.leaves[i].primitive.loadTexture(texture);
                 texture[0].bind();
             }

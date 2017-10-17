@@ -9,7 +9,6 @@ function MyGraphLeaf(graph, xmlelem) {
     var type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
     this.xmlelem = xmlelem;
     this.primitive;
-    this.loadTextureFlag= 0;
     this.initBuffers(type);
 
 }
@@ -33,7 +32,6 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
             this.primitive = new MyTriangle(this.graph.scene, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
             break;
         case 'patch':
-            this.loadTextureFlag = 1;
             this.createPatch(args);
             break;
 
@@ -74,5 +72,5 @@ MyGraphLeaf.prototype.createPatch = function (args){
     
 
     }
-    this.primitive = this.graph.scene.makeSurface(controlpoints.length-1,controlines.length-1,controlpoints,u,v);
+    this.primitive = new MyPatch(this.graph.scene,controlpoints,args);
 }
