@@ -52,7 +52,9 @@ MyGraphLeaf.prototype.createPatch = function (args){
     for(let i = 0; i < cplines.length ;i++)
     {
         var aux = cplines[i].children;
+        var nodeName;
         var controlines =[];
+        
         for(let j = 0; j < aux.length;j++)
         {
             var aux2 = aux[j];
@@ -70,5 +72,5 @@ MyGraphLeaf.prototype.createPatch = function (args){
         }
         controlpoints.push(controlines);
     } 
-    this.primitive = this.graph.scene.makeSurface(u,v,controlpoints);
+    this.primitive = this.graph.scene.makeSurface(controlpoints.length-1,controlines.length-1,controlpoints,u,v);
 }

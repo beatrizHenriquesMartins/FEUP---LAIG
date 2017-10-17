@@ -80,7 +80,7 @@ XMLscene.prototype.getKnotsVector = function(degree) { // TODO (CGF 0.19.3): add
 }
 
 
-XMLscene.prototype.makeSurface = function (degree1, degree2, controlvertexes) {
+XMLscene.prototype.makeSurface = function (degree1, degree2, controlvertexes,u,v) {
 		
 	var knots1 = this.getKnotsVector(degree1); // to be built inside webCGF in later versions ()
 	var knots2 = this.getKnotsVector(degree2); // to be built inside webCGF in later versions
@@ -90,7 +90,7 @@ XMLscene.prototype.makeSurface = function (degree1, degree2, controlvertexes) {
 		return nurbsSurface.getPoint(u, v);
 	};
 
-	var obj = new CGFnurbsObject(this, getSurfacePoint, 20, 20 );
+	var obj = new CGFnurbsObject(this, getSurfacePoint, u, v );
 	return obj;
 }
 

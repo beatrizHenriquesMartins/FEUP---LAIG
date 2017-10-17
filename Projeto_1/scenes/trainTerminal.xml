@@ -240,7 +240,6 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-<!--
         <NODEREF id="railsFloor"/>
         <NODEREF id="sides"/>
         <NODEREF id="walls"/>
@@ -1688,7 +1687,7 @@
         <SCALE sx="1" sy="2" sz="2"/>
 
         <DESCENDANTS>
-            <LEAF type="patch" args="2 4">
+            <LEAF type="patch" args="20 20">
 
                <CPLINE>
                     <CPOINT xx="0" yy="0" zz="8" ww="1"/>
