@@ -240,6 +240,7 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
+<!--
         <NODEREF id="railsFloor"/>
         <NODEREF id="sides"/>
         <NODEREF id="walls"/>
@@ -252,6 +253,7 @@
         <NODEREF id="wood-seat-right2"/>
         <NODEREF id="lamps"/>
         <NODEREF id="tunnel"/>
+        <NODEREF id="boardsInformation"/>
       </DESCENDANTS>
     </NODE>
 
@@ -1720,6 +1722,53 @@
              
             </LEAF>
         </DESCENDANTS>
+    </NODE>
+
+    <NODE id="boardsInformation">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="leftBoardInformation"/>
+        <NODEREF id="rightBoardInformation"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="leftBoardInformation">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="genericBoardInformation"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="rightBoardInformation">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="genericBoardInformation"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="genericBoardInformation">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="arrow"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- board information: lampshade -->
+    <NODE id="arrow">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="triangle" args="0 0 0 -2 0 4 2 0 4" />
+      </DESCENDANTS>
     </NODE>
   </NODES>
 </SCENE>
