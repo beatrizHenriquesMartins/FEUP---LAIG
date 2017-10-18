@@ -182,7 +182,7 @@
     <!-- text for cais 2 -->
     <TEXTURE id="cais2">
       <file path="images/cais2.png"/>
-      <amplif_factor s="10" t="10"/>
+      <amplif_factor s="1" t="1"/>
     </TEXTURE>
   </TEXTURES>
 
@@ -245,7 +245,7 @@
     <MATERIAL id="arrowMaterial">
       <shininess value="5"/>
       <specular r="0.0" g="0.0" b="0.0" a="1"/>
-      <diffuse r="0.01568" g="0.22745" b="0.58039" a="1" />
+      <diffuse r="0.0549" g="0.2275" b="0.60" a="1" />
       <ambient r="0.0" g="0.0" b="0.0" a="1" />
       <emission r="0.1" g="0.1" b="0.1" a="1" />
     </MATERIAL>
@@ -272,7 +272,6 @@
         <NODEREF id="wood-seat-right2"/>
         <NODEREF id="lamps"/>
         <NODEREF id="tunnel"/>
--->
         <NODEREF id="boardsInformation"/>
       </DESCENDANTS>
     </NODE>
@@ -1729,18 +1728,43 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- board information: Boards Information pack -->
+    <!-- boardsInformation -->
     <NODE id="boardsInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
+        <NODEREF id="leftBoardInformation_pack"/>
+        <NODEREF id="rightBoardInformation_pack"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- boardsInformation: left Board Information pack -->
+    <NODE id="leftBoardInformation_pack">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="23" y="10" z="1"/>
+      <SCALE sx="0.35" sy="0.35" sz="0.35"/>
+
+      <DESCENDANTS>
         <NODEREF id="leftBoardInformation"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- boardsInformation: right Board Information pack -->
+    <NODE id="rightBoardInformation_pack">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="5" y="5" z="0"/>
+
+      <DESCENDANTS>
         <NODEREF id="rightBoardInformation"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- board information: left Board Information -->
+    <!-- boardsInformation: left Board Information -->
     <NODE id="leftBoardInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1751,17 +1775,18 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- board information: right Board Information -->
+    <!-- boardsInformation: right Board Information -->
     <NODE id="rightBoardInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
         <NODEREF id="genericBoardInformation"/>
+        <NODEREF id="rightBoardText"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- board information: generic Board Information -->
+    <!-- boardsInformation: generic Board Information -->
     <NODE id="genericBoardInformation">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -1778,7 +1803,7 @@
       <TEXTURE id="null"/>
 
       <ROTATION axis="y" angle="-180" />
-      <TRANSLATION x="-2" y="0.5" z="-0.002" />
+      <TRANSLATION x="-2" y="0.5" z="-0.003" />
       <SCALE sx="0.75" sy="0.75" sz="0.75" />
 
       <DESCENDANTS>
@@ -1786,29 +1811,17 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- board information: lampshade -->
+    <!-- board information: box -->
     <NODE id="box">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <LEAF type="rectangle" args="0 3 4.5 0"/>
+        <LEAF type="rectangle" args="0 4 8.5 0"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- board information: right Board Text -->
-<!--
-    <NODE id="rightBoardText">
-      <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
-
-      <DESCENDANTS>
-        <NODEREF id="genericBoardText"/>
-      </DESCENDANTS>
-    </NODE>
--->
-
-    <!-- board information: left Board Text-->
+    <!-- boardsInformation: left Board Text -->
     <NODE id="leftBoardText">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="cais1"/>
@@ -1818,13 +1831,25 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- board information: generic Board Information -->
+    <!-- boardsInformation: right Board Text -->
+    <NODE id="rightBoardText">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="cais2"/>
+
+      <DESCENDANTS>
+        <NODEREF id="genericBoardText"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- boardsInformation: generic Board Text -->
     <NODE id="genericBoardText">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
+      <TRANSLATION x="4.15" y="0.5" z="0.03"/>
+
       <DESCENDANTS>
-        <LEAF type="rectangle" args="0 4 12 0"/>
+        <LEAF type="rectangle" args="0 3 4 0"/>
       </DESCENDANTS>
     </NODE>
   </NODES>
