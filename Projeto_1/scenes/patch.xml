@@ -201,7 +201,7 @@
 
 
         <DESCENDANTS>
-            <LEAF type="patch" args="2 2">
+            <LEAF type="patch" args="20 20">
 
                <CPLINE>
                     <CPOINT xx="0" yy="0" zz="8" ww="1"/>
