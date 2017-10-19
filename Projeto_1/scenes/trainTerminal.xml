@@ -120,12 +120,6 @@
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
 
-    <!-- door img -->
-    <TEXTURE id="doorIMG">
-      <file path="images/portaImagem.png" />
-      <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
     <!-- metal for the lamp support -->
     <TEXTURE id="metalLamp">
       <file path="images/metal.png" />
