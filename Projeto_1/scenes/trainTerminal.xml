@@ -243,9 +243,9 @@
 
     <!-- arrow material -->
     <MATERIAL id="arrowMaterial">
-      <shininess value="5"/>
-      <specular r="0.0" g="0.0" b="0.0" a="1"/>
-      <diffuse r="0.0549" g="0.2275" b="0.60" a="1" />
+      <shininess value="10"/>
+      <specular r="0.0549" g="0.2275" b="0.5804" a="1"/>
+      <diffuse r="0.0" g="0.0" b="0.0" a="1" />
       <ambient r="0.0" g="0.0" b="0.0" a="1" />
       <emission r="0.1" g="0.1" b="0.1" a="1" />
     </MATERIAL>
@@ -1704,24 +1704,38 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="-2" y="0" z="30"/>
-      <SCALE sx="1" sy="2" sz="2"/>
+      <SCALE sx="1" sy="1.35" sz="1"/>
 
         <DESCENDANTS>
             <LEAF type="patch" args="20 20">
 
+            <CPLINE>
+            <CPOINT xx="0" yy="0" zz="8" ww="1"/>
+            <CPOINT xx="0" yy="8" zz="8" ww="1"/>
+            <CPOINT xx="0" yy="12" zz="8" ww="1"/>
+            <CPOINT xx="0" yy="15" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="8" zz="-8" ww="1"/>
+            <CPOINT xx="0" yy="12" zz="-8" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
+          </CPLINE>
+
           <CPLINE>
             <CPOINT xx="1" yy="0" zz="8" ww="1"/>
-            <CPOINT xx="1" yy="9" zz="8" ww="1"/>
+            <CPOINT xx="1" yy="8" zz="8" ww="1"/>
+            <CPOINT xx="1" yy="12" zz="8" ww="1"/>
             <CPOINT xx="1" yy="15" zz="0" ww="1"/>
-            <CPOINT xx="1" yy="9" zz="-8" ww="1"/>
+            <CPOINT xx="1" yy="8" zz="-8" ww="1"/>
+            <CPOINT xx="1" yy="12" zz="-8" ww="1"/>
             <CPOINT xx="1" yy="0" zz="-8" ww="1"/>
           </CPLINE>
 
           <CPLINE>
             <CPOINT xx="1" yy="0" zz="7" ww="1"/>
-            <CPOINT xx="1" yy="8" zz="7" ww="1"/>
+            <CPOINT xx="1" yy="7" zz="7" ww="1"/>
+            <CPOINT xx="1" yy="11" zz="7" ww="1"/>
             <CPOINT xx="1" yy="14" zz="0" ww="1"/>
-            <CPOINT xx="1" yy="8" zz="-7" ww="1"/>
+            <CPOINT xx="1" yy="7" zz="-7" ww="1"/>
+            <CPOINT xx="1" yy="11" zz="-7" ww="1"/>
             <CPOINT xx="1" yy="0" zz="-7" ww="1"/>
           </CPLINE>
         </LEAF>
