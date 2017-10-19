@@ -1679,7 +1679,7 @@
       <TEXTURE id="metalLamp"/>
 
       <SCALE sx="0.25" sy="1.85" sz="0.25" />
-      <ROTATION axis="x" angle="-90" />
+      <ROTATION axis="x" angle="-90"/> 
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="4 1 1 20 20 0 0" />
