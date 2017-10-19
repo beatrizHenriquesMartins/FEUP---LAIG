@@ -331,7 +331,7 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- leftWall -->
+    <!-- left Wall -->
     <NODE id="leftWall">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -341,7 +341,7 @@
       </DESCENDANTS>
     </NODE>
 
-    <!-- rightWall -->
+    <!-- right Wall -->
     <NODE id="rightWall">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -384,7 +384,6 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="22.5" y="2.5" z="0.3"/>
-      <SCALE sx="5" sy="5" sz="3"/>
 
       <DESCENDANTS>
         <NODEREF id="genericDoor"/>
@@ -396,7 +395,8 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="8.4" y="0.32" z="58"/>
+      <TRANSLATION x="10" y="2.5" z="61"/>
+      <ROTATION axis="y" angle="180"/>
 
       <DESCENDANTS>
         <NODEREF id="genericDoor"/>
@@ -416,6 +416,8 @@
     <NODE id="splineDoor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="woodRailsTexture"/>
+
+      <SCALE sx="5" sy="5" sz="3"/>
 
       <DESCENDANTS>
         <LEAF type="patch" args="20 20">
