@@ -5,14 +5,12 @@ function MySphere(scene, radius, slices, stacks) {
   this.radius = radius || 0;
   this.slices = slices || 0;
   this.stacks = stacks || 0;
-  this.initBuffers();
 
+  this.initBuffers();
 }
 
 MySphere.prototype = Object.create(CGFobject.prototype);
 MySphere.prototype.construtor = MySphere;
-
-
 
 MySphere.prototype.initBuffers = function () {
   this.indices = [];
@@ -40,7 +38,6 @@ MySphere.prototype.initBuffers = function () {
 
   this.primitiveType = this.scene.gl.TRIANGLES;
   this.initGLBuffers();
-
 }
 
 MySphere.prototype.loadTexture = function(texture){

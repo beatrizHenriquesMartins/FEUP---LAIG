@@ -8,31 +8,33 @@
      this.controlpoints = controlpoints;
      this.args = args;
 
-    this.nurb = this.makeSurface(controlpoints.length-1,controlpoints[0].length-1,controlpoints,args[0],args[1]);
+     this.nurb = this.makeSurface(controlpoints.length-1,controlpoints[0].length-1,controlpoints,args[0],args[1]);
  }
 
 MyPatch.prototype = Object.create(CGFobject.prototype);
 MyPatch.prototype.constructor = MyPatch;
 
  MyPatch.prototype.getKnotsVector = function(degree) { // TODO (CGF 0.19.3): add to CGFnurbsSurface
-	
 	var v = new Array();
+
 	for (var i=0; i<=degree; i++) {
 		v.push(0);
 	}
+
 	for (var i=0; i<=degree; i++) {
 		v.push(1);
 	}
+
 	return v;
 }
 
 
 MyPatch.prototype.makeSurface = function (degree1, degree2, controlvertexes,u,v) {
-		
-	var knots1 = this.getKnotsVector(degree1); 
-	var knots2 = this.getKnotsVector(degree2); 
-		
-	var nurbsSurface = new CGFnurbsSurface(degree1, degree2, knots1, knots2, controlvertexes); 
+
+	var knots1 = this.getKnotsVector(degree1);
+	var knots2 = this.getKnotsVector(degree2);
+
+	var nurbsSurface = new CGFnurbsSurface(degree1, degree2, knots1, knots2, controlvertexes);
 	getSurfacePoint = function(u, v) {
 		return nurbsSurface.getPoint(u, v);
 	};
@@ -46,5 +48,5 @@ MyPatch.prototype.display = function(){
 }
 
 MyPatch.prototype.loadTexture = function (texture) {
-    
-  }
+
+}

@@ -34,6 +34,7 @@ main=function()
 
 	//var filename=getUrlVars()['file'] || "demo.xml";
   var filename=getUrlVars()['file'] || "trainTerminal.xml";
+  //var filename=getUrlVars()['file'] || "patch.xml";
 
 	// create and load graph, and associate it to scene.
 	// Check console for loading errors

@@ -2,7 +2,7 @@ function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices) {
     CGFobject.call(this, scene);
 
     this.scene = scene;
-   
+
     this.texture;
     this.topRad = topRadius;
     this.bottomRad = bottomRadius;
@@ -10,7 +10,6 @@ function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices) {
     this.slices = slices;
     this.stacks = stacks;
 
-    
     this.initBuffers();
 };
 
@@ -29,24 +28,21 @@ MyCylinder.prototype.initBuffers = function () {
     var delta_z = this.height / this.stacks;
     var m = this.height / (this.bottomRad - this.topRad);
     var maxheight;
-    if (this.bottomRad > this.topRad)
-        maxheight = this.topRad * m + this.height;
-    else maxheight = this.bottomRad * m + this.height;
-    var indice = 0;
 
+    if (this.bottomRad > this.topRad){
+        maxheight = this.topRad * m + this.height;
+    }else{
+      maxheight = this.bottomRad * m + this.height;
+    }
+
+    var indice = 0;
     var acc = 0;
+
     for (var i = 0; i <= this.stacks; i++) {
         for (var j = 0; j <= this.slices; j++) {
-            this.vertices.push(
-                r * Math.cos(j * delta_rad),
-                r * Math.sin(j * delta_rad),
-                i * delta_z
-            );
+            this.vertices.push(r * Math.cos(j * delta_rad), r * Math.sin(j * delta_rad), i * delta_z);
             if (Math.abs(this.bottomRad - this.topRad) < 0.0001) {
-                this.normals.push(
-                    Math.cos(j * delta_rad),
-                    Math.sin(j * delta_rad),
-                    0);
+                this.normals.push(Math.cos(j * delta_rad), Math.sin(j * delta_rad), 0);
             } else if (this.bottomRad > this.topRad) {
                 this.normals.push(
                     maxheight * Math.cos(j * delta_rad) / Math.sqrt(Math.pow(this.bottomRad, 2) + Math.pow(maxheight, 2)),
@@ -60,14 +56,16 @@ MyCylinder.prototype.initBuffers = function () {
                     this.topRad / Math.sqrt(Math.pow(this.topRad, 2) + Math.pow(maxheight, 2))
                 );
             }
-            this.originalTexCoords.push(j / this.slices, i / this.stacks);
 
+            this.originalTexCoords.push(j / this.slices, i / this.stacks);
         }
+
         r = (i + 1) * delta_r + this.bottomRad;
     }
 
     for (var i = 0; i < this.stacks; i++) {
         acc = 0;
+
         for (var j = 0; j < this.slices; j++) {
             this.indices.push(
                 i * (this.slices + 1) + j,
@@ -79,7 +77,6 @@ MyCylinder.prototype.initBuffers = function () {
                 (i + 1) * (this.slices + 1) + j,
                 i * (this.slices + 1) + j
             );
-
         }
     }
 
@@ -94,5 +91,5 @@ MyCylinder.prototype.initBuffers = function () {
 
 
 MyCylinder.prototype.loadTexture = function (texture) {
-    
+
 }

@@ -16,14 +16,10 @@ MyCircle.prototype = Object.create(CGFobject.prototype);
 MyCircle.prototype.constructor = MyCircle;
 
 MyCircle.prototype.initBuffers = function () {
-
-
-
-
   this.vertices = [];
 
   this.normals = [];
-  this.texCoords = []
+  this.texCoords = [];
 
   var ang = 2 * Math.PI / this.slices;
   this.vertices.push(0, 0, 0);
@@ -40,17 +36,12 @@ MyCircle.prototype.initBuffers = function () {
   this.indices = [];
 
   for (let i = 1; i <= this.slices; i++) {
-    if (i == this.slices)
+    if (i == this.slices){
       this.indices.push(0, i, 1);
-    else
+    }else{
       this.indices.push(0, i, i + 1);
+    }
   }
-
-
-
-
-
-
 
   this.primitiveType = this.scene.gl.TRIANGLES;
   this.initGLBuffers();
@@ -58,5 +49,5 @@ MyCircle.prototype.initBuffers = function () {
 
 
 MyCircle.prototype.loadTexture = function (texture) {
-  
+
 }
