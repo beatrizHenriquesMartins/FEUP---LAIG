@@ -39,38 +39,75 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
 }
 
 
-MyGraphLeaf.prototype.createPatch = function (args){
+MyGraphLeaf.prototype.createPatch = function (args) {
 
 
-    var u =args[0];
-    var v =args[1];
+    var u = args[0];
+    var v = args[1];
 
     var cplines = this.xmlelem.children;
     var controlpoints = [];
-    for(let i = 0; i < cplines.length ;i++)
-    {
-        var aux = cplines[i].children;
-        var controlines =[];
     
-        for(let j = 0; j < aux.length;j++)
-        {
-            var aux2 = aux[j];
-            var point = [];
-            var x =  parseFloat(this.graph.reader.getString(aux2, 'xx'));
-            point.push(x);
-            var y = parseFloat(this.graph.reader.getString(aux2, 'yy'));
-            point.push(y);
-            var z = parseFloat(this.graph.reader.getString(aux2, 'zz'));
-            point.push(z);
-            var w = parseFloat(this.graph.reader.getString(aux2, 'ww'));
-            point.push(w);
-            controlines.push(point);
+   
+    for (let i = 0; i < cplines.length; i++) {
+        var nodeName = cplines[i].nodeName;
+        if (cplines[i] != null && nodeName == "CPLINE") {
+            var aux = cplines[i].children;
+            var controlines = [];
 
+            for (let j = 0; j < aux.length; j++) {
+                var pointName = aux[j].nodeName;
+                if(aux[j] != null && pointName == "CPOINT"){
+                    var aux2 = aux[j];
+                    var point = [];
+                    var x = parseFloat(this.graph.reader.getString(aux2, 'xx'));
+                    if(x == null)
+                    {
+                        this.onXMLMinorError("unable to parse x value; point");
+                        break;
+                    }else if(isNaN(x)){
+                        return "non-numeric value for rotation x value of cpoint (leaf ID = " + this.graph.reader.getItem(xmlelem, 'id') + ")";
+                    }
+                    point.push(x);
+                    var y = parseFloat(this.graph.reader.getString(aux2, 'yy'));
+                    if(y == null){
+                        this.onXMLMinorError("unable to parse y value; point");
+                        break;
+                    }else if(isNaN(y)){
+                        return "non-numeric value for rotation y value of cpoint (leaf ID = " + this.graph.reader.getItem(xmlelem, 'id') + ")";
+                    }
+                    point.push(y);
+                    var z = parseFloat(this.graph.reader.getString(aux2, 'zz'));
+                    if(z == null){
+                        this.onXMLMinorError("unable to parse z value; point");
+                        break;
+                    }else if(isNaN(z)){
+                        return "non-numeric value for rotation z value of cpoint (leaf ID = " + this.graph.reader.getItem(xmlelem, 'id') + ")";
+                    }
+                    point.push(z);
+                    var w = parseFloat(this.graph.reader.getString(aux2, 'ww'));
+                    if(w == null){
+                        this.onXMLMinorError("unable to parse w value; point");
+                        break;
+                    }else if(isNaN(w)){
+                        return "non-numeric value for rotation w value of cpoint (leaf ID = " + this.graph.reader.getItem(xmlelem, 'id') + ")";
+                    }
+                    point.push(w);
+                    controlines.push(point);
+                }else{
+                    this.graph.onXMLMinorError("unknown tag <" + pointName + ">");
+                }
+              
+
+            }
+            controlpoints.push(controlines);
+
+        }else{
+            this.graph.onXMLMinorError("unknown tag <" + nodeName+ ">");
         }
-        controlpoints.push(controlines);
-    
-    
 
     }
-    this.primitive = new MyPatch(this.graph.scene,controlpoints,args);
+    this.primitive = new MyPatch(this.graph.scene, controlpoints, args);
+
+
 }
