@@ -84,12 +84,6 @@
   </LIGHTS>
 
   <TEXTURES>
-    <!-- Rocks -->
-    <TEXTURE id="rocks">
-      <file path="images/rocks.jpg" />
-      <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
     <!-- floor texture for laterals -->
     <TEXTURE id="floorTexture">
       <file path="images/bank.jpg" />
@@ -126,47 +120,55 @@
       <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
 
-    <!--texture of rear lights of train-->
+    <!-- texture of rear lights of train-->
     <TEXTURE id="reartrainlights">
   	  <file path="images/headlight.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="trainmetaltexture">
   	  <file path="images/teste2.jpg"/>
       <amplif_factor s="7" t="5"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="wheeltexture">
   	  <file path="images/wheeltexture.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="toptrainlights">
   	  <file path="images/headlighttop.png"/>
       <amplif_factor s="4" t="4"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="windowtexture1">
   	  <file path="images/window1.jpg"/>
       <amplif_factor s="7" t="7"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="windowtexture2">
   	  <file path="images/window2.jpg"/>
       <amplif_factor s="4" t="4"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="brickTexture">
       <file path="images/brick.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="rubbertexture">
   	  <file path="images/rubbertexture.jpg"/>
       <amplif_factor s="4" t="4"/>
     </TEXTURE>
 
+    <!-- texture of rear lights of train-->
     <TEXTURE id="woodtexture">
   	  <file path="images/wood.jpg"/>
       <amplif_factor s="10" t="10"/>
@@ -187,6 +189,12 @@
     <!-- Text for the clock-->
     <TEXTURE id="clockText">
       <file path="images/clock.png"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <!-- Text for food machine-->
+    <TEXTURE id="foodMachineTexture">
+      <file path="images/foodMachine.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
   </TEXTURES>
@@ -254,6 +262,15 @@
       <ambient r="0.0" g="0.0" b="0.0" a="1" />
       <emission r="0" g="0" b="0" a="1" />
     </MATERIAL>
+
+    <!-- food machine material -->
+    <MATERIAL id="foodMachineMaterial">
+      <shininess value="20"/>
+      <specular r="0.5" g="0.5" b="0.5" a="1"/>
+      <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+      <ambient r="0.2" g="0.2" b="0.2" a="1" />
+      <emission r="0" g="0" b="0" a="1" />
+    </MATERIAL>
   </MATERIALS>
 
   <NODES>
@@ -279,6 +296,7 @@
         <NODEREF id="tunnel"/>
         <NODEREF id="boardsInformation"/>
         <NODEREF id="terminalClock"/>
+        <NODEREF id="foodMachine"/>
       </DESCENDANTS>
     </NODE>
 
@@ -2068,6 +2086,55 @@
 
       <DESCENDANTS>
         <LEAF type="triangle" args="-0.5 0 1 0.5 0 1 0 1 1"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- food machine -->
+    <NODE id="foodMachine">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANLSATION x="-5" y="-5" z="-5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="foodMachine_pack"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- food machine: foodMachine_pack -->
+    <NODE id="foodMachine_pack">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="foodMachine_box"/>
+        <NODEREF id="foodMachine_planImg"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- food machine: foodMachine_box -->
+    <NODE id="foodMachine_box">
+      <MATERIAL id="foodMachineMaterial"/>
+      <TEXTURE id="null"/>
+
+      <ROTATION axis="x" angle="-90"/>
+      <SCALE sx="5" sy="3" sz="5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="myRectangle"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- food machine: foodMachine_planImg -->
+    <NODE id="foodMachine_planImg">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="foodMachineTexture"/>
+
+      <TRANSLATION x="0" y="0" z="0.05"/>
+      <SCALE sx="2.5" sy="7.5" sz="1"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
       </DESCENDANTS>
     </NODE>
   </NODES>
