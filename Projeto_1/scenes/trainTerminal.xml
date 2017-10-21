@@ -137,7 +137,7 @@
       <amplif_factor s="7" t="5"/>
     </TEXTURE>
 
-      <TEXTURE id="wheeltexture">
+    <TEXTURE id="wheeltexture">
   	  <file path="images/wheeltexture.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
@@ -160,7 +160,6 @@
     <TEXTURE id="brickTexture">
       <file path="images/brick.jpg"/>
       <amplif_factor s="1" t="1"/>
-
     </TEXTURE>
 
     <TEXTURE id="rubbertexture">
@@ -185,16 +184,12 @@
       <amplif_factor s="4" t="3"/>
     </TEXTURE>
 
-
     <!-- Text for the clock-->
     <TEXTURE id="clockText">
       <file path="images/clock.png"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
   </TEXTURES>
-
-    
-    
 
   <MATERIALS>
     <!-- A default material, most use for draw -->
@@ -454,16 +449,16 @@
 
           <!-- down back -->
           <CPLINE>
-            <CPOINT xx="0" yy="0" zz="0.15" ww="1"/> <!-- primeiro ponto -->
+            <CPOINT xx="0" yy="0" zz="0.15" ww="1"/>
             <CPOINT xx="0" yy="0.5" zz="0.15" ww="1"/>
             <CPOINT xx="0" yy="1" zz="0.15" ww="1"/>
             <CPOINT xx="0.05" yy="1.5" zz="0.15" ww="1"/>
             <CPOINT xx="0.15" yy="1.3" zz="0.15" ww="1"/>
-            <CPOINT xx="0.5" yy="2" zz="0.15" ww="1"/> <!-- centro -->
+            <CPOINT xx="0.5" yy="2" zz="0.15" ww="1"/>
             <CPOINT xx="0.85" yy="1.3" zz="0.15" ww="1"/>
             <CPOINT xx="0.95" yy="1.5" zz="0.15" ww="1"/>
             <CPOINT xx="1" yy="1" zz="0.15" ww="1"/>
-            <CPOINT xx="1" yy="0" zz="0.15" ww="1"/> <!-- ultimo ponto -->
+            <CPOINT xx="1" yy="0" zz="0.15" ww="1"/>
           </CPLINE>
 
           <!-- front curve -->
@@ -902,6 +897,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="-0.75" y="0" z="0"/>
+
       <DESCENDANTS>
         <NODEREF id="wheel"/>
       </DESCENDANTS>
@@ -1066,13 +1062,11 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="7.25" y="6" z="0.4"/>
-
       <ROTATION axis="y" angle="180"/>
 
       <DESCENDANTS>
         <NODEREF id="lateral-window"/>
       </DESCENDANTS>
-
     </NODE>
 
     <!-- train: lateral-window -->
@@ -1450,6 +1444,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="9.5" y="10" z="10"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
@@ -1461,6 +1456,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="9.5" y="10" z="8.5"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
@@ -1472,6 +1468,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="9.5" y="10" z="7"/>
+
       <DESCENDANTS>
         <NODEREF id="wood-plate"/>
       </DESCENDANTS>
@@ -1561,7 +1558,6 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-
       <TRANSLATION x="10" y="10" z="10"/>
       <ROTATION axis="x" angle="65"/>
 
@@ -1574,7 +1570,6 @@
     <NODE id="seat-body-cylinder2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
-
 
       <TRANSLATION x="10" y="10" z="10"/>
       <ROTATION axis="x" angle="125"/>
@@ -1627,6 +1622,7 @@
       <TEXTURE id="woodtexture"/>
 
       <SCALE sx="11" sy="0.25" sz="1"/>
+
       <DESCENDANTS>
         <NODEREF id="faceCube1"/>
         <NODEREF id="faceCube2"/>
@@ -1689,7 +1685,7 @@
       <TEXTURE id="metalLamp"/>
 
       <SCALE sx="0.25" sy="1.85" sz="0.25" />
-      <ROTATION axis="x" angle="-90"/> 
+      <ROTATION axis="x" angle="-90"/>
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="4 1 1 20 20 0 0" />
@@ -1719,11 +1715,13 @@
       </DESCENDANTS>
     </NODE>
 
-       <NODE id="tunnelBackground">
+    <NODE id="tunnelBackground">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
+
       <TRANSLATION x="-2" y="0" z="30"/>
       <SCALE sx="1" sy="1.35" sz="1.1"/>
+
       <DESCENDANTS>
         <LEAF type="patch" args="20 20">
           <CPLINE>
@@ -1735,9 +1733,9 @@
             <CPOINT xx="0" yy="11" zz="-7" ww="1"/>
             <CPOINT xx="0" yy="0" zz="-7" ww="1"/>
           </CPLINE>
-          
+
           <CPLINE>
-              <CPOINT xx="0" yy="0" zz="7" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="7" ww="1"/>
             <CPOINT xx="0" yy="0" zz="7" ww="1"/>
             <CPOINT xx="0" yy="0" zz="7" ww="1"/>
             <CPOINT xx="0" yy="0" zz="0" ww="1"/>
@@ -1745,10 +1743,8 @@
             <CPOINT xx="0" yy="0" zz="-7" ww="1"/>
             <CPOINT xx="0" yy="0" zz="-7" ww="1"/>
           </CPLINE>
-
         </LEAF>
       </DESCENDANTS>
-
     </NODE>
 
     <NODE id="tunnel-body">
@@ -1758,12 +1754,9 @@
       <TRANSLATION x="-2" y="0" z="30"/>
       <SCALE sx="1" sy="1.35" sz="1"/>
 
-        <DESCENDANTS>
-            <LEAF type="patch" args="20 20">
-
-            
-
-            <CPLINE>
+      <DESCENDANTS>
+        <LEAF type="patch" args="20 20">
+          <CPLINE>
             <CPOINT xx="0" yy="0" zz="8" ww="1"/>
             <CPOINT xx="0" yy="8" zz="8" ww="1"/>
             <CPOINT xx="0" yy="12" zz="8" ww="1"/>
@@ -1825,7 +1818,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="5" y="5" z="0"/>
+      <TRANSLATION x="30" y="8" z="0"/>
 
       <DESCENDANTS>
         <NODEREF id="rightBoardInformation"/>
@@ -1927,12 +1920,13 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="8" y="-1" z="-2.5"/>
+
       <DESCENDANTS>
         <NODEREF id="clock-skeleton"/>
         <NODEREF id="clock-itself"/>
       </DESCENDANTS>
     </NODE>
-    
+
     <!-- body that supports the clock-->
      <NODE id="clock-skeleton">
       <MATERIAL id="separatorMaterial"/>
@@ -1943,16 +1937,16 @@
         <NODEREF id="clock-cylinder1"/>
         <NODEREF id="clock-cylinder2"/>
       </DESCENDANTS>
-
     </NODE>
 
      <!-- holder of clock  stuck to the wall-->
     <NODE id="wall-holder">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
-      
+
       <SCALE sx="0.25" sy="2" sz="0.25"/>
       <TRANSLATION x="10" y="5" z="10"/>
+
       <DESCENDANTS>
         <NODEREF id="faceCube1" />
         <NODEREF id="faceCube2" />
@@ -1961,31 +1955,29 @@
         <NODEREF id="faceCube5" />
         <NODEREF id="faceCube6" />
       </DESCENDANTS>
-
     </NODE>
 
     <NODE id="clock-cylinder1">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
+
       <TRANSLATION x="2.625" y="11.85" z="2.8"/>
       <ROTATION axis="x" angle="20"/>
       <SCALE sx="0.125" sy="0.125" sz="2.8"/>
+
       <DESCENDANTS>
         <LEAF type="cylinder" args="1 1 1 20 20 1 1"/>
       </DESCENDANTS>
     </NODE>
-  
 
     <NODE id="clock-cylinder2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     
-      
       <TRANSLATION x="2.625" y="10.1" z="2.8"/>
       <ROTATION axis="x" angle="-20"/>
       <SCALE sx="0.125" sy="0.125" sz="2.5"/>
-       
+
       <DESCENDANTS>
         <LEAF type="cylinder" args="1 1 1 20 20 1 1"/>
       </DESCENDANTS>
@@ -1995,7 +1987,6 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      
       <DESCENDANTS>
         <NODEREF id="clock-body-cylinder"/>
         <NODEREF id="minutes-pointer"/>
@@ -2011,19 +2002,21 @@
       <TRANSLATION x="2.45" y="10.2" z="5.65"/>
       <ROTATION axis="y" angle="90"/>
       <SCALE sx="1" sy="1" sz="0.4"/>
+
       <DESCENDANTS>
         <LEAF type="cylinder" args="1 1 1 20 20 1 1"/>
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="minutes-pointer">
+    <NODE id="minutes-pointer">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="1.9" y="10.2" z="5.675"/>
-        <ROTATION axis="x" angle="-90"/>
-       <ROTATION axis="y" angle="90"/>
-       <SCALE sx="0.075" sy="0.75" sz="1"/>
+      <ROTATION axis="x" angle="-90"/>
+      <ROTATION axis="y" angle="90"/>
+      <SCALE sx="0.075" sy="0.75" sz="1"/>
+
       <DESCENDANTS>
         <NODEREF id="clock-pointer"/>
       </DESCENDANTS>
@@ -2034,11 +2027,11 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="1.9" y="10.2" z="5.675"/>
-       <ROTATION axis="y" angle="90"/>
-       <SCALE sx="0.075" sy="0.5" sz="1"/>
+      <ROTATION axis="y" angle="90"/>
+      <SCALE sx="0.075" sy="0.5" sz="1"/>
+
       <DESCENDANTS>
         <NODEREF id="clock-pointer"/>
-        
       </DESCENDANTS>
     </NODE>
 
@@ -2048,15 +2041,15 @@
 
       <TRANSLATION x="1.9" y="10.2" z="5.675"/>
       <ROTATION axis="x" angle="145"/>
-       <ROTATION axis="y" angle="90"/>
-       <SCALE sx="0.075" sy="1" sz="1"/>
+      <ROTATION axis="y" angle="90"/>
+      <SCALE sx="0.075" sy="1" sz="1"/>
+
       <DESCENDANTS>
         <NODEREF id="clock-pointer"/>
-        
       </DESCENDANTS>
     </NODE>
 
-      <NODE id="clock-pointer">
+    <NODE id="clock-pointer">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
 
@@ -2064,9 +2057,5 @@
         <LEAF type="triangle" args="-0.5 0 1 0.5 0 1 0 1 1"/>
       </DESCENDANTS>
     </NODE>
-
-
- 
-    
   </NODES>
 </SCENE>
