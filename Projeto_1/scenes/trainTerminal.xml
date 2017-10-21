@@ -1818,7 +1818,9 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="30" y="8" z="0"/>
+      <TRANSLATION x="13.5" y="8" z="60.95"/>
+      <ROTATION axis="y" angle="180"/>
+      <SCALE sx="0.35" sy="0.35" sz="0.35"/>
 
       <DESCENDANTS>
         <NODEREF id="rightBoardInformation"/>
