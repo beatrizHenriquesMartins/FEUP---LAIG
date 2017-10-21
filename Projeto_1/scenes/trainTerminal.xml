@@ -2015,6 +2015,7 @@
 
       <DESCENDANTS>
         <NODEREF id="clock-body-cylinder"/>
+        <NODEREF id="clock-body-outercylinder"/>
         <NODEREF id="minutes-pointer"/>
         <NODEREF id="hours-pointer"/>
         <NODEREF id="seconds-pointer"/>
@@ -2032,6 +2033,19 @@
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="1 1 1 20 20 1 1"/>
+      </DESCENDANTS>
+    </NODE>
+
+     <NODE id="clock-body-outercylinder">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="2.45" y="10.2" z="5.65"/>
+      <ROTATION axis="y" angle="90"/>
+      <SCALE sx="1" sy="1" sz="0.4"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="1 1 1 20 20 0 1"/>
       </DESCENDANTS>
     </NODE>
 
