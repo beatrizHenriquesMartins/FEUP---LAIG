@@ -1,7 +1,10 @@
 /**
- * MyQuad
- * @param gl {WebGLRenderingContext}
- * @constructor
+ * 
+ * @param {*} scene xml scene
+ * @param {*} x1 top left coordenate
+ * @param {*} y1 top left coordenate
+ * @param {*} x2 bottom right coordenate
+ * @param {*} y2 bottom right coordenate
  */
 function MyQuad(scene, x1, y1, x2, y2) {
 	CGFobject.call(this, scene);
@@ -19,6 +22,9 @@ function MyQuad(scene, x1, y1, x2, y2) {
 MyQuad.prototype = Object.create(CGFobject.prototype);
 MyQuad.prototype.constructor = MyQuad;
 
+/**
+ * Initiates all WEBCGF atributes of the primitive
+ */
 MyQuad.prototype.initBuffers = function () {
 	this.vertices = [ this.x1, this.y2, 0,
 										this.x2, this.y2, 0,
@@ -45,7 +51,9 @@ MyQuad.prototype.initBuffers = function () {
 	this.initGLBuffers();
 };
 
-
+/**
+ * //Function that applies the amp factors of the texture
+ */
 MyQuad.prototype.loadTexture = function(texture){
 	this.lengths = texture[1];
 	this.lengtht = texture[2];

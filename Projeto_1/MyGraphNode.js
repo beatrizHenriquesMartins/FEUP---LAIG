@@ -5,7 +5,8 @@
 
 function MyGraphNode(graph, nodeID) {
     this.graph = graph;
-
+    
+    //Node identification
     this.nodeID = nodeID;
     
     // IDs of child nodes.

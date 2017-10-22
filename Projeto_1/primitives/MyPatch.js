@@ -1,6 +1,8 @@
 /**
  * MyPatch
- * @constructor
+ * @param {*} scene the xml scene
+ * @param {*} controlpoints arrays of arrays of arrays with the control lines and points of the nurb
+ * @param {*} args slices and stacks of the nurb
  */
 
  function MyPatch(scene,controlpoints,args){
@@ -14,7 +16,7 @@
 MyPatch.prototype = Object.create(CGFobject.prototype);
 MyPatch.prototype.constructor = MyPatch;
 
- MyPatch.prototype.getKnotsVector = function(degree) { // TODO (CGF 0.19.3): add to CGFnurbsSurface
+ MyPatch.prototype.getKnotsVector = function(degree) { 
 	var v = new Array();
 
 	for (var i=0; i<=degree; i++) {
@@ -42,11 +44,16 @@ MyPatch.prototype.makeSurface = function (degree1, degree2, controlvertexes,u,v)
 	var obj = new CGFnurbsObject(this.scene, getSurfacePoint, u, v );
 	return obj;
 }
-
+/**
+ * Overload of the display function
+ */
 MyPatch.prototype.display = function(){
     this.nurb.display();
 }
-
+/**
+ * //Function that applies the amp factors of the texture, since it is isnt necessary on the patch this 
+ * function only exist to overload convenience
+ */
 MyPatch.prototype.loadTexture = function (texture) {
 
 }

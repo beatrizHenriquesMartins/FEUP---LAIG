@@ -21,7 +21,9 @@ function MyTriangle(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
 
 MyTriangle.prototype = Object.create(CGFobject.prototype);
 MyTriangle.prototype.constructor = MyTriangle;
-
+/**
+ *  Initiates all WEBCGF atributes of the primitive
+ */
 MyTriangle.prototype.initBuffers = function () {
   
 
@@ -42,16 +44,7 @@ MyTriangle.prototype.initBuffers = function () {
   this.normals.push(vecx, vecy, vecz);
   this.normals.push(vecx, vecy, vecz);
 
-  /*this.auxTexCoords = [
-
-    0, 1,
-    this.c, 1,
-    this.c - (this.a * this.beta),
-    1 - (this.a * Math.sin(this.angle))
-  ];
-
-  this.texCoords = this.auxTexCoords.slice();*/
-
+ 
   this.texCoords= [
     0,1,
     1,1,
@@ -61,14 +54,14 @@ MyTriangle.prototype.initBuffers = function () {
   this.initGLBuffers();
 }
 
+/**
+ * //Function that applies the amp factors of the texture
+ */
 MyTriangle.prototype.loadTexture = function (texture) {
 
   var lengths = texture[1];
   var lengtht = texture[2];
 
-  //a 1-2
-  //b 0-2
-  //c 0-1
   var a = Math.sqrt(Math.pow(this.x2 - this.x3, 2) + Math.pow(this.y2 - this.y3, 2) + Math.pow(this.z2 - this.z3, 2));
   var b = Math.sqrt(Math.pow(this.x1 - this.x3, 2) + Math.pow(this.y1 - this.y3, 2) + Math.pow(this.z1 - this.z3, 2));
   var c = Math.sqrt(Math.pow(this.x1 - this.x2, 2) + Math.pow(this.y1 - this.y2, 2) + Math.pow(this.z1 - this.z2, 2));
@@ -78,11 +71,6 @@ MyTriangle.prototype.loadTexture = function (texture) {
 
   var h= a * Math.sin(angle);
 
-
-  /*for (let i = 0; i < this.auxTexCoords.length; i += 2) {
-    this.texCoords[i] = this.auxTexCoords[i] / this.lengths;
-    this.texCoords[i + 1] = this.auxTexCoords[i + 1] / this.lengtht;
-  }*/
 
   this.texCoords = [
     

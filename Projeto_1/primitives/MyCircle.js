@@ -1,5 +1,5 @@
 /**
- * MyPrism
+ * MyCircle primitive
  * @constructor
  */
 function MyCircle(scene, slices,radius) {
@@ -15,6 +15,9 @@ function MyCircle(scene, slices,radius) {
 MyCircle.prototype = Object.create(CGFobject.prototype);
 MyCircle.prototype.constructor = MyCircle;
 
+/**
+ * Initiates all WEBCGF atributes of the primitive
+ */
 MyCircle.prototype.initBuffers = function () {
   this.vertices = [];
 
@@ -47,7 +50,10 @@ MyCircle.prototype.initBuffers = function () {
   this.initGLBuffers();
 };
 
-
+/**
+ * //Function that applies the amp factors of the texture, since it is isnt necessary on the circle this 
+ * function only exist to overload convenience
+ */
 MyCircle.prototype.loadTexture = function (texture) {
 
 }

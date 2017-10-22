@@ -1,3 +1,10 @@
+/**
+ * MySphere
+ * @param {*} scene xml scene
+ * @param {*} radius radius of the sphere
+ * @param {*} slices 
+ * @param {*} stacks 
+ */
 function MySphere(scene, radius, slices, stacks) {
 
   CGFobject.call(this, scene);
@@ -12,6 +19,10 @@ function MySphere(scene, radius, slices, stacks) {
 MySphere.prototype = Object.create(CGFobject.prototype);
 MySphere.prototype.construtor = MySphere;
 
+
+/**
+ * Initiates all WEBCGF atributes of the primitive
+ */
 MySphere.prototype.initBuffers = function () {
   this.indices = [];
   this.vertices = [];
@@ -40,7 +51,10 @@ MySphere.prototype.initBuffers = function () {
   this.initGLBuffers();
 }
 
+/**
+ * //Function that applies the amp factors of the texture, since it is isnt necessary on the sphere this 
+ * function only exist to overload convenience
+ */
 MySphere.prototype.loadTexture = function(texture){
-  this.lengths = texture[1];
-	this.lengtht = texture[2];
+ 
 }

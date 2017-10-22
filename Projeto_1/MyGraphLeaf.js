@@ -14,7 +14,9 @@ function MyGraphLeaf(graph, xmlelem) {
 }
 
 
-
+/**
+ * Initiate the primitive established on xml file for the spefici leaf
+ */
 MyGraphLeaf.prototype.initBuffers = function (type) {
 
     var args = this.graph.reader.getString(this.xmlelem, 'args').split(" ").map(Number);
@@ -38,7 +40,9 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
     }
 }
 
-
+/**
+ * Parses the xml unique patch args in order to create a primitive of type patch with error detection
+ */
 MyGraphLeaf.prototype.createPatch = function (args) {
 
 

@@ -1364,6 +1364,7 @@ MySceneGraph.prototype.displayScene = function () {
 
 }
 
+//Recursive function that processes all nodes applying textures and materials.
 MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) {
 
     let material = initialMat;

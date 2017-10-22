@@ -1,3 +1,12 @@
+/**
+ * Cylinder without the top and bottom circles used in MyCompleteCylinder
+ * @param {*} scene the xml scene
+ * @param {*} height the height of the cylinder
+ * @param {*} bottomRadius radius of the bottom side of the cylinder
+ * @param {*} topRadius radius of the top side of the cylinder 
+ * @param {*} stacks 
+ * @param {*} slices 
+ */
 function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices) {
     CGFobject.call(this, scene);
 
@@ -16,6 +25,9 @@ function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices) {
 MyCylinder.prototype = Object.create(CGFobject.prototype);
 MyCylinder.prototype.constructor = MyCylinder;
 
+/**
+ * Initiates all Webcgf atributes of the primitive
+ */
 MyCylinder.prototype.initBuffers = function () {
     this.vertices = [];
     this.indices = [];
@@ -89,7 +101,10 @@ MyCylinder.prototype.initBuffers = function () {
 
 
 
-
+/**
+ * //Function that applies the amp factors of the texture, since it is isnt necessary on the cylinder this 
+ * function only exist to overload convenience
+ */
 MyCylinder.prototype.loadTexture = function (texture) {
 
 }
