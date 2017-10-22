@@ -298,7 +298,7 @@
         <NODEREF id="terminalClock"/>
         <NODEREF id="leftPillar"/>
         <NODEREF id="rightPillar"/>
-        <NODEREF id="foodMachine"/>
+        <NODEREF id="foodMachine_set"/>
       </DESCENDANTS>
     </NODE>
 
@@ -2156,12 +2156,36 @@
     </NODE>
 
     <!-- food machine -->
-    <NODE id="foodMachine">
+    <NODE id="foodMachine_set">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="3" y="5" z="10" />
+      <DESCENDANTS>
+        <NODEREF id="foodMachine_left"/>
+        <NODEREF id="foodMachine_right"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- food machine: LEFT -->
+    <NODE id="foodMachine_left">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="1.9" y="2.5" z="10" />
       <ROTATION axis="y" angle="90"/>
+
+      <DESCENDANTS>
+        <NODEREF id="foodMachine_pack"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- food machine: RIGHT -->
+    <NODE id="foodMachine_right">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="25" y="2.5" z="59.25"/>
+      <ROTATION axis="y" angle="180"/>
 
       <DESCENDANTS>
         <NODEREF id="foodMachine_pack"/>
