@@ -308,7 +308,7 @@
       <TEXTURE id="gravelTexture"/>
 
       <SCALE sx="35" sy="0" sz="39.5" />
-      <TRANSLATION x="0" y="0" z="1.5" />
+      <TRANSLATION x="0" y="0" z="1.5"/>
       <ROTATION axis="x" angle="-90" />
 
       <DESCENDANTS>
@@ -418,7 +418,7 @@
     <NODE id="leftPillar">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="brickTexture"/>
-        
+
       <TRANSLATION x="-1" y="17" z="61"/>
       <ROTATION axis="x" angle="90"/>
       <DESCENDANTS>
@@ -2160,7 +2160,8 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANLSATION x="-5" y="-5" z="-5"/>
+      <TRANSLATION x="3" y="5" z="10" />
+      <ROTATION axis="y" angle="90"/>
 
       <DESCENDANTS>
         <NODEREF id="foodMachine_pack"/>
