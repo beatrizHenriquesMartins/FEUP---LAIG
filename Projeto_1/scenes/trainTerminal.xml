@@ -386,7 +386,8 @@
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="backWall">
+    <!-- black Wall -->
+    <NODE id="backWall">
       <MATERIAL id="null"/>
       <TEXTURE id="brickTexture"/>
 
@@ -398,7 +399,6 @@
         <NODEREF id="bigWall"/>
       </DESCENDANTS>
     </NODE>
-
 
     <!-- big wall -->
     <NODE id="bigWall">
@@ -414,7 +414,7 @@
       </DESCENDANTS>
     </NODE>
 
-
+    <!-- left Pillar -->
     <NODE id="leftPillar">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="brickTexture"/>
@@ -427,7 +427,8 @@
 
     </NODE>
 
-     <NODE id="rightPillar">
+    <!-- right Pillar -->
+    <NODE id="rightPillar">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="brickTexture"/>
 
@@ -436,17 +437,16 @@
       <DESCENDANTS>
         <NODEREF id="Pillar"/>
       </DESCENDANTS>
-
     </NODE>
 
-      <NODE id="Pillar">
+    <!-- Pillar -->
+    <NODE id="Pillar">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="17 2 2 20 20 1 1"/>
       </DESCENDANTS>
-
     </NODE>
 
     <!-- station doors -->
@@ -468,7 +468,7 @@
       <TRANSLATION x="22.5" y="2.5" z="0.3"/>
 
       <DESCENDANTS>
-        <NODEREF id="genericDoor"/>
+        <NODEREF id="genericDoor_pack"/>
       </DESCENDANTS>
     </NODE>
 
@@ -481,12 +481,25 @@
       <ROTATION axis="y" angle="180"/>
 
       <DESCENDANTS>
-        <NODEREF id="genericDoor"/>
+        <NODEREF id="genericDoor_pack"/>
       </DESCENDANTS>
     </NODE>
 
-    <!-- genric door -->
-    <NODE id="genericDoor">
+    <!-- genericDoor_pack -->
+    <NODE id="genericDoor_pack">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="strutucDoor"/>
+        <NODEREF id="planDoor"/>
+        <NODEREF id="aroundDoor"/>
+        <NODEREF id="glassDoor"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- strutucDoor -->
+    <NODE id="strutucDoor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
@@ -495,6 +508,7 @@
       </DESCENDANTS>
     </NODE>
 
+    <!-- stationDoor: spline door -->
     <NODE id="splineDoor">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="woodRailsTexture"/>
@@ -543,6 +557,122 @@
             <CPOINT xx="0.75" yy="0" zz="0.15" ww="1"/>
             <CPOINT xx="0.85" yy="0" zz="0.15" ww="1"/>
             <CPOINT xx="1" yy="0" zz="0.15" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- stationDoor: plan door -->
+    <NODE id="planDoor">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="woodRailsTexture"/>
+
+      <TRANSLATION x="0" y="0" z="0.5"/>
+      <SCALE sx="5" sy="5" sz="3"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="20 20">
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0.5" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="0.05" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="0.15" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.5" yy="2" zz="0" ww="1"/>
+            <CPOINT xx="0.85" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.95" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+          </CPLINE>
+
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.05" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.15" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.5" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.85" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.95" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- stationDoor: around door -->
+    <NODE id="aroundDoor">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="woodRailsTexture"/>
+
+      <SCALE sx="5" sy="5" sz="3"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="20 20">
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0.5" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="0.05" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="0.15" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.5" yy="2" zz="0" ww="1"/>
+            <CPOINT xx="0.85" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.95" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+          </CPLINE>
+
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0.15" ww="1"/>
+            <CPOINT xx="0" yy="0.5" zz="0.15" ww="1"/>
+            <CPOINT xx="0" yy="1" zz="0.15" ww="1"/>
+            <CPOINT xx="0.05" yy="1.5" zz="0.15" ww="1"/>
+            <CPOINT xx="0.15" yy="1.3" zz="0.15" ww="1"/>
+            <CPOINT xx="0.5" yy="2" zz="0.15" ww="1"/>
+            <CPOINT xx="0.85" yy="1.3" zz="0.15" ww="1"/>
+            <CPOINT xx="0.95" yy="1.5" zz="0.15" ww="1"/>
+            <CPOINT xx="1" yy="1" zz="0.15" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0.15" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- stationDoor: glass door -->
+    <NODE id="glassDoor">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="windowtexture2"/>
+
+      <TRANSLATION x="0.9" y="0.7" z="0.55"/>
+      <SCALE sx="3.25" sy="4.25" sz="3"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="20 20">
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0.5" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="0.05" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="0.15" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.5" yy="2" zz="0" ww="1"/>
+            <CPOINT xx="0.85" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.95" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+          </CPLINE>
+
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.05" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.15" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.5" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.85" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.95" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
           </CPLINE>
         </LEAF>
       </DESCENDANTS>
@@ -1878,7 +2008,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="20" y="8" z="1"/>
+      <TRANSLATION x="19.5" y="8" z="1"/>
       <SCALE sx="0.35" sy="0.35" sz="0.35"/>
 
       <DESCENDANTS>

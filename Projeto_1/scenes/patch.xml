@@ -191,63 +191,64 @@
 
       <DESCENDANTS>
         <NODEREF id="patch"/>
-       <!-- <NODEREF id="unpatch"/>-->
-        <NODEREF id="square"/>
+        <!-- <NODEREF id="square"/> -->
       </DESCENDANTS>
-
-      </NODE>
-<<<<<<< Updated upstream
-  
-     <NODE id="patch">
-      <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="-2" y="0" z="30"/>
-=======
+    </NODE>
 
     <NODE id="patch">
         <MATERIAL id="defaultMaterial"/>
         <TEXTURE id="null"/>
->>>>>>> Stashed changes
-
 
         <DESCENDANTS>
-            <LEAF type="patch" args="20 20">
-<<<<<<< Updated upstream
-
+          <LEAF type="patch" args="20 20">
+            <!-- back curve -->
             <CPLINE>
-            <CPOINT xx="0" yy="0" zz="8" ww="1"/>
-            <CPOINT xx="0" yy="8" zz="8" ww="1"/>
-            <CPOINT xx="0" yy="12" zz="8" ww="1"/>
-            <CPOINT xx="0" yy="15" zz="0" ww="1"/>
-            <CPOINT xx="0" yy="8" zz="-8" ww="1"/>
-            <CPOINT xx="0" yy="12" zz="-8" ww="1"/>
-            <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
-          </CPLINE>
+              <CPOINT xx="0" yy="0" zz="0" ww="1"/> <!-- primeiro ponto -->
+              <CPOINT xx="0" yy="0.5" zz="0" ww="1"/>
+              <CPOINT xx="0" yy="1" zz="0" ww="1"/>
+              <CPOINT xx="0.05" yy="1.5" zz="0" ww="1"/>
+              <CPOINT xx="0.15" yy="1.3" zz="0" ww="1"/>
+              <CPOINT xx="0.5" yy="2" zz="0" ww="1"/> <!-- centro -->
+              <CPOINT xx="0.85" yy="1.3" zz="0" ww="1"/>
+              <CPOINT xx="0.95" yy="1.5" zz="0" ww="1"/>
+              <CPOINT xx="1" yy="1" zz="0" ww="1"/>
+              <CPOINT xx="1" yy="0" zz="0" ww="1"/> <!-- ultimo ponto -->
+            </CPLINE>
 
-          <CPLINE>
-            <CPOINT xx="1" yy="0" zz="8" ww="1"/>
-            <CPOINT xx="1" yy="8" zz="8" ww="1"/>
-            <CPOINT xx="1" yy="12" zz="8" ww="1"/>
-            <CPOINT xx="1" yy="15" zz="0" ww="1"/>
-            <CPOINT xx="1" yy="8" zz="-8" ww="1"/>
-            <CPOINT xx="1" yy="12" zz="-8" ww="1"/>
-            <CPOINT xx="1" yy="0" zz="-8" ww="1"/>
-          </CPLINE>
+            <!-- down back -->
+            <CPLINE>
+              <CPOINT xx="0" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0" yy="0.5" zz="0.15" ww="1"/>
+              <CPOINT xx="0" yy="1" zz="0.15" ww="1"/>
+              <CPOINT xx="0.05" yy="1.5" zz="0.15" ww="1"/>
+              <CPOINT xx="0.15" yy="1.3" zz="0.15" ww="1"/>
+              <CPOINT xx="0.5" yy="2" zz="0.15" ww="1"/>
+              <CPOINT xx="0.85" yy="1.3" zz="0.15" ww="1"/>
+              <CPOINT xx="0.95" yy="1.5" zz="0.15" ww="1"/>
+              <CPOINT xx="1" yy="1" zz="0.15" ww="1"/>
+              <CPOINT xx="1" yy="0" zz="0.15" ww="1"/>
+            </CPLINE>
 
-          <CPLINE>
-            <CPOINT xx="1" yy="0" zz="7" ww="1"/>
-            <CPOINT xx="1" yy="7" zz="7" ww="1"/>
-            <CPOINT xx="1" yy="11" zz="7" ww="1"/>
-            <CPOINT xx="1" yy="14" zz="0" ww="1"/>
-            <CPOINT xx="1" yy="7" zz="-7" ww="1"/>
-            <CPOINT xx="1" yy="11" zz="-7" ww="1"/>
-            <CPOINT xx="1" yy="0" zz="-7" ww="1"/>
-          </CPLINE>
-        </LEAF>
-      </DESCENDANTS>
+            <!-- front curve -->
+<!--
+            <CPLINE>
+              <CPOINT xx="0" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.25" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.35" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.45" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.5" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.65" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.7" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.75" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="0.85" yy="0" zz="0.15" ww="1"/>
+              <CPOINT xx="1" yy="0" zz="0.15" ww="1"/>
+            </CPLINE>
+-->
+          </LEAF>
+        </DESCENDANTS>
     </NODE>
 
+<!--
     <NODE id="unpatch">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
@@ -273,7 +274,6 @@
             <CPOINT xx="0" yy="12" zz="-8" ww="1"/>
             <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
           </CPLINE>
-
             <CPLINE>
            <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
             <CPOINT xx="0" yy="0" zz="-9" ww="1"/>
@@ -283,7 +283,6 @@
             <CPOINT xx="0" yy="0" zz="-13.5" ww="1"/>
             <CPOINT xx="0" yy="0" zz="-14" ww="1"/>
            </CPLINE>
-
              <CPLINE>
            <CPOINT xx="0" yy="0" zz="-14" ww="1"/>
             <CPOINT xx="0" yy="5" zz="-14" ww="1"/>
@@ -293,7 +292,6 @@
             <CPOINT xx="0" yy="18" zz="-14" ww="1"/>
              <CPOINT xx="0" yy="20" zz="-14" ww="1"/>
            </CPLINE>
-
             <CPLINE>
            <CPOINT xx="0" yy="20" zz="-14" ww="1"/>
             <CPOINT xx="0" yy="20" zz="-8" ww="1"/>
@@ -303,7 +301,6 @@
             <CPOINT xx="0" yy="20" zz="10" ww="1"/>
             <CPOINT xx="0" yy="20" zz="14" ww="1"/>
            </CPLINE>
-
             <CPLINE>
              <CPOINT xx="0" yy="20" zz="14" ww="1"/>
             <CPOINT xx="0" yy="17" zz="14" ww="1"/>
@@ -319,11 +316,8 @@
     <NODE id="square">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
-
       <DESCENDANTS>
         <LEAF type="patch" args="20 20">
-
-        
           <CPLINE>
              <CPOINT xx="0" yy="0" zz="14" ww="1"/>
              <CPOINT xx="0" yy="4" zz="14" ww="1"/>
@@ -332,9 +326,7 @@
              <CPOINT xx="0" yy="16" zz="14" ww="1"/>
              <CPOINT xx="0" yy="18" zz="14" ww="1"/>
              <CPOINT xx="0" yy="20" zz="14" ww="1"/>
-             
           </CPLINE>
-
          <CPLINE>
             <CPOINT xx="0" yy="0" zz="8" ww="1"/>
             <CPOINT xx="0" yy="8" zz="8" ww="1"/>
@@ -344,8 +336,7 @@
             <CPOINT xx="0" yy="12" zz="-8" ww="1"/>
             <CPOINT xx="0" yy="0" zz="-8" ww="1"/>
           </CPLINE>
-
-             <CPLINE>
+          <CPLINE>
              <CPOINT xx="0" yy="0" zz="-14" ww="1"/>
              <CPOINT xx="0" yy="4" zz="-14" ww="1"/>
              <CPOINT xx="0" yy="8" zz="-14" ww="1"/>
@@ -353,66 +344,10 @@
              <CPOINT xx="0" yy="16" zz="-14" ww="1"/>
              <CPOINT xx="0" yy="18" zz="-14" ww="1"/>
              <CPOINT xx="0" yy="20" zz="-14" ww="1"/>
-             
           </CPLINE>
-
-          
-
-         
-
-
-
         </LEAF>
-
-
       </DESCENDANTS>
-
-=======
-              <CPLINE>
-                <CPOINT xx="0" yy="0" zz="0" ww="1"/> <!-- primeiro ponto -->
-                <CPOINT xx="0" yy="0.5" zz="0" ww="1"/>
-                <CPOINT xx="0" yy="1" zz="0" ww="1"/>
-                <CPOINT xx="0.05" yy="1.5" zz="0" ww="1"/>
-                <CPOINT xx="0.15" yy="1.3" zz="0" ww="1"/>
-                <CPOINT xx="0.5" yy="2" zz="0" ww="1"/> <!-- centro -->
-                <CPOINT xx="0.85" yy="1.3" zz="0" ww="1"/>
-                <CPOINT xx="0.95" yy="1.5" zz="0" ww="1"/>
-                <CPOINT xx="1" yy="1" zz="0" ww="1"/>
-                <CPOINT xx="1" yy="0" zz="0" ww="1"/> <!-- ultimo ponto -->
-              </CPLINE>
-
-
-
-              <CPLINE>
-                <CPOINT xx="0" yy="0" zz="0.15" ww="1"/> <!-- primeiro ponto -->
-                <CPOINT xx="0" yy="0.5" zz="0.15" ww="1"/>
-                <CPOINT xx="0" yy="1" zz="0.15" ww="1"/>
-                <CPOINT xx="0.05" yy="1.5" zz="0.15" ww="1"/>
-                <CPOINT xx="0.15" yy="1.3" zz="0.15" ww="1"/>
-                <CPOINT xx="0.5" yy="2" zz="0.15" ww="1"/> <!-- centro -->
-                <CPOINT xx="0.85" yy="1.3" zz="0.15" ww="1"/>
-                <CPOINT xx="0.95" yy="1.5" zz="0.15" ww="1"/>
-                <CPOINT xx="1" yy="1" zz="0.15" ww="1"/>
-                <CPOINT xx="1" yy="0" zz="0.15" ww="1"/> <!-- ultimo ponto -->
-              </CPLINE>
-
-              <CPLINE>
-                <CPOINT xx="0" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.25" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.35" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.45" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.5" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.65" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.7" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.75" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="0.85" yy="0" zz="0.15" ww="1"/>
-                <CPOINT xx="1" yy="0" zz="0.15" ww="1"/>
-              </CPLINE>
-            </LEAF>
-        </DESCENDANTS>
->>>>>>> Stashed changes
     </NODE>
-
+-->
  </NODES>
-
 </SCENE>
