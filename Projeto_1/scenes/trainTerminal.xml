@@ -186,15 +186,27 @@
       <amplif_factor s="4" t="3"/>
     </TEXTURE>
 
-    <!-- Text for the clock-->
+    <!-- Text for the clock -->
     <TEXTURE id="clockText">
       <file path="images/clock.png"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
-    <!-- Text for food machine-->
+    <!-- Text for food machine -->
     <TEXTURE id="foodMachineTexture">
       <file path="images/foodMachine.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <!-- Text for garbage -->
+    <TEXTURE id="garbageTexture">
+      <file path="images/greenGarbage.png"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <!-- Text for garbage symbol -->
+    <TEXTURE id="garbageSymbolTexture">
+      <file path="images/garbageSymbol.png"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
   </TEXTURES>
@@ -299,6 +311,7 @@
         <NODEREF id="leftPillar"/>
         <NODEREF id="rightPillar"/>
         <NODEREF id="foodMachine_set"/>
+        <NODEREF id="garbageStation_set"/>
       </DESCENDANTS>
     </NODE>
 
@@ -501,7 +514,9 @@
     <!-- strutucDoor -->
     <NODE id="strutucDoor">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="woodRailsTexture"/>
+
+      <SCALE sx="5" sy="5" sz="3"/>
 
       <DESCENDANTS>
         <NODEREF id="splineDoor"/>
@@ -511,9 +526,7 @@
     <!-- stationDoor: spline door -->
     <NODE id="splineDoor">
       <MATERIAL id="defaultMaterial"/>
-      <TEXTURE id="woodRailsTexture"/>
-
-      <SCALE sx="5" sy="5" sz="3"/>
+      <TEXTURE id="null"/>
 
       <DESCENDANTS>
         <LEAF type="patch" args="20 20">
@@ -2218,7 +2231,7 @@
       </DESCENDANTS>
     </NODE>
 
-     <NODE id="clock-body-outercylinder">
+    <NODE id="clock-body-outercylinder">
       <MATERIAL id="separatorMaterial"/>
       <TEXTURE id="null"/>
 
@@ -2301,7 +2314,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="1.9" y="2.5" z="10" />
+      <TRANSLATION x="1.9" y="2.5" z="10"/>
       <ROTATION axis="y" angle="90"/>
 
       <DESCENDANTS>
@@ -2353,6 +2366,154 @@
 
       <TRANSLATION x="0" y="0" z="0.05"/>
       <SCALE sx="2.5" sy="7.5" sz="1"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage -->
+    <NODE id="garbageStation_set">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="garbageStationLeft"/>
+        <NODEREF id="garbageStationRight"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbage Station Left -->
+    <NODE id="garbageStationLeft">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="27" y="2.5" z="10"/>
+
+      <DESCENDANTS>
+        <NODEREF id="garbageStation_pack"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbage Station Right -->
+    <NODE id="garbageStationRight">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="10" y="2.5" z="50"/>
+      <ROTATION axis="y" angle="180"/>
+
+      <DESCENDANTS>
+        <NODEREF id="garbageStation_pack"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbage Station pack -->
+    <NODE id="garbageStation_pack">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="garbageGeneric"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbage Generic -->
+    <NODE id="garbageGeneric">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="garbageGeneric_up"/>
+        <NODEREF id="garbageGeneric_back"/>
+        <NODEREF id="garbageGeneric_hole"/>
+        <NODEREF id="garbageGeneric_symbol"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbageGeneric_up -->
+    <NODE id="garbageGeneric_up">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="garbageTexture"/>
+
+      <SCALE sx="3" sy="3" sz="6"/>
+
+      <DESCENDANTS>
+        <NODEREF id="splineDoor"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbageGeneric_back -->
+    <NODE id="garbageGeneric_back">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="garbageTexture"/>
+
+      <TRANSLATION x="3" y="0" z="0"/>
+      <ROTATION axis="y" angle="180"/>
+      <SCALE sx="3" sy="3" sz="9"/>
+
+      <DESCENDANTS>
+        <NODEREF id="garbage_spline"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbageGeneric_hole -->
+    <NODE id="garbageGeneric_hole">
+      <MATERIAL id="separatorMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0.75" y="2.75" z="0.8"/>
+      <ROTATION axis="x" angle="-10"/>
+      <SCALE sx="1.5" sy="0.5" sz="0"/>
+
+      <DESCENDANTS>
+        <NODEREF id="garbage_spline"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="garbage_spline">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="20 20">
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0.5" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="0.05" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="0.15" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.5" yy="2" zz="0" ww="1"/>
+            <CPOINT xx="0.85" yy="1.3" zz="0" ww="1"/>
+            <CPOINT xx="0.95" yy="1.5" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="1" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+          </CPLINE>
+
+          <CPLINE>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.05" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.15" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.5" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.85" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="0.95" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+            <CPOINT xx="1" yy="0" zz="0" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- garbage: garbageGeneric_symbol -->
+    <NODE id="garbageGeneric_symbol">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="garbageSymbolTexture"/>
+
+      <TRANSLATION x="0.75" y="0.6" z="0.92"/>
+      <ROTATION axis="x" angle="-2"/>
+      <SCALE sx="1.5" sy="1.5" sz="1"/>
 
       <DESCENDANTS>
         <LEAF type="rectangle" args="0 1 1 0"/>
