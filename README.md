@@ -1,3 +1,3 @@
 # FEUP---LAIG
 
-![picture](image/proj1_resFinal.png)
+![picture](images/proj1_resFinal.png)
