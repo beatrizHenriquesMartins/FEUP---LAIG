@@ -6,4 +6,8 @@ class BezierAnimation extends Animation{
         this.p3 = bezierPoints[2];
         this.p4 = bezierPoints[3];
     }
+
+    calcPoints(){
+        
+    }
 }

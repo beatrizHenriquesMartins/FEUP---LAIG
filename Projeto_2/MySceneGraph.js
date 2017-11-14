@@ -6,8 +6,9 @@ var ILLUMINATION_INDEX = 1;
 var LIGHTS_INDEX = 2;
 var TEXTURES_INDEX = 3;
 var MATERIALS_INDEX = 4;
-var LEAVES_INDEX = 5;
-var NODES_INDEX = 6;
+var ANIMATIONS_INDEX = 5;
+var LEAVES_INDEX = 6;
+var NODES_INDEX = 7;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -135,6 +136,17 @@ MySceneGraph.prototype.parseLSXFile = function (rootElement) {
             this.onXMLMinorError("tag <MATERIALS> out of order");
 
         if ((error = this.parseMaterials(nodes[index])) != null)
+            return error;
+    }
+
+    //<ANIMATIONS>
+    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+        return "tag <ANIMATIONS> missing";
+    else {
+        if (index != ANIMATIONS_INDEX)
+            this.onXMLMinorError("tag <ANIMATIONS> out of order");
+
+        if ((error = this.parseAnimations(nodes[index])) != null)
             return error;
     }
 
@@ -1106,8 +1118,193 @@ MySceneGraph.prototype.parseMaterials = function (materialsNode) {
 
     console.log("Parsed materials");
 }
+/**
+ * Parses the <ANIMATIONS> block
+ */
+MySceneGraph.prototype.parseAnimations = function (animationsNode) {
+
+    var children = animationsNode.children;
+
+    //Each animation
+    this.animations = [];
+
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].nodeName != "ANIMATION") {
+            this.onXMLMinorError("unknown tag name" + children[i].nodeName + ">");
+            continue;
+        }
+
+        var animationID = this.reader.getString(children[i], 'id');
+        if (animationID == null)
+            return "no ID defined for animation";
+
+        if (this.animations[animationID] != null)
+            return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
+
+        //Speed
+        var speed = this.reader.getFloat(animationSpecs[speedIndex], 'speed');
+        var animationType = this.reader.getItem(children[i], 'type', ['linear', 'circular', 'bezier', 'combo']);        
+        if (speed == null && animationType != 'combo')
+            return "unable to parse speed value for animation with id: " + animationID;
+        else if (isNaN(speed))
+            return "speed is a non numeric value";
+        else if (speed <= 0)
+            return "speed must be a positive value";
+
+        //Type
+        if (animationType == null)
+            return "unable to parse the type of animation for animation with id: " + animationID;
 
 
+        var animationSpecs = children[i].children;
+
+        var nodeNames = [];
+
+        for (var j = 0; j < animationSpecs.length; j++)
+            nodeNames.push(animationSpecs[j].nodeName);
+
+        switch (animationType) {
+            case 'linear':
+                if (animationSpecs.length == 0)
+                    return "linear animation needs controlpoints";
+                var controlPoints = [];
+                for (let j = 0; j < animationSpecs.length; j++) {
+                    var controlpoint = [];
+                    var x = this.reader.getFloat(animationSpecs[j], 'xx');
+                    if (x == null)
+                        return "unable to parse x component of a control point for a linear animation with ID: " + animationID;
+                    else if (isNaN(x))
+                        return "variable x is a non numeric value in a control point for a linear animation ID: " + animationID;
+                    controlpoint.push(x);
+
+                    var y = this.reader.getFloat(animationSpecs[j], 'yy');
+                    if (y == null)
+                        return "unable to parse y component of a control point for a linear animation with ID: " + animationID;
+                    else if (isNaN(y))
+                        return "variable y is a non numeric value in a control point for a linear animation with ID " + animationID;
+                    controlpoint.push(y);
+
+                    var z = this.reader.getFloat(animationSpecs[j], 'zz');
+                    if (z == null)
+                        return "unable to parse z component of a control point for a linear animation with ID: " + animationID;
+                    else if (isNaN(z))
+                        return "variable z is a non numeric value in a control point for a linear animation with ID: " + animationID;
+                    controlpoint.push(z);
+
+                    controlPoints.push(controlpoint);
+
+                }
+                var auxanimation = new LinearAnimation(this.scene,speed,controlPoints);
+                this.animations[animationID] = auxanimation;
+                break;
+            case 'bezier':
+                if(animationSpecs.lenght == 0 || animationSpecs.lenght != 4)
+                    return "bezier animation needs 4 control points";
+                var controlPoints = [];
+                for(let j = 0; j < animationSpecs.length; j++){
+                    var controlpoint = [];
+                    var x = this.reader.getFloat(animationSpecs[j],'xx');
+                    if(x == null)
+                        return "unable to parse x component of a control point of a bezier animation with ID: " + animationID;
+                    else if(isNaN(x))
+                        return "variable x is a non numeric value in control point of a bezier animation with ID: " + animationID;
+                    controlpoint.push(x);
+
+                    var y = this.reader.getFloat(animationSpecs[j],'yy');
+                    if(y == null)
+                        return "unable to parse y component of a control point of a bezier animation with ID: " + animationID;
+                    else if(isNaN(y))
+                        return "variable y is a non numeric value in control point of a bezier animation with ID: " + animationID;
+                    controlpoint.push(y);
+
+                    var z = this.reader.getFloat(animationSpecs[j], 'zz');
+                    if(z == null)
+                        return "unable to parse z component of a control point of a bezier animation with ID: " + animationID;
+                    else if(isNaN(z))
+                        return "variable z is a non numeric value in control point of a bezier animation with ID: " + animationID;
+                    controlpoint.push(z);
+
+                    controlPoints.push(controlpoint);
+                }
+                var auxanimation = new BezierAnimation(this.scene,speed,controlPoints);
+                this.animations[animationID] = auxanimation;
+                break;
+            
+            case 'circular':
+                var centerx = this.reader.getFloat(children[i],'centerx');
+                if(centerx == null)
+                    return "no x position for center defined for circular animation with ID " + animationID;
+                else if(isNaN(centerx))
+                    return "x center position for circular animation needs to be numeric in animation with ID: " + animationID;
+                var centery = this.reader.getFloat(children[i],'centery');
+                if(centery == null)
+                    return "no y position for center defined for circular animation with ID: " + animationID;
+                else if(isNaN(centery))
+                    return "y center position for circular animation needs to be numeric in animation with ID: " + animationID;
+                
+                var centerz = this.reader.getFloat(children[i],'centerz');
+                if(centerz == null)
+                    return "no z position for center defined for circular animation with ID: " + animationID;
+                else if(isNaN(centerz))
+                    return "z center position for circular animation needs to be numeric in animation with ID: " +animationID;
+                
+                var radius = this.reader.getFloat(children[i],'radius');
+                if(radius == null)
+                    return "no movement radius detected in circular animation with ID: " +animationID;
+                else if(isNaN(radius))
+                    return "radius must be a numeric value in circular animation with ID: " + animationID;
+                
+                var startang = this.reader.getFloat(children[i],'startang');
+                if(startang == null)
+                    return "no inicial angle detected in circular animation with ID: " + animationID;
+                else if(isNaN(startang))
+                    return "starting angle needs to be a numeric value in circular animation with ID: " + animationID;
+                
+                var rotang = this.reader.getFloat(children[i],'rotang');
+                if(rotang == null)
+                    return "no rotation angle detected in circular animation with ID: " + animationID;
+                else if(isNaN(rotang))
+                    return "rotation angle must be a numeric value in circular animation with ID: " + animationID;
+                
+                var center = [centerx,centery,centerz];
+                var auxanimation = new CircularAnimation(this.scene,speed,radius,startang,rotang,center);
+                this.animations[animationID] = auxanimation;
+                break;
+            
+            case 'combo':
+                if(animationSpecs.lenght == 0)
+                    return "a combo animation needs to refer to atleast one animation on animation with ID: " + animationID;
+                var comboAnimations = [];
+                for(let j = 0; j < animationSpecs.lenght; j++){
+                    var animation;
+                    var comboAnimationIdentity = this.reader.getString(animationSpecs[j],'id');
+                    if(comboAnimationIdentity == null)
+                        return "you must describe a id of the animation in combo box with ID: " + animationID;
+                    else if(this.animations[comboAnimationIdentity] == null)
+                        return "couldn't find animation " + comboAnimationIdentity + "on combo animation with ID: " + animationID;
+                    animation = this.animations[comboAnimationIdentity];
+
+                    comboAnimations.push(animation);
+                }
+                var auxanimation = new ComboAnimation(comboAnimations);
+                this.animations[animationID] = auxanimation;
+                break;
+                
+
+
+
+        }
+
+
+
+
+
+
+    }
+
+    console.log("Animations parsed");
+
+}
 /**
  * Parses the <NODES> block.
  */
@@ -1145,7 +1342,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS","ANIMATIONREFS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1253,6 +1450,31 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                 }
             }
 
+            //Retrieve informatin about animations
+            var animationsIndex = specsNames.indexOf("ANIMATIONREFS");
+
+            console.log("cenas" + animationsIndex);
+            if(animationsIndex != -1)
+            {
+                var animationsrefs = nodeSpecs[animationsIndex].children;
+            
+
+            for(var j = 0; animationsrefs.lenght; j++){
+                if(animationsrefs[j].nodeName == "ANIMATIONREF"){
+                    var animationID = this.reader.getString(animationsrefs[j],'id');
+
+                    this.log("   Animation: " + animationID);
+
+                    if(animationID == null)
+                        this.onXMLMinorError("unable to parse animation ref id");
+                    else if(this.animations[animationID] == null)
+                        return "invalid Animation ID reference in node ID: " + nodeID;
+                    else
+                        this.nodes[nodeID].nodeAnimationsID.push(animationID);
+                }
+            }
+            }
+
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");
             if (descendantsIndex == -1)
@@ -1278,7 +1500,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                     }
                 } else
                 if (descendants[j].nodeName == "LEAF") {
-                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']);
+                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
 
                     if (type != null)
                         this.log("   Leaf: " + type);
@@ -1386,7 +1608,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
 
     if (currnode.textureID != "null") {
         if (currnode.textureID == "clear") {
-            clear =1;
+            clear = 1;
         } else {
             texture = this.textures[currnode.textureID];
 
@@ -1420,17 +1642,16 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
 
         if (texture != null) {
 
-            if(clear ==1)
-            {
+            if (clear == 1) {
                 texture[0].unbind();
                 clear = 0;
-            }else{
-               
+            } else {
+
                 currnode.leaves[i].primitive.loadTexture(texture);
                 texture[0].bind();
             }
-            
-            
+
+
 
         }
 

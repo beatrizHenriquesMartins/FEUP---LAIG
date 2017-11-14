@@ -5,4 +5,7 @@ class LinearAnimation extends Animation {
         this.p2 = controlPoints[1];
         this.p3 = controlPoints[2];
     }
+    calcPoints(){
+        
+    }
 }

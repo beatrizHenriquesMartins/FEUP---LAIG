@@ -6,4 +6,8 @@ class CicularAnimation extends Animation {
         this.rotation_angle = rotation_angle;
         this.center = center;
     }
+
+    calcPoints(){
+        
+    }
 }
