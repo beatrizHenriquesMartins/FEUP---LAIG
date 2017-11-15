@@ -2388,7 +2388,7 @@
     </NODE>
 
     <!-- garbage: garbage Station Left -->
-    <NODE id="garbageStationLeft">
+    <NODE id="garbageStationLeft" selectable="true">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 

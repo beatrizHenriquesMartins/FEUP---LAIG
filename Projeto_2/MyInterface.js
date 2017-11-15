@@ -1,4 +1,15 @@
- /**
+//returns obj index on array a, or -1 if a does not contain obj
+function contains(a,obj){
+    for(var i=0; i < a.length;i++){
+        if(a[i] === obj){
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+/**
  * MyInterface class, creating a GUI interface.
  * @constructor
  */
@@ -23,11 +34,42 @@ MyInterface.prototype.init = function(application) {
     //  http://workshop.chromeexperiments.com/examples/gui
     
     this.gui = new dat.GUI();
-
+    
+    
     // add a group of controls (and open/expand by defult)
     
     return true;
 };
+
+
+MyInterface.prototype.addShadersGroup = function(selectables) {
+    var group = this.gui.addFolder("Shaders");
+    group.open();
+    group.add(this.scene,'Shader', {
+        'Flat Shading':0,
+        'Passing a scale as uniform': 1,
+        'Passing a varying paramenter from VS -> FS': 2,
+        'Simple texturing': 3,
+        'Multiple textures in the FS': 4,
+        'Multiple textures in VS and FS': 5,
+        'Sepia': 6,
+        'Convolution': 7
+    }).name('Shaders list');
+
+    for(var key in selectables){
+        if(selectables.hasOwnProperty(key)){
+            this.scene.selectablesValues[key] = selectables[key][1];
+            group.add(this.scene.selectablesValues,key) ;
+        }
+    }
+    obj = this;
+    group.add(this.scene,'scaleFactor',-25,25).onChange(function(v){
+        obj.scene.updateScaleFactor(v);
+    });
+
+}
+
+
 
 /**
  * Adds a folder containing the IDs of the lights passed as parameter.

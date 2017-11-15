@@ -25,6 +25,8 @@ function MySceneGraph(filename, scene) {
 
     this.idRoot = null; // The id of the root element.
 
+    this.selectables = [];
+
     this.axisCoords = [];
     this.axisCoords['x'] = [1, 0, 0];
     this.axisCoords['y'] = [0, 1, 0];
@@ -1339,6 +1341,25 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this, nodeID);
 
+            //Retrieves node selectable flag
+            var selectableNode = this.reader.getString(children[i],'selectable');
+            if(selectableNode != null){
+                if(selectableNode == "true"){
+                    this.nodes[nodeID].selectable = true;
+                    this.selectables[nodeID] = [nodeID,true];
+                                        
+                }
+                else if(selectableNode == "false"){
+                    this.nodes[nodeID].selectable = false;
+                    this.selectables[nodeID] = [nodeID,false];
+                    
+                }else 
+                    this.onXMLMinorError("invalid boolean type in selectable,false predefined applied");
+                    
+            }
+
+
+
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
@@ -1453,7 +1474,6 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             //Retrieve informatin about animations
             var animationsIndex = specsNames.indexOf("ANIMATIONREFS");
 
-            console.log("cenas" + animationsIndex);
             if(animationsIndex != -1)
             {
                 var animationsrefs = nodeSpecs[animationsIndex].children;
@@ -1471,7 +1491,8 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                         return "invalid Animation ID reference in node ID: " + nodeID;
                     else
                         this.nodes[nodeID].nodeAnimationsID.push(animationID);
-                }
+                }else 
+                    this.onXMLMinorError("unknown tag <" + animationsrefs[j].nodeName + ">");
             }
             }
 
@@ -1581,17 +1602,18 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
 
-    this.processNode(this.idRoot, this.materials[this.nodes[this.idRoot].materialID], this.textures[this.nodes[this.idRoot].textureID]);
+    this.processNode(this.idRoot, this.materials[this.nodes[this.idRoot].materialID], this.textures[this.nodes[this.idRoot].textureID],null);
     //console.log("Cenas de material",this.materials[this.nodes[this.idRoot].materialID]);
 
 }
 
 //Recursive function that processes all nodes applying textures and materials.
-MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) {
+MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,selectableFlag) {
 
     let material = initialMat;
     let texture = initialText;
     let clear = 0;
+    let isSelect = selectableFlag;
     var currnode = this.nodes[nodeID];
 
 
@@ -1616,6 +1638,10 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
 
     }
 
+    if(currnode.selectable != null) {
+        isSelect = currnode.selectable;
+    }
+
 
     this.scene.multMatrix(currnode.transformMatrix);
 
@@ -1623,14 +1649,15 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
 
     for (let i = 0; i < currnode.children.length; i++) {
         this.scene.pushMatrix();
-        //this.processNode(currnode.children[i],this.materials[currnode.children[i].materialID], this.textures[currnode.children[i].textureID]);
-        this.processNode(currnode.children[i], material, texture);
+        this.processNode(currnode.children[i], material, texture,isSelect);
         this.scene.popMatrix();
     }
 
 
 
     for (let i = 0; i < currnode.leaves.length; i++) {
+
+      
 
         this.scene.pushMatrix();
 
@@ -1648,12 +1675,20 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
             } else {
 
                 currnode.leaves[i].primitive.loadTexture(texture);
-                texture[0].bind();
+                texture[0].bind(0);
             }
 
 
 
         }
+        if(isSelect == true){
+            this.scene.setActiveShader(this.scene.Shaders[this.scene.Shader]);
+
+        }else if(isSelect == false || isSelect == null)
+        {
+            this.scene.setActiveShader(this.scene.defaultShader);
+        }
+      
 
 
         currnode.leaves[i].primitive.display();
@@ -1661,3 +1696,19 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText) 
     }
 
 }
+
+MySceneGraph.prototype.getSelectables = function(){
+    var returnSelectables = [];
+
+    for(var node in this.nodes){
+        if(this.nodes.hasOwnProperty(node)){
+            if(node.selectable != null){
+                console.log("ENTROU AQUI", node.nodeID);
+                returnSelectables[node.nodeID] = [node.nodeID,node.selectable];
+                i++;
+            }
+        }
+    }
+    return returnSelectables;
+}
+

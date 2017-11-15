@@ -9,7 +9,13 @@ function XMLscene(interface) {
 
     this.interface = interface;
 
+    this.selectables = [];
+    this.Shader = 0;
+
     this.lightValues = {};
+
+    this.selectablesValues = {};
+    this.scaleFactor =5.0;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -25,10 +31,28 @@ XMLscene.prototype.init = function(application) {
 
     this.enableTextures(true);
     
+    this.setUpdatePeriod(1/60*100);
+
     this.gl.clearDepth(100.0);
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
+
+    this.Shaders = [
+        new CGFshader(this.gl,"Shaders/flat.vert","Shaders/flat.frag"),
+        new CGFshader(this.gl,"Shaders/uScale.vert","Shaders/uScale.frag"),
+        new CGFshader(this.gl, "Shaders/varying.vert","Shaders/varying.frag"),
+        new CGFshader(this.gl, "Shaders/texture1.vert","Shaders/texture1.frag"),
+		new CGFshader(this.gl, "Shaders/texture2.vert","Shaders/texture2.frag"),
+		new CGFshader(this.gl, "Shaders/texture3.vert","Shaders/texture3.frag"),
+		new CGFshader(this.gl, "Shaders/texture3.vert","Shaders/sepia.frag"),
+		new CGFshader(this.gl, "Shaders/texture3.vert","Shaders/convolution.frag")
+    ]
+
+    this.Shaders[4].setUniformsValues({uSampler2: 1});
+    this.Shaders[5].setUniformsValues({uSampler2: 1});
+
+    this.updateScaleFactor();
     
     this.axis = new CGFaxis(this);
 }
@@ -67,6 +91,24 @@ XMLscene.prototype.initLights = function() {
     
 }
 
+XMLscene.prototype.updateScaleFactor = function(v){
+
+    this.Shaders[1].setUniformsValues({normScale: this.scaleFactor});
+	this.Shaders[2].setUniformsValues({normScale: this.scaleFactor});
+	this.Shaders[5].setUniformsValues({normScale: this.scaleFactor});
+
+}
+
+/**
+ * Initializes selectables
+ */
+XMLscene.prototype.initSelectables = function(){
+    var i = 0;
+
+    this.selectables = this.graph.getSelectables();
+}
+
+
 
 
 /**
@@ -94,6 +136,7 @@ XMLscene.prototype.onGraphLoaded = function()
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
+    this.interface.addShadersGroup(this.graph.selectables);
 }
 
 /**
@@ -138,6 +181,17 @@ XMLscene.prototype.display = function() {
                 }
                 this.lights[i].update();
                 i++;
+            }
+        }
+
+        var j = 0;
+        for(var key in this.selectablesValues){
+            if(this.selectablesValues.hasOwnProperty(key)){
+                if(this.selectablesValues[key]){
+                    this.graph.nodes[key].selectable = true;
+                }else{
+                    this.graph.nodes[key].selectable = false;
+                }
             }
         }
 
