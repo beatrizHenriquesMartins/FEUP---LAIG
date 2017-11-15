@@ -1196,7 +1196,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
                     controlPoints.push(controlpoint);
 
                 }
-                var auxanimation = new LinearAnimation(this.scene,speed,controlPoints);
+                var auxanimation = new LinearAnimation(this.scene,animationID,speed,controlPoints);
                 this.animations[animationID] = auxanimation;
                 break;
             case 'bezier':
@@ -1228,7 +1228,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
 
                     controlPoints.push(controlpoint);
                 }
-                var auxanimation = new BezierAnimation(this.scene,speed,controlPoints);
+                var auxanimation = new BezierAnimation(this.scene,animationID,speed,controlPoints);
                 this.animations[animationID] = auxanimation;
                 break;
             
@@ -1269,7 +1269,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
                     return "rotation angle must be a numeric value in circular animation with ID: " + animationID;
                 
                 var center = [centerx,centery,centerz];
-                var auxanimation = new CircularAnimation(this.scene,speed,radius,startang,rotang,center);
+                var auxanimation = new CircularAnimation(this.scene,animationID,speed,radius,startang,rotang,center);
                 this.animations[animationID] = auxanimation;
                 break;
             
