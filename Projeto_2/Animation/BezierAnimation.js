@@ -8,6 +8,11 @@ class BezierAnimation extends Animation{
     }
 
     calcPoints(){
+        var time = this.scene.deltaTime / 1000;
+
+        var distance = Math.sqrt(Math.pow(this.p4[0]-this.p1[0],2) + Math.pow(this.p4[1] - this.p1[1],2) + Math.pow(this.p4[2]-this.p1[2],2));
+
+        var inc = this.speed * time;
         
     }
 }

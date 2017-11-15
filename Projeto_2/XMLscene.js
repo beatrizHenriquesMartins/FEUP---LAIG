@@ -31,7 +31,8 @@ XMLscene.prototype.init = function(application) {
 
     this.enableTextures(true);
     
-    this.setUpdatePeriod(1/60*100);
+    this.setUpdatePeriod(1/60*1000);
+    this.lastUpdateTime = (new Date()).getTime();
 
     this.gl.clearDepth(100.0);
     this.gl.enable(this.gl.DEPTH_TEST);
@@ -137,6 +138,21 @@ XMLscene.prototype.onGraphLoaded = function()
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
     this.interface.addShadersGroup(this.graph.selectables);
+}
+
+
+/**
+ * Defaut update scene function
+ */
+XMLscene.prototype.update = function(currTime) {
+    if(!this.graph.loadedOk)
+        return "Error processing graph";
+    
+    this.deltaTime = currTime - this.lastUpdateTime || 0.0;
+
+
+   //In the end
+   this.lastUpdateTime = currTime;     
 }
 
 /**
