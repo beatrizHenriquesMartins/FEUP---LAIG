@@ -5,6 +5,8 @@
 
 function MyGraphNode(graph, nodeID) {
     this.graph = graph;
+
+    this.currentAnimationIndex = null;
     
     //Node identification
     this.nodeID = nodeID;
@@ -22,7 +24,7 @@ function MyGraphNode(graph, nodeID) {
     this.textureID = null ;
 
     //The animations
-    this.nodeAnimationsID = [];
+    this.nodeAnimations = [];
 
     //Selectable flag
     this.selectable = null;

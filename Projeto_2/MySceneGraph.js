@@ -1489,8 +1489,11 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                         this.onXMLMinorError("unable to parse animation ref id");
                     else if(this.animations[animationID] == null)
                         return "invalid Animation ID reference in node ID: " + nodeID;
-                    else
-                        this.nodes[nodeID].nodeAnimationsID.push(animationID);
+                    else{
+                        var animationclone = this.animations[animationID].clone();
+                        this.nodes[nodeID].nodeAnimationsID.push(animationclone);
+                    }
+                        
                 }else 
                     this.onXMLMinorError("unknown tag <" + animationsrefs[j].nodeName + ">");
             }
@@ -1644,7 +1647,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
 
 
     this.scene.multMatrix(currnode.transformMatrix);
-
+    
 
 
     for (let i = 0; i < currnode.children.length; i++) {
@@ -1714,5 +1717,10 @@ MySceneGraph.prototype.getSelectables = function(){
         }
     }
     return returnSelectables;
+}
+
+
+MySceneGraph.prototype.update = function(currTime){
+
 }
 

@@ -10,4 +10,8 @@ class CicularAnimation extends Animation {
     calcPoints(){
         
     }
+
+    clone(){
+        return new CircularAnimation(this.scene,this.id,this.velocity,this.radius,this.ang_initial,this.rotation_angle,this.center);
+    }
 }

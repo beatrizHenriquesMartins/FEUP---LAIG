@@ -9,6 +9,17 @@ class LinearAnimation extends Animation {
         
     }
 
+
+    
+
     //x(t)=x0+v*t
     //y(t)=y0+v*t
+
+
+
+
+
+    clone(){
+        return new LinearAnimation(this.scene,this.id,this.velocity,this.controlPoints);
+    }
 }
