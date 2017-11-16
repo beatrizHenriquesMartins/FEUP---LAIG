@@ -12,8 +12,8 @@ class BezierAnimation extends Animation {
         this.transformMatrix = mat4.create();
     }
 
-    calcPoints() {
-        var time = this.scene.deltaTime / 1000;
+    calcPoints(deltaTime) {
+        var time = deltaTime / 1000;
 
         this.rotIt +=  Math.PI/6 *(this.scene.deltaTime/1000);
         var distance = Math.sqrt(Math.pow(this.p4[0] - this.p1[0], 2) + Math.pow(this.p4[1] - this.p1[1], 2) + Math.pow(this.p4[2] - this.p1[2], 2));
@@ -59,7 +59,14 @@ class BezierAnimation extends Animation {
 
     }
 
-    resetT(){
+    update(deltaTime){
+        calcPoints(deltaTime);
+        getTransformationMatrix();
+    }
+
+    reset(){
+        this.finished = false;
+        this.rotIt = 0;
         this.t= 0;
     }
 

@@ -7,8 +7,20 @@ class CicularAnimation extends Animation {
         this.center = center;
     }
 
-    calcPoints(){
-        
+    calcPoints(deltaTime){
+    }
+
+
+    getTransformationMatrix(){
+
+    }
+
+    update(deltaTime){
+
+    }
+
+    reset(){
+
     }
 
     clone(){

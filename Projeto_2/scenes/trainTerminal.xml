@@ -286,7 +286,13 @@
   </MATERIALS>
 
   <ANIMATIONS>
+      <ANIMATION id="teste" speed="10" type="bezier">
+          <controlpoint xx="0.0" yy="0.0" zz="0.0"/>
+          <controlpoint xx="3.0" yy="2.0" zz="1.0"/>
+          <controlpoint xx="2.0" yy="2.0" zz="3.0"/>
+          <controlpoint xx="2.0" yy="2.0" zz="2.0"/>
 
+      </ANIMATION>
   </ANIMATIONS>
 
   <NODES>

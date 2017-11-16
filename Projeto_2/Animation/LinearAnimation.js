@@ -15,18 +15,26 @@ class LinearAnimation extends Animation {
         this.over = false;
     }
 
-    calcPoints(){
+    calcPoints(deltaTime){
       //x(t)=x0+v*t
       //y(t)=y0+v*t
       
     }
 
-    update(){
+    update(deltaTime){
+
+    }
+
+    getTransformationMatrix(){
 
     }
 
     display(){
 
+    }
+
+    reset(){
+        this.finished = false;
     }
 
     clone(){

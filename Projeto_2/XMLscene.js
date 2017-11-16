@@ -149,7 +149,8 @@ XMLscene.prototype.update = function(currTime) {
         return "Error processing graph";
     
     this.deltaTime = currTime - this.lastUpdateTime || 0.0;
-     
+    
+    
     
 
    //In the end

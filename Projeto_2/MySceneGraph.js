@@ -1144,7 +1144,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
             return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
 
         //Speed
-        var speed = this.reader.getFloat(animationSpecs[speedIndex], 'speed');
+        var speed = this.reader.getFloat(children[i], 'speed');
         var animationType = this.reader.getItem(children[i], 'type', ['linear', 'circular', 'bezier', 'combo']);        
         if (speed == null && animationType != 'combo')
             return "unable to parse speed value for animation with id: " + animationID;
@@ -1200,7 +1200,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
                 this.animations[animationID] = auxanimation;
                 break;
             case 'bezier':
-                if(animationSpecs.lenght == 0 || animationSpecs.lenght != 4)
+                if(animationSpecs.length == 0 || animationSpecs.length != 4)
                     return "bezier animation needs 4 control points";
                 var controlPoints = [];
                 for(let j = 0; j < animationSpecs.length; j++){
@@ -1274,10 +1274,10 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
                 break;
             
             case 'combo':
-                if(animationSpecs.lenght == 0)
+                if(animationSpecs.length == 0)
                     return "a combo animation needs to refer to atleast one animation on animation with ID: " + animationID;
                 var comboAnimations = [];
-                for(let j = 0; j < animationSpecs.lenght; j++){
+                for(let j = 0; j < animationSpecs.length; j++){
                     var animation;
                     var comboAnimationIdentity = this.reader.getString(animationSpecs[j],'id');
                     if(comboAnimationIdentity == null)
@@ -1479,7 +1479,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                 var animationsrefs = nodeSpecs[animationsIndex].children;
             
 
-            for(var j = 0; animationsrefs.lenght; j++){
+            for(var j = 0; animationsrefs.length; j++){
                 if(animationsrefs[j].nodeName == "ANIMATIONREF"){
                     var animationID = this.reader.getString(animationsrefs[j],'id');
 
@@ -1647,7 +1647,21 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
 
 
     this.scene.multMatrix(currnode.transformMatrix);
-    
+    var nodeAnimations_aux = currnode.nodeAnimations;
+    var indexAnimation_aux = currnode.currentAnimationIndex;
+
+    if(nodeAnimations_aux.length != 0 && (indexAnimation_aux === null || (nodeAnimations_aux.isFinished() && indexAnimation_aux === (nodeAnimations_aux.length-1))))  
+    {
+        currnode.currentAnimationIndex = 0;
+    }else if(nodeAnimations_aux.length != 0 && indexAnimation_aux != null){
+        if(nodeAnimations_aux[indexAnimation_aux].isFinished() && indexAnimation_aux < (nodeAnimations_aux.length-1)){
+            currnode.nodeAnimations[currnode.currentAnimationIndex].reset();
+            currnode.currentAnimationIndex++;
+        }else{
+            currnode.nodeAnimations[indexAnimation_aux].update(this.scene.deltaTime);
+            this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
+        }
+    }
 
 
     for (let i = 0; i < currnode.children.length; i++) {
