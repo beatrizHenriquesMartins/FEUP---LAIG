@@ -5,25 +5,25 @@ class CicularAnimation extends Animation {
         this.ang_initial = ang_initial;
         this.rotation_angle = rotation_angle;
         this.center = center;
+
+        this.currentAngle = 0;
+        this.currentDistance = 0;
+
+        this.over = false;
     }
 
-    calcPoints(deltaTime){
-    }
-
-
-    getTransformationMatrix(){
-
+    calcPoints(){
+      this.distance = this.rotation_angle * this.radius;
     }
 
     update(deltaTime){
-
+      var time = (deltaTime/1000) * this.velocity;
     }
 
-    reset(){
-
-    }
+    
 
     clone(){
-        return new CircularAnimation(this.scene,this.id,this.velocity,this.radius,this.ang_initial,this.rotation_angle,this.center);
+      return new CicularAnimation(this.scene, this.id,
+        this.velocity, this.radius, this.ang_initial, this.rotation_angle, this.center);
     }
 }
