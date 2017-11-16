@@ -1479,7 +1479,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                 var animationsrefs = nodeSpecs[animationsIndex].children;
             
 
-            for(var j = 0; animationsrefs.length; j++){
+            for(var j = 0; j < animationsrefs.length; j++){
                 if(animationsrefs[j].nodeName == "ANIMATIONREF"){
                     var animationID = this.reader.getString(animationsrefs[j],'id');
 
@@ -1491,7 +1491,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                         return "invalid Animation ID reference in node ID: " + nodeID;
                     else{
                         var animationclone = this.animations[animationID].clone();
-                        this.nodes[nodeID].nodeAnimationsID.push(animationclone);
+                        this.nodes[nodeID].nodeAnimations.push(animationclone);
                     }
                         
                 }else 
@@ -1649,16 +1649,20 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
     this.scene.multMatrix(currnode.transformMatrix);
     var nodeAnimations_aux = currnode.nodeAnimations;
     var indexAnimation_aux = currnode.currentAnimationIndex;
-
-    if(nodeAnimations_aux.length != 0 && (indexAnimation_aux === null || (nodeAnimations_aux.isFinished() && indexAnimation_aux === (nodeAnimations_aux.length-1))))  
+    
+    if(nodeAnimations_aux.length != 0 && indexAnimation_aux == null)  
     {
         currnode.currentAnimationIndex = 0;
     }else if(nodeAnimations_aux.length != 0 && indexAnimation_aux != null){
-        if(nodeAnimations_aux[indexAnimation_aux].isFinished() && indexAnimation_aux < (nodeAnimations_aux.length-1)){
+        if(currnode.nodeAnimations[indexAnimation_aux].isFinished()){
+            console.log("ENTROU ONDE DEVIA");
             currnode.nodeAnimations[currnode.currentAnimationIndex].reset();
-            currnode.currentAnimationIndex++;
+            if(indexAnimation_aux < (nodeAnimations_aux.length-1))
+                    currnode.currentAnimationIndex++;
+            else currnode.currentAnimationIndex = 0;
         }else{
             currnode.nodeAnimations[indexAnimation_aux].update(this.scene.deltaTime);
+            console.log("ITERACAO ENTROU");
             this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
         }
     }

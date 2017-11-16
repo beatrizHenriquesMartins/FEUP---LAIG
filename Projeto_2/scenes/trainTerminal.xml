@@ -286,11 +286,11 @@
   </MATERIALS>
 
   <ANIMATIONS>
-      <ANIMATION id="teste" speed="10" type="bezier">
+      <ANIMATION id="teste" speed="0.5" type="bezier">
           <controlpoint xx="0.0" yy="0.0" zz="0.0"/>
           <controlpoint xx="3.0" yy="2.0" zz="1.0"/>
           <controlpoint xx="2.0" yy="2.0" zz="3.0"/>
-          <controlpoint xx="2.0" yy="2.0" zz="2.0"/>
+          <controlpoint xx="20.0" yy="0" zz="0.0"/>
 
       </ANIMATION>
   </ANIMATIONS>
@@ -881,7 +881,7 @@
       <TEXTURE id="trainmetaltexture"/>
 
       <TRANSLATION x="18" y="-2.5" z="25.75"/>
-
+   
       <DESCENDANTS>
         <NODEREF id="carriage_1"/>
         <NODEREF id="carriage_2"/>
