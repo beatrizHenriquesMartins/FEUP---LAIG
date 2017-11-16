@@ -8,4 +8,7 @@ class LinearAnimation extends Animation {
     calcPoints(){
         
     }
+
+    //x(t)=x0+v*t
+    //y(t)=y0+v*t
 }
