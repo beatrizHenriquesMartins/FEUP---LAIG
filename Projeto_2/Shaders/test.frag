@@ -6,7 +6,7 @@ varying vec4 vFinalColor;
 varying vec2 vTextureCoord;
 
 uniform sampler2D uSampler;
-
+uniform float timeFactor;
 uniform bool uUseTexture;
 
 void main() {

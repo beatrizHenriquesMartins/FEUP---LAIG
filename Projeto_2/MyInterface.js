@@ -56,6 +56,17 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
         'Convolution': 7
     }).name('Shaders list');
 
+    /*this.gui.add(this.scene,"selectables",selectables).onChange(v){
+        for(key in selectables){
+            if(selectables.hasOwnProperty(key)){
+                this.scene.selectablesValues[key] = true;
+
+            }
+        }
+    }*/
+
+
+
     for(var key in selectables){
         if(selectables.hasOwnProperty(key)){
             this.scene.selectablesValues[key] = selectables[key][1];

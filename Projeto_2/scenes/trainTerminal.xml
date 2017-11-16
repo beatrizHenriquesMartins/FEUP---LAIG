@@ -870,7 +870,7 @@
     </NODE>
 
     <!-- train -->
-    <NODE id="train">
+    <NODE id="train" selectable = "false">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="trainmetaltexture"/>
 
@@ -2388,7 +2388,7 @@
     </NODE>
 
     <!-- garbage: garbage Station Left -->
-    <NODE id="garbageStationLeft" selectable="true">
+    <NODE id="garbageStationLeft">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 

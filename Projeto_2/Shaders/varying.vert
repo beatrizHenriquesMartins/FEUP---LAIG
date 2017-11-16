@@ -9,7 +9,7 @@ attribute vec2 aTextureCoord;
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
-
+uniform float timeFactor;
 uniform float normScale;
 varying vec4 coords;
 varying vec4 normal;

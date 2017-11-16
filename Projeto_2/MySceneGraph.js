@@ -1666,6 +1666,13 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
             material.apply();
 
         }
+        if(isSelect == true){
+            this.scene.setActiveShader(this.scene.Shaders[this.scene.Shader]);
+
+        }else if(isSelect == false || isSelect == null)
+        {
+            this.scene.setActiveShader(this.scene.defaultShader);
+        }
 
         if (texture != null) {
 
@@ -1675,19 +1682,16 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
             } else {
 
                 currnode.leaves[i].primitive.loadTexture(texture);
+                if(isSelect)
+                texture[0].bind(1);
+                else
                 texture[0].bind(0);
             }
 
 
 
         }
-        if(isSelect == true){
-            this.scene.setActiveShader(this.scene.Shaders[this.scene.Shader]);
-
-        }else if(isSelect == false || isSelect == null)
-        {
-            this.scene.setActiveShader(this.scene.defaultShader);
-        }
+     
       
 
 
