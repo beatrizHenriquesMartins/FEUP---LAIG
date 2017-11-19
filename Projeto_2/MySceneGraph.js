@@ -1491,6 +1491,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                         return "invalid Animation ID reference in node ID: " + nodeID;
                     else{
                         var animationclone = this.animations[animationID].clone();
+                        animationclone.nodeMatrix = this.nodes[nodeID].transformMatrix;
                         this.nodes[nodeID].nodeAnimations.push(animationclone);
                     }
                         
@@ -1656,6 +1657,8 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
     }else if(nodeAnimations_aux.length != 0 && indexAnimation_aux != null){
         if(currnode.nodeAnimations[indexAnimation_aux].isFinished()){
             console.log("ENTROU ONDE DEVIA");
+            //mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
+            currnode.transformMatrix = currnode.nodeAnimations[indexAnimation_aux].transformMatrix;
             currnode.nodeAnimations[currnode.currentAnimationIndex].reset();
             if(indexAnimation_aux < (nodeAnimations_aux.length-1))
                     currnode.currentAnimationIndex++;
@@ -1663,9 +1666,11 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
         }else{
             currnode.nodeAnimations[indexAnimation_aux].update(this.scene.deltaTime);
             console.log("ITERACAO ENTROU");
+            console.log(currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
             this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
         }
     }
+
 
 
     for (let i = 0; i < currnode.children.length; i++) {

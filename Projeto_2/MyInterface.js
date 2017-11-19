@@ -46,7 +46,7 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
     var group = this.gui.addFolder("Shaders");
     group.open();
     group.add(this.scene,'Shader', {
-        'Flat Shading':0,
+        'My Shader':0,
         'Passing a scale as uniform': 1,
         'Passing a varying paramenter from VS -> FS': 2,
         'Simple texturing': 3,

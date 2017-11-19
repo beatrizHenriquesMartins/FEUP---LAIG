@@ -11,6 +11,7 @@ class BezierAnimation extends Animation {
 
         this.rotIt = 0 ;
 
+        this.nodeMatrix = mat4.create();
         this.transformMatrix = mat4.create();
     }
 
@@ -20,11 +21,11 @@ class BezierAnimation extends Animation {
         //this.rotIt +=  Math.PI/6 *(this.scene.deltaTime/1000);
         var distance = Math.sqrt(Math.pow(this.p4[0] - this.p1[0], 2) + Math.pow(this.p4[1] - this.p1[1], 2) + Math.pow(this.p4[2] - this.p1[2], 2));
 
-        var inc = this.velocity * time;
+        var inc = (this.velocity * time)/distance;
 
         console.log("INCREMENTO" + inc);
 
-        if (this.t >= 1) {
+        if (this.t > 1) {
             this.finished = true;
             console.log("MUDA FINSIHED PARA TRUE");
         } else {
@@ -47,7 +48,7 @@ class BezierAnimation extends Animation {
     }
 
     getTransformationMatrix(){
-        mat4.identity(this.transformMatrix);
+        /*mat4.identity(this.transformMatrix);
        mat4.translate(this.transformMatrix,this.transformMatrix,[this.x,this.y,this.z]);
         var orient = vec3.fromValues(0,0,1);
         var axis = vec3.create();
@@ -56,10 +57,31 @@ class BezierAnimation extends Animation {
             axis = vec3.fromValues(0,-1,0);
         }else{
             this.calcAxis(axis,orient,this.tangent);
+        }*/
+
+        let identiy_mat = mat4.create();
+        let translated_mat = [];
+        let final_mat = [];
+
+        var orient = vec3.fromValues(0,1,0);
+        var axis = vec3.create();
+        var angle = this.calcAngle(orient,this.tangent);
+        if(angle == Math.PI){
+            axis = vec3.fromValues(0,-1,0);
+        }else{
+            this.calcAxis(axis,orient,this.tangent);
         }
 
+        
+
+        mat4.translate(translated_mat,identiy_mat,[this.x,this.y,this.z]);
+
+        mat4.rotate(final_mat,translated_mat,angle,axis);
+
+        this.transformMatrix = final_mat;
+
         //mat4.rotate(this.transformMatrix,this.transformMatrix,this.rotIt,this.tangent);
-        mat4.rotate(this.transformMatrix,this.transformMatrix,angle,axis);
+        //mat4.rotate(this.transformMatrix,this.transformMatrix,angle,axis);
 
 
     }
@@ -74,6 +96,8 @@ class BezierAnimation extends Animation {
         console.log("FEZ RESET");
         this.finished = false;
         this.rotIt = 0;
+        //this.finalMatrix = this.transform
+        this.transformMatrix = [];
         this.t= 0;
     }
 

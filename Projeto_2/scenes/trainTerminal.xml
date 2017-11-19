@@ -881,7 +881,9 @@
       <TEXTURE id="trainmetaltexture"/>
 
       <TRANSLATION x="18" y="-2.5" z="25.75"/>
-   
+      
+       
+
       <DESCENDANTS>
         <NODEREF id="carriage_1"/>
         <NODEREF id="carriage_2"/>
@@ -1574,6 +1576,8 @@
       <TRANSLATION x="20" y="-0.5" z="40"/>
       <SCALE sx="0.5" sy="0.5" sz="0.5"/>
 
+
+
       <DESCENDANTS>
         <NODEREF id="wood-seat"/>
       </DESCENDANTS>
@@ -1625,6 +1629,9 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
+       <ANIMATIONREFS>
+            <ANIMATIONREF id="teste"/>
+        </ANIMATIONREFS>
       <DESCENDANTS>
         <NODEREF id="left-body"/>
         <NODEREF id="right-body"/>
