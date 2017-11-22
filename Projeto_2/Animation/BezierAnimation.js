@@ -28,10 +28,10 @@ class BezierAnimation extends Animation {
        // var inc = (this.velocity * time)/distance;
        this.t = (deltaTime)/this.time;
         
-        console.log("INCREMENTO" + this.t);
+        //console.log("INCREMENTO" + this.t);
 
         if (this.t > 1) {
-            this.finished = true;
+            return true;
             console.log("MUDA FINSIHED PARA TRUE");
         } else {
 
@@ -49,7 +49,7 @@ class BezierAnimation extends Animation {
             this.tangent = vec3.fromValues(dx, dy, dz);
 
         }
-
+        return false;
     }
 
     getTransformationMatrix(){
@@ -92,8 +92,10 @@ class BezierAnimation extends Animation {
     }
 
     update(deltaTime){
-        this.calcPoints(deltaTime);
+        if(this.calcPoints(deltaTime))
+            return false;
         this.getTransformationMatrix();
+        return true;
     }
 
     reset(){
@@ -116,7 +118,7 @@ class BezierAnimation extends Animation {
 
     calcDistance(){
         var l1 = vec3.fromValues(this.p1[0],this.p1[1],this.p1[2]);
-        var auxp2 = vec3.fromValues(this.p2[0],this.p2[1],this.p3[2]);
+        var auxp2 = vec3.fromValues(this.p2[0],this.p2[1],this.p2[2]);
         var auxp3 = vec3.fromValues(this.p3[0],this.p3[1],this.p3[2]);
         var r4 = vec3.fromValues(this.p4[0],this.p4[1],this.p4[2]);
         var divide_aux = vec3.fromValues(2,2,2);

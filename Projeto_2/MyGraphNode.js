@@ -30,6 +30,7 @@ function MyGraphNode(graph, nodeID) {
     this.selectable = null;
 
     this.transformMatrix = mat4.create();
+    this.animationMatrix= mat4.create();
     mat4.identity(this.transformMatrix);
 }
 

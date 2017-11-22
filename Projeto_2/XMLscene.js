@@ -43,7 +43,7 @@ XMLscene.prototype.init = function(application) {
 
     this.Shaders = [
         new CGFshader(this.gl,"Shaders/myShader.vert","Shaders/myShader.frag"),
-        new CGFshader(this.gl,"Shaders/uScale.vert","Shaders/uScale.frag"),
+        new CGFshader(this.gl,"Shaders/myShader2.vert","Shaders/myShader2.frag"),
         new CGFshader(this.gl, "Shaders/varying.vert","Shaders/varying.frag"),
         new CGFshader(this.gl, "Shaders/texture1.vert","Shaders/texture1.frag"),
 		new CGFshader(this.gl, "Shaders/texture2.vert","Shaders/texture2.frag"),
@@ -97,7 +97,7 @@ XMLscene.prototype.initLights = function() {
 XMLscene.prototype.updateScaleFactor = function(v){
 
     this.Shaders[0].setUniformsValues({displacement: this.scaleFactor});
-    this.Shaders[1].setUniformsValues({normScale: this.scaleFactor});
+    this.Shaders[1].setUniformsValues({displacement:this.scaleFactor});
 	this.Shaders[2].setUniformsValues({normScale: this.scaleFactor});
 	this.Shaders[5].setUniformsValues({normScale: this.scaleFactor});
 
@@ -153,7 +153,9 @@ XMLscene.prototype.update = function(currTime) {
         return "Error processing graph";
     
     this.deltaTime = currTime - this.lastUpdateTime || 0.0;
-    this.Shaders[0].setUniformsValues({amplitude: Math.sin(this.frame)})
+    this.Shaders[0].setUniformsValues({amplitude: (1+Math.sin(this.frame))/2})
+    
+    this.Shaders[1].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
     this.frame+=this.deltaTime/1000;
     this.graph.update(this.deltaTime);
     

@@ -1273,6 +1273,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
                     return "rotation angle must be a numeric value in circular animation with ID: " + animationID;
                 
                 var center = [centerx,centery,centerz];
+                console.log("ROTANG",rotang);
                 var auxanimation = new CircularAnimation(this.scene,animationID,speed,radius,startang,rotang,center);
                 this.animations[animationID] = auxanimation;
                 break;
@@ -1288,7 +1289,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
                         return "you must describe a id of the animation in combo box with ID: " + animationID;
                     else if(this.animations[comboAnimationIdentity] == null)
                         return "couldn't find animation " + comboAnimationIdentity + "on combo animation with ID: " + animationID;
-                    animation = this.animations[comboAnimationIdentity];
+                    animation = new AnimationRef([],this.animations[comboAnimationIdentity]);
 
                     comboAnimations.push(animation);
                 }
@@ -1354,7 +1355,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                                         
                 }
                 else if(selectableNode == "false"){
-                    this.nodes[nodeID].selectable = false;
+                    //this.nodes[nodeID].selectable = false;
                     //this.selectables[nodeID] = [nodeID,false];
                     
                 }else 
@@ -1495,10 +1496,19 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                         return "invalid Animation ID reference in node ID: " + nodeID;
                     else{
                         //var animationclone = this.animations[animationID].clone();
+                        console.log("LOG",this.animations[animationID].constructor.name);
+                        if(this.animations[animationID].constructor.name === "ComboAnimation"){
+                            var comboanimations = this.animations[animationID].Animations;
+                            for(let a = 0; a < comboanimations.length; a++){
+                                this.animationsrefs.push(comboanimations[a]);
+                                this.nodes[nodeID].nodeAnimations.push(comboanimations[a]);
+                            }
+                        }else{
+                            var animationref = new AnimationRef(this.nodes[nodeID].transformMatrix,this.animations[animationID]);
+                            this.animationsrefs.push(animationref);
+                            this.nodes[nodeID].nodeAnimations.push(animationref);
+                        }
                         
-                        var animationref = new AnimationRef(this.nodes[nodeID].transformMatrix,this.animations[animationID]);
-                        this.animationsrefs.push(animationref);
-                        this.nodes[nodeID].nodeAnimations.push(animationref);
 
                        // animationclone.nodeMatrix = this.nodes[nodeID].transformMatrix;
                         //this.nodes[nodeID].nodeAnimations.push(animationclone);
@@ -1662,9 +1672,11 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
     //this.scene.multMatrix(currnode.transformMatrix);
     var nodeAnimations_aux = currnode.nodeAnimations;
     var indexAnimation_aux = currnode.currentAnimationIndex;
-  
+    
+    var flag_needtochange = 0;
     if(nodeAnimations_aux.length != 0 && indexAnimation_aux == null)
     {
+        
         currnode.currentAnimationIndex = 0;
         currnode.nodeAnimations[0].enable = 1;
     }else if(nodeAnimations_aux != 0 && indexAnimation_aux <= (currnode.nodeAnimations.length - 1)){
@@ -1672,13 +1684,19 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
         if(currnode.nodeAnimations[indexAnimation_aux].enable == 1){
             
            // mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
-            this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].matrix);
+           console.log("MATRIX QUE RECEBE",currnode.nodeAnimations[indexAnimation_aux].matrix);
+           // this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].matrix);
+           currnode.animationMatrix = currnode.nodeAnimations[indexAnimation_aux].matrix;
         }else{
-            mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
+            console.log("MATRIZ QUE MULTIPLICA",currnode.nodeAnimations[indexAnimation_aux].matrix);
+            
+           // mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
             currnode.currentAnimationIndex++;
             if(currnode.currentAnimationIndex <= (currnode.nodeAnimations.length - 1)){
                 currnode.nodeAnimations[currnode.currentAnimationIndex].enable = 1;
+                flag_needtochange = 1;
             }
+           
         }
         /*for(var i = 0; i < currnode.nodeAnimations.length;i++){
             if(currnode.nodeAnimations[i].enable == 1){
@@ -1687,7 +1705,20 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
             }
         }*/
    }
-   this.scene.multMatrix(currnode.transformMatrix);
+
+   if(flag_needtochange == 0){
+    this.scene.multMatrix(currnode.transformMatrix);
+    this.scene.multMatrix(currnode.animationMatrix);
+  
+    
+   }else{
+       flag_needtochange = 0;
+        mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.animationMatrix)
+        this.scene.multMatrix(currnode.transformMatrix);
+
+   }
+   
+   
     
 
   /*if(nodeAnimations_aux.length != 0 && indexAnimation_aux != null){

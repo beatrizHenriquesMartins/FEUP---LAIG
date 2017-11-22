@@ -165,10 +165,14 @@
 
       </ANIMATION>
 
-      <ANIMATION id="teste3" type="combo">
+      <ANIMATION id="testecombo" type="combo">
             <SPANREF id="teste"/>
             <SPANREF id="teste"/>
       </ANIMATION>
+
+      <ANIMATION id="teste4" speed="1" type="circular" centerx="5" centery="5" centerz="5" radius="1" startang="0" rotang="360"/>
+        
+
   </ANIMATIONS>
 <!-- End of the second project's ANIMATIONS block. -->
 
@@ -393,8 +397,8 @@
         <TRANSLATION x="-2" y="0" z="5" />
 
          <ANIMATIONREFS>
-            <ANIMATIONREF id="teste3" />
-           <!-- <ANIMATIONREF id="teste" />-->
+            <ANIMATIONREF id="teste4" />
+           <ANIMATIONREF id="teste" />
 
         </ANIMATIONREFS>
 
@@ -412,7 +416,8 @@
         <TRANSLATION x="22" y="0" z="5" />
 
         <ANIMATIONREFS>
-            <ANIMATIONREF id="teste" />
+            <ANIMATIONREF id="testecombo" />
+            
         </ANIMATIONREFS>
         <DESCENDANTS>
             <NODEREF id="arvore" />     	    

@@ -11,13 +11,14 @@ AnimationRef.prototype.constructor = AnimationRef;
 
 AnimationRef.prototype.update = function(deltaTime){
     //console.log("ENTROU NO UPDATE ANIMATION REF");
-    if(!this.Animation.isFinished()){
-        this.Animation.update(this.initialTime);
+    if(this.Animation.update(this.initialTime)){
+        
         this.matrix = this.Animation.transformMatrix;
         //console.log("MATRIX",this.matrix);
+        console.log("MATRIZ DA ANIMATIONREF", this.matrix);
         this.initialTime += (deltaTime/1000);
     }else {
         this.enable = 0;
-        this.Animation.reset();
+        //this.Animation.reset();
     }
 }

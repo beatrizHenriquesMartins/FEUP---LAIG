@@ -1,26 +1,59 @@
-class CicularAnimation extends Animation {
+class CircularAnimation extends Animation {
     constructor(scene, id,velocity, radius, ang_initial, rotation_angle, center) {
         super(scene,id, velocity);
         this.radius = radius;
-        this.ang_initial = ang_initial;
-        this.rotation_angle = rotation_angle;
+        this.ang_initial = ang_initial*Math.PI/180;
+        this.rotation_angle = rotation_angle*Math.PI/180;
+        this.deltaAngle;
         this.center = center;
-
-        this.currentAngle = 0;
-        this.currentDistance = 0;
-
-        this.over = false;
+        this.angularspeed = this.velocity/this.radius;
+        this.transformMatrix = mat4.create();
+        console.log("ROTATION ANGLE",this.rotation_angle);
+        this.time = (this.rotation_angle*this.radius)/this.velocity;
+        console.log("TIME DA CIRCULAR",this.time);
     }
 
-    calcPoints(){
-      this.distance = this.rotation_angle * this.radius;
+    calcPoints(deltaTime){
+
+      console.log("DELTA TIME E TIME TOTAL",deltaTime,this.time);
+      if(deltaTime > this.time)
+      {
+        return true;
+      }else {
+        this.deltaAngle = this.ang_initial + (deltaTime/this.time)*this.rotation_angle;
+      }
+      return false;
+      
+    }
+
+    getTransformMatrix(){
+
+      let identity_mat = mat4.create();
+      let translated_mat = [];
+
+      mat4.translate(translated_mat,identity_mat,this.center);
+      mat4.rotateY(translated_mat,translated_mat,this.deltaAngle);
+      mat4.translate(translated_mat,translated_mat,[this.radius,0,0]);
+      
+      //if(this.deltaAngle > 0)
+        //mat4.rotateY(translated_mat,translated_mat,Math.PI/2);
+
+      this.transformMatrix = translated_mat;
+      console.log("MATRIZ DA CIRCULAR",this.transformMatrix);
+
     }
 
     update(deltaTime){
-      var time = (deltaTime/1000) * this.velocity;
+      if(this.calcPoints(deltaTime))
+        return false;
+      this.getTransformMatrix();
+      return true;
     }
 
-    
+    reset(){
+      this.finished = false;
+      this.deltaAngle = 0;
+    }
 
     clone(){
       return new CicularAnimation(this.scene, this.id,
