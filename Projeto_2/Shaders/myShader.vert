@@ -17,7 +17,7 @@ varying vec3 vNormal;
 void main(){
     
     vNormal = aVertexNormal;
-    vec3 newPosition = aVertexPosition + aVertexNormal * vec3(displacement*0.1);
+    vec3 newPosition = aVertexPosition + aVertexNormal * vec3(displacement*amplitude);
 
     gl_Position = uPMatrix*uMVMatrix*vec4(newPosition,1.0);
 }

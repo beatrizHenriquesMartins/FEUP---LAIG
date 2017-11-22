@@ -24,7 +24,7 @@ class LinearAnimation extends Animation {
         var distanceY = Math.pow(this.controlPoints[i][1] - this.controlPoints[i-1][1],2);
         var distanceZ = Math.pow(this.controlPoints[i][2] - this.controlPoints[i-1][2],2);
 
-        var distanceTotal += Math.sqrt(distanceX + distanceY + distanceZ);
+        var distanceTotal = Math.sqrt(distanceX + distanceY + distanceZ);
 
         this.distance.push(distanceTotal);
 

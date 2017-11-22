@@ -11,11 +11,13 @@ function XMLscene(interface) {
 
     this.selectables = [];
     this.Shader = 0;
+    this.Node= 0;
+    this.frame = 0;
 
     this.lightValues = {};
 
     this.selectablesValues = {};
-    this.scaleFactor =5.0;
+    this.scaleFactor =1.0;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -139,6 +141,7 @@ XMLscene.prototype.onGraphLoaded = function()
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
     this.interface.addShadersGroup(this.graph.selectables);
+    console.log("CAUHWAIU",this.Node);
 }
 
 
@@ -150,8 +153,9 @@ XMLscene.prototype.update = function(currTime) {
         return "Error processing graph";
     
     this.deltaTime = currTime - this.lastUpdateTime || 0.0;
-    
-    
+    this.Shaders[0].setUniformsValues({amplitude: Math.sin(this.frame)})
+    this.frame+=this.deltaTime/1000;
+    this.graph.update(this.deltaTime);
     
 
    //In the end

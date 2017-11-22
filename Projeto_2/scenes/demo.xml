@@ -150,11 +150,11 @@
 
 <!-- Beginning of the second project's ANIMATIONS block. -->
  <ANIMATIONS>
-      <ANIMATION id="teste" speed="5" type="bezier">
+      <ANIMATION id="teste" speed="1" type="bezier">
           <controlpoint xx="0.0" yy="0.0" zz="0.0"/>
-          <controlpoint xx="3.0" yy="2.0" zz="1.0"/>
-          <controlpoint xx="2.0" yy="2.0" zz="3.0"/>
-          <controlpoint xx="10.0" yy="0" zz="0.0"/>
+          <controlpoint xx="0.0" yy="0.0" zz="4.0"/>
+          <controlpoint xx="4.0" yy="0.0" zz="4.0"/>
+          <controlpoint xx="4.0" yy="0.0" zz="0.0"/>
 
       </ANIMATION>
        <ANIMATION id="teste2" speed="5" type="bezier">
@@ -163,6 +163,11 @@
           <controlpoint xx="5.0" yy="0.0" zz="3.0"/>
           <controlpoint xx="20.0" yy="0" zz="0.0"/>
 
+      </ANIMATION>
+
+      <ANIMATION id="teste3" type="combo">
+            <SPANREF id="teste"/>
+            <SPANREF id="teste"/>
       </ANIMATION>
   </ANIMATIONS>
 <!-- End of the second project's ANIMATIONS block. -->
@@ -381,14 +386,16 @@
     </NODE>
 
     <!-- One tree -->
-    <NODE id="arvore1">       
+    <NODE id="arvore1" selectable="true">       
         <MATERIAL id="null" />    
         <TEXTURE id="null" />       			
 
         <TRANSLATION x="-2" y="0" z="5" />
 
          <ANIMATIONREFS>
-            <ANIMATIONREF id="teste" />
+            <ANIMATIONREF id="teste3" />
+           <!-- <ANIMATIONREF id="teste" />-->
+
         </ANIMATIONREFS>
 
         <DESCENDANTS>
@@ -398,13 +405,13 @@
     </NODE>
 
     <!-- Another tree -->
-    <NODE id="arvore2">       
+    <NODE id="arvore2" selectable="true">       
         <MATERIAL id="null" />     
         <TEXTURE id="null" />       			
 
         <TRANSLATION x="22" y="0" z="5" />
 
-         <ANIMATIONREFS>
+        <ANIMATIONREFS>
             <ANIMATIONREF id="teste" />
         </ANIMATIONREFS>
         <DESCENDANTS>
@@ -426,7 +433,7 @@
     </NODE>
 
     <!-- Tree trunk -->
-    <NODE id="troncoArvore">       
+    <NODE id="troncoArvore" selectable="false">       
         <MATERIAL id="trunkTreeMaterial" />     
         <TEXTURE id="trunk" />       			
 

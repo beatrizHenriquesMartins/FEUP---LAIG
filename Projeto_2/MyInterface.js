@@ -65,15 +65,27 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
         }
     }*/
 
+   
 
+    obj = this;
+    group.add(this.scene,'Node',selectables).onChange(function(v){
+        for(var i = 0; i  < selectables.length;i++){
+            if(selectables[i] == v){
+                obj.scene.graph.clearSelectables();
+                console.log("CHANGE ",i);
+                obj.scene.graph.activeSelectable = i;
+                
+            }
+        } 
+    });
 
-    for(var key in selectables){
+   /* for(var key in selectables){
         if(selectables.hasOwnProperty(key)){
             this.scene.selectablesValues[key] = selectables[key][1];
             group.add(this.scene.selectablesValues,key) ;
         }
-    }
-    obj = this;
+    }*/
+    
     group.add(this.scene,'scaleFactor',-25,25).onChange(function(v){
         obj.scene.updateScaleFactor(v);
     });

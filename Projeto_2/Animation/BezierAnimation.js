@@ -13,17 +13,22 @@ class BezierAnimation extends Animation {
 
         this.nodeMatrix = mat4.create();
         this.transformMatrix = mat4.create();
+
+        this.calcDistance();
+        this.time = this.distance/this.velocity;
+        console.log("TEMPO",this.time);
     }
 
     calcPoints(deltaTime) {
-        var time = deltaTime / 1000;
+        //var time = deltaTime / 1000;
 
         //this.rotIt +=  Math.PI/6 *(this.scene.deltaTime/1000);
-        var distance = Math.sqrt(Math.pow(this.p4[0] - this.p1[0], 2) + Math.pow(this.p4[1] - this.p1[1], 2) + Math.pow(this.p4[2] - this.p1[2], 2));
+        //var distance = Math.sqrt(Math.pow(this.p4[0] - this.p1[0], 2) + Math.pow(this.p4[1] - this.p1[1], 2) + Math.pow(this.p4[2] - this.p1[2], 2));
 
-        var inc = (this.velocity * time)/distance;
-
-        console.log("INCREMENTO" + inc);
+       // var inc = (this.velocity * time)/distance;
+       this.t = (deltaTime)/this.time;
+        
+        console.log("INCREMENTO" + this.t);
 
         if (this.t > 1) {
             this.finished = true;
@@ -35,7 +40,7 @@ class BezierAnimation extends Animation {
             this.y = Math.pow(1 - this.t, 3) * this.p1[1] + 3 * this.t * Math.pow(1 - this.t, 2) * this.p2[1] + 3 * Math.pow(this.t, 2) * (1 - this.t) * this.p3[1] + Math.pow(this.t, 3) * this.p4[1];
             this.z = Math.pow(1 - this.t, 3) * this.p1[2] + 3 * this.t * Math.pow(1 - this.t, 2) * this.p2[2] + 3 * Math.pow(this.t, 2) * (1 - this.t) * this.p3[2] + Math.pow(this.t, 3) * this.p4[2];
 
-            this.t += inc;
+            //this.t += inc;
 
            var dx = 3 * Math.pow((1 - this.t), 2) * (this.p2[0] - this.p1[0]) + 6 * (1 - this.t) * this.t * (this.p3[0] - this.p2[0]) + 3 * Math.pow(this.t, 2) * (this.p4[0] - this.p3[0]);
            var dy = 3 * Math.pow((1 - this.t), 2) * (this.p2[1] - this.p1[1]) + 6 * (1 - this.t) * this.t * (this.p3[1] - this.p2[1]) + 3 * Math.pow(this.t, 2) * (this.p4[1] - this.p3[1]);
@@ -76,9 +81,9 @@ class BezierAnimation extends Animation {
 
         mat4.translate(translated_mat,identiy_mat,[this.x,this.y,this.z]);
 
-        mat4.rotate(final_mat,translated_mat,angle,axis);
+       mat4.rotate(final_mat,translated_mat,angle,axis);
 
-        this.transformMatrix = final_mat;
+        this.transformMatrix = translated_mat;
 
         //mat4.rotate(this.transformMatrix,this.transformMatrix,this.rotIt,this.tangent);
         //mat4.rotate(this.transformMatrix,this.transformMatrix,angle,axis);
@@ -97,7 +102,7 @@ class BezierAnimation extends Animation {
         this.finished = false;
         this.rotIt = 0;
         //this.finalMatrix = this.transform
-        this.transformMatrix = [];
+       // this.transformMatrix = [];
         this.t= 0;
     }
 
@@ -107,6 +112,37 @@ class BezierAnimation extends Animation {
         return Math.acos(vec3.dot(vecA,vecB));
 
 
+    }
+
+    calcDistance(){
+        var l1 = vec3.fromValues(this.p1[0],this.p1[1],this.p1[2]);
+        var auxp2 = vec3.fromValues(this.p2[0],this.p2[1],this.p3[2]);
+        var auxp3 = vec3.fromValues(this.p3[0],this.p3[1],this.p3[2]);
+        var r4 = vec3.fromValues(this.p4[0],this.p4[1],this.p4[2]);
+        var divide_aux = vec3.fromValues(2,2,2);
+
+        var l2 = vec3.create();
+        vec3.add(l2,l1,auxp2);
+        vec3.divide(l2,l2,divide_aux);
+
+        var h = vec3.create();
+        vec3.add(h,auxp2,auxp3);
+        vec3.divide(h,h,divide_aux);
+
+        var l3 = vec3.create();
+        vec3.add(l3,l2,h);
+        vec3.divide(l3,l3,divide_aux);
+
+        var r3 = vec3.create();
+        vec3.add(r3,auxp3,r4);
+        vec3.divide(r3,r3,divide_aux);
+
+        var r2 = vec3.create();
+        vec3.add(r2,h,r3);
+        vec3.divide(r2,r2,divide_aux);
+
+        this.distance = vec3.distance(l1,l2)  + vec3.distance(l2,l3) + vec3.distance(l3,r2) + vec3.distance(r2,r3) + vec3.distance(r3,r4);
+        console.log("DISTANCIA", this.distance);
     }
 
     calcAxis(axis,vecA,vecB){

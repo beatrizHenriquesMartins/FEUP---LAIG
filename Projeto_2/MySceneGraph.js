@@ -25,7 +25,9 @@ function MySceneGraph(filename, scene) {
 
     this.idRoot = null; // The id of the root element.
 
-    this.selectables = [];
+    this.selectables = ["none"];
+    this.activeSelectable = 0;
+    this.animationsrefs = [];
 
     this.axisCoords = [];
     this.axisCoords['x'] = [1, 0, 0];
@@ -1145,12 +1147,14 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
 
         //Speed
         var speed = this.reader.getFloat(children[i], 'speed');
-        var animationType = this.reader.getItem(children[i], 'type', ['linear', 'circular', 'bezier', 'combo']);        
+        var animationType = this.reader.getItem(children[i], 'type', ['linear', 'circular', 'bezier', 'combo']);
+        console.log(speed);
+        console.log(animationType);        
         if (speed == null && animationType != 'combo')
             return "unable to parse speed value for animation with id: " + animationID;
-        else if (isNaN(speed))
+        else if (isNaN(speed) && animationType != 'combo')
             return "speed is a non numeric value";
-        else if (speed <= 0)
+        else if (speed <= 0 && animationType !='combo')
             return "speed must be a positive value";
 
         //Type
@@ -1345,13 +1349,13 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             var selectableNode = this.reader.getString(children[i],'selectable');
             if(selectableNode != null){
                 if(selectableNode == "true"){
-                    this.nodes[nodeID].selectable = true;
-                    this.selectables[nodeID] = [nodeID,true];
+                    //this.nodes[nodeID].selectable = true;
+                    this.selectables.push(nodeID);
                                         
                 }
                 else if(selectableNode == "false"){
                     this.nodes[nodeID].selectable = false;
-                    this.selectables[nodeID] = [nodeID,false];
+                    //this.selectables[nodeID] = [nodeID,false];
                     
                 }else 
                     this.onXMLMinorError("invalid boolean type in selectable,false predefined applied");
@@ -1490,9 +1494,14 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                     else if(this.animations[animationID] == null)
                         return "invalid Animation ID reference in node ID: " + nodeID;
                     else{
-                        var animationclone = this.animations[animationID].clone();
-                        animationclone.nodeMatrix = this.nodes[nodeID].transformMatrix;
-                        this.nodes[nodeID].nodeAnimations.push(animationclone);
+                        //var animationclone = this.animations[animationID].clone();
+                        
+                        var animationref = new AnimationRef(this.nodes[nodeID].transformMatrix,this.animations[animationID]);
+                        this.animationsrefs.push(animationref);
+                        this.nodes[nodeID].nodeAnimations.push(animationref);
+
+                       // animationclone.nodeMatrix = this.nodes[nodeID].transformMatrix;
+                        //this.nodes[nodeID].nodeAnimations.push(animationclone);
                     }
                         
                 }else 
@@ -1606,6 +1615,9 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
 
+  
+    if(this.activeSelectable >= 1)
+        this.nodes[this.selectables[this.activeSelectable]].selectable = true;
     this.processNode(this.idRoot, this.materials[this.nodes[this.idRoot].materialID], this.textures[this.nodes[this.idRoot].textureID],null);
     //console.log("Cenas de material",this.materials[this.nodes[this.idRoot].materialID]);
 
@@ -1647,29 +1659,50 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
     }
 
 
-    this.scene.multMatrix(currnode.transformMatrix);
+    //this.scene.multMatrix(currnode.transformMatrix);
     var nodeAnimations_aux = currnode.nodeAnimations;
     var indexAnimation_aux = currnode.currentAnimationIndex;
-    
-    if(nodeAnimations_aux.length != 0 && indexAnimation_aux == null)  
+  
+    if(nodeAnimations_aux.length != 0 && indexAnimation_aux == null)
     {
         currnode.currentAnimationIndex = 0;
-    }else if(nodeAnimations_aux.length != 0 && indexAnimation_aux != null){
+        currnode.nodeAnimations[0].enable = 1;
+    }else if(nodeAnimations_aux != 0 && indexAnimation_aux <= (currnode.nodeAnimations.length - 1)){
+        
+        if(currnode.nodeAnimations[indexAnimation_aux].enable == 1){
+            
+           // mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
+            this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].matrix);
+        }else{
+            mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
+            currnode.currentAnimationIndex++;
+            if(currnode.currentAnimationIndex <= (currnode.nodeAnimations.length - 1)){
+                currnode.nodeAnimations[currnode.currentAnimationIndex].enable = 1;
+            }
+        }
+        /*for(var i = 0; i < currnode.nodeAnimations.length;i++){
+            if(currnode.nodeAnimations[i].enable == 1){
+                mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[i].matrix);
+                break;
+            }
+        }*/
+   }
+   this.scene.multMatrix(currnode.transformMatrix);
+    
+
+  /*if(nodeAnimations_aux.length != 0 && indexAnimation_aux != null){
         if(currnode.nodeAnimations[indexAnimation_aux].isFinished()){
-            console.log("ENTROU ONDE DEVIA");
             //mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
-            currnode.transformMatrix = currnode.nodeAnimations[indexAnimation_aux].transformMatrix;
+           // currnode.transformMatrix = currnode.nodeAnimations[indexAnimation_aux].transformMatrix;
             currnode.nodeAnimations[currnode.currentAnimationIndex].reset();
             if(indexAnimation_aux < (nodeAnimations_aux.length-1))
                     currnode.currentAnimationIndex++;
-            else currnode.currentAnimationIndex = 0;
+            else currnode.currentAnimationIndex == null;
         }else{
             currnode.nodeAnimations[indexAnimation_aux].update(this.scene.deltaTime);
-            console.log("ITERACAO ENTROU");
-            console.log(currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
             this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
         }
-    }
+    }*/
 
 
 
@@ -1687,11 +1720,6 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
 
         this.scene.pushMatrix();
 
-
-        if (material != null) {
-            material.apply();
-
-        }
         if(isSelect == true){
             this.scene.setActiveShader(this.scene.Shaders[this.scene.Shader]);
 
@@ -1699,6 +1727,13 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
         {
             this.scene.setActiveShader(this.scene.defaultShader);
         }
+
+        if (material != null) {
+            material.apply();
+
+        }
+        
+       
 
         if (texture != null) {
 
@@ -1742,8 +1777,18 @@ MySceneGraph.prototype.getSelectables = function(){
     return returnSelectables;
 }
 
+MySceneGraph.prototype.clearSelectables = function(){
+    for(var i = 1; i < this.selectables.length;i++){
+        this.nodes[this.selectables[i]].selectable = null;
+    }
+}
 
-MySceneGraph.prototype.update = function(currTime){
-
+MySceneGraph.prototype.update = function(deltaTime){
+    for(var i = 0; i < this.animationsrefs.length;i++){
+        if(this.animationsrefs[i].enable == 1){
+            //console.log("CHAMA");
+            this.animationsrefs[i].update(deltaTime);
+        }
+    }
 }
 

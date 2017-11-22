@@ -876,7 +876,7 @@
     </NODE>
 
     <!-- train -->
-    <NODE id="train" selectable = "false">
+    <NODE id="train" selectable = "true">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="trainmetaltexture"/>
 
@@ -1629,9 +1629,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-       <ANIMATIONREFS>
-            <ANIMATIONREF id="teste"/>
-        </ANIMATIONREFS>
+       
       <DESCENDANTS>
         <NODEREF id="left-body"/>
         <NODEREF id="right-body"/>
