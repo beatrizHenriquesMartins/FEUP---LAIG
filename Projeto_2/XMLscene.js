@@ -44,7 +44,7 @@ XMLscene.prototype.init = function(application) {
     this.Shaders = [
         new CGFshader(this.gl,"Shaders/myShader.vert","Shaders/myShader.frag"),
         new CGFshader(this.gl,"Shaders/myShader2.vert","Shaders/myShader2.frag"),
-        new CGFshader(this.gl, "Shaders/varying.vert","Shaders/varying.frag"),
+        new CGFshader(this.gl, "Shaders/myShader3.vert","Shaders/myShader3.frag"),
         new CGFshader(this.gl, "Shaders/texture1.vert","Shaders/texture1.frag"),
 		new CGFshader(this.gl, "Shaders/texture2.vert","Shaders/texture2.frag"),
 		new CGFshader(this.gl, "Shaders/texture3.vert","Shaders/texture3.frag"),
