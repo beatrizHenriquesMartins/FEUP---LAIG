@@ -87,6 +87,7 @@ class LinearAnimation extends Animation {
             getTransformationMatrix(vec, this.angles[i-1]);
           }
         }
+        return true;
       }
     }
 
