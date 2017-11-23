@@ -283,6 +283,15 @@
       <ambient r="0.2" g="0.2" b="0.2" a="1" />
       <emission r="0" g="0" b="0" a="1" />
     </MATERIAL>
+
+    <!-- red ball -->
+    <MATERIAL id="redBall">
+      <shininess value="15"/>
+      <specular r="0.05" g="0.05" b="0.05" a="1"/>
+      <diffuse r="0.05" g="0.05" b="0.05" a="1" />
+      <ambient r="0.8509" g="0.0392" b="0.1764" a="1" />
+      <emission r="0.8509" g="0.0392" b="0.1764" a="1" />
+    </MATERIAL>
   </MATERIALS>
 
   <ANIMATIONS>
@@ -291,8 +300,10 @@
           <controlpoint xx="3.0" yy="2.0" zz="1.0"/>
           <controlpoint xx="2.0" yy="2.0" zz="3.0"/>
           <controlpoint xx="20.0" yy="0" zz="0.0"/>
-
       </ANIMATION>
+
+      <ANIMATION id="redBall_animation" speed="2.5" type="circular"
+              centerx="0" centery="0" centerz="0" radius="5" startang="30" rotang="360"/>
   </ANIMATIONS>
 
   <NODES>
@@ -322,6 +333,7 @@
         <NODEREF id="rightPillar"/>
         <NODEREF id="foodMachine_set"/>
         <NODEREF id="garbageStation_set"/>
+        <NODEREF id="ball"/>
       </DESCENDANTS>
     </NODE>
 
@@ -881,8 +893,8 @@
       <TEXTURE id="trainmetaltexture"/>
 
       <TRANSLATION x="18" y="-2.5" z="25.75"/>
-      
-       
+
+
 
       <DESCENDANTS>
         <NODEREF id="carriage_1"/>
@@ -1629,7 +1641,7 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
-       
+
       <DESCENDANTS>
         <NODEREF id="left-body"/>
         <NODEREF id="right-body"/>
@@ -2532,6 +2544,21 @@
 
       <DESCENDANTS>
         <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ball">
+      <MATERIAL id="redBall"/>
+      <TEXTURE id="null"/>
+
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="redBall_animation"/>
+      </ANIMATIONREFS>
+
+      <TRANSLATION x="16" y="3.25" z="7.5"/>
+
+      <DESCENDANTS>
+        <LEAF type="sphere" args="1 20 20"/>
       </DESCENDANTS>
     </NODE>
   </NODES>

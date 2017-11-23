@@ -44,9 +44,10 @@ class LinearAnimation extends Animation {
     }
 
     update(deltaTime){
+      // delta time = somatorio
       //x(t)=x0+v*t
       //y(t)=y0+v*t
-      
+
     }
 
     display(){
