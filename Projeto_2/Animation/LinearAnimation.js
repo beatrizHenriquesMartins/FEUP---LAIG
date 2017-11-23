@@ -22,6 +22,7 @@ class LinearAnimation extends Animation {
     calcPoints(){
 
       this.distance.push(0);
+      
       //calculo da distancia
       for(let i = 1; i < this.controlPoints.length ; i++){
         //calculos para construir um array de distancia de "control"
@@ -64,10 +65,6 @@ class LinearAnimation extends Animation {
     }
 
     update(deltaTime){
-      // delta time = somatorio
-      //x(t)=x0+v*t
-      //y(t)=y0+v*t
-
       var deltaAux = this.time;
 
       var distanceGone = this.time * this.velocity;
@@ -85,7 +82,7 @@ class LinearAnimation extends Animation {
         }
       }
     }
-    
+
     reset(){
         this.finished = false;
     }
