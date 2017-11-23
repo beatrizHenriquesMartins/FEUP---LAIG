@@ -19,9 +19,9 @@ class LinearAnimation extends Animation {
         this.over = false;
     }
 
-    calcPoints(){
-
+    calcPoints(deltaTime){
       this.distance.push(0);
+
       //calculo da distancia
       for(let i = 1; i < this.controlPoints.length ; i++){
         //calculos para construir um array de distancia de "control"
@@ -49,6 +49,10 @@ class LinearAnimation extends Animation {
       }
 
       this.time = this.distance[this.distance.length - 1] / this.velocity;
+
+      if (deltaTime > this.time) {
+        return true;
+      }
     }
 
     getTransformationMatrix(vec, angle){
@@ -64,28 +68,29 @@ class LinearAnimation extends Animation {
     }
 
     update(deltaTime){
-      // delta time = somatorio
-      //x(t)=x0+v*t
-      //y(t)=y0+v*t
 
-      var deltaAux = this.time;
+      if (this.calcPoints(deltaTime)) {
+        return true;
+      } else {
+        var deltaAux = this.time;
+        var distanceGone = this.time * this.velocity;
 
-      var distanceGone = this.time * this.velocity;
+        for(let i = 1; i<this.distance.length; i++){
+          if(this.distance[i] >= distanceGone){
+            var cp1 = this.controlPoints[i-1];
+            var cp2 = this.controlPoints[i];
+            var vec = vec3.fromValues(cp2[0]-cp1[0],cp2[1]-cp1[1],cp2[2]-cp1[2]);
 
-      for(let i = 1; i<this.distance.length; i++){
-        if(this.distance[i] >= distanceGone){
-          var cp1 = this.controlPoints[i-1];
-          var cp2 = this.controlPoints[i];
-          var vec = vec3.fromValues(cp2[0]-cp1[0],cp2[1]-cp1[1],cp2[2]-cp1[2]);
+            var distanceRatio = (this.distance[i] - distanceGone)/(this.distance[i] - this.distance[i-1]);
 
-          var distanceRatio = (this.distance[i] - distanceGone)/(this.distance[i] - this.distance[i-1]);
-
-          vec3.scale(vec, vec, distanceRatio);
-          getTransformationMatrix(vec, this.angles[i-1]);
+            vec3.scale(vec, vec, distanceRatio);
+            getTransformationMatrix(vec, this.angles[i-1]);
+          }
         }
+        return true;
       }
     }
-    
+
     reset(){
         this.finished = false;
     }
