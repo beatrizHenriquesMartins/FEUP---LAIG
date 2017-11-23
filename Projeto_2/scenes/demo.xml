@@ -172,7 +172,39 @@
 
       <ANIMATION id="teste4" speed="1" type="circular" centerx="5" centery="5" centerz="5" radius="1" startang="0" rotang="-360"/>
         
+      <ANIMATION id="linearteste" speed="1" type="linear">
+        <controlpoint xx="0.0" yy="0" zz="0"/>
+        <controlpoint xx="5.0" yy="0" zz="0"/>
+        <controlpoint xx="5.0" yy="0" zz="5.0"/>
+        <controlpoint xx="0.0" yy="0" zz="5.0"/>
+      </ANIMATION>
 
+      <ANIMATION id="candrop1" speed="5" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0"/>
+        <controlpoint xx="2" yy="1" zz="0"/>
+        <controlpoint xx="4" yy="1" zz="0"/>
+        <controlpoint xx="5" yy="-1.8" zz="0"/>
+
+      </ANIMATION>
+
+
+      <ANIMATION id="candrop2" speed="5" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0"/>
+        <controlpoint xx="0" yy="0" zz="2"/>
+        <controlpoint xx="0" yy="1" zz="2"/>
+        <controlpoint xx="0" yy="0" zz="3"/>
+
+      </ANIMATION>
+
+       <ANIMATION id="candrop3" speed="5" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0"/>
+        <controlpoint xx="0" yy="0" zz="2"/>
+        <controlpoint xx="0" yy="1" zz="2"/>
+        <controlpoint xx="0" yy="0" zz="3"/>
+
+      </ANIMATION>
+
+      <ANIMATION id="candrop4" speed="0.05" type="circular" centerx="0" centery="0" centerz="0" radius="0.1" startang="0" rotang="45"/>
   </ANIMATIONS>
 <!-- End of the second project's ANIMATIONS block. -->
 
@@ -189,12 +221,34 @@
 
         <DESCENDANTS>
 
-            <NODEREF id="luzes" />    
+          <!--  <NODEREF id="luzes" />    
             <NODEREF id="piramide" /> 
-            <NODEREF id="arvores" />   
+            <NODEREF id="arvores" /> -->   
             <NODEREF id="chao" />
-            <NODEREF id="bancos" />
+            <NODEREF id="machine_can"/>
+           <!-- <NODEREF id="bancos" /> -->
         </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="machine_can">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null"/>
+
+        
+        <TRANSLATION x="2" y="2" z="2"/>
+        
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="candrop1"/>
+            <ANIMATIONREF id="candrop2"/>
+            <ANIMATIONREF id="candrop3"/>
+            <ANIMATIONREF id="candrop4"/>
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <LEAF type="cylinder" args="1.5 0.5 0.5 20 20 1 1"/>  
+
+        </DESCENDANTS>
+
 
     </NODE>
 
@@ -396,11 +450,11 @@
 
         <TRANSLATION x="-2" y="0" z="5" />
 
-         <ANIMATIONREFS>
+        <!-- <ANIMATIONREFS>
             <ANIMATIONREF id="teste4" />
            <ANIMATIONREF id="teste" />
 
-        </ANIMATIONREFS>
+        </ANIMATIONREFS> -->
 
         <DESCENDANTS>
             <NODEREF id="arvore" />     	    
@@ -416,9 +470,9 @@
         <TRANSLATION x="22" y="0" z="5" />
 
         <ANIMATIONREFS>
-            <ANIMATIONREF id="teste2" />
+            <ANIMATIONREF id="linearteste" />
             
-        </ANIMATIONREFS>
+        </ANIMATIONREFS> 
         <DESCENDANTS>
             <NODEREF id="arvore" />     	    
         </DESCENDANTS>
