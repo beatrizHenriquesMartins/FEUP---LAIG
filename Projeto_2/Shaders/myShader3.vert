@@ -1,5 +1,5 @@
 #ifdef GL_ES
-precision mediump float;
+precision highp float;
 #endif
 
 attribute vec3 aVertexPosition;
@@ -9,17 +9,16 @@ attribute vec2 aTextureCoord;
 uniform mat4 uPMatrix;
 uniform mat4 uMVMatrix;
 uniform mat4 uNMatrix;
+uniform float amplitude;
 uniform float displacement;
 varying vec2 vTextureCoord;
 varying vec3 vNormal;
-uniform float time;
-uniform vec2 mouse;
-uniform vec2 resolution;
+
 
 void main(){
     
     vNormal = aVertexNormal;
-    vec3 newPosition = aVertexPosition +  vec3(displacement*0.1);
+    vec3 newPosition = aVertexPosition + aVertexNormal * vec3(displacement*amplitude);
 
     gl_Position = uPMatrix*uMVMatrix*vec4(newPosition,1.0);
 }

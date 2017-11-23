@@ -98,7 +98,7 @@ XMLscene.prototype.updateScaleFactor = function(v){
 
     this.Shaders[0].setUniformsValues({displacement: this.scaleFactor});
     this.Shaders[1].setUniformsValues({displacement:this.scaleFactor});
-	this.Shaders[2].setUniformsValues({normScale: this.scaleFactor});
+	this.Shaders[2].setUniformsValues({displacement: this.scaleFactor});
 	this.Shaders[5].setUniformsValues({normScale: this.scaleFactor});
 
 }
@@ -156,6 +156,8 @@ XMLscene.prototype.update = function(currTime) {
     this.Shaders[0].setUniformsValues({amplitude: (1+Math.sin(this.frame))/2})
     
     this.Shaders[1].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
+    
+    this.Shaders[2].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
     this.frame+=this.deltaTime/1000;
     this.graph.update(this.deltaTime);
     

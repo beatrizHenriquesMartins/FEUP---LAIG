@@ -48,7 +48,7 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
     group.add(this.scene,'Shader', {
         'My Shader':0,
         'My Shader 2': 1,
-        'Passing a varying paramenter from VS -> FS': 2,
+        'My Shader 3': 2,
         'Simple texturing': 3,
         'Multiple textures in the FS': 4,
         'Multiple textures in VS and FS': 5,

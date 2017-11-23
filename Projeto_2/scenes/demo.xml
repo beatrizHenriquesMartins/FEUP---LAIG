@@ -416,7 +416,7 @@
         <TRANSLATION x="22" y="0" z="5" />
 
         <ANIMATIONREFS>
-            <ANIMATIONREF id="teste" />
+            <ANIMATIONREF id="teste2" />
             
         </ANIMATIONREFS>
         <DESCENDANTS>

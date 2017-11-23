@@ -62,22 +62,22 @@ class BezierAnimation extends Animation {
         let translated_mat = [];
         let final_mat = [];
 
-        var orient = vec3.fromValues(0,0,1);
+     /*   var orient = vec3.fromValues(0,0,1);
         var axis = vec3.create();
         var angle = this.calcAngle(orient,this.tangent);
        if(angle == Math.PI){
             axis = vec3.fromValues(0,0,1);
         }else{
             this.calcAxis(axis,orient,this.tangent);
-        }
+        }*/
 
         
 
         mat4.translate(translated_mat,identiy_mat,[this.x,this.y,this.z]);
 
-        console.log("AXIS TO ROTATE", axis);
 
-       mat4.rotate(final_mat,translated_mat,angle,axis);
+
+       mat4.rotateY(final_mat,translated_mat,Math.atan2(this.x,this.z));
 
         this.transformMatrix = final_mat;
 
