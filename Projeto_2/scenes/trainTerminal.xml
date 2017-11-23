@@ -300,8 +300,10 @@
           <controlpoint xx="3.0" yy="2.0" zz="1.0"/>
           <controlpoint xx="2.0" yy="2.0" zz="3.0"/>
           <controlpoint xx="20.0" yy="0" zz="0.0"/>
-
       </ANIMATION>
+
+      <ANIMATION id="redBall_animation" speed="2.5" type="circular"
+              centerx="0" centery="0" centerz="0" radius="5" startang="30" rotang="360"/>
   </ANIMATIONS>
 
   <NODES>
@@ -2548,6 +2550,10 @@
     <NODE id="ball">
       <MATERIAL id="redBall"/>
       <TEXTURE id="null"/>
+
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="redBall_animation"/>
+      </ANIMATIONREFS>
 
       <TRANSLATION x="16" y="3.25" z="7.5"/>
 
