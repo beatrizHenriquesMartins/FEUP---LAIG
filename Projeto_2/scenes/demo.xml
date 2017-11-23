@@ -159,9 +159,9 @@
       </ANIMATION>
        <ANIMATION id="teste2" speed="5" type="bezier">
           <controlpoint xx="0.0" yy="0.0" zz="0.0"/>
-          <controlpoint xx="5.0" yy="3.0" zz="1.0"/>
-          <controlpoint xx="5.0" yy="0.0" zz="3.0"/>
-          <controlpoint xx="20.0" yy="0" zz="0.0"/>
+          <controlpoint xx="0.0" yy="2.0" zz="0.0"/>
+          <controlpoint xx="0.0" yy="0.0" zz="3.0"/>
+          <controlpoint xx="10.0" yy="0" zz="0.0"/>
 
       </ANIMATION>
 
@@ -170,7 +170,7 @@
             <SPANREF id="teste"/>
       </ANIMATION>
 
-      <ANIMATION id="teste4" speed="1" type="circular" centerx="5" centery="5" centerz="5" radius="1" startang="0" rotang="360"/>
+      <ANIMATION id="teste4" speed="1" type="circular" centerx="5" centery="5" centerz="5" radius="1" startang="0" rotang="-360"/>
         
 
   </ANIMATIONS>
@@ -416,7 +416,7 @@
         <TRANSLATION x="22" y="0" z="5" />
 
         <ANIMATIONREFS>
-            <ANIMATIONREF id="testecombo" />
+            <ANIMATIONREF id="teste" />
             
         </ANIMATIONREFS>
         <DESCENDANTS>
