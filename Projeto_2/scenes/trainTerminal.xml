@@ -302,8 +302,15 @@
           <controlpoint xx="20.0" yy="0" zz="0.0"/>
       </ANIMATION>
 
-      <ANIMATION id="redBall_animation" speed="2.5" type="circular"
+      <ANIMATION id="redBall_animation" speed="0.5" type="circular"
               centerx="0" centery="0" centerz="0" radius="5" startang="30" rotang="360"/>
+
+      <ANIMATION id="trainMovement" speed="2.5" type="linear">
+        <controlpoint xx="0.0" yy="0.0" zz="0.0"/>
+        <controlpoint xx="1.0" yy="0.0" zz="0.0"/>
+        <controlpoint xx="1.0" yy="0.0" zz="1.0"/>
+        <controlpoint xx="1.0" yy="1.0" zz="1.0"/>
+     </ANIMATION>
   </ANIMATIONS>
 
   <NODES>
@@ -315,10 +322,13 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
+<!--
         <NODEREF id="railsFloor"/>
         <NODEREF id="sides"/>
         <NODEREF id="walls"/>
+-->
         <NODEREF id="train"/>
+<!--
         <NODEREF id="rails"/>
         <NODEREF id="stationDoors"/>
         <NODEREF id="wood-seat-left1"/>
@@ -334,6 +344,7 @@
         <NODEREF id="foodMachine_set"/>
         <NODEREF id="garbageStation_set"/>
         <NODEREF id="ball"/>
+-->
       </DESCENDANTS>
     </NODE>
 
@@ -892,9 +903,10 @@
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="trainmetaltexture"/>
 
+      <ANIMATIONREF>
+        <ANIMATIONREF id="trainMovement"/>
+      </ANIMATIONREF>
       <TRANSLATION x="18" y="-2.5" z="25.75"/>
-
-
 
       <DESCENDANTS>
         <NODEREF id="carriage_1"/>

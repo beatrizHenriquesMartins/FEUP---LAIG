@@ -3,7 +3,7 @@ class LinearAnimation extends Animation {
         super(scene,id, velocity);
         this.controlPoints = controlPoints;
 
-        if(controlPoints == NULL){
+        if(controlPoints == null){
           throw new Error("Sem pontos de controlo!");
         }
 
@@ -12,11 +12,16 @@ class LinearAnimation extends Animation {
         this.zAxis = [0,0,1];
         this.angles = [];
 
+        this.nodeMatrix = mat4.create();
+        this.transformMatrix = mat4.create();
+
         // para terminar a animacao
         this.over = false;
     }
 
     calcPoints(){
+
+      this.distance.push(0);
       //calculo da distancia
       for(let i = 1; i < this.controlPoints.length ; i++){
         //calculos para construir um array de distancia de "control"
@@ -34,6 +39,7 @@ class LinearAnimation extends Animation {
         var p2 = vec3.fromValues(this.controlPoints[i][0], this.controlPoints[i][1],
           this.controlPoints[i][2]);
 
+        //para a vec3, só é capaz
         p1[1] = 0;
         p2[1] = 0;
 
@@ -41,6 +47,20 @@ class LinearAnimation extends Animation {
 
         this.angles.push(angle);
       }
+
+      this.time = this.distance[this.distance.length - 1] / this.velocity;
+    }
+
+    getTransformationMatrix(vec, angle){
+      let identiy_mat = mat4.create();
+      let translated_mat = [];
+      let final_mat = [];
+
+      mat4.translate(translated_mat,identiy_mat,[vec[0],vec[1],vec[2]]);
+
+      mat4.rotate(final_mat,translated_mat,angle,axis);
+
+      this.transformMatrix = translated_mat;
     }
 
     update(deltaTime){
@@ -48,12 +68,24 @@ class LinearAnimation extends Animation {
       //x(t)=x0+v*t
       //y(t)=y0+v*t
 
+      var deltaAux = this.time;
+
+      var distanceGone = this.time * this.velocity;
+
+      for(let i = 1; i<this.distance.length; i++){
+        if(this.distance[i] >= distanceGone){
+          var cp1 = this.controlPoints[i-1];
+          var cp2 = this.controlPoints[i];
+          var vec = vec3.fromValues(cp2[0]-cp1[0],cp2[1]-cp1[1],cp2[2]-cp1[2]);
+
+          var distanceRatio = (this.distance[i] - distanceGone)/(this.distance[i] - this.distance[i-1]);
+
+          vec3.scale(vec, vec, distanceRatio);
+          getTransformationMatrix(vec, this.angles[i-1]);
+        }
+      }
     }
-
-    display(){
-
-    }
-
+    
     reset(){
         this.finished = false;
     }
