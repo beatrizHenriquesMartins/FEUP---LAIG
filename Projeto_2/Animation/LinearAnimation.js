@@ -1,5 +1,6 @@
 class LinearAnimation extends Animation {
     constructor(scene, id, velocity, controlPoints) {
+      console.log('AQUI');
         super(scene,id, velocity);
         this.controlPoints = controlPoints;
 
@@ -20,6 +21,8 @@ class LinearAnimation extends Animation {
     }
 
     calcPoints(deltaTime){
+      console.log('AQUI 2 !!!');
+      console.log('calcPoints - lin');
       this.distance.push(0);
 
       //calculo da distancia
@@ -43,7 +46,10 @@ class LinearAnimation extends Animation {
         p1[1] = 0;
         p2[1] = 0;
 
-        var angle = vec3.angle(p1,p2);
+        console.log('ANTES DO ANGLE ESTUPIDO');
+        //var angle = vec3.angle(p1,p2);
+        var angle = this.calcAngle(p1, p2);
+        console.log('angle = ',angle);
 
         this.angles.push(angle);
       }
@@ -69,26 +75,25 @@ class LinearAnimation extends Animation {
 
     update(deltaTime){
 
-      if (this.calcPoints(deltaTime)) {
-        return true;
-      } else {
-        var deltaAux = this.time;
-        var distanceGone = this.time * this.velocity;
+      var deltaAux = this.time;
+      var distanceGone = this.time * this.velocity;
 
-        for(let i = 1; i<this.distance.length; i++){
-          if(this.distance[i] >= distanceGone){
-            var cp1 = this.controlPoints[i-1];
-            var cp2 = this.controlPoints[i];
-            var vec = vec3.fromValues(cp2[0]-cp1[0],cp2[1]-cp1[1],cp2[2]-cp1[2]);
+      this.calcPoints(deltaTime);
+      var i = 1;
+      //for(let i = 1; i<this.distance.length; i++){
+        if(this.distance[i] >= distanceGone){
+          var cp1 = this.controlPoints[i-1];
+          var cp2 = this.controlPoints[i];
+          var vec = vec3.fromValues(cp2[0]-cp1[0],cp2[1]-cp1[1],cp2[2]-cp1[2]);
 
-            var distanceRatio = (this.distance[i] - distanceGone)/(this.distance[i] - this.distance[i-1]);
+          var distanceRatio = (this.distance[i] - distanceGone)/(this.distance[i] - this.distance[i-1]);
 
-            vec3.scale(vec, vec, distanceRatio);
-            getTransformationMatrix(vec, this.angles[i-1]);
-          }
+          vec3.scale(vec, vec, distanceRatio);
+          getTransformationMatrix(vec, this.angles[i-1]);
         }
-        return true;
-      }
+        this.distance.shift();
+      //}
+      //return true;
     }
 
     reset(){
@@ -97,5 +102,11 @@ class LinearAnimation extends Animation {
 
     clone(){
       return new LinearAnimation(this.scene, this.id, this.velocity, this.controlPoints);
+    }
+
+    calcAngle(vecA,vecB){
+        vec3.normalize(vecA,vecA);
+        vec3.normalize(vecB,vecB);
+        return Math.acos(vec3.dot(vecA,vecB));
     }
 }
