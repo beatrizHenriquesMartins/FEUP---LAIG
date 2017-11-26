@@ -14,8 +14,7 @@ AnimationRef.prototype.update = function(deltaTime){
     if(this.Animation.update(this.initialTime)){
         
         this.matrix = this.Animation.transformMatrix;
-        //console.log("MATRIX",this.matrix);
-        console.log("MATRIZ DA ANIMATIONREF", this.matrix);
+        //console.log("MATRIX",this.matrix)
         this.initialTime += (deltaTime/1000);
     }else {
         this.enable = 0;

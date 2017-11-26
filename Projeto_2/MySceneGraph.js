@@ -1684,11 +1684,11 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
         if(currnode.nodeAnimations[indexAnimation_aux].enable == 1){
             
            // mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
-           console.log("MATRIX QUE RECEBE",currnode.nodeAnimations[indexAnimation_aux].matrix);
+         
            // this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].matrix);
            currnode.animationMatrix = currnode.nodeAnimations[indexAnimation_aux].matrix;
         }else{
-            console.log("MATRIZ QUE MULTIPLICA",currnode.nodeAnimations[indexAnimation_aux].matrix);
+          
             
            // mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
             currnode.currentAnimationIndex++;
