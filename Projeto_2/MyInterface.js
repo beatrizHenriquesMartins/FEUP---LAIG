@@ -48,24 +48,8 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
     group.add(this.scene,'Shader', {
         'My Shader':0,
         'My Shader 2': 1,
-        'My Shader 3': 2,
-        'Simple texturing': 3,
-        'Multiple textures in the FS': 4,
-        'Multiple textures in VS and FS': 5,
-        'Sepia': 6,
-        'Convolution': 7
+        'My Shader 3': 2
     }).name('Shaders list');
-
-    /*this.gui.add(this.scene,"selectables",selectables).onChange(v){
-        for(key in selectables){
-            if(selectables.hasOwnProperty(key)){
-                this.scene.selectablesValues[key] = true;
-
-            }
-        }
-    }*/
-
-   
 
     obj = this;
     group.add(this.scene,'Node',selectables).onChange(function(v){
@@ -79,13 +63,7 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
         } 
     });
 
-   /* for(var key in selectables){
-        if(selectables.hasOwnProperty(key)){
-            this.scene.selectablesValues[key] = selectables[key][1];
-            group.add(this.scene.selectablesValues,key) ;
-        }
-    }*/
-    
+    group.addColor(this.scene,'selectionColor').name('Selection Color:');
     group.add(this.scene,'scaleFactor',-25,25).onChange(function(v){
         obj.scene.updateScaleFactor(v);
     });

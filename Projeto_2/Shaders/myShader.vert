@@ -14,6 +14,7 @@ uniform float displacement;
 varying vec3 vNormal;
 
 
+
 void main(){
     
     vNormal = aVertexNormal;

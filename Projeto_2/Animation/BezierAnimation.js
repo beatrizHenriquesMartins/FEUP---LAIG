@@ -22,8 +22,7 @@ class BezierAnimation extends Animation {
     calcPoints(deltaTime) {
        
        this.t = (deltaTime)/this.time;
-        
-        //console.log("INCREMENTO" + this.t);
+ 
 
         if (this.t > 1) {
             return true;
@@ -47,29 +46,12 @@ class BezierAnimation extends Animation {
     }
 
     getTransformationMatrix(){
-        /*mat4.identity(this.transformMatrix);
-       mat4.translate(this.transformMatrix,this.transformMatrix,[this.x,this.y,this.z]);
-        var orient = vec3.fromValues(0,0,1);
-        var axis = vec3.create();
-        var angle = this.calcAngle(orient,this.tangent);
-        if(angle == Math.PI){
-            axis = vec3.fromValues(0,-1,0);
-        }else{
-            this.calcAxis(axis,orient,this.tangent);
-        }*/
-
+    
         let identiy_mat = mat4.create();
         let translated_mat = [];
         let final_mat = [];
 
-     /*   var orient = vec3.fromValues(0,0,1);
-        var axis = vec3.create();
-        var angle = this.calcAngle(orient,this.tangent);
-       if(angle == Math.PI){
-            axis = vec3.fromValues(0,0,1);
-        }else{
-            this.calcAxis(axis,orient,this.tangent);
-        }*/
+    
 
         
 
@@ -81,8 +63,7 @@ class BezierAnimation extends Animation {
 
         this.transformMatrix = final_mat;
 
-        //mat4.rotate(this.transformMatrix,this.transformMatrix,this.rotIt,this.tangent);
-        //mat4.rotate(this.transformMatrix,this.transformMatrix,angle,axis);
+      
 
 
     }
@@ -94,13 +75,12 @@ class BezierAnimation extends Animation {
         return true;
     }
 
+    //deprecated
     reset(){
 
-        console.log("FEZ RESET");
         this.finished = false;
         this.rotIt = 0;
-        //this.finalMatrix = this.transform
-       // this.transformMatrix = [];
+ 
         this.t= 0;
     }
 
@@ -149,7 +129,7 @@ class BezierAnimation extends Animation {
     }
 
   
-
+    //deprecated
     clone(){
         return new BezierAnimation(this.scene,this.id,this.velocity,this.bezierPoints);
     }

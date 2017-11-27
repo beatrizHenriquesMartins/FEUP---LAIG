@@ -6,7 +6,6 @@ class CircularAnimation extends Animation {
         this.rotation_angle = rotation_angle*Math.PI/180;
         this.deltaAngle;
         this.center = center;
-        //this.angularspeed = this.velocity/this.radius;
         this.transformMatrix = mat4.create();
         console.log("ROTATION ANGLE",this.rotation_angle);
         this.time = Math.abs((this.rotation_angle*this.radius)/this.velocity);
@@ -14,7 +13,6 @@ class CircularAnimation extends Animation {
 
     calcPoints(deltaTime){
 
-      console.log("DELTA TIME E TIME TOTAL",deltaTime,this.time);
       if(deltaTime > this.time)
       {
         return true;
@@ -34,11 +32,9 @@ class CircularAnimation extends Animation {
       mat4.translate(translated_mat,identity_mat,this.center);
       mat4.rotateY(translated_mat,translated_mat,this.deltaAngle);
       mat4.translate(translated_mat,translated_mat,[this.radius,0,0]);
-      
-   
+    
 
       this.transformMatrix = translated_mat;
-      console.log("MATRIZ DA CIRCULAR",this.transformMatrix);
 
     }
 
@@ -49,6 +45,7 @@ class CircularAnimation extends Animation {
       return true;
     }
 
+    //deprecated
     reset(){
       this.finished = false;
       this.deltaAngle = 0;

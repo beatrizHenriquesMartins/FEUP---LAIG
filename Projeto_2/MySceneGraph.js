@@ -1629,7 +1629,7 @@ MySceneGraph.prototype.displayScene = function () {
     if(this.activeSelectable >= 1)
         this.nodes[this.selectables[this.activeSelectable]].selectable = true;
     this.processNode(this.idRoot, this.materials[this.nodes[this.idRoot].materialID], this.textures[this.nodes[this.idRoot].textureID],null);
-    //console.log("Cenas de material",this.materials[this.nodes[this.idRoot].materialID]);
+    
 
 }
 
@@ -1668,8 +1668,8 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
         isSelect = currnode.selectable;
     }
 
+    
 
-    //this.scene.multMatrix(currnode.transformMatrix);
     var nodeAnimations_aux = currnode.nodeAnimations;
     var indexAnimation_aux = currnode.currentAnimationIndex;
     
@@ -1683,14 +1683,12 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
         
         if(currnode.nodeAnimations[indexAnimation_aux].enable == 1){
             
-           // mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
          
-           // this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].matrix);
            currnode.animationMatrix = currnode.nodeAnimations[indexAnimation_aux].matrix;
         }else{
           
             
-           // mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].matrix);
+   
             currnode.currentAnimationIndex++;
             if(currnode.currentAnimationIndex <= (currnode.nodeAnimations.length - 1)){
                 currnode.nodeAnimations[currnode.currentAnimationIndex].enable = 1;
@@ -1698,12 +1696,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
             }
            
         }
-        /*for(var i = 0; i < currnode.nodeAnimations.length;i++){
-            if(currnode.nodeAnimations[i].enable == 1){
-                mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[i].matrix);
-                break;
-            }
-        }*/
+     
    }
 
    if(flag_needtochange == 0){
@@ -1721,19 +1714,7 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
    
     
 
-  /*if(nodeAnimations_aux.length != 0 && indexAnimation_aux != null){
-        if(currnode.nodeAnimations[indexAnimation_aux].isFinished()){
-            //mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
-           // currnode.transformMatrix = currnode.nodeAnimations[indexAnimation_aux].transformMatrix;
-            currnode.nodeAnimations[currnode.currentAnimationIndex].reset();
-            if(indexAnimation_aux < (nodeAnimations_aux.length-1))
-                    currnode.currentAnimationIndex++;
-            else currnode.currentAnimationIndex == null;
-        }else{
-            currnode.nodeAnimations[indexAnimation_aux].update(this.scene.deltaTime);
-            this.scene.multMatrix(currnode.nodeAnimations[indexAnimation_aux].transformMatrix);
-        }
-    }*/
+
 
 
 

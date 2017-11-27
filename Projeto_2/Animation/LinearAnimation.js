@@ -18,6 +18,7 @@ class LinearAnimation extends Animation {
         this.animations = [];
         this.vec ;
         this.identiy_mat = mat4.create();
+        this.auxmatrix;
         // para terminar a animacao
         this.over = false;
         this.calcDistance();
@@ -43,22 +44,7 @@ class LinearAnimation extends Animation {
               distanceTotal += ant_distance;
               this.distance.push(distanceTotal);
               ant_distance = distanceTotal;
-              //determinação da orientação do obj
-              var p1 = vec3.fromValues(this.controlPoints[i-1][0], this.controlPoints[i-1][1],
-                this.controlPoints[i-1][2]);
-              var p2 = vec3.fromValues(this.controlPoints[i][0], this.controlPoints[i][1],
-                this.controlPoints[i][2]);
-      
-              //para a vec3, só é capaz
-              p1[1] = 0;
-              p2[1] = 0;
-      
-              console.log('ANTES DO ANGLE ESTUPIDO');
-              //var angle = vec3.angle(p1,p2);
-              var angle = this.calcAngle(p1, p2);
-              console.log('angle = ',angle);
-      
-              this.angles.push(angle);
+             
             }
     }
 
@@ -73,7 +59,6 @@ class LinearAnimation extends Animation {
     calcPoints(deltaTime){
    
       if (deltaTime > this.time) {
-        console.log("ENTROU");
         return true;
       }
    
@@ -81,7 +66,7 @@ class LinearAnimation extends Animation {
       {
         this.animations.shift();
         this.times.shift();
-        this.identiy_mat = this.transformMatrix;
+        this.identiy_mat = this.auxmatrix;
       }
       var animation_time = deltaTime - this.times[0];
       var animation_distance = animation_time*this.velocity;
@@ -89,11 +74,12 @@ class LinearAnimation extends Animation {
       var p2 = this.animations[0]['p2'];
       this.vec = vec3.fromValues(p2[0]-p1[0],p2[1]-p1[1],p2[2]-p1[2]);
       vec3.normalize(this.vec,this.vec);
-      let aux =Object.values(this.vec);
+      var orient = vec3.fromValues(1,0,0);
+      this.angles = this.calcAngle(orient,this.vec);
       this.vec[0] = this.vec[0]*animation_distance;
       this.vec[1] = this.vec[1]*animation_distance;
       this.vec[2] = this.vec[2]*animation_distance;
-      console.log("AUX",this.vec);
+    
       return false;
        
     }
@@ -112,12 +98,12 @@ class LinearAnimation extends Animation {
       
       let translated_mat = [];
       let final_mat = [];
-      console.log("OLA",this.vec);
       mat4.translate(translated_mat,this.identiy_mat,[this.vec[0],this.vec[1],this.vec[2]]);
 
-      //mat4.rotate(final_mat,translated_mat,angle,axis);
+       mat4.rotateY(final_mat,translated_mat,this.angles);
 
-      this.transformMatrix = translated_mat;
+      this.transformMatrix = final_mat;
+      this.auxmatrix = translated_mat;
     }
 
     update(deltaTime){

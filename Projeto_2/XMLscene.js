@@ -18,6 +18,7 @@ function XMLscene(interface) {
 
     this.selectablesValues = {};
     this.scaleFactor =1.0;
+    this.selectionColor = [0, 128, 255, 1];
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -44,16 +45,10 @@ XMLscene.prototype.init = function(application) {
     this.Shaders = [
         new CGFshader(this.gl,"Shaders/myShader.vert","Shaders/myShader.frag"),
         new CGFshader(this.gl,"Shaders/myShader2.vert","Shaders/myShader2.frag"),
-        new CGFshader(this.gl, "Shaders/myShader3.vert","Shaders/myShader3.frag"),
-        new CGFshader(this.gl, "Shaders/texture1.vert","Shaders/texture1.frag"),
-		new CGFshader(this.gl, "Shaders/texture2.vert","Shaders/texture2.frag"),
-		new CGFshader(this.gl, "Shaders/texture3.vert","Shaders/texture3.frag"),
-		new CGFshader(this.gl, "Shaders/texture3.vert","Shaders/sepia.frag"),
-		new CGFshader(this.gl, "Shaders/texture3.vert","Shaders/convolution.frag")
+        new CGFshader(this.gl, "Shaders/myShader3.vert","Shaders/myShader3.frag")
     ]
 
-    this.Shaders[4].setUniformsValues({uSampler2: 1});
-    this.Shaders[5].setUniformsValues({uSampler2: 1});
+
 
     this.updateScaleFactor();
 
@@ -99,7 +94,6 @@ XMLscene.prototype.updateScaleFactor = function(v){
     this.Shaders[0].setUniformsValues({displacement: this.scaleFactor});
     this.Shaders[1].setUniformsValues({displacement:this.scaleFactor});
 	this.Shaders[2].setUniformsValues({displacement: this.scaleFactor});
-	this.Shaders[5].setUniformsValues({normScale: this.scaleFactor});
 
 }
 
@@ -186,7 +180,10 @@ XMLscene.prototype.display = function() {
     this.pushMatrix();
 
 
-
+    this.Shaders[0].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
+    this.Shaders[1].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
+    this.Shaders[2].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
+    
     if (this.graph.loadedOk)
     {
         // Applies initial transformations.

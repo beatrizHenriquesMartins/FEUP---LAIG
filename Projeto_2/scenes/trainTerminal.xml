@@ -295,22 +295,61 @@
   </MATERIALS>
 
   <ANIMATIONS>
-      <ANIMATION id="teste" speed="0.5" type="bezier">
-          <controlpoint xx="0.0" yy="0.0" zz="0.0"/>
-          <controlpoint xx="3.0" yy="2.0" zz="1.0"/>
-          <controlpoint xx="2.0" yy="2.0" zz="3.0"/>
-          <controlpoint xx="20.0" yy="0" zz="0.0"/>
-      </ANIMATION>
+     
 
-      <ANIMATION id="redBall_animation" speed="0.5" type="circular"
-              centerx="0" centery="0" centerz="0" radius="5" startang="30" rotang="360"/>
+      
 
       <ANIMATION id="trainMovement" speed="10" type="linear">
-        <controlpoint xx="0.0"  yy="0.0" zz="0.0"/>
-        <controlpoint xx="5.0"  yy="0.0" zz="0.0"/>
-        <controlpoint xx="25.0" yy="0.0" zz="0.0"/>
-        <controlpoint xx="45.0" yy="0.0" zz="0.0"/>
+         <controlpoint xx="0.0"  yy="0.0" zz="0.0"/>
+          <controlpoint xx="50.0"  yy="0.0" zz="0.0"/>
+        <controlpoint xx="50.0" yy="0.0" zz="-30.0"/>
+        <controlpoint xx="-50" yy="0.0" zz="-30.0"/>
+        <controlpoint xx="-50.0" yy="0.0" zz="0"/>
+        <controlpoint xx="0.0" yy="0.0" zz="0"/>
      </ANIMATION>
+      <ANIMATION id="redBall_animation" speed="5" type="circular"
+              centerx="0" centery="0" centerz="0" radius="5" startang="30" rotang="360"/>
+      
+      <ANIMATION id="redBall_animation1" speed="5" type="linear">
+          <controlpoint xx="0.0"  yy="0.0" zz="0.0"/>
+          <controlpoint xx="10.0"  yy="0.0" zz="0.0"/>
+          <controlpoint xx="10.0"  yy="0.0" zz="5.0"/>
+      </ANIMATION>
+      <ANIMATION id="candrop1" speed="5" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0"/>
+        <controlpoint xx="2" yy="1" zz="0"/>
+        <controlpoint xx="4" yy="1" zz="0"/>
+        <controlpoint xx="5" yy="-1.8" zz="0"/>
+
+      </ANIMATION>
+
+
+      <ANIMATION id="candrop2" speed="5" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0"/>
+        <controlpoint xx="0" yy="0" zz="2"/>
+        <controlpoint xx="0" yy="1" zz="2"/>
+        <controlpoint xx="0" yy="0" zz="3"/>
+
+      </ANIMATION>
+
+       <ANIMATION id="candrop3" speed="5" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0"/>
+        <controlpoint xx="0" yy="0" zz="2"/>
+        <controlpoint xx="0" yy="1" zz="2"/>
+        <controlpoint xx="0" yy="0" zz="3"/>
+
+      </ANIMATION>
+
+      <ANIMATION id="candrop4" speed="0.05" type="circular" centerx="0" centery="0" centerz="0" radius="0.1" startang="0" rotang="45"/>
+
+      <ANIMATION id="machinedrop" speed="0.05" type="circular" centerx="0" centery="0" centerz="0" radius="0.1" startang="0" rotang="45"/>
+      <ANIMATION id="candrop" type="combo">
+            <SPANREF id="candrop1"/>
+            <SPANREF id="candrop2"/>
+              <SPANREF id="candrop3"/>
+            <SPANREF id="candrop4"/>
+      </ANIMATION>
+
   </ANIMATIONS>
 
   <NODES>
@@ -327,19 +366,20 @@
         <NODEREF id="walls"/>
         <NODEREF id="train"/>
         <NODEREF id="rails"/>
-        <NODEREF id="stationDoors"/>
-        <NODEREF id="wood-seat-left1"/>
+        <NODEREF id="machine_can"/>
+        <!--<NODEREF id="stationDoors"/>-->
+        <!--<NODEREF id="wood-seat-left1"/>
         <NODEREF id="wood-seat-left2"/>
         <NODEREF id="wood-seat-right1"/>
-        <NODEREF id="wood-seat-right2"/>
-        <NODEREF id="lamps"/>
+        <NODEREF id="wood-seat-right2"/>-->
+        <!--<NODEREF id="lamps"/>-->
         <NODEREF id="tunnel"/>
-        <NODEREF id="boardsInformation"/>
+        <!--<NODEREF id="boardsInformation"/>-->
         <NODEREF id="terminalClock"/>
-        <NODEREF id="leftPillar"/>
-        <NODEREF id="rightPillar"/>
+        <!--<NODEREF id="leftPillar"/>-->
+        <!--<NODEREF id="rightPillar"/>-->
         <NODEREF id="foodMachine_set"/>
-        <NODEREF id="garbageStation_set"/>
+        <!--<NODEREF id="garbageStation_set"/>-->
         <NODEREF id="ball"/>
       </DESCENDANTS>
     </NODE>
@@ -895,15 +935,16 @@
     </NODE>
 
     <!-- train -->
-    <NODE id="train" selectable = "true">
+    <NODE id="train" selectable="true">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="trainmetaltexture"/>
 
-      <ANIMATIONREFS>
-        <ANIMATIONREF id="trainMovement"/>
-      </ANIMATIONREFS>
+     
 
       <TRANSLATION x="18" y="-2.5" z="25.75"/>
+       <ANIMATIONREFS>
+        <ANIMATIONREF id="trainMovement"/>
+      </ANIMATIONREFS>
 
       <DESCENDANTS>
         <NODEREF id="carriage_1"/>
@@ -2353,13 +2394,16 @@
       <TRANSLATION x="1.9" y="2.5" z="10"/>
       <ROTATION axis="y" angle="90"/>
 
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="machinedrop"/>
+      </ANIMATIONREFS>
       <DESCENDANTS>
         <NODEREF id="foodMachine_pack"/>
       </DESCENDANTS>
     </NODE>
 
     <!-- food machine: RIGHT -->
-    <NODE id="foodMachine_right">
+    <NODE id="foodMachine_right" selectable="true">
       <MATERIAL id="defaultMaterial"/>
       <TEXTURE id="null"/>
 
@@ -2556,12 +2600,13 @@
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="ball">
+    <NODE id="ball" selectable="true">
       <MATERIAL id="redBall"/>
       <TEXTURE id="null"/>
 
       <ANIMATIONREFS>
-        <ANIMATIONREF id="redBall_animation"/>
+        <ANIMATIONREF id="redBall_animation1"/>
+         <ANIMATIONREF id="redBall_animation"/>
       </ANIMATIONREFS>
 
       <TRANSLATION x="16" y="3.25" z="7.5"/>
@@ -2569,6 +2614,24 @@
       <DESCENDANTS>
         <LEAF type="sphere" args="1 20 20"/>
       </DESCENDANTS>
+    </NODE>
+
+     <NODE id="machine_can">
+        <MATERIAL id="separatorMaterial"/>
+        <TEXTURE id="null"/>
+
+        
+        <TRANSLATION x="1" y="4" z="8"/>
+        
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="candrop"/>
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <LEAF type="cylinder" args="1 0.25 0.25 20 20 1 1"/>  
+
+        </DESCENDANTS>
+
+
     </NODE>
   </NODES>
 </SCENE>
