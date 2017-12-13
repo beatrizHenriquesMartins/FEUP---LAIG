@@ -5,9 +5,9 @@ function contains(a,obj){
             return i;
         }
     }
+
     return -1;
 }
-
 
 /**
  * MyInterface class, creating a GUI interface.
@@ -16,8 +16,7 @@ function contains(a,obj){
 function MyInterface() {
     //call CGFinterface constructor 
     CGFinterface.call(this);
-}
-;
+};
 
 MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
@@ -34,7 +33,6 @@ MyInterface.prototype.init = function(application) {
     //  http://workshop.chromeexperiments.com/examples/gui
     
     this.gui = new dat.GUI();
-    
     
     // add a group of controls (and open/expand by defult)
     
@@ -53,7 +51,7 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
 
     obj = this;
     group.add(this.scene,'Node',selectables).onChange(function(v){
-        for(var i = 0; i  < selectables.length;i++){
+        for(var i = 0; i  < selectables.length ; i++){
             if(selectables[i] == v){
                 obj.scene.graph.clearSelectables();
                 console.log("CHANGE ",i);
@@ -67,10 +65,7 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
     group.add(this.scene,'scaleFactor',-25,25).onChange(function(v){
         obj.scene.updateScaleFactor(v);
     });
-
 }
-
-
 
 /**
  * Adds a folder containing the IDs of the lights passed as parameter.

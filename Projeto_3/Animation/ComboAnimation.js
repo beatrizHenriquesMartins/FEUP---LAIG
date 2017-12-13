@@ -1,22 +1,34 @@
-//série de animações
-//deprecated unnecessary class
+/**
+ * 
+ */
 class ComboAnimation{
+    /**
+     * 
+     * @param {*} Animations 
+     */
     constructor(Animations){
         this.Animations = Animations;
-   
     }
 
+    /**
+     * 
+     * @param {*} deltaTime 
+     */
     update(deltaTime){
-    
 
     }
 
+    /**
+     * 
+     */
     isFinished(){
      
     }
 
+    /**
+     * 
+     */
     reset(){
        
     }
-
 }

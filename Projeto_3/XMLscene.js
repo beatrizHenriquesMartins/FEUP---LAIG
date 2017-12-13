@@ -48,8 +48,6 @@ XMLscene.prototype.init = function(application) {
         new CGFshader(this.gl, "Shaders/myShader3.vert","Shaders/myShader3.frag")
     ]
 
-
-
     this.updateScaleFactor();
 
     this.axis = new CGFaxis(this);
@@ -71,11 +69,15 @@ XMLscene.prototype.initLights = function() {
             var light = this.graph.lights[key];
 
             this.lights[i].setPosition(light[1][0], light[1][1], light[1][2], light[1][3]);
+
             this.lights[i].setAmbient(light[2][0], light[2][1], light[2][2], light[2][3]);
+            
             this.lights[i].setDiffuse(light[3][0], light[3][1], light[3][2], light[3][3]);
+            
             this.lights[i].setSpecular(light[4][0], light[4][1], light[4][2], light[4][3]);
 
             this.lights[i].setVisible(true);
+            
             if (light[0])
                 this.lights[i].enable();
             else
@@ -90,11 +92,9 @@ XMLscene.prototype.initLights = function() {
 }
 
 XMLscene.prototype.updateScaleFactor = function(v){
-
     this.Shaders[0].setUniformsValues({displacement: this.scaleFactor});
     this.Shaders[1].setUniformsValues({displacement:this.scaleFactor});
 	this.Shaders[2].setUniformsValues({displacement: this.scaleFactor});
-
 }
 
 /**
@@ -106,9 +106,6 @@ XMLscene.prototype.initSelectables = function(){
     this.selectables = this.graph.getSelectables();
 }
 
-
-
-
 /**
  * Initializes the scene cameras.
  */
@@ -119,8 +116,7 @@ XMLscene.prototype.initCameras = function() {
 /* Handler called when the graph is finally loaded.
  * As loading is asynchronous, this may be called already after the application has started the run loop
  */
-XMLscene.prototype.onGraphLoaded = function()
-{
+XMLscene.prototype.onGraphLoaded = function(){
     this.camera.near = this.graph.near;
     this.camera.far = this.graph.far;
     this.axis = new CGFaxis(this,this.graph.referenceLength);
@@ -136,6 +132,8 @@ XMLscene.prototype.onGraphLoaded = function()
     this.interface.addLightsGroup(this.graph.lights);
     this.interface.addShadersGroup(this.graph.selectables);
     console.log("CAUHWAIU",this.Node);
+
+    var suzanne = new MyObj(this, 'suzanne');
 }
 
 
@@ -154,7 +152,6 @@ XMLscene.prototype.update = function(currTime) {
     this.Shaders[2].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
     this.frame+=this.deltaTime/1000;
     this.graph.update(this.deltaTime);
-
 
    //In the end
    this.lastUpdateTime = currTime;
@@ -179,13 +176,11 @@ XMLscene.prototype.display = function() {
 
     this.pushMatrix();
 
-
     this.Shaders[0].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
     this.Shaders[1].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
     this.Shaders[2].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
     
-    if (this.graph.loadedOk)
-    {
+    if (this.graph.loadedOk){
         // Applies initial transformations.
         this.multMatrix(this.graph.initialTransforms);
 
@@ -198,8 +193,7 @@ XMLscene.prototype.display = function() {
                 if (this.lightValues[key]) {
                     this.lights[i].setVisible(true);
                     this.lights[i].enable();
-                }
-                else {
+                }else {
                     this.lights[i].setVisible(false);
                     this.lights[i].disable();
                 }
@@ -222,16 +216,11 @@ XMLscene.prototype.display = function() {
         // Displays the scene.
         this.graph.displayScene();
 
-    }
-	else
-	{
+    }else{
 		// Draw axis
 		this.axis.display();
 	}
 
-
     this.popMatrix();
-
     // ---- END Background, camera and axis setup
-
 }

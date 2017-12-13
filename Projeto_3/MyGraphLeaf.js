@@ -4,13 +4,11 @@
  **/
 
 function MyGraphLeaf(graph, xmlelem) {
-
     this.graph = graph;
     var type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
     this.xmlelem = xmlelem;
     this.primitive;
     this.initBuffers(type);
-
 }
 
 
@@ -36,7 +34,6 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
         case 'patch':
             this.createPatch(args);
             break;
-
     }
 }
 
@@ -44,8 +41,6 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
  * Parses the xml unique patch args in order to create a primitive of type patch with error detection
  */
 MyGraphLeaf.prototype.createPatch = function (args) {
-
-
     var u = args[0];
     var v = args[1];
 
@@ -65,8 +60,7 @@ MyGraphLeaf.prototype.createPatch = function (args) {
                     var aux2 = aux[j];
                     var point = [];
                     var x = parseFloat(this.graph.reader.getString(aux2, 'xx'));
-                    if(x == null)
-                    {
+                    if(x == null){
                         this.onXMLMinorError("unable to parse x value; point");
                         break;
                     }else if(isNaN(x)){
@@ -101,17 +95,12 @@ MyGraphLeaf.prototype.createPatch = function (args) {
                 }else{
                     this.graph.onXMLMinorError("unknown tag <" + pointName + ">");
                 }
-              
-
             }
             controlpoints.push(controlines);
-
         }else{
             this.graph.onXMLMinorError("unknown tag <" + nodeName+ ">");
         }
-
     }
+
     this.primitive = new MyPatch(this.graph.scene, controlpoints, args);
-
-
 }

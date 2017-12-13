@@ -20,11 +20,11 @@ MyCircle.prototype.constructor = MyCircle;
  */
 MyCircle.prototype.initBuffers = function () {
   this.vertices = [];
-
   this.normals = [];
   this.texCoords = [];
 
   var ang = 2 * Math.PI / this.slices;
+  
   this.vertices.push(0, 0, 0);
   this.normals.push(0, 0, 1);
   this.texCoords.push(0.5, 0.5);
@@ -34,8 +34,7 @@ MyCircle.prototype.initBuffers = function () {
     this.normals.push(0, 0, 1);
     this.texCoords.push(0.5 + 0.5 * Math.cos(-j * ang), 0.5 + 0.5 * Math.sin(-j * ang));
   }
-
-
+  
   this.indices = [];
 
   for (let i = 1; i <= this.slices; i++) {

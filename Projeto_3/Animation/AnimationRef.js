@@ -1,5 +1,9 @@
+/**
+ * 
+ * @param {*} matrix 
+ * @param {*} Animation 
+ */
 function AnimationRef(matrix,Animation){
-
     this.matrix = matrix;
     this.Animation = Animation;
     this.initialTime = 0;
@@ -7,8 +11,15 @@ function AnimationRef(matrix,Animation){
     this.nodeInitialMatrix = matrix;
 }
 
+/**
+ * 
+ */
 AnimationRef.prototype.constructor = AnimationRef;
 
+/**
+ * function update time
+ * @param {*} deltaTime 
+ */
 AnimationRef.prototype.update = function(deltaTime){
     if(this.Animation.update(this.initialTime)){
         

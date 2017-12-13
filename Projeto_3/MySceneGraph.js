@@ -1624,24 +1624,18 @@ MySceneGraph.generateRandomString = function (length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function () {
-
-  
     if(this.activeSelectable >= 1)
         this.nodes[this.selectables[this.activeSelectable]].selectable = true;
     this.processNode(this.idRoot, this.materials[this.nodes[this.idRoot].materialID], this.textures[this.nodes[this.idRoot].textureID],null);
-    
-
 }
 
 //Recursive function that processes all nodes applying textures and materials.
 MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,selectableFlag) {
-
     let material = initialMat;
     let texture = initialText;
     let clear = 0;
     let isSelect = selectableFlag;
     var currnode = this.nodes[nodeID];
-
 
     //procurar nodeID no conjunto de nos e ver se existe
     if (currnode == null) {
@@ -1661,117 +1655,76 @@ MySceneGraph.prototype.processNode = function (nodeID, initialMat, initialText,s
             texture = this.textures[currnode.textureID];
 
         }
-
     }
 
     if(currnode.selectable != null) {
         isSelect = currnode.selectable;
     }
 
-    
-
     var nodeAnimations_aux = currnode.nodeAnimations;
     var indexAnimation_aux = currnode.currentAnimationIndex;
-    
     var flag_needtochange = 0;
-    if(nodeAnimations_aux.length != 0 && indexAnimation_aux == null)
-    {
-        
+
+    if(nodeAnimations_aux.length != 0 && indexAnimation_aux == null){
         currnode.currentAnimationIndex = 0;
         currnode.nodeAnimations[0].enable = 1;
     }else if(nodeAnimations_aux != 0 && indexAnimation_aux <= (currnode.nodeAnimations.length - 1)){
-        
         if(currnode.nodeAnimations[indexAnimation_aux].enable == 1){
-            
-         
            currnode.animationMatrix = currnode.nodeAnimations[indexAnimation_aux].matrix;
         }else{
-          
-            
-   
             currnode.currentAnimationIndex++;
             if(currnode.currentAnimationIndex <= (currnode.nodeAnimations.length - 1)){
                 currnode.nodeAnimations[currnode.currentAnimationIndex].enable = 1;
                 flag_needtochange = 1;
             }
-           
         }
-     
    }
 
    if(flag_needtochange == 0){
     this.scene.multMatrix(currnode.transformMatrix);
     this.scene.multMatrix(currnode.animationMatrix);
-  
-    
    }else{
        flag_needtochange = 0;
-        mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.animationMatrix)
-        this.scene.multMatrix(currnode.transformMatrix);
-
+       mat4.multiply(currnode.transformMatrix,currnode.transformMatrix,currnode.animationMatrix)
+       this.scene.multMatrix(currnode.transformMatrix);
    }
    
-   
-    
-
-
-
-
-
     for (let i = 0; i < currnode.children.length; i++) {
         this.scene.pushMatrix();
         this.processNode(currnode.children[i], material, texture,isSelect);
         this.scene.popMatrix();
     }
 
-
-
     for (let i = 0; i < currnode.leaves.length; i++) {
-
-      
-
         this.scene.pushMatrix();
 
         if(isSelect == true){
             this.scene.setActiveShader(this.scene.Shaders[this.scene.Shader]);
 
-        }else if(isSelect == false || isSelect == null)
-        {
+        }else if(isSelect == false || isSelect == null){
             this.scene.setActiveShader(this.scene.defaultShader);
         }
 
         if (material != null) {
             material.apply();
-
         }
         
-       
-
         if (texture != null) {
-
             if (clear == 1) {
                 texture[0].unbind();
                 clear = 0;
             } else {
-
                 currnode.leaves[i].primitive.loadTexture(texture);
                 if(isSelect)
                 texture[0].bind(1);
                 else
                 texture[0].bind(0);
             }
-
-
-
         }
      
-      
-
-
         currnode.leaves[i].primitive.display();
         this.scene.popMatrix();
     }
-
 }
 
 MySceneGraph.prototype.getSelectables = function(){

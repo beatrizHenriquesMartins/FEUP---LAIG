@@ -12,11 +12,17 @@ function getUrlVars() {
 }
 
 serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
-			 'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js',
-       'primitives/MyQuad.js','primitives/MySphere.js','primitives/MyTriangle.js','primitives/MyCylinder.js','primitives/MyCircle.js', 'primitives/MyCompleteCylinder.js','primitives/MyPatch.js','Animation/Animation.js','Animation/BezierAnimation.js','Animation/CircularAnimation.js','Animation/ComboAnimation.js','Animation/LinearAnimation.js','Animation/AnimationRef.js',
+			  'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js',
+              'primitives/MyQuad.js','primitives/MySphere.js',
+              'primitives/MyTriangle.js','primitives/MyCylinder.js',
+              'primitives/MyCircle.js', 'primitives/MyCompleteCylinder.js',
+              'primitives/MyPatch.js','Animation/Animation.js',
+              'Animation/BezierAnimation.js','Animation/CircularAnimation.js',
+              'Animation/ComboAnimation.js','Animation/LinearAnimation.js',
+              'Animation/AnimationRef.js', 'webgl-obj-loader.js',
+              'primitives/MyObj.js',
 
-main=function()
-{
+main=function(){
 	// Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
     var myInterface = new MyInterface();
@@ -25,6 +31,7 @@ main=function()
     app.init();
 
     app.setScene(myScene);
+
     app.setInterface(myInterface);
 
     myInterface.setActiveCamera(myScene.camera);
@@ -36,7 +43,7 @@ main=function()
 
 	// create and load graph, and associate it to scene.
 	// Check console for loading errors
-	var myGraph = new MySceneGraph(filename, myScene);
+    var myGraph = new MySceneGraph(filename, myScene);
 
 	// start
     app.run();

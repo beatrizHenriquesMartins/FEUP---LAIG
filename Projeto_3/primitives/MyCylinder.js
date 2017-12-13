@@ -53,6 +53,7 @@ MyCylinder.prototype.initBuffers = function () {
     for (var i = 0; i <= this.stacks; i++) {
         for (var j = 0; j <= this.slices; j++) {
             this.vertices.push(r * Math.cos(j * delta_rad), r * Math.sin(j * delta_rad), i * delta_z);
+            
             if (Math.abs(this.bottomRad - this.topRad) < 0.0001) {
                 this.normals.push(Math.cos(j * delta_rad), Math.sin(j * delta_rad), 0);
             } else if (this.bottomRad > this.topRad) {
