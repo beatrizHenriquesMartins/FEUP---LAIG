@@ -5,7 +5,8 @@
 
 function MyGraphLeaf(graph, xmlelem) {
     this.graph = graph;
-    var type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch','obj']);
+    var type = this.graph.reader.getItem(xmlelem, 'type', 
+                    ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch','obj','board']);
     this.xmlelem = xmlelem;
     this.primitive;
     this.initBuffers(type);
@@ -17,11 +18,13 @@ function MyGraphLeaf(graph, xmlelem) {
  */
 MyGraphLeaf.prototype.initBuffers = function (type) {
 
+    //obj draw by blender
     if(type === 'obj'){
         var args = this.graph.reader.getString(this.xmlelem, 'args').split(" ");
         this.primitive = new MyObj(this.graph.scene, args[0]);
     }
 
+    console.log("antes do switch");
     var args = this.graph.reader.getString(this.xmlelem, 'args').split(" ").map(Number);
     switch (type) {
         case 'rectangle':
@@ -38,6 +41,10 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
             break;
         case 'patch':
             this.createPatch(args);
+            break;
+        case 'board':
+            this.primitive = new MyBoard(this.graph.scene, args[0], args[1], args[2]);
+            console.log("depois de criar a primitiva board");
             break;
     }
 }

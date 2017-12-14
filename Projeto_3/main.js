@@ -20,7 +20,7 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
               'Animation/BezierAnimation.js','Animation/CircularAnimation.js',
               'Animation/ComboAnimation.js','Animation/LinearAnimation.js',
               'Animation/AnimationRef.js', 'webgl-obj-loader.js',
-              'primitives/MyObj.js',
+              'primitives/MyObj.js','primitives/MyUnitCubeQuad.js','primitives/MyBoard.js',
 
 main=function(){
 	// Standard application, scene and interface setup
