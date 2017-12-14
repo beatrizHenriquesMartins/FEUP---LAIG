@@ -1544,13 +1544,16 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                     }
                 } else
                 if (descendants[j].nodeName == "LEAF") {
-                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
+                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch', 'obj']);
 
                     if (type != null)
                         this.log("   Leaf: " + type);
                     else
                         this.warn("Error in leaf");
 
+                    if(type==='obj'){
+                        var kk=0;
+                    }
                     //parse leaf
                     this.nodes[nodeID].addLeaf(new MyGraphLeaf(this, descendants[j]));
                     sizeChildren++;

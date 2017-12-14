@@ -133,7 +133,7 @@ XMLscene.prototype.onGraphLoaded = function(){
     this.interface.addShadersGroup(this.graph.selectables);
     console.log("CAUHWAIU",this.Node);
 
-    var suzanne = new MyObj(this, 'suzanne');
+    //var suzanne = new MyObj(this, 'suzanne');
 }
 
 

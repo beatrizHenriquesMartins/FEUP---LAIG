@@ -116,7 +116,10 @@
             <TEXTURE id="null"/>
         
             <DESCENDANTS>
+<!--
                 <NODEREF id="cube"/>
+-->
+            <NODEREF id="teste_blender"/>
             </DESCENDANTS>
         </NODE>
 
@@ -266,6 +269,15 @@
 
             <DESCENDANTS>
                 <LEAF type="rectangle" args="0.0 0.5 0.5 0.0"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="teste_blender">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="obj" args="suzanne"/>
             </DESCENDANTS>
         </NODE>
   </NODES>
