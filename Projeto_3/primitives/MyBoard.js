@@ -19,7 +19,7 @@ function MyBoard(scene, width, heigh, len) {
 MyBoard.prototype = Object.create(CGFobject.prototype);
 MyBoard.prototype.constructor = MyBoard;
 
-MyBoard.prototype.drawLine = function() {
+MyBoard.prototype.drawQuad = function() {
     this.scene.pushMatrix();
         this.scene.scale(this.width, 1/3, this.heigh);
         this.scene.translate((this.width/2), 0, 0);
@@ -35,13 +35,13 @@ MyBoard.prototype.display = function () {
         if(j != 1){
             this.scene.translate(-1 * this.len + this.width, 0, this.heigh);
         }
-        
+
         for(let i = 1; i <= this.len; i++){
             if(i === 1){
-                this.drawLine();
+                this.drawQuad();
             }else{
                 this.scene.translate(this.width, 0, 0);
-                this.drawLine();
+                this.drawQuad();
             }
         }
     }
