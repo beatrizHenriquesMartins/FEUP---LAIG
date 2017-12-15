@@ -35,10 +35,16 @@ function MyBoard(scene, width, heigh, len) {
 
     // material
     this.materialMetal = new CGFappearance(this.scene);
-	this.materialMetal.setAmbient(0.3,0.3,0.3,1);
-	this.materialMetal.setDiffuse(0.25,0.25,0.25,1);
-	this.materialMetal.setSpecular(0.85,0.85,0.85,1);	
+	this.materialMetal.setAmbient(0.3, 0.3, 0.3, 1);
+	this.materialMetal.setDiffuse(0.25, 0.25, 0.25, 1);
+	this.materialMetal.setSpecular(0.85, 0.85, 0.85, 1);	
     this.materialMetal.setShininess(580);
+
+    this.materialBlack = new CGFappearance(this.scene);
+    this.materialBlack.setAmbient(0.5, 0.5, 0.5, 1);
+    this.materialBlack.setDiffuse(0.5, 0.5, 0.5, 1);
+    this.materialBlack.setSpecular(0.5, 0.5, 0.5, 1);
+    this.materialBlack.setShininess(580);
     
     // primitives
     this.cube = new MyUnitCubeQuad(scene);
@@ -52,25 +58,36 @@ MyBoard.prototype.constructor = MyBoard;
 
 /**
  * draw one piece of de board
+ *  ----
+ * |    |
+ *  ----
  */
 MyBoard.prototype.drawQuad = function() {
     this.scene.pushMatrix();
         this.scene.scale(this.width, 1/3, this.heigh);
-        this.scene.translate((this.width/2), 1/3, (this.heigh/2));
+        this.scene.translate((this.width/2), 1/2, (this.heigh/2));
         this.cube.display();
     this.scene.popMatrix();    
 }
 
+/**
+ * draw one split vertical
+ * |
+ * |
+ * |
+ */
 MyBoard.prototype.drawStrip_vertical = function() {
     this.scene.pushMatrix();
-        this.scene.translate(-4, 0.3, -4);
-        this.scene.scale(0.5, 1/2, this.heigh*this.len);
+        this.scene.translate(0, 1/3, 0);
+        this.scene.scale(0.15, 1, ((this.heigh * this.len) * 2));
+        console.log("new h = ", (this.heigh * this.len));
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
         this.scene.rotate(-(Math.PI / 2), 0, 0, 1);
-        this.materialMetal.apply();
+        this.materialBlack.apply();
         this.strip.display();
     this.scene.popMatrix();
 }
+
 /**
  * draw de complete board
  */
@@ -87,6 +104,7 @@ MyBoard.prototype.display = function () {
                 if(index === 0){
                     this.drawQuad();
                 }else{
+                    //desenha 1 quadrado
                     this.scene.pushMatrix();
                         this.scene.translate((this.width * index), 0, 0);
                         this.drawQuad();
@@ -95,6 +113,17 @@ MyBoard.prototype.display = function () {
             }
         this.scene.popMatrix();
     }
-
-    this.drawStrip_vertical();
+    
+    /*
+    for (let i = 0; i < (this.len + 1); i++) {
+        if(i === 0){
+            this.drawStrip_vertical();
+        }else{
+            this.scene.pushMatrix();
+            this.scene.translate(((this.width * i), 0, 0);
+                this.drawStrip_vertical();
+            this.scene.popMatrix();
+        }
+    }
+    */
 };
