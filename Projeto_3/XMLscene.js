@@ -49,8 +49,10 @@ XMLscene.prototype.init = function(application) {
     ]
 
     this.updateScaleFactor();*/
-    this.plHandler = new PrologHandler(8080);
+    this.plHandler = new PrologHandler(8081);
     this.axis = new CGFaxis(this);
+
+    this.plHandler.makeRequest("start");
 }
 
 /**

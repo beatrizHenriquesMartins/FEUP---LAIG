@@ -1,7 +1,7 @@
 :-use_module(library(sockets)).
 :-use_module(library(lists)).
 :-use_module(library(codesio)).
-:-consult('server.pl').
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%                                        Server                                                   %%%%
@@ -13,7 +13,7 @@
 
 % Made by Luis Reis (ei12085@fe.up.pt) for LAIG course at FEUP.
 
-port(8080).
+port(8081).
 
 % Server Entry Point
 server :-
@@ -103,8 +103,16 @@ print_header_line(_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Require your Prolog Files here
+:-include('main.pl').
+:-include('to_json.pl').
 
-parse_input(handshake, handshake).
+
+parse_input(start,Board):- now(Y),setrand(Y),initiateGlobalValues,startBoard(Board).
+
+parse_input(scoreW,Score) :- translatePlayer('W',Player), score(Player,Score).
+parse_input(scoreB,Score) :- translatePlayer('B',Player), score(Player,Score).
+
+parse_input(handshake, olaCarlos).
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 

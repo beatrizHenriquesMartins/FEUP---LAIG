@@ -1,6 +1,6 @@
 class PrologHandler {
     constructor(port) {
-        this.requestPort = port || 8080;
+        this.requestPort = port || 8081;
     }
 
     getPrologRequest(requestString, onSucess, onError) {

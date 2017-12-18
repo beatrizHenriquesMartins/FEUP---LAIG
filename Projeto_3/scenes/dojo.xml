@@ -291,7 +291,7 @@
             <TEXTURE id="null"/>
 
             <DESCENDANTS>
-                <LEAF type="board" args="1 1 4">
+                <LEAF type="board" args="1 1 4"/>
             </DESCENDANTS>
         </NODE>
 
@@ -301,7 +301,7 @@
             <TEXTURE id="null"/>
 
             <DESCENDANTS>
-                <LEAF id="piece" args="white">
+                <LEAF type="piece" args="white"/>
             </DESCENDANTS>
         </NODE>
   </NODES>
