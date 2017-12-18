@@ -1,10 +1,10 @@
 /**
- * 
+ * Class MyQuad
  * @param {*} scene xml scene
- * @param {*} x1 top left coordenate
- * @param {*} y1 top left coordenate
- * @param {*} x2 bottom right coordenate
- * @param {*} y2 bottom right coordenate
+ * @param {*} x1 left coordenate
+ * @param {*} y1 top coordenate
+ * @param {*} x2 right coordenate
+ * @param {*} y2 bottom coordenate
  */
 function MyQuad(scene, x1, y1, x2, y2) {
 	CGFobject.call(this, scene);
@@ -45,10 +45,10 @@ MyQuad.prototype.initBuffers = function () {
 					 0, 0, 1,
 					 0, 0, 1 ];
 
-	this.texCoords = [ 0, this.height/this.lengtht,
-					   this.width/this.lengths, this.height/this.lengtht,
+	this.texCoords = [ 0, (this.height / this.lengtht),
+					   (this.width / this.lengths), (this.height / this.lengtht),
 					   0, 0,
-					   this.width/this.lengths, 0 ];
+					   (this.width / this.lengths), 0 ];
 
 	this.primitiveType = this.scene.gl.TRIANGLES;
 						   

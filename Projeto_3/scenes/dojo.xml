@@ -116,10 +116,11 @@
             <TEXTURE id="null"/>
         
             <DESCENDANTS>
-<!--
+<!-- TESTE
                 <NODEREF id="cube"/>
+                <NODEREF id="teste_blender"/>
 -->
-            <NODEREF id="teste_blender"/>
+                <NODEREF id="board_play"/>
             </DESCENDANTS>
         </NODE>
 
@@ -272,12 +273,22 @@
             </DESCENDANTS>
         </NODE>
 
+        <!-- teste de ficheiro blender -->
         <NODE id="teste_blender">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
             <DESCENDANTS>
                 <LEAF type="obj" args="suzanne"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="board_play">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="board" args="1 1 4">
             </DESCENDANTS>
         </NODE>
   </NODES>
