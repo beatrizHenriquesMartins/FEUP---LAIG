@@ -1,15 +1,13 @@
 /**
- * o---o---o---o---o---o
- * |   |   |   |   |   |
- * o---o---o---o---o---o
- * |   |   |   |   |   |
- * o---o---o---o---o---o
- * |   |   |   |   |   |
- * o---o---o---o---o---o
- * |   |   |   |   |   |
- * o---o---o---o---o---o
- * |   |   |   |   |   |
- * o---o---o---o---o---o
+ * o---o---o---o---o
+ * |   |   |   |   |
+ * o---o---o---o---o
+ * |   |   |   |   |
+ * o---o---o---o---o
+ * |   |   |   |   |
+ * o---o---o---o---o
+ * |   |   |   |   |
+ * o---o---o---o---o
  * need: circle, slip, cube
  */
 
@@ -66,8 +64,43 @@ MyBoard.prototype.drawQuad = function() {
 }
 
 /**
+ * draw the entire cube
+ *  _______________
+ * |               |
+ * |               |
+ * |               |
+ * |               |
+ * |               |
+ * |               |
+ * |               |
+ * |_______________|
+*/
+MyBoard.prototype.drawCube = function() {
+    //LINHA
+    for(let ind = 0; ind < (this.len + 2); ind++){
+        this.scene.pushMatrix();
+            if(ind != 0){
+                this.scene.translate(0, 0, (this.heigh * ind));
+            }
+
+            //COLUNA
+            for (let index = 0; index < (this.len + 2); index++) {
+                if(index === 0){
+                    this.drawQuad();
+                }else{
+                    //desenha 1 quadrado
+                    this.scene.pushMatrix();
+                        this.scene.translate((this.width * index), 0, 0);
+                        this.drawQuad();
+                    this.scene.popMatrix();
+                }
+            }
+        this.scene.popMatrix();
+    }
+}
+
+/**
  * draw one split vertical
- * |
  * |
  * |
  */
@@ -79,6 +112,26 @@ MyBoard.prototype.drawStrip_vertical = function() {
         this.scene.rotate(-(Math.PI / 2), 0, 0, 1);
         this.strip.display();
     this.scene.popMatrix();
+}
+
+/**
+ * draw the entire vertical splits
+ * |   |   |   |   |   |
+ * |   |   |   |   |   |
+ * |   |   |   |   |   |
+ * |   |   |   |   |   |
+*/
+MyBoard.prototype.draw_all_vertical_splits = function(){
+    for (let i = 0; i < (this.len + 1); i++) {
+        if(i === 0){
+            this.drawStrip_vertical();
+        }else{
+            this.scene.pushMatrix();
+                this.scene.translate(((this.width * i) - (0.15 / 2)), 0, 0);
+                this.drawStrip_vertical();
+            this.scene.popMatrix();
+        }
+    }
 }
 
 /**
@@ -96,58 +149,13 @@ MyBoard.prototype.drawStrip_horizontal = function() {
 }
 
 /**
- * draw one little ball filled
- * o
+ * ____________________
+ * ____________________
+ * ____________________
+ * ____________________
+ * ____________________
  */
-MyBoard.prototype.drawBallFilled = function() {
-    this.scene.pushMatrix();
-        this.scene.translate(0, 1/3, 0);
-        this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
-        this.ball.display();
-    this.scene.popMatrix();
-}
-
-
-/**
- * draw de complete board
- */
-MyBoard.prototype.display = function () {
-    //quadrados
-    //LINHA
-    for(let ind = 0; ind < this.len; ind++){
-        this.scene.pushMatrix();
-            if(ind != 0){
-                this.scene.translate(0, 0, (this.heigh * ind));
-            }
-
-            //COLUNA
-            for (let index = 0; index < this.len; index++) {
-                if(index === 0){
-//                    this.drawQuad();
-                }else{
-                    //desenha 1 quadrado
-                    this.scene.pushMatrix();
-                        this.scene.translate((this.width * index), 0, 0);
-//                        this.drawQuad();
-                    this.scene.popMatrix();
-                }
-            }
-        this.scene.popMatrix();
-    }
-    
-    //linhas verticais
-    for (let i = 0; i < (this.len + 1); i++) {
-        if(i === 0){
-            this.drawStrip_vertical();
-        }else{
-            this.scene.pushMatrix();
-                this.scene.translate(((this.width * i) - (0.15 / 2)), 0, 0);
-                this.drawStrip_vertical();
-            this.scene.popMatrix();
-        }
-    }
-    
-    //linhas horizontais
+MyBoard.prototype.draw_all_horizontal_splits = function () {
     for (let j = 0; j < (this.len + 1); j++) {
         if(j === 0){
             this.drawStrip_horizontal();
@@ -158,8 +166,31 @@ MyBoard.prototype.display = function () {
             this.scene.popMatrix();
         }
     }
+}
 
-    //bolinhas preenchidas
+/**
+ * draw one little ball filled
+ * o
+ */
+MyBoard.prototype.drawBallFilled = function() {
+    this.scene.pushMatrix();
+        this.scene.translate(0, 1/3, 0);
+        this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
+        this.ball.display();
+    this.scene.popMatrix();
+}
+/**
+ * o   o   o   o   o   o
+ * 
+ * o   o   o   o   o   o
+ * 
+ * o   o   o   o   o   o
+ * 
+ * o   o   o   o   o   o
+ * 
+ * o   o   o   o   o   o
+ */
+MyBoard.prototype.draw_all_ball = function() {
     for (let k = 0; k < (this.len + 1); k++) {
         this.scene.pushMatrix();
             if(k !=0){
@@ -178,4 +209,24 @@ MyBoard.prototype.display = function () {
             }
         this.scene.popMatrix();
     }
+}
+
+/**
+ * draw de complete board
+ */
+MyBoard.prototype.display = function () {
+    //quadrados
+    this.drawCube();
+    
+    this.scene.pushMatrix();
+        this.scene.translate(this.width, 0, this.heigh);
+        //linhas verticais
+        this.draw_all_vertical_splits();
+    
+        //linhas horizontais
+        this.draw_all_horizontal_splits();
+
+        //bolinhas preenchidas
+        this.draw_all_ball();
+    this.scene.popMatrix();    
 };
