@@ -42,14 +42,14 @@ XMLscene.prototype.init = function(application) {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
-    this.Shaders = [
+   /* this.Shaders = [
         new CGFshader(this.gl,"Shaders/myShader.vert","Shaders/myShader.frag"),
         new CGFshader(this.gl,"Shaders/myShader2.vert","Shaders/myShader2.frag"),
         new CGFshader(this.gl, "Shaders/myShader3.vert","Shaders/myShader3.frag")
     ]
 
-    this.updateScaleFactor();
-
+    this.updateScaleFactor();*/
+    this.plHandler = new PrologHandler(8080);
     this.axis = new CGFaxis(this);
 }
 
@@ -145,11 +145,13 @@ XMLscene.prototype.update = function(currTime) {
         return "Error processing graph";
 
     this.deltaTime = currTime - this.lastUpdateTime || 0.0;
-    this.Shaders[0].setUniformsValues({amplitude: (1+Math.sin(this.frame))/2});
+    /*this.Shaders[0].setUniformsValues({amplitude: (1+Math.sin(this.frame))/2});
 
     this.Shaders[1].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
     
-    this.Shaders[2].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
+    this.Shaders[2].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});*/
+
+   // this.plHandler.makeRequest("handshake");
     this.frame+=this.deltaTime/1000;
     this.graph.update(this.deltaTime);
 
@@ -176,9 +178,9 @@ XMLscene.prototype.display = function() {
 
     this.pushMatrix();
 
-    this.Shaders[0].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
-    this.Shaders[1].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
-    this.Shaders[2].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
+    //this.Shaders[0].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
+    //this.Shaders[1].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
+    //this.Shaders[2].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
     
     if (this.graph.loadedOk){
         // Applies initial transformations.
