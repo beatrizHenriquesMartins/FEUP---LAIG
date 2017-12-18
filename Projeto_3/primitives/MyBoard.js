@@ -32,11 +32,12 @@ function MyBoard(scene, width, heigh, len) {
     }
 
     // material
-    this.materialParede = new CGFappearance(this.scene);
-	this.materialParede.setAmbient(0.3, 0.3, 0.3, 1);
-	this.materialParede.setDiffuse(0.917, 0.859, 0.745, 1);
-	this.materialParede.setSpecular(0.8, 0.8, 0.8, 0);	
-	this.materialParede.setShininess(120);
+    //materialParede
+    this.material_1 = new CGFappearance(this.scene);
+	this.material_1.setAmbient(0.1, 0.1, 0.1, 1);
+	this.material_1.setDiffuse(1.0, 0.9019, 0.933, 1);
+	this.material_1.setSpecular(0.5, 0.5, 0.5, 0);	
+	this.material_1.setShininess(120);
     
     // primitives
     this.cube = new MyUnitCubeQuad(scene);
@@ -216,7 +217,7 @@ MyBoard.prototype.draw_all_ball = function() {
  */
 MyBoard.prototype.display = function () {
     //quadrados
-    this.drawCube();
+    //this.drawCube();
     
     this.scene.pushMatrix();
         this.scene.translate(this.width, 0, this.heigh);
