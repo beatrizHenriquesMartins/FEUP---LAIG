@@ -34,17 +34,11 @@ function MyBoard(scene, width, heigh, len) {
     }
 
     // material
-    this.materialMetal = new CGFappearance(this.scene);
-	this.materialMetal.setAmbient(0.3, 0.3, 0.3, 1);
-	this.materialMetal.setDiffuse(0.25, 0.25, 0.25, 1);
-	this.materialMetal.setSpecular(0.85, 0.85, 0.85, 1);	
-    this.materialMetal.setShininess(580);
-
-    this.materialBlack = new CGFappearance(this.scene);
-    this.materialBlack.setAmbient(0.5, 0.5, 0.5, 1);
-    this.materialBlack.setDiffuse(0.5, 0.5, 0.5, 1);
-    this.materialBlack.setSpecular(0.5, 0.5, 0.5, 1);
-    this.materialBlack.setShininess(580);
+    this.materialParede = new CGFappearance(this.scene);
+	this.materialParede.setAmbient(0.3, 0.3, 0.3, 1);
+	this.materialParede.setDiffuse(0.917, 0.859, 0.745, 1);
+	this.materialParede.setSpecular(0.8, 0.8, 0.8, 0);	
+	this.materialParede.setShininess(120);
     
     // primitives
     this.cube = new MyUnitCubeQuad(scene);
@@ -80,18 +74,32 @@ MyBoard.prototype.drawStrip_vertical = function() {
     this.scene.pushMatrix();
         this.scene.translate(0, 1/3, 0);
         this.scene.scale(0.15, 1, ((this.heigh * this.len) * 2));
-        console.log("new h = ", (this.heigh * this.len));
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
         this.scene.rotate(-(Math.PI / 2), 0, 0, 1);
-        this.materialBlack.apply();
         this.strip.display();
     this.scene.popMatrix();
 }
 
 /**
+ * draw one split vertical
+ * -------
+ */
+MyBoard.prototype.drawStrip_horizontal = function() {
+    this.scene.pushMatrix();
+        this.scene.translate(0, 1/3, 0);
+        this.scene.scale(((this.width * this.len) * 2), 1, 0.15);
+        this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
+        this.scene.rotate(-(Math.PI / 2), 0, 0, 1);
+        this.strip.display();
+    this.scene.popMatrix();
+}
+
+
+/**
  * draw de complete board
  */
 MyBoard.prototype.display = function () {
+    //quadrados
     //LINHA
     for(let ind = 0; ind < this.len; ind++){
         this.scene.pushMatrix();
@@ -114,16 +122,27 @@ MyBoard.prototype.display = function () {
         this.scene.popMatrix();
     }
     
-    /*
+    //linhas verticais
     for (let i = 0; i < (this.len + 1); i++) {
         if(i === 0){
             this.drawStrip_vertical();
         }else{
             this.scene.pushMatrix();
-            this.scene.translate(((this.width * i), 0, 0);
+                this.scene.translate(((this.width * i) - (0.15 / 2)), 0, 0);
                 this.drawStrip_vertical();
             this.scene.popMatrix();
         }
     }
-    */
+    
+    //linhas horizontais
+    for (let i = 0; i < (this.len + 1); i++) {
+        if(i === 0){
+            this.drawStrip_horizontal();
+        }else{
+            this.scene.pushMatrix();
+                this.scene.translate(0, 0, ((this.heigh * i) - (0.15 / 2)));
+                this.drawStrip_horizontal();
+            this.scene.popMatrix();
+        }
+    }
 };
