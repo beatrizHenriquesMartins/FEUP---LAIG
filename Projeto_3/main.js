@@ -11,16 +11,35 @@ function getUrlVars() {
     return vars;
 }
 
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
-			  'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js',
-              'primitives/MyQuad.js','primitives/MySphere.js',
-              'primitives/MyTriangle.js','primitives/MyCylinder.js',
-              'primitives/MyCircle.js', 'primitives/MyCompleteCylinder.js',
-              'primitives/MyPatch.js','Animation/Animation.js',
-              'Animation/BezierAnimation.js','Animation/CircularAnimation.js',
-              'Animation/ComboAnimation.js','Animation/LinearAnimation.js',
-              'Animation/AnimationRef.js', 'webgl-obj-loader.js',
-              'primitives/MyObj.js', 'PrologHandler.js','primitives/MyUnitCubeQuad.js','primitives/MyBoard.js',
+serialInclude(['../lib/CGF.js', 
+            //parser
+                'MyGraphLeaf.js',
+                'MyGraphNode.js',
+                'MyInterface.js',
+                'MySceneGraph.js', 
+                'webgl-obj-loader.js',
+                'XMLscene.js',
+            //prolog e logica de jogo
+                'PrologHandler.js',
+            //primitivas
+                'primitives/MyBoard.js',  
+                'primitives/MyCircle.js',  
+                'primitives/MyCompleteCylinder.js',
+                'primitives/MyCylinder.js',
+                'primitives/MyObj.js',
+                'primitives/MyPatch.js',
+                'primitives/MyPiece.js',
+                'primitives/MyQuad.js',
+                'primitives/MySphere.js',
+                'primitives/MyTriangle.js',
+                'primitives/MyUnitCubeQuad.js',
+            //animação
+                'Animation/Animation.js',
+                'Animation/AnimationRef.js',
+                'Animation/BezierAnimation.js',
+                'Animation/CircularAnimation.js',
+                'Animation/ComboAnimation.js',
+                'Animation/LinearAnimation.js',
 
 main=function(){
 	// Standard application, scene and interface setup

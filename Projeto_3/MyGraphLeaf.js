@@ -6,7 +6,7 @@
 function MyGraphLeaf(graph, xmlelem) {
     this.graph = graph;
     var type = this.graph.reader.getItem(xmlelem, 'type', 
-                    ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch','obj','board']);
+                    ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch', 'obj', 'board', 'piece']);
     this.xmlelem = xmlelem;
     this.primitive;
     this.initBuffers(type);
@@ -22,6 +22,12 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
     if(type === 'obj'){
         var args = this.graph.reader.getString(this.xmlelem, 'args').split(" ");
         this.primitive = new MyObj(this.graph.scene, args[0]);
+    }
+
+    //piece of play
+    if(type === 'piece'){
+        var args = this.graph.reader.getString(this.xmlelem, 'args').split(" ");
+        this.primitive = new MyPiece(this.graph.scene, args[0]);
     }
 
     console.log("antes do switch");

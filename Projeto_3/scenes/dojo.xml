@@ -119,6 +119,8 @@
 <!-- TESTE
                 <NODEREF id="cube"/>
                 <NODEREF id="teste_blender"/>
+                
+                <NODEREF id="piece_white"/>
 -->
                 <NODEREF id="board_play"/>
             </DESCENDANTS>
@@ -283,12 +285,23 @@
             </DESCENDANTS>
         </NODE>
 
+        <!-- board -->
         <NODE id="board_play">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
             <DESCENDANTS>
                 <LEAF type="board" args="1 1 4">
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- white piece -->
+        <NODE id="piece_white">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF id="piece" args="white">
             </DESCENDANTS>
         </NODE>
   </NODES>
