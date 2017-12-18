@@ -35,13 +35,13 @@ function MyBoard(scene, width, heigh, len) {
     //materialParede
     this.material_1 = new CGFappearance(this.scene);
 	this.material_1.setAmbient(0.1, 0.1, 0.1, 1);
-	this.material_1.setDiffuse(1.0, 0.9019, 0.933, 1);
+	this.material_1.setDiffuse(0.1, 0.19, 0.3, 1);
 	this.material_1.setSpecular(0.5, 0.5, 0.5, 0);	
 	this.material_1.setShininess(120);
     
     // primitives
     this.cube = new MyUnitCubeQuad(scene);
-    this.strip =  new MyQuad(scene, 0.0, 0.5, 0.5, 0.0);
+    this.split =  new MyQuad(scene, 0.0, 0.5, 0.5, 0.0);
     this.ball =  new MyCircle(scene, 200, 0.25);
 
     this.initBuffers();
@@ -62,7 +62,7 @@ MyBoard.prototype.drawQuad = function() {
         this.scene.translate((this.width/2), 1/2, (this.heigh/2));
         this.cube.display();
     this.scene.popMatrix();    
-}
+};
 
 /**
  * draw the entire cube
@@ -98,7 +98,7 @@ MyBoard.prototype.drawCube = function() {
             }
         this.scene.popMatrix();
     }
-}
+};
 
 /**
  * draw one split vertical
@@ -107,13 +107,13 @@ MyBoard.prototype.drawCube = function() {
  */
 MyBoard.prototype.drawStrip_vertical = function() {
     this.scene.pushMatrix();
-        this.scene.translate(0, 1/3, 0);
+        this.scene.translate(0, (1/3 + 0.01), 0);
         this.scene.scale(0.15, 1, ((this.heigh * this.len) * 2));
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
         this.scene.rotate(-(Math.PI / 2), 0, 0, 1);
-        this.strip.display();
+        this.split.display();
     this.scene.popMatrix();
-}
+};
 
 /**
  * draw the entire vertical splits
@@ -133,7 +133,7 @@ MyBoard.prototype.draw_all_vertical_splits = function(){
             this.scene.popMatrix();
         }
     }
-}
+};
 
 /**
  * draw one split horizontal
@@ -141,13 +141,13 @@ MyBoard.prototype.draw_all_vertical_splits = function(){
  */
 MyBoard.prototype.drawStrip_horizontal = function() {
     this.scene.pushMatrix();
-        this.scene.translate(0, 1/3, 0);
+        this.scene.translate(0, (1/3 + 0.01), 0);
         this.scene.scale(((this.width * this.len) * 2), 1, 0.15);
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
         this.scene.rotate(-(Math.PI / 2), 0, 0, 1);
-        this.strip.display();
+        this.split.display();
     this.scene.popMatrix();
-}
+};
 
 /**
  * ____________________
@@ -167,7 +167,7 @@ MyBoard.prototype.draw_all_horizontal_splits = function () {
             this.scene.popMatrix();
         }
     }
-}
+};
 
 /**
  * draw one little ball filled
@@ -175,11 +175,12 @@ MyBoard.prototype.draw_all_horizontal_splits = function () {
  */
 MyBoard.prototype.drawBallFilled = function() {
     this.scene.pushMatrix();
-        this.scene.translate(0, 1/3, 0);
+        this.scene.translate(0, (1/3 + 0.01), 0);
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
         this.ball.display();
     this.scene.popMatrix();
-}
+};
+
 /**
  * o   o   o   o   o   o
  * 
@@ -210,17 +211,18 @@ MyBoard.prototype.draw_all_ball = function() {
             }
         this.scene.popMatrix();
     }
-}
+};
 
 /**
  * draw de complete board
  */
 MyBoard.prototype.display = function () {
     //quadrados
-    //this.drawCube();
+    this.drawCube();
     
     this.scene.pushMatrix();
         this.scene.translate(this.width, 0, this.heigh);
+        this.material_1.apply();
         //linhas verticais
         this.draw_all_vertical_splits();
     
