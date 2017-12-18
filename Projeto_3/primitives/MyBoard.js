@@ -43,6 +43,7 @@ function MyBoard(scene, width, heigh, len) {
     // primitives
     this.cube = new MyUnitCubeQuad(scene);
     this.strip =  new MyQuad(scene, 0.0, 0.5, 0.5, 0.0);
+    this.ball =  new MyCircle(scene, 200, 0.25);
 
     this.initBuffers();
 };
@@ -81,7 +82,7 @@ MyBoard.prototype.drawStrip_vertical = function() {
 }
 
 /**
- * draw one split vertical
+ * draw one split horizontal
  * -------
  */
 MyBoard.prototype.drawStrip_horizontal = function() {
@@ -91,6 +92,18 @@ MyBoard.prototype.drawStrip_horizontal = function() {
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
         this.scene.rotate(-(Math.PI / 2), 0, 0, 1);
         this.strip.display();
+    this.scene.popMatrix();
+}
+
+/**
+ * draw one little ball filled
+ * o
+ */
+MyBoard.prototype.drawBallFilled = function() {
+    this.scene.pushMatrix();
+        this.scene.translate(0, 1/3, 0);
+        this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
+        this.ball.display();
     this.scene.popMatrix();
 }
 
@@ -110,12 +123,12 @@ MyBoard.prototype.display = function () {
             //COLUNA
             for (let index = 0; index < this.len; index++) {
                 if(index === 0){
-                    this.drawQuad();
+//                    this.drawQuad();
                 }else{
                     //desenha 1 quadrado
                     this.scene.pushMatrix();
                         this.scene.translate((this.width * index), 0, 0);
-                        this.drawQuad();
+//                        this.drawQuad();
                     this.scene.popMatrix();
                 }
             }
@@ -135,14 +148,34 @@ MyBoard.prototype.display = function () {
     }
     
     //linhas horizontais
-    for (let i = 0; i < (this.len + 1); i++) {
-        if(i === 0){
+    for (let j = 0; j < (this.len + 1); j++) {
+        if(j === 0){
             this.drawStrip_horizontal();
         }else{
             this.scene.pushMatrix();
-                this.scene.translate(0, 0, ((this.heigh * i) - (0.15 / 2)));
+                this.scene.translate(0, 0, ((this.heigh * j) - (0.15 / 2)));
                 this.drawStrip_horizontal();
             this.scene.popMatrix();
         }
+    }
+
+    //bolinhas preenchidas
+    for (let k = 0; k < (this.len + 1); k++) {
+        this.scene.pushMatrix();
+            if(k !=0){
+                this.scene.translate(0, 0, ((this.heigh * k) - (0.125 / 2)));
+            }
+
+            for (let m = 0; m < (this.len + 1); m++) {
+                if(m === 0){
+                    this.drawBallFilled();
+                }else{
+                    this.scene.pushMatrix();
+                        this.scene.translate(((this.width * m) - (0.125 / 2)), 0, 0);
+                        this.drawBallFilled();
+                    this.scene.popMatrix();
+                }
+            }
+        this.scene.popMatrix();
     }
 };
