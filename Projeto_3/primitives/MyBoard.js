@@ -32,7 +32,6 @@ function MyBoard(scene, width, heigh, len) {
     }
 
     // material
-    //materialParede
     this.material_1 = new CGFappearance(this.scene);
 	this.material_1.setAmbient(0.1, 0.1, 0.1, 1);
 	this.material_1.setDiffuse(0.1, 0.19, 0.3, 1);

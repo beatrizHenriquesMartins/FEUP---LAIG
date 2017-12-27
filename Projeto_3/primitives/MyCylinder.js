@@ -99,9 +99,6 @@ MyCylinder.prototype.initBuffers = function () {
     this.initGLBuffers();
 };
 
-
-
-
 /**
  * //Function that applies the amp factors of the texture, since it is isnt necessary on the cylinder this 
  * function only exist to overload convenience
