@@ -86,7 +86,7 @@
     <!-- Textures Group -->
     <TEXTURES>
         <TEXTURE id="glass">
-            <file path="images/glass.jpg"/>
+            <file path="images/glass.jpg"/>
             <amplif_factor s="4" t="4"/>
         </TEXTURE>
     </TEXTURES>
@@ -122,8 +122,9 @@
                 <NODEREF id="board_play"/>
                 <NODEREF id="almond_bloom"/>
 -->
-                <NODEREF id="white_piece"/>
+                <NODEREF id="mix_piece"/>
 <!--
+                <NODEREF id="white_piece"/>
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
 -->
@@ -306,6 +307,26 @@
 
             <DESCENDANTS>
                 <LEAF type="piece" args="white"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- white piece -->
+        <NODE id="black_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="black"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- MIX piece -->
+        <NODE id="mix_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="mix"/>
             </DESCENDANTS>
         </NODE>
   </NODES>
