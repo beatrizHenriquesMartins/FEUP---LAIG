@@ -115,8 +115,15 @@ parse_input(scoreB, Score) :- translatePlayer('O',Player), score(Player,Score).
 parse_input(piecesW,Pieces) :- translatePlayer('X',Player),pieces(Player,Pieces).
 parse_input(piecesB,Pieces) :- translatePlayer('O',Player),pieces(Player,Pieces).
 
-parse_input(getValidMovesMatrix(Board,Piece,FinalList),FinalList) :- getValidMovesMatrix(Board,Piece,FinalList).
+parse_input(getValidMovesMatrix(Board,Piece),FinalList) :- getValidMovesMatrix(Board,Piece,FinalList).
 
+parse_input(checkGameEnd(Board, Player),EndRes) :- checkGameEnd(Board,Player,EndRes).
+
+parse_input(processMovement(Board,Row,Col,Player,UsedPiece),CapturedBoard) :- processMovement(Board,Row,Col,Player,UsedPiece,CapturedBoard).
+
+parse_input(randomBotMovement(Board,PlayerType),[NewBoard,Res]) :- randomBotMovement(Board,PlayerType,NewBoard, Res).
+
+parse_input(inteligentBotPlay(Board,PlayerType),[NewBoard,Res]) :- inteligentBotPlay(Board,PlayerType,NewBoard,Res).
 
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).

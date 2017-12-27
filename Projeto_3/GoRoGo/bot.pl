@@ -7,7 +7,7 @@ randomBotMovement(Board,PlayerType,NewBoard, Res) :-
             pieces(NumericPlayer,PlayerPieces),
             choosePiece(_PieceA, PlayerPieces, Piece),
             score(NumericPlayer,Score),
-            write('The Current Player '), write(PlayerType), write(' score is: '), write(Score),nl,nl,
+            %write('The Current Player '), write(PlayerType), write(' score is: '), write(Score),nl,nl,
             getValidMovesMatrix(Board,0,Piece,_List,AvailableMoves),
             length(AvailableMoves,Length),
             ite(Length == 0,
@@ -73,7 +73,7 @@ inteligentBotPlay(Board,PlayerType,NewBoard,Res) :-
             pieces(NumericPlayer,PlayerPieces),
             choosePiece(_PieceA, PlayerPieces, Piece),
             score(NumericPlayer,Score),
-            write('The Current Player '), write(PlayerType), write(' score is: '), write(Score),nl,nl,
+            %write('The Current Player '), write(PlayerType), write(' score is: '), write(Score),nl,nl,
             ite(botGetBestMovement(Board,Piece,FinalOptimalMove),(
                 nth0(0,FinalOptimalMove,Row),
                 nth0(1,FinalOptimalMove,Col),

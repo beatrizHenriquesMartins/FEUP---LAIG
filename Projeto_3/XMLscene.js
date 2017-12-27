@@ -47,8 +47,9 @@ XMLscene.prototype.init = function(application) {
         new CGFshader(this.gl,"Shaders/myShader2.vert","Shaders/myShader2.frag"),
         new CGFshader(this.gl, "Shaders/myShader3.vert","Shaders/myShader3.frag")
     ]
-
     this.updateScaleFactor();*/
+    this.setPickEnabled(true);
+    this.clearPickRegistration();
     this.game  = new Game();
     this.game.newGame(this,0);
     this.game.startGame();
@@ -109,6 +110,21 @@ XMLscene.prototype.initSelectables = function(){
     this.selectables = this.graph.getSelectables();
 }
 
+XMLscene.prototype.logPicking = function (){
+    if(this.pickMode == false){
+        if(this.pickResults != null && this.pickResults.length > 0){
+            for(var i = 0; i<this.pickResults.length;i++){
+                var obj = this.pickResults[i][0];
+                if(obj){
+                    var customId = this.pickResults[i][1];
+                    console.log("Picked object" + obj + ",with pick id " + customId );
+                }
+            }
+            this.pickResults.splice(0,this.pickResults.length);
+        }
+    }
+}
+
 /**
  * Initializes the scene cameras.
  */
@@ -139,6 +155,7 @@ XMLscene.prototype.onGraphLoaded = function(){
 }
 
 
+
 /**
  * Defaut update scene function
  */
@@ -148,7 +165,7 @@ XMLscene.prototype.update = function(currTime) {
 
     this.deltaTime = currTime - this.lastUpdateTime || 0.0;
 
-    this.game.update(currTime);
+    this.game.update(this.deltaTime);
   
     /*this.Shaders[0].setUniformsValues({amplitude: (1+Math.sin(this.frame))/2});
 

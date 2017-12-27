@@ -7,7 +7,8 @@ class Game {
         this.boards = [];
         this.movements = [];
         this.whitePieces = [];
-        this.BlackPieces = [];
+        this.blackPieces = [];
+        this.scores = [];
         this.board;
 
     }
@@ -29,8 +30,8 @@ class Game {
     startGame() {
 
         initializeVariables(this.getBoard.bind(this));
-        getScore(PLAYERS.WHITE,this.getScores.bind(this,PLAYERS.WHITE));
-        getScore(PLAYERS.BLACK,this.getScores.bind(this,PLAYERS.BLACK));
+        
+        this.updateAuxVars();
         if (this.gameMode == GAMEMODE.BOT_VS_BOT) {
             this.gameMode = GAMEMODE.BOT_VS_BOT;
             this.gameStatus = GAMESTATE.BOT_PLAY;
@@ -55,10 +56,22 @@ class Game {
     }
 
     setScore(Score,Player){
+        if(this.blackScore != null || this.whiteScore != null){
+            this.scores.unshift({white:this.whiteScore,black:this.blackScore});
+        }
+
         if(Player == PLAYERS.WHITE){
             this.whiteScore = Score;
         }else{
             this.blackScore = Score;
+        }
+    }
+
+    setPlayerPieces(Pieces,Player){
+        if(Player == PLAYERS.WHITE){
+            this.whitePieces = Pieces;
+        }else{
+            this.blackPieces = Pieces;
         }
     }
 
@@ -71,7 +84,58 @@ class Game {
       this.setScore(JSON.parse(data.target.response),Player);
     }
 
-    update(currTime){
+    getPieces(Player,data){
+        this.setPlayerPieces(JSON.parse(data.target.response),Player);
+    }
+
+     /**
+     * Gets the current player.
+     * @returns {number} Returns the current player, index based on 0.
+     */
+    getCurrentPlayer() {
+        return this.currentPlayer;
+    }
+
+    updateAuxVars(){
+        getScore(PLAYERS.WHITE,this.getScores.bind(this,PLAYERS.WHITE));
+        getScore(PLAYERS.BLACK,this.getScores.bind(this,PLAYERS.BLACK));
+        getPieces(PLAYERS.WHITE,this.getPieces.bind(this,PLAYERS.WHITE));
+        getPieces(PLAYERS.BLACK,this.getPieces.bind(this,PLAYERS.BLACK));
+    }
+
+    getGameStatus(){
+        switch(this.gameStatus){
+            case GAMESTATE.NORMAL:
+                return "select a piece to move";
+            case GAMESTATE.PLACE_PIECE:
+                return "select the tile to move the ship";
+        }
+    }
+
+    updateGameState(){
+        switch(this.gameStatus){
+            case GAMEMODE.P1_VS_P2:
+                this.gameStatus = GAMESTATE.NORMAL;
+                break;
+            case GAMEMODE.P1_VS_BOT:
+                if(this.currentPlayer === PLAYERS.WHITE)
+                    this.gameStatus = GAMESTATE.BOT_PLAY;
+                else 
+                    this.gameStatus = GAMESTATE.NORMAL;
+                break;
+            case GAMEMODE.BOT_VS_BOT:
+                this.gameStatus = GAMESTATE.BOT_PLAY;
+                break;
+        }
+    }
+
+    update(deltaTime){
+        if(this.gameStatus === GAMESTATE.NOT_RUNNING)
+            return;
+
+        if(this.gameStatus == GAMESTATE.NORMAL){
+
+        }
         
     }
 
