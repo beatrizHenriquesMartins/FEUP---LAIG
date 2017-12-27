@@ -49,10 +49,11 @@ XMLscene.prototype.init = function(application) {
     ]
 
     this.updateScaleFactor();*/
-    this.plHandler = new PrologHandler(8081);
+    this.game  = new Game();
+    this.game.newGame(this,0);
+    this.game.startGame();
     this.axis = new CGFaxis(this);
-
-    this.plHandler.makeRequest("start");
+    
 }
 
 /**
@@ -133,7 +134,6 @@ XMLscene.prototype.onGraphLoaded = function(){
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
     this.interface.addShadersGroup(this.graph.selectables);
-    console.log("CAUHWAIU",this.Node);
 
     //var suzanne = new MyObj(this, 'suzanne');
 }
@@ -147,6 +147,9 @@ XMLscene.prototype.update = function(currTime) {
         return "Error processing graph";
 
     this.deltaTime = currTime - this.lastUpdateTime || 0.0;
+
+    this.game.update(currTime);
+  
     /*this.Shaders[0].setUniformsValues({amplitude: (1+Math.sin(this.frame))/2});
 
     this.Shaders[1].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});

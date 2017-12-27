@@ -21,6 +21,7 @@ serialInclude(['../lib/CGF.js',
                 'XMLscene.js',
             //prolog e logica de jogo
                 'PrologHandler.js',
+                'Game.js',
             //primitivas
                 'primitives/MyBoard.js',  
                 'primitives/MyCircle.js',  

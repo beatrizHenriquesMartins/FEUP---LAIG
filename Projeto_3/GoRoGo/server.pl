@@ -107,12 +107,17 @@ print_header_line(_).
 :-include('to_json.pl').
 
 
-parse_input(start,Board):- now(Y),setrand(Y),initiateGlobalValues,startBoard(Board).
+parse_input(startVars,Board):- now(Y),setrand(Y),initiateGlobalValues,startBoard(BoardL),matrix_to_json(BoardL,Board).
 
-parse_input(scoreW,Score) :- translatePlayer('W',Player), score(Player,Score).
-parse_input(scoreB,Score) :- translatePlayer('B',Player), score(Player,Score).
+parse_input(scoreW, Score) :- translatePlayer('X',Player), score(Player,Score).
+parse_input(scoreB, Score) :- translatePlayer('O',Player), score(Player,Score).
 
-parse_input(handshake, olaCarlos).
+parse_input(piecesW,Pieces) :- translatePlayer('X',Player),pieces(Player,Pieces).
+parse_input(piecesB,Pieces) :- translatePlayer('O',Player),pieces(Player,Pieces).
+
+parse_input(getValidMovesMatrix(Board,Piece,FinalList),FinalList) :- getValidMovesMatrix(Board,Piece,FinalList).
+
+
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 
