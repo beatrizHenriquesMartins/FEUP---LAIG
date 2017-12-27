@@ -118,11 +118,16 @@
             <DESCENDANTS>
 <!-- TESTE
                 <NODEREF id="cube"/>
-                <NODEREF id="teste_blender"/>
                 <NODEREF id="board_play"/>
-                <NODEREF id="almond_bloom"/>
 -->
-                <NODEREF id="piece_white"/>
+                
+                <NODEREF id="teste_blender"/>
+<!--
+                <NODEREF id="white_piece"/>
+
+                <NODEREF id="black_piece"/>
+                <NODEREF id="mix_piece"/>
+-->
             </DESCENDANTS>
         </NODE>
 
@@ -281,7 +286,7 @@
             <TEXTURE id="null"/>
 
             <DESCENDANTS>
-                <LEAF type="obj" args="suzanne"/>
+                <LEAF type="obj" args="AlmondBlossom"/>
             </DESCENDANTS>
         </NODE>
 
@@ -296,7 +301,7 @@
         </NODE>
 
         <!-- white piece -->
-        <NODE id="piece_white">
+        <NODE id="white_piece">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 

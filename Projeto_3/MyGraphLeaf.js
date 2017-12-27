@@ -27,6 +27,7 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
     //piece of play
     if(type === 'piece'){
         console.log("what obj? ", type);
+        console.log("piece");
         var args = this.graph.reader.getString(this.xmlelem, 'args').split(" ");
         console.log("args = ", args);
         this.primitive = new MyPiece(this.graph.scene, args[0]);
