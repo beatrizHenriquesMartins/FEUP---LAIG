@@ -117,20 +117,12 @@
         
             <DESCENDANTS>
 <!-- TESTE
-                <NODEREF id="cube"/>
-                <NODEREF id="teste_blender"/>
--->
                 <NODEREF id="board_play"/>
-<!--
-                <NODEREF id="almond_bloom"/>
                 <NODEREF id="mix_piece"/>
--->
                 <NODEREF id="white_piece"/> 
-<!-- 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
 -->
-
                 <NODEREF id="piece_support"/>
             </DESCENDANTS>
         </NODE>
@@ -182,10 +174,14 @@
 
             <DESCENDANTS>
                 <NODEREF id="base"/>
+                <NODEREF id="top_lateral"/>
+                <NODEREF id="bottom_lateral"/>
                 <NODEREF id="right_lateral"/>
+                <NODEREF id="left_lateral"/>
             </DESCENDANTS>
         </NODE>
 
+        <!-- support for pieces: base -->
         <NODE id="base">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="glass"/>
@@ -197,12 +193,52 @@
             </DESCENDANTS>
         </NODE>
 
+        <!-- support for pieces: top lateral -->
+        <NODE id="top_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="glass"/>
+
+            <TRANSLATION x="-1.37" y="0.2" z="0"/>
+            <SCALE sx="0.25" sy="0.5" sz="7"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: bottom lateral -->
+        <NODE id="bottom_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="glass"/>
+
+            <TRANSLATION x="1.37" y="0.2" z="0"/>
+            <SCALE sx="0.25" sy="0.5" sz="7"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: right lateral -->
         <NODE id="right_lateral">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="-1.11" y="0.12" z="0.1"/>
-            <SCALE sx="0.25" sy="0.05" sz="7"/>
+            <TRANSLATION x="0" y="0.2" z="3.37"/>
+            <SCALE sx="2.5" sy="0.5" sz="0.25"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: left lateral -->
+        <NODE id="left_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0.2" z="-3.37"/>
+            <SCALE sx="2.5" sy="0.5" sz="0.25"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
