@@ -117,20 +117,216 @@
         
             <DESCENDANTS>
 <!-- TESTE
-                <NODEREF id="cube"/>
-                <NODEREF id="teste_blender"/>-->
                 <NODEREF id="board_play"/>
- <!--               <NODEREF id="almond_bloom"/>
--->
-            <!--    <NODEREF id="mix_piece"/> -->
-
+                <NODEREF id="mix_piece"/>
                 <NODEREF id="white_piece"/> 
-               <!-- <NODEREF id="black_piece"/>
-                <NODEREF id="mix_piece"/> -->
-
+                <NODEREF id="black_piece"/>
+                <NODEREF id="mix_piece"/>
+                <NODEREF id="piece_support"/>
+-->
+                <NODEREF id="table"/>
             </DESCENDANTS>
         </NODE>
 
+        <!-- board -->
+        <NODE id="board_play">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="board" args="1 1 4"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- white piece -->
+        <NODE id="white_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="white"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- black piece -->
+        <NODE id="black_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="black"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- mix piece -->
+        <NODE id="mix_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="mix"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces not yet played -->
+        <NODE id="piece_support">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <NODEREF id="base"/>
+                <NODEREF id="top_lateral"/>
+                <NODEREF id="bottom_lateral"/>
+                <NODEREF id="right_lateral"/>
+                <NODEREF id="left_lateral"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: base -->
+        <NODE id="base">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <SCALE sx="3" sy="0.1" sz="7"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: top lateral -->
+        <NODE id="top_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.37" y="0.2" z="0"/>
+            <SCALE sx="0.25" sy="0.5" sz="7"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: bottom lateral -->
+        <NODE id="bottom_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1.37" y="0.2" z="0"/>
+            <SCALE sx="0.25" sy="0.5" sz="7"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: right lateral -->
+        <NODE id="right_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0.2" z="3.37"/>
+            <SCALE sx="2.5" sy="0.5" sz="0.25"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces: left lateral -->
+        <NODE id="left_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0.2" z="-3.37"/>
+            <SCALE sx="2.5" sy="0.5" sz="0.25"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table for the game board-->
+        <NODE id="table">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cover"/>
+                <NODEREF id="left_leg"/>
+                <NODEREF id="right_leg"/>
+                <NODEREF id="left_back_leg"/>
+                <NODEREF id="right_back_leg"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: cover -->
+        <NODE id="cover">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="4" z="0"/>
+            <SCALE sx="4" sy="0.65" sz="4"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: left_leg -->
+        <NODE id="left_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1.67" y="2" z="1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: right_leg -->
+        <NODE id="right_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1.67" y="2" z="-1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: left_back_leg -->
+        <NODE id="left_back_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.67" y="2" z="1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: right_back_leg -->
+        <NODE id="right_back_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.67" y="2" z="-1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+<!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- -->  <!-- -->
+                        <!-- EXTRA -->
         <!-- generic cube -->
         <NODE id="cube">
             <MATERIAL id="defaultMaterial"/>
@@ -289,45 +485,5 @@
                 <LEAF type="obj" args="AlmondBlossom"/>
             </DESCENDANTS>
         </NODE>
-
-        <!-- board -->
-        <NODE id="board_play">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <DESCENDANTS>
-                <LEAF type="board" args="1 1 4"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- white piece -->
-        <NODE id="white_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-            
-            <DESCENDANTS>
-                <LEAF type="piece" args="white"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- white piece -->
-        <NODE id="black_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <DESCENDANTS>
-                <LEAF type="piece" args="black"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- MIX piece -->
-        <NODE id="mix_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <DESCENDANTS>
-                <LEAF type="piece" args="mix"/>
-            </DESCENDANTS>
-        </NODE>
-  </NODES>
+    </NODES>
 </SCENE>
