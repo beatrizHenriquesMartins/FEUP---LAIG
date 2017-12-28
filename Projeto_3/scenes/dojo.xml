@@ -122,8 +122,9 @@
                 <NODEREF id="white_piece"/> 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
--->
                 <NODEREF id="piece_support"/>
+-->
+                <NODEREF id="table"/>
             </DESCENDANTS>
         </NODE>
 
@@ -245,6 +246,87 @@
             </DESCENDANTS>
         </NODE>
 
+        <!-- table for the game board-->
+        <NODE id="table">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cover"/>
+                <NODEREF id="left_leg"/>
+                <NODEREF id="right_leg"/>
+                <NODEREF id="left_back_leg"/>
+                <NODEREF id="right_back_leg"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: cover -->
+        <NODE id="cover">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="4" z="0"/>
+            <SCALE sx="4" sy="0.65" sz="4"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: left_leg -->
+        <NODE id="left_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1.67" y="2" z="1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: right_leg -->
+        <NODE id="right_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1.67" y="2" z="-1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: left_back_leg -->
+        <NODE id="left_back_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.67" y="2" z="1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- table: right_back_leg -->
+        <NODE id="right_back_leg">
+            <MATERIAL id ="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.67" y="2" z="-1.67"/>
+            <SCALE sx="0.65" sy="4" sz="0.65"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+<!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- -->  <!-- -->
+                        <!-- EXTRA -->
         <!-- generic cube -->
         <NODE id="cube">
             <MATERIAL id="defaultMaterial"/>
