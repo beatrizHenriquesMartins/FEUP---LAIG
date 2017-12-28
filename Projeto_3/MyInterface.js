@@ -35,6 +35,46 @@ MyInterface.prototype.init = function(application) {
     this.gui = new dat.GUI();
     
     // add a group of controls (and open/expand by defult)
+    let menu = {
+        undo: 'cena',
+        replay: 'replay',
+        scene: this.scene
+    };
+
+    let config = {
+        newGame: this.requestNewConfig,
+        gameMode: GAMEMODE.P1_VS_P2,
+        botDifficulty: BOT_DIFFICULTY.EASY,
+        theme: 0,
+        loadTheme: this.loadTheme,
+        scene: this.scene
+    };
+
+
+    this.gui.add(menu, 'undo').name('Undo');
+    this.gui.add(menu, 'replay').name('Replay');
+    let configFolder = this.gui.addFolder('Configuration');
+    configFolder.add(config, 'gameMode', {
+        'P1 vs P2': GAMEMODE.P1_VS_P2,
+        'P1 vs BOT': GAMEMODE.P1_VS_BOT,
+        'BOT vs BOT': GAMEMODE.BOT_VS_BOT,
+    }).name('Game Mode');
+
+    configFolder.add(config, 'botDifficulty', {
+        'Easy': BOT_DIFFICULTY.EASY,
+        'Hard': BOT_DIFFICULTY.HARD
+    }).name('Bot Difficulty');
+
+    
+    configFolder.add(config, 'theme', {
+        'Dojo': 0,
+        'Garden': 1
+    }).name('Theme');
+    configFolder.add(config, 'loadTheme').name('Load Theme');
+    configFolder.add(config, 'newGame').name('New Game');
+    configFolder.open();
+
+ 
     
     return true;
 };
@@ -72,9 +112,10 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
  */
 MyInterface.prototype.addLightsGroup = function(lights) {
 
+    this.gui.removeFolder("Lights");
     var group = this.gui.addFolder("Lights");
     group.open();
-
+    
     // add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
     // e.g. this.option1=true; this.option2=false;
 
@@ -84,5 +125,29 @@ MyInterface.prototype.addLightsGroup = function(lights) {
             group.add(this.scene.lightValues, key);
         }
     }
+
+ 
 }
+
+/**
+ * Loads theme.
+ */
+MyInterface.prototype.loadTheme = function () {
+    this.scene.loadTheme(this.theme);
+};
+
+MyInterface.prototype.requestNewConfig = function(){
+    this.scene.newGame.bind(this.scene,this.gameMode,this.botDifficulty);
+}
+
+dat.GUI.prototype.removeFolder = function(name) {
+    var folder = this.__folders[name];
+    if (!folder) {
+      return;
+    }
+    folder.close();
+    this.__ul.removeChild(folder.domElement.parentNode);
+    delete this.__folders[name];
+    this.onResize();
+  }
 

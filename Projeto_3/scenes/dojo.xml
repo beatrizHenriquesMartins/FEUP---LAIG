@@ -116,14 +116,14 @@
             <TEXTURE id="null"/>
         
             <DESCENDANTS>
-<!-- TESTE
+
                 <NODEREF id="board_play"/>
                 <NODEREF id="mix_piece"/>
                 <NODEREF id="white_piece"/> 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
                 <NODEREF id="piece_support"/>
--->
+
                 <NODEREF id="table"/>
             </DESCENDANTS>
         </NODE>

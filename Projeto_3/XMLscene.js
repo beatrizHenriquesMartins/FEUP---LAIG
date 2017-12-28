@@ -19,6 +19,7 @@ function XMLscene(interface) {
     this.selectablesValues = {};
     this.scaleFactor =1.0;
     this.selectionColor = [0, 128, 255, 1];
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -42,17 +43,10 @@ XMLscene.prototype.init = function(application) {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
-   /* this.Shaders = [
-        new CGFshader(this.gl,"Shaders/myShader.vert","Shaders/myShader.frag"),
-        new CGFshader(this.gl,"Shaders/myShader2.vert","Shaders/myShader2.frag"),
-        new CGFshader(this.gl, "Shaders/myShader3.vert","Shaders/myShader3.frag")
-    ]
-    this.updateScaleFactor();*/
+    this.theme = 0;
     this.setPickEnabled(true);
     this.clearPickRegistration();
-    this.game  = new Game();
-    this.game.newGame(this,0);
-    this.game.startGame();
+    this.game  = new Game(this);
     this.axis = new CGFaxis(this);
     
 }
@@ -95,11 +89,22 @@ XMLscene.prototype.initLights = function() {
 
 }
 
-XMLscene.prototype.updateScaleFactor = function(v){
-    this.Shaders[0].setUniformsValues({displacement: this.scaleFactor});
-    this.Shaders[1].setUniformsValues({displacement:this.scaleFactor});
-	this.Shaders[2].setUniformsValues({displacement: this.scaleFactor});
+XMLscene.prototype.newGame = function(gameMode,botDifficulty){
+    this.game.newGame(gameMode);
+    this.game.startGame();
 }
+
+XMLscene.prototype.loadTheme = function(theme){
+
+    if(theme === 0 ){
+        let filename = getUrlVars()['file'] || "dojo.xml";
+        this.graph = new MySceneGraph(filename,this);
+    }else if(theme === 1){
+        let filename = getUrlVars()['file'] || "garden.xml";
+        this.graph = new MySceneGraph(filename,this);
+    }
+}
+
 
 /**
  * Initializes selectables
@@ -117,6 +122,7 @@ XMLscene.prototype.logPicking = function (){
                 var obj = this.pickResults[i][0];
                 if(obj){
                     var customId = this.pickResults[i][1];
+                    console.log(obj);
                     console.log("Picked object" + obj + ",with pick id " + customId );
                     this.clearPickRegistration();
                 }
@@ -150,7 +156,7 @@ XMLscene.prototype.onGraphLoaded = function(){
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
-    this.interface.addShadersGroup(this.graph.selectables);
+    //this.interface.addShadersGroup(this.graph.selectables);
 
     //var suzanne = new MyObj(this, 'suzanne');
 }
@@ -164,17 +170,11 @@ XMLscene.prototype.update = function(currTime) {
     if(!this.graph.loadedOk)
         return "Error processing graph";
 
+  
     this.deltaTime = currTime - this.lastUpdateTime || 0.0;
 
     this.game.update(this.deltaTime);
   
-    /*this.Shaders[0].setUniformsValues({amplitude: (1+Math.sin(this.frame))/2});
-
-    this.Shaders[1].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
-    
-    this.Shaders[2].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});*/
-
-   // this.plHandler.makeRequest("handshake");
     this.frame+=this.deltaTime/1000;
     this.graph.update(this.deltaTime);
 
@@ -191,20 +191,20 @@ XMLscene.prototype.display = function() {
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-    this.logPicking();
-	this.clearPickRegistration();
+
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
 
+    
+    this.logPicking();
+    this.clearPickRegistration();
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
-
+   
     this.pushMatrix();
 
-    //this.Shaders[0].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
-    //this.Shaders[1].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
-    //this.Shaders[2].setUniformsValues({selectionColor: [this.selectionColor[0]/255,this.selectionColor[1]/255,this.selectionColor[2]/255,this.selectionColor[3]]});
+    
     
     if (this.graph.loadedOk){
         // Applies initial transformations.
@@ -228,16 +228,6 @@ XMLscene.prototype.display = function() {
             }
         }
 
-        var j = 0;
-        for(var key in this.selectablesValues){
-            if(this.selectablesValues.hasOwnProperty(key)){
-                if(this.selectablesValues[key]){
-                    this.graph.nodes[key].selectable = true;
-                }else{
-                    this.graph.nodes[key].selectable = false;
-                }
-            }
-        }
 
         // Displays the scene.
         this.graph.displayScene();

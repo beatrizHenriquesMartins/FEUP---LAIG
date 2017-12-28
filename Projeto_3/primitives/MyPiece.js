@@ -43,8 +43,8 @@ function MyPiece(scene, type_piece) {
     this.material_black.setShininess(0, 0, 0, 1);
     this.material_black.setShininess(120);
 
-    this.body = new MyCompleteCylinder(this.scene, 1, 0.5, 0.5, 200, 200, 1, 1);
-    this.circle = new MyCircle(this.scene, 200, 0.25);
+    this.body = new MyCompleteCylinder(this.scene, 1, 0.5, 0.5, 30, 30, 1, 1);
+    this.circle = new MyCircle(this.scene, 30, 0.25);
 
     this.initBuffers();
 };

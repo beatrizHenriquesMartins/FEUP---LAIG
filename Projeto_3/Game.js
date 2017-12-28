@@ -2,14 +2,16 @@ class Game {
     /**
      * Constructor for the Game classe, initializes the prolog Handler
      */
-    constructor() {
+    constructor(scene) {
         this.gameStatus = GAMESTATE.NOT_RUNNING;
         this.boards = [];
         this.movements = [];
         this.whitePieces = [];
         this.blackPieces = [];
         this.scores = [];
+        this.scene = scene;
         this.board;
+        this.gameMode;
 
     }
     /**
@@ -17,9 +19,8 @@ class Game {
      * @param {*} scene 
      * @param {*} gameMode 
      */
-    newGame(scene, gameMode) {
+    newGame(gameMode) {
         this.gameStatus = GAMESTATE.NOT_RUNNING;
-        this.scene = scene;
         this.gameMode = gameMode;
         this.currentPlayer = PLAYERS.WHITE;
         this.botIsPlaying = false;

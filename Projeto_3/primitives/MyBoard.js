@@ -41,9 +41,9 @@ function MyBoard(scene, width, heigh, len) {
     // primitives
     this.cube = new MyUnitCubeQuad(scene);
     this.split =  new MyQuad(scene, 0.0, 0.5, 0.5, 0.0);
-    this.ball =  new MyCircle(scene, 200, 0.25);
+   
 
-    this.balls = Array(25).fill(this.ball);
+    this.balls = Array(25).fill({pick: false, circle : new MyCircle(scene,30,0.25)});
 
     this.initBuffers();
 };
@@ -178,8 +178,12 @@ MyBoard.prototype.drawBallFilled = function(index) {
     this.scene.pushMatrix();
         this.scene.translate(0, (1/3 + 0.01), 0);
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
-        this.scene.registerForPick(index+1,this.balls[index]);
-        this.balls[index].display();
+        if(this.balls[index].pick){
+            this.balls[index].circle.pick = 'board';
+            this.scene.registerForPick((index+1),this.balls[index].circle);
+        }
+        
+        this.balls[index].circle.display();
     this.scene.popMatrix();
 };
 
@@ -213,6 +217,7 @@ MyBoard.prototype.draw_all_ball = function() {
                 }
                 ballind++;
             }
+        
         this.scene.popMatrix();
         
     }
@@ -223,7 +228,7 @@ MyBoard.prototype.draw_all_ball = function() {
  */
 MyBoard.prototype.display = function () {
 
-    this.scene.clearPickRegistration();
+   
     //quadrados
     this.drawCube();
     
