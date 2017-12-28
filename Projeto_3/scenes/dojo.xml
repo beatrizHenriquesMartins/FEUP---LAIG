@@ -128,6 +128,81 @@
                <!-- <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/> -->
 
+                <NODEREF id="piece_support"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- board -->
+        <NODE id="board_play">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="board" args="1 1 4"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- white piece -->
+        <NODE id="white_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="white"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- black piece -->
+        <NODE id="black_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="black"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- mix piece -->
+        <NODE id="mix_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="mix"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- support for pieces not yet played -->
+        <NODE id="piece_support">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <NODEREF id="base"/>
+                <NODEREF id="right_lateral"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="base">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="glass"/>
+
+            <SCALE sx="3" sy="0.1" sz="7"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="right_lateral">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.11" y="0.12" z="0.1"/>
+            <SCALE sx="0.25" sy="0.05" sz="7"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
             </DESCENDANTS>
         </NODE>
 
