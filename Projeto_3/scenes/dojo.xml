@@ -118,15 +118,18 @@
             <DESCENDANTS>
 <!-- TESTE
                 <NODEREF id="cube"/>
-                <NODEREF id="teste_blender"/>-->
-                <NODEREF id="board_play"/>
- <!--               <NODEREF id="almond_bloom"/>
+                <NODEREF id="teste_blender"/>
 -->
-            <!--    <NODEREF id="mix_piece"/> -->
-
+                <NODEREF id="board_play"/>
+<!--
+                <NODEREF id="almond_bloom"/>
+                <NODEREF id="mix_piece"/>
+-->
                 <NODEREF id="white_piece"/> 
-               <!-- <NODEREF id="black_piece"/>
-                <NODEREF id="mix_piece"/> -->
+<!-- 
+                <NODEREF id="black_piece"/>
+                <NODEREF id="mix_piece"/>
+-->
 
                 <NODEREF id="piece_support"/>
             </DESCENDANTS>
@@ -364,45 +367,5 @@
                 <LEAF type="obj" args="AlmondBlossom"/>
             </DESCENDANTS>
         </NODE>
-
-        <!-- board -->
-        <NODE id="board_play">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <DESCENDANTS>
-                <LEAF type="board" args="1 1 4"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- white piece -->
-        <NODE id="white_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-            
-            <DESCENDANTS>
-                <LEAF type="piece" args="white"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- white piece -->
-        <NODE id="black_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <DESCENDANTS>
-                <LEAF type="piece" args="black"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- MIX piece -->
-        <NODE id="mix_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <DESCENDANTS>
-                <LEAF type="piece" args="mix"/>
-            </DESCENDANTS>
-        </NODE>
-  </NODES>
+    </NODES>
 </SCENE>
