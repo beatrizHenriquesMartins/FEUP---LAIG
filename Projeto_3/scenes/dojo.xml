@@ -184,7 +184,7 @@
         <!-- support for pieces: base -->
         <NODE id="base">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="glass"/>
+            <TEXTURE id="null"/>
 
             <SCALE sx="3" sy="0.1" sz="7"/>
 
@@ -196,7 +196,7 @@
         <!-- support for pieces: top lateral -->
         <NODE id="top_lateral">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="glass"/>
+            <TEXTURE id="null"/>
 
             <TRANSLATION x="-1.37" y="0.2" z="0"/>
             <SCALE sx="0.25" sy="0.5" sz="7"/>
@@ -209,7 +209,7 @@
         <!-- support for pieces: bottom lateral -->
         <NODE id="bottom_lateral">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="glass"/>
+            <TEXTURE id="null"/>
 
             <TRANSLATION x="1.37" y="0.2" z="0"/>
             <SCALE sx="0.25" sy="0.5" sz="7"/>
