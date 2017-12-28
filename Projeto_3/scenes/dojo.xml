@@ -89,6 +89,11 @@
             <file path="images/glass.jpg"/>
             <amplif_factor s="4" t="4"/>
         </TEXTURE>
+
+        <TEXTURE id="wood_for_table">
+            <file path="images/japoneseWood.jpg"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
     </TEXTURES>
     
     <!-- Materials Group -->
@@ -123,10 +128,10 @@
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
 -->
-                <NODEREF id="table"/>
 <!-- a não usar
                 <NODEREF id="piece_support"/>
--->                
+-->
+                <NODEREF id="table"/>           
             </DESCENDANTS>
         </NODE>
 
@@ -251,7 +256,7 @@
         <!-- table for the game board-->
         <NODE id="table">
             <MATERIAL id ="defaultMaterial"/>
-            <TEXTURE id="null"/>
+            <TEXTURE id="wood_for_table"/>
 
             <TRANSLATION x="4" y="0" z="4"/>
 
@@ -334,7 +339,7 @@
         <!-- generic cube -->
         <NODE id="cube">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
+            <TEXTURE id="wood_for_table"/>
         
             <DESCENDANTS>
                 <NODEREF id="face_1"/>
@@ -441,20 +446,26 @@
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
+            <TRANSLATION x="-0.5" y="-0.5" z="0"/>
+
             <DESCENDANTS>
-                <LEAF type="rectangle" args="0.0 -0.5 -0.5 0.0"/>
+                <LEAF type="rectangle" args="0.0 0.5 0.5 0.0"/>
             </DESCENDANTS>
         </NODE>
         
         <!-- another part of generic face -->
+        <!--    
+                |_|_|
+                |_|X| 
+         -->
         <NODE id="part_2">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="0.5" y="0" z="0"/>
+            <TRANSLATION x="0" y="-0.5" z="0"/>
 
             <DESCENDANTS>
-                <LEAF type="rectangle" args="0.0 -0.5 -0.5 0.0"/>
+                <LEAF type="rectangle" args="0.0 0.5 0.5 0.0"/>
             </DESCENDANTS>
         </NODE>
 
@@ -477,16 +488,6 @@
 
             <DESCENDANTS>
                 <LEAF type="rectangle" args="0.0 0.5 0.5 0.0"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- teste de ficheiro blender -->
-        <NODE id="teste_blender">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <DESCENDANTS>
-                <LEAF type="obj" args="AlmondBlossom"/>
             </DESCENDANTS>
         </NODE>
     </NODES>
