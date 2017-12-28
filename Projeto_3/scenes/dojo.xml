@@ -122,9 +122,11 @@
                 <NODEREF id="white_piece"/> 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
-                <NODEREF id="piece_support"/>
 -->
                 <NODEREF id="table"/>
+<!-- a não usar
+                <NODEREF id="piece_support"/>
+-->                
             </DESCENDANTS>
         </NODE>
 
@@ -251,6 +253,8 @@
             <MATERIAL id ="defaultMaterial"/>
             <TEXTURE id="null"/>
 
+            <TRANSLATION x="4" y="0" z="4"/>
+
             <DESCENDANTS>
                 <NODEREF id="cover"/>
                 <NODEREF id="left_leg"/>
@@ -265,8 +269,8 @@
             <MATERIAL id ="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="0" y="4" z="0"/>
-            <SCALE sx="4" sy="0.65" sz="4"/>
+            <TRANSLATION x="0" y="2.5" z="0"/>
+            <SCALE sx="6" sy="0.65" sz="6"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
@@ -278,8 +282,8 @@
             <MATERIAL id ="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="1.67" y="2" z="1.67"/>
-            <SCALE sx="0.65" sy="4" sz="0.65"/>
+            <TRANSLATION x="2.72" y="1.375" z="2.72"/>
+            <SCALE sx="0.55" sy="2.5" sz="0.55"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
@@ -291,8 +295,8 @@
             <MATERIAL id ="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="1.67" y="2" z="-1.67"/>
-            <SCALE sx="0.65" sy="4" sz="0.65"/>
+            <TRANSLATION x="2.72" y="1.375" z="-2.72"/>
+            <SCALE sx="0.55" sy="2.5" sz="0.55"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
@@ -304,8 +308,8 @@
             <MATERIAL id ="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="-1.67" y="2" z="1.67"/>
-            <SCALE sx="0.65" sy="4" sz="0.65"/>
+            <TRANSLATION x="-2.72" y="1.375" z="2.72"/>
+            <SCALE sx="0.55" sy="2.5" sz="0.55"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
@@ -317,8 +321,8 @@
             <MATERIAL id ="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="-1.67" y="2" z="-1.67"/>
-            <SCALE sx="0.65" sy="4" sz="0.65"/>
+            <TRANSLATION x="-2.72" y="1.375" z="-2.72"/>
+            <SCALE sx="0.55" sy="2.5" sz="0.55"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
