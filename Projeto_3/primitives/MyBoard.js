@@ -43,6 +43,8 @@ function MyBoard(scene, width, heigh, len) {
     this.split =  new MyQuad(scene, 0.0, 0.5, 0.5, 0.0);
     this.ball =  new MyCircle(scene, 200, 0.25);
 
+    this.balls = Array(25).fill(this.ball);
+
     this.initBuffers();
 };
   
@@ -172,11 +174,12 @@ MyBoard.prototype.draw_all_horizontal_splits = function () {
  * draw one little ball filled
  * o
  */
-MyBoard.prototype.drawBallFilled = function() {
+MyBoard.prototype.drawBallFilled = function(index) {
     this.scene.pushMatrix();
         this.scene.translate(0, (1/3 + 0.01), 0);
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
-        this.ball.display();
+        this.scene.registerForPick(index+1,this.balls[index]);
+        this.balls[index].display();
     this.scene.popMatrix();
 };
 
@@ -192,6 +195,7 @@ MyBoard.prototype.drawBallFilled = function() {
  * o   o   o   o   o   o
  */
 MyBoard.prototype.draw_all_ball = function() {
+    var ballind = 0;
     for (let k = 0; k < (this.len + 1); k++) {
         this.scene.pushMatrix();
             if(k !=0){
@@ -200,15 +204,17 @@ MyBoard.prototype.draw_all_ball = function() {
 
             for (let m = 0; m < (this.len + 1); m++) {
                 if(m === 0){
-                    this.drawBallFilled();
+                    this.drawBallFilled(ballind);
                 }else{
                     this.scene.pushMatrix();
                         this.scene.translate(((this.width * m) - (0.125 / 2)), 0, 0);
-                        this.drawBallFilled();
+                        this.drawBallFilled(ballind);
                     this.scene.popMatrix();
                 }
+                ballind++;
             }
         this.scene.popMatrix();
+        
     }
 };
 
@@ -216,6 +222,8 @@ MyBoard.prototype.draw_all_ball = function() {
  * draw de complete board
  */
 MyBoard.prototype.display = function () {
+
+    this.scene.clearPickRegistration();
     //quadrados
     this.drawCube();
     
