@@ -36,7 +36,7 @@ function MyBoard(scene, width, heigh, len) {
 	this.material_1.setAmbient(0.1, 0.1, 0.1, 1);
 	this.material_1.setDiffuse(0.1, 0.19, 0.3, 1);
 	this.material_1.setSpecular(0.5, 0.5, 0.5, 0);	
-	this.material_1.setShininess(120);
+	this.material_1.setShininess(100000);
     
     // primitives
     this.cube = new MyUnitCubeQuad(scene);

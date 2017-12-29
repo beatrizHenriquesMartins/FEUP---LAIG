@@ -13,8 +13,10 @@ function XMLscene(interface) {
     this.Shader = 0;
     this.Node= 0;
     this.frame = 0;
-
+    this.cameras = [];
     this.lightValues = {};
+    this.changingCamera  = false;
+    this.currentCamera = 0;
 
     this.selectablesValues = {};
     this.scaleFactor =1.0;
@@ -74,7 +76,7 @@ XMLscene.prototype.initLights = function() {
             
             this.lights[i].setSpecular(light[4][0], light[4][1], light[4][2], light[4][3]);
 
-            this.lights[i].setVisible(true);
+            this.lights[i].setVisible(false);
             
             if (light[0])
                 this.lights[i].enable();
@@ -98,9 +100,13 @@ XMLscene.prototype.loadTheme = function(theme){
 
     if(theme === 0 ){
         let filename = getUrlVars()['file'] || "dojo.xml";
+        this.cameras = [];
+        this.initCameras();
         this.graph = new MySceneGraph(filename,this);
     }else if(theme === 1){
         let filename = getUrlVars()['file'] || "garden.xml";
+        this.cameras = [];
+        this.initCameras();
         this.graph = new MySceneGraph(filename,this);
     }
 }
@@ -136,7 +142,10 @@ XMLscene.prototype.logPicking = function (){
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
-    this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(15, 15, 15),vec3.fromValues(0, 0, 0));
+
+    this.cameras[0] = new CGFcamera(0.4,0.1,500,vec3.fromValues(0, 5, 5),vec3.fromValues(0,1,0));
+    this.cameras[1] = new CGFcamera(0.4,0.1,500,vec3.fromValues(0, 5, -3),vec3.fromValues(0,0,3));
+    this.camera = this.cameras[this.currentCamera];
 }
 
 /* Handler called when the graph is finally loaded.
@@ -152,6 +161,8 @@ XMLscene.prototype.onGraphLoaded = function(){
 
     this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
 
+    this.camera = this.cameras[this.currentCamera];
+    this.interface.setActiveCamera(this.camera);
     this.initLights();
 
     // Adds lights group.
@@ -159,6 +170,15 @@ XMLscene.prototype.onGraphLoaded = function(){
     //this.interface.addShadersGroup(this.graph.selectables);
 
     //var suzanne = new MyObj(this, 'suzanne');
+}
+
+XMLscene.prototype.changeCamera = function(){
+
+    if(!this.changingCamera){
+        this.changingCamera = true;
+        this.cameraChangedTime = 0;
+    }
+
 }
 
 
@@ -177,6 +197,7 @@ XMLscene.prototype.update = function(currTime) {
   
     this.frame+=this.deltaTime/1000;
     this.graph.update(this.deltaTime);
+    this.animateCamera(this.deltaTime);
 
    //In the end
    this.lastUpdateTime = currTime;
@@ -217,7 +238,7 @@ XMLscene.prototype.display = function() {
         for (var key in this.lightValues) {
             if (this.lightValues.hasOwnProperty(key)) {
                 if (this.lightValues[key]) {
-                    this.lights[i].setVisible(true);
+                    this.lights[i].setVisible(false);
                     this.lights[i].enable();
                 }else {
                     this.lights[i].setVisible(false);
@@ -230,7 +251,9 @@ XMLscene.prototype.display = function() {
 
 
         // Displays the scene.
+        this.interface.setActiveCamera(this.camera);
         this.graph.displayScene();
+        
 
     }else{
 		// Draw axis
@@ -239,4 +262,59 @@ XMLscene.prototype.display = function() {
 
     this.popMatrix();
     // ---- END Background, camera and axis setup
+}
+
+
+XMLscene.prototype.animateCamera = function(deltaTime){
+    if(!this.changingCamera){
+        return;
+    }
+    if(this.cameraChangedTime > 1.5*0.95){
+        this.changingCamera = false;
+        this.currentCamera = (this.currentCamera + 1) % this.cameras.length;
+        this.camera = this.cameras[this.currentCamera];
+        return;
+
+    }
+
+    let currCamera = this.cameras[this.currentCamera];
+    let nextCamera = this.cameras[(this.currentCamera + 1) % this.cameras.length];
+
+    let targetCenter = midpoint(currCamera.target,nextCamera.target);
+    let posCenter = midpoint(currCamera.position,nextCamera.position);
+
+    let targetRadius = distance(targetCenter,nextCamera.target);
+    let positionRadius = distance(posCenter,nextCamera.position);
+    
+    this.cameraChangedTime += deltaTime/1000;
+    let cameraAngle = Math.PI * this.cameraChangedTime / 1.5;
+    let multiplier = this.currentCamera ? 1 : -1;
+
+    let targetPosition = [
+        targetCenter[0] + multiplier * targetRadius * Math.sin(cameraAngle),
+        targetCenter[1],
+        targetCenter[2] + multiplier*targetRadius * Math.cos(cameraAngle),
+        1
+    ];
+
+    let positionPos = [
+        posCenter[0] + multiplier*positionRadius*Math.sin(cameraAngle),
+        posCenter[1],
+        posCenter[2] + multiplier*positionRadius*Math.cos(cameraAngle),
+        1
+    ];
+
+    this.camera = new CGFcamera(currCamera.fov,currCamera.near,currCamera.far,positionPos,targetPosition);
+
+
+
+}
+
+function midpoint(pointA,pointB){
+    return [(pointA[0] + pointB[0]) / 2, (pointA[1] + pointB[1]) / 2, (pointA[2] + pointB[2]) / 2, (pointA[3] + pointB[3]) / 2];
+}
+
+
+function distance(pointA, pointB) {
+    return Math.sqrt(Math.pow(pointA[0] - pointB[0], 2) + Math.pow(pointA[1] - pointB[1], 2) + Math.pow(pointA[2] - pointB[2], 2));
 }

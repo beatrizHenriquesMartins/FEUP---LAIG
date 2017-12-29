@@ -151,3 +151,28 @@ dat.GUI.prototype.removeFolder = function(name) {
     this.onResize();
   }
 
+
+  /**
+ * processKeyboard
+ * @param event {Event}
+ */
+MyInterface.prototype.processKeyboard = function (event) {
+	// call CGFinterface default code (omit if you want to override)
+	CGFinterface.prototype.processKeyboard.call(this, event);
+
+	// Check key codes e.g. here: http://www.asciitable.com/
+	// or use String.fromCharCode(event.keyCode) to compare chars
+
+	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
+	switch (event.keyCode || event.which) {
+        case(107):
+            this.scene.changeCamera();
+            break;
+
+	};
+	var self = this;
+	//Verifires when a key has been released (any key)
+	window.onkeyup = function (e) {
+		
+	}
+};
