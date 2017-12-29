@@ -288,18 +288,18 @@ XMLscene.prototype.animateCamera = function(deltaTime){
     
     this.cameraChangedTime += deltaTime/1000;
     let cameraAngle = Math.PI * this.cameraChangedTime / 1.5;
-    let multiplier = this.currentCamera ? 1 : -1;
+    let multiplier = this.currentCamera ? -1 : 1;
 
     let targetPosition = [
-        targetCenter[0] + multiplier * targetRadius * Math.sin(cameraAngle),
+        targetCenter[0] ,
         targetCenter[1],
-        targetCenter[2] + multiplier*targetRadius * Math.cos(cameraAngle),
+        targetCenter[2],
         1
     ];
 
     let positionPos = [
-        posCenter[0] + multiplier*positionRadius*Math.sin(cameraAngle),
-        posCenter[1],
+        posCenter[0] + multiplier*positionRadius*Math.sin(cameraAngle)*3,
+        posCenter[1]*2,
         posCenter[2] + multiplier*positionRadius*Math.cos(cameraAngle),
         1
     ];
