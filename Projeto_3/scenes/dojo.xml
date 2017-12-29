@@ -25,7 +25,8 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </LIGHT>
-<!--
+        
+        <!--
         <LIGHT id="light1">
             <enable value ="1" />
             <position x="30" y="12.5" z="0" w="1" />
@@ -41,7 +42,7 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </LIGHT>
--->
+        -->
 
         <LIGHT id="light3">
             <enable value ="1" />
@@ -93,6 +94,11 @@
 
         <TEXTURE id="wood_for_table">
             <file path="images/japoneseWood.jpg"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
+
+        <TEXTURE id="wood_for_windows">
+            <file path="images/wood_windows.jpg"/>
             <amplif_factor s="1" t="1"/>
         </TEXTURE>
     </TEXTURES>
@@ -357,7 +363,7 @@
         <!-- japonese window: window -->
         <NODE id="window">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="wood_for_table"/>
+            <TEXTURE id="wood_for_windows"/>
 
             <SCALE sx="3" sy="6.5" sz="0.1"/>
 
@@ -369,7 +375,7 @@
         <!-- japonese window: white plan -->
         <NODE id="white_plan">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="glass"/>
+            <TEXTURE id="null"/>
 
             <TRANSLATION x="-1.25" y="-3" z="0.06"/>
             <SCALE sx="5" sy="12" sz="1"/>
@@ -382,13 +388,16 @@
         <!-- japonese window: ridge -->
         <NODE id="ridge">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
+            <TEXTURE id="wood_for_windows"/>
 
             <DESCENDANTS>
                 <NODEREF id="ridge_top"/>
                 <NODEREF id="ridge_bottom"/>
                 <NODEREF id="ridge_left"/>
                 <NODEREF id="ridge_right"/>
+                <NODEREF id="div_1"/>
+                <NODEREF id="div_2"/>
+                <NODEREF id="div_3"/>
             </DESCENDANTS>
         </NODE>
 
@@ -399,7 +408,6 @@
 
             <TRANSLATION x="0" y="3" z="0.08"/>
             <SCALE sx="2.55" sy="0.05" sz="0.05"/>
-
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
@@ -432,6 +440,45 @@
             </DESCENDANTS>
         </NODE>
 
+        <!-- japonese window: glass div (1) -->
+        <NODE id="div_1">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: glass div (2) -->
+        <NODE id="div_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="1.5" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: glass div (3) -->
+        <NODE id="div_3">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="-1.5" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
         <!-- japonese window: right ridge -->
         <NODE id="ridge_right">
             <MATERIAL id="defaultMaterial"/>
@@ -444,6 +491,7 @@
                 <NODEREF id="cube"/>
             </DESCENDANTS>
         </NODE>
+        
 <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- -->  <!-- -->
                         <!-- EXTRA -->
         <!-- generic cube -->
