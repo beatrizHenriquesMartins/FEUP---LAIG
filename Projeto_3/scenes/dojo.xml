@@ -25,7 +25,8 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </LIGHT>
-
+        
+        <!--
         <LIGHT id="light1">
             <enable value ="1" />
             <position x="30" y="12.5" z="0" w="1" />
@@ -41,6 +42,7 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </LIGHT>
+        -->
 
         <LIGHT id="light3">
             <enable value ="1" />
@@ -94,6 +96,26 @@
             <file path="images/japoneseWood.jpg"/>
             <amplif_factor s="1" t="1"/>
         </TEXTURE>
+
+        <TEXTURE id="wood_for_windows">
+            <file path="images/wood_windows.jpg"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
+
+        <TEXTURE id="japonese_carpet">
+            <file path="images/materialFloor.jpg"/>
+            <amplif_factor s="0.5" t="0.5"/>
+        </TEXTURE>
+
+        <TEXTURE id="materialStrip">
+            <file path="images/stripMaterial.png"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
+
+        <TEXTURE id="materialWalls">
+            <file path="images/wallMaterial.jpg"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
     </TEXTURES>
     
     <!-- Materials Group -->
@@ -105,6 +127,14 @@
             <diffuse r="0.4" g="0.4" b="0.4" a="1" />
             <ambient r="0.4" g="0.4" b="0.4" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
+        </MATERIAL>
+
+        <MATERIAL id="carriageMaterial">
+            <shininess value="1"/>
+            <specular r="0.807" g="0.807" b="0.0" a="1"/>
+            <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+            <ambient r="0.0" g="0.0" b="0.0" a="1" />
+            <emission r="0.1" g="0.1" b="0.1" a="1" />
         </MATERIAL>
     </MATERIALS>
     
@@ -121,146 +151,182 @@
             <TEXTURE id="null"/>
         
             <DESCENDANTS>
+<<<<<<< HEAD
 
                 <NODEREF id="board_play"/>
     <!--            <NODEREF id="mix_piece"/>
+=======
+                <!--
+                <NODEREF id="mix_piece"/>
+>>>>>>> Dojo
                 <NODEREF id="white_piece"/> 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
--->
-<!-- a não usar
-                <NODEREF id="piece_support"/>
--->
-                <NODEREF id="table"/>           
+                <NODEREF id="japonese_big_window"/>
+                <NODEREF id="pillow"/>
+                <NODEREF id="windows">
+                -->
+                <NODEREF id="walls"/>
+                <NODEREF id="floor"/>
+                <NODEREF id="table"/>
+                <NODEREF id="board_play"/>
             </DESCENDANTS>
         </NODE>
 
-        <!-- board -->
-        <NODE id="board_play">
+        <!-- walls -->
+        <NODE id="walls">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="1" y="2.8" z="1"/>
-            <DESCENDANTS>
-                <LEAF type="board" args="1 1 4"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- white piece -->
-        <NODE id="white_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="7" y="3.2" z="1.3"/>
-            <DESCENDANTS>
-                <LEAF type="piece" args="white"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- black piece -->
-        <NODE id="black_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-            <TRANSLATION x="7" y="3.2" z="7"/>
-            <DESCENDANTS>
-                <LEAF type="piece" args="black"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- mix piece -->
-        <NODE id="mix_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
+            <TEXTURE id="materialWalls"/>
 
             <DESCENDANTS>
-                <LEAF type="piece" args="mix"/>
+                <NODEREF id="wall_1"/>
+                <NODEREF id="wall_2"/>
             </DESCENDANTS>
         </NODE>
 
-        <!-- support for pieces not yet played -->
-        <NODE id="piece_support">
+        <!-- walls: wall 1 -->
+        <NODE id="wall_1">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <DESCENDANTS>
-                <NODEREF id="base"/>
-                <NODEREF id="top_lateral"/>
-                <NODEREF id="bottom_lateral"/>
-                <NODEREF id="right_lateral"/>
-                <NODEREF id="left_lateral"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- support for pieces: base -->
-        <NODE id="base">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <SCALE sx="3" sy="0.1" sz="7"/>
+            <TRANSLATION x="20" y="6.5" z="0"/>
+            <SCALE sx="40" sy="13" sz="0.1"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
             </DESCENDANTS>
         </NODE>
 
-        <!-- support for pieces: top lateral -->
-        <NODE id="top_lateral">
+        <!-- walls: wall 2-->
+        <NODE id="wall_2">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="-1.37" y="0.2" z="0"/>
-            <SCALE sx="0.25" sy="0.5" sz="7"/>
+            <TRANSLATION x="0" y="6.5" z="20"/>
+            <SCALE sx="0.1" sy="13" sz="40"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
             </DESCENDANTS>
         </NODE>
 
-        <!-- support for pieces: bottom lateral -->
-        <NODE id="bottom_lateral">
+        <!-- floor -->
+        <NODE id="floor">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="1.37" y="0.2" z="0"/>
-            <SCALE sx="0.25" sy="0.5" sz="7"/>
+            <DESCENDANTS>
+                <NODEREF id="base_floor"/>
+                <NODEREF id="floor_strips"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- floor: base -->
+        <NODE id="base_floor">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="japonese_carpet"/>
+
+            <TRANSLATION x="20" y="0" z="20"/>
+            <SCALE sx="40" sy="0.1" sz="40"/>
 
             <DESCENDANTS>
                 <NODEREF id="cube"/>
             </DESCENDANTS>
         </NODE>
 
-        <!-- support for pieces: right lateral -->
-        <NODE id="right_lateral">
+        <!-- floor: floor_strips -->
+        <NODE id="floor_strips">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="0" y="0.2" z="3.37"/>
-            <SCALE sx="2.5" sy="0.5" sz="0.25"/>
+            <TEXTURE id="materialStrip"/>
 
             <DESCENDANTS>
-                <NODEREF id="cube"/>
+                <NODEREF id="strip_1"/>
+                <NODEREF id="strip_2"/>                
+                <NODEREF id="strip_3"/>                
+                <NODEREF id="strip_4"/>                
+                <NODEREF id="strip_5"/>                
             </DESCENDANTS>
         </NODE>
 
-        <!-- support for pieces: left lateral -->
-        <NODE id="left_lateral">
+        <!-- floor: strip 1 -->
+        <NODE id="strip_1">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="0" y="0.2" z="-3.37"/>
-            <SCALE sx="2.5" sy="0.5" sz="0.25"/>
-
             <DESCENDANTS>
-                <NODEREF id="cube"/>
+                <NODEREF id="strip_generic_h"/>
             </DESCENDANTS>
         </NODE>
 
+        <!-- floor: strip 2 -->
+        <NODE id="strip_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0" z="9.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="strip_generic_h"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- floor: strip 3 -->
+        <NODE id="strip_3">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0" z="19.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="strip_generic_h"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- floor: strip 4 -->
+        <NODE id="strip_4">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0" z="29.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="strip_generic_h"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- floor: strip 5 -->
+        <NODE id="strip_5">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0" z="39.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="strip_generic_h"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- floor: generic strip horizontal -->
+        <NODE id="strip_generic_h">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0.05" y="0.055" z="0.5"/>
+            <ROTATION axis="x" angle="-90"/>
+            <SCALE sx="80" sy="1" sz="0.5"/>
+
+            <DESCENDANTS>
+                <LEAF type="rectangle" args="0.0 0.5 0.5 0.0"/>
+            </DESCENDANTS>
+        </NODE>
+        
         <!-- table for the game board-->
         <NODE id="table">
             <MATERIAL id ="defaultMaterial"/>
             <TEXTURE id="wood_for_table"/>
 
-            <TRANSLATION x="4" y="0" z="4"/>
+            <TRANSLATION x="20" y="0" z="20"/>
+            <SCALE sx="1.5" sy="1" sz="1.5"/>
 
             <DESCENDANTS>
                 <NODEREF id="cover"/>
@@ -336,12 +402,213 @@
             </DESCENDANTS>
         </NODE>
 
+        <!-- board -->
+        <NODE id="board_play">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="17" y="2.83" z="17"/>
+
+            <DESCENDANTS>
+                <LEAF type="board" args="1 1 4"/>
+            </DESCENDANTS>
+        </NODE>
+
+    <!--x
+        <NODE id="pillow">
+            <MATERIAL id="carriageMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="10" y="5" z="10"/>
+
+            <DESCENDANTS>
+                <LEAF type="obj" args="pillowB"/>
+            </DESCENDANTS>
+        </NODE>
+    -->
+        <!-- white piece -->
+        <NODE id="white_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="7" y="3.2" z="1.3"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="white"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- black piece -->
+        <NODE id="black_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="7" y="3.2" z="7"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="black"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- mix piece -->
+        <NODE id="mix_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="mix"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window -->
+        <NODE id="japonese_big_window">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <NODEREF id="window"/>
+                <NODEREF id="white_plan"/>
+                <NODEREF id="ridge"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: window -->
+        <NODE id="window">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="wood_for_windows"/>
+
+            <SCALE sx="3" sy="6.5" sz="0.1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: white plan -->
+        <NODE id="white_plan">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.25" y="-3" z="0.06"/>
+            <SCALE sx="5" sy="12" sz="1"/>
+
+            <DESCENDANTS>
+                <LEAF type="rectangle" args="0.0 0.5 0.5 0.0"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: ridge -->
+        <NODE id="ridge">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="wood_for_windows"/>
+
+            <DESCENDANTS>
+                <NODEREF id="ridge_top"/>
+                <NODEREF id="ridge_bottom"/>
+                <NODEREF id="ridge_left"/>
+                <NODEREF id="ridge_right"/>
+                <NODEREF id="div_1"/>
+                <NODEREF id="div_2"/>
+                <NODEREF id="div_3"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: top ridge -->
+        <NODE id="ridge_top">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="3" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: bottom ridge -->
+        <NODE id="ridge_bottom">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="-3" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: left ridge -->
+        <NODE id="ridge_left">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="-1.25" y="0" z="0.08"/>
+            <SCALE sx="0.05" sy="6" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: glass div (1) -->
+        <NODE id="div_1">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="0" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: glass div (2) -->
+        <NODE id="div_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="1.5" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: glass div (3) -->
+        <NODE id="div_3">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="-1.5" z="0.08"/>
+            <SCALE sx="2.55" sy="0.05" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- japonese window: right ridge -->
+        <NODE id="ridge_right">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1.25" y="0" z="0.08"/>
+            <SCALE sx="0.05" sy="6" sz="0.05"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
 <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- -->  <!-- -->
                         <!-- EXTRA -->
         <!-- generic cube -->
         <NODE id="cube">
             <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="wood_for_table"/>
+            <TEXTURE id="null"/>
         
             <DESCENDANTS>
                 <NODEREF id="face_1"/>
