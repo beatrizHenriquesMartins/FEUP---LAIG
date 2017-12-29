@@ -204,7 +204,7 @@ class Game {
 
     nextPlayer(){
         this.currentPlayer = (this.currentPlayer + 1) % 2;
-        this.scene.changeCamera()
+        //this.scene.changeCamera()
     }
 
     picked(pickedObj) {
@@ -221,10 +221,11 @@ class Game {
             if((this.validMoves.indexOf(pickedObj[1])) != -1){
         
                 this.validMoves = [];
-                this.pieceFocus.x = this.sceneBoard.coords[pickedObj[1]-1].x + 17 + this.sceneBoard.width; //alterar
-                this.pieceFocus.y = this.sceneBoard.coords[pickedObj[1]-1].y + 2.8 ; //alterar
-                this.pieceFocus.z= this.sceneBoard.coords[pickedObj[1]-1].z + 17 + this.sceneBoard.heigh;
+                this.pieceFocus.targetx = this.sceneBoard.coords[pickedObj[1]-1].x + 17 + this.sceneBoard.width; //alterar
+                this.pieceFocus.targety = this.sceneBoard.coords[pickedObj[1]-1].y + 2.8 ; //alterar
+                this.pieceFocus.targetz= this.sceneBoard.coords[pickedObj[1]-1].z + 17 + this.sceneBoard.heigh;
                 this.gameStatus = GAMESTATE.NORMAL //alterar
+                this.pieceFocus.setBezierPoints();
                 this.nextPlayer();
             }
             
@@ -274,6 +275,14 @@ class Game {
     update(deltaTime) {
         if (this.gameStatus === GAMESTATE.NOT_RUNNING)
             return;
+
+        for(var i = 0; i < this.sceneBlackPieces.length; i++){
+            if(i <= 4){
+                this.sceneMixPieces[i].update(deltaTime);
+            }
+            this.sceneBlackPieces[i].update(deltaTime);
+            this.sceneWhitePieces[i].update(deltaTime);
+        }
 
         if (this.gameStatus == GAMESTATE.NORMAL) {
 

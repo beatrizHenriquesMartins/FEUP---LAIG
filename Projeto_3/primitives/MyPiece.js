@@ -123,3 +123,49 @@ MyPiece.prototype.display = function () {
 
     this.scene.popMatrix();
 };
+
+/**
+ * Initializes the 4 points necessary to calculate the bezier path
+ */
+MyPiece.prototype.setBezierPoints = function(){
+    let p1 = [this.x,this.y,this.z];
+    if(this.type_piece == 'white' || this.player == PLAYERS.WHITE)
+        var p2 = [this.x,this.y+1,this.z-3]
+    else{
+        var p2 = [this.x,this.y+1,this.z+3]
+    }
+    let p3 = [this.targetx,this.targety+1,this.targetz];
+    let p4 = [this.targetx,this.targety,this.targetz];
+
+    this.p = [p1,p2,p3,p4];
+    
+    var animation = new BezierAnimation(this.scene,'id',5,this.p);
+    this.animation = new AnimationRef(mat4.create(),animation);
+    this.animate = true;
+    this.animation.enable = 1;
+}
+
+
+/**
+ * Updates piece position if it needs to
+ */
+MyPiece.prototype.update = function(deltaTime){
+    if(this.animate == false || this.targetx == null){
+        return;
+    }
+
+ 
+
+    this.animation.update(deltaTime);
+
+    console.log('HELLO',this.animation.Animation.x,this.animation.Animation.y,this.animation.Animation.z);
+    this.x = this.animation.Animation.x;
+    this.y = this.animation.Animation.y;
+    this.z = this.animation.Animation.z;
+
+    if(this.animation != null && this.animation.enable == 0)
+    this.animate = false;
+
+
+
+}
