@@ -143,8 +143,8 @@ XMLscene.prototype.logPicking = function () {
  */
 XMLscene.prototype.initCameras = function () {
 
-    this.cameras[0] = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 5, 5), vec3.fromValues(0, 1, 0));
-    this.cameras[1] = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 5, -3), vec3.fromValues(0, 0, 3));
+    this.cameras[0] = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(4, 5, 10), vec3.fromValues(4, 1, 4));
+    this.cameras[1] = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(4, 5, 0), vec3.fromValues(4, 2.5, 4));
     this.camera = this.cameras[this.currentCamera];
 }
 

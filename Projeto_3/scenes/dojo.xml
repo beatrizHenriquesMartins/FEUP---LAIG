@@ -151,14 +151,8 @@
             <TEXTURE id="null"/>
         
             <DESCENDANTS>
-<<<<<<< HEAD
-
-                <NODEREF id="board_play"/>
     <!--            <NODEREF id="mix_piece"/>
-=======
-                <!--
                 <NODEREF id="mix_piece"/>
->>>>>>> Dojo
                 <NODEREF id="white_piece"/> 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>

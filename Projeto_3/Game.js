@@ -140,14 +140,14 @@ class Game {
     createBlackPieces(){
         this.sceneBlackPieces = [];
         for(var i = 0; i < 10; i++){
-            this.sceneBlackPieces[i] = new MyPiece(this.scene,(i/2.0)+1,3.25,0,'black');
+            this.sceneBlackPieces[i] = new MyPiece(this.scene,(i/2.0)+17,2.83,16,'black');
         }
     }
 
     createWhitePieces(){
         this.sceneWhitePieces = [];
         for(var i = 0; i < 10; i++){
-            this.sceneWhitePieces[i] = new MyPiece(this.scene,(i/2.0)+1,3.25,7,'white'); 
+            this.sceneWhitePieces[i] = new MyPiece(this.scene,(i/2.0)+17,2.83,7+17,'white'); 
         }
     }
 
@@ -155,12 +155,12 @@ class Game {
         this.sceneMixPieces = [];
         for(var i = 0; i <5; i++){
             if(i <= 2){
-                this.sceneMixPieces[i] = new MyPiece(this.scene,((i+10)/2.0)+1,3.25,7,'mix');
+                this.sceneMixPieces[i] = new MyPiece(this.scene,((i+10)/2.0)+17,2.83,7+17,'mix');
                 this.sceneMixPieces[i].player = PLAYERS.WHITE;
             }
           
             else{
-                this.sceneMixPieces[i] = new MyPiece(this.scene,((i+7)/2.0)+1,3.25,0,'mix');
+                this.sceneMixPieces[i] = new MyPiece(this.scene,((i+7)/2.0)+17,2.83,16,'mix');
                 this.sceneMixPieces[i].player = PLAYERS.BLACK;
             }
         }
@@ -221,9 +221,9 @@ class Game {
             if((this.validMoves.indexOf(pickedObj[1])) != -1){
         
                 this.validMoves = [];
-                this.pieceFocus.x = this.sceneBoard.coords[pickedObj[1]-1].x + 1 + this.sceneBoard.width; //alterar
+                this.pieceFocus.x = this.sceneBoard.coords[pickedObj[1]-1].x + 17 + this.sceneBoard.width; //alterar
                 this.pieceFocus.y = this.sceneBoard.coords[pickedObj[1]-1].y + 2.8 ; //alterar
-                this.pieceFocus.z= this.sceneBoard.coords[pickedObj[1]-1].z + 1 + this.sceneBoard.heigh;
+                this.pieceFocus.z= this.sceneBoard.coords[pickedObj[1]-1].z + 17 + this.sceneBoard.heigh;
                 this.gameStatus = GAMESTATE.NORMAL //alterar
                 this.nextPlayer();
             }
