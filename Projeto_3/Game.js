@@ -202,6 +202,11 @@ class Game {
         console.log(this.validMoves);
     }
 
+    nextPlayer(){
+        this.currentPlayer = (this.currentPlayer + 1) % 2;
+        this.scene.changeCamera()
+    }
+
     picked(pickedObj) {
 
         console.log('SIM',this.gameStatus);
@@ -218,7 +223,9 @@ class Game {
                 this.validMoves = [];
                 this.pieceFocus.x = this.sceneBoard.coords[pickedObj[1]-1].x + 1 + this.sceneBoard.width; //alterar
                 this.pieceFocus.y = this.sceneBoard.coords[pickedObj[1]-1].y + 2.8 ; //alterar
-                this.pieceFocus.z= this.sceneBoard.coords[pickedObj[1]-1].z + 1 + this.sceneBoard.heigh; //alterar
+                this.pieceFocus.z= this.sceneBoard.coords[pickedObj[1]-1].z + 1 + this.sceneBoard.heigh;
+                this.gameStatus = GAMESTATE.NORMAL //alterar
+                this.nextPlayer();
             }
             
 
