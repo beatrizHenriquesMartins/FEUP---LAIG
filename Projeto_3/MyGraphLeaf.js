@@ -53,6 +53,7 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
             break;
         case 'board':
             this.primitive = new MyBoard(this.graph.scene, args[0], args[1], args[2]);
+            this.graph.scene.game.sceneBoard = this.primitive;
             console.log("depois de criar a primitiva board");
             break;
     }

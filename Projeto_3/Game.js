@@ -6,6 +6,7 @@ class Game {
         this.gameStatus = GAMESTATE.NOT_RUNNING;
         this.boards = [];
         this.movements = [];
+        
         this.pieces = [];
         this.whitePieces = [];
         this.blackPieces = [];
@@ -13,6 +14,7 @@ class Game {
         this.scene = scene;
         this.board;
         this.gameMode;
+        this.createPieces();
 
     }
     /**
@@ -129,6 +131,41 @@ class Game {
         }
     }
 
+    createPieces(){
+        this.createBlackPieces();
+        this.createWhitePieces();
+        this.createMixPieces();
+    }
+
+    createBlackPieces(){
+        this.sceneBlackPieces = [];
+        for(var i = 0; i < 10; i++){
+            this.sceneBlackPieces[i] = new MyPiece(this.scene,(i/2.0)+1,3.25,0,'black');
+        }
+    }
+
+    createWhitePieces(){
+        this.sceneWhitePieces = [];
+        for(var i = 0; i < 10; i++){
+            this.sceneWhitePieces[i] = new MyPiece(this.scene,(i/2.0)+1,3.25,7,'white'); 
+        }
+    }
+
+    createMixPieces(){
+        this.sceneMixPieces = [];
+        for(var i = 0; i <5; i++){
+            if(i <= 2){
+                this.sceneMixPieces[i] = new MyPiece(this.scene,((i+10)/2.0)+1,3.25,7,'mix');
+                this.sceneMixPieces[i].player = PLAYERS.WHITE;
+            }
+          
+            else{
+                this.sceneMixPieces[i] = new MyPiece(this.scene,((i+7)/2.0)+1,3.25,0,'mix');
+                this.sceneMixPieces[i].player = PLAYERS.BLACK;
+            }
+        }
+    }
+
     updateGameState() {
         switch (this.gameStatus) {
             case GAMEMODE.P1_VS_P2:
@@ -149,7 +186,7 @@ class Game {
     getValidMoves(data){
         var validMoves = JSON.parse(data.target.response);
         console.log(validMoves);
-
+        this.validMoves = [];
         var index = 0;
         for(let coord of validMoves){
             if(coord[0] == 0)
@@ -159,8 +196,10 @@ class Game {
             }
             this.validMoves[index] = aux;
             index++;
-            console.log(aux);
+            
         }
+        this.validMoves.sort(sortNumber);
+        console.log(this.validMoves);
     }
 
     picked(pickedObj) {
@@ -173,31 +212,54 @@ class Game {
 
 
         if (pickedObj[0].pick != null && pickedObj[0].pick === 'board' && this.gameStatus === GAMESTATE.PLACE_PIECE) {
-
-
-        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'white' ) {
-            if(this.gameStatus === GAMESTATE.NORMAL){
-                this.gameStatus == GAMESTATE.PLACE_PIECE;
+            var index;
+            if((this.validMoves.indexOf(pickedObj[1])) != -1){
+        
+                this.validMoves = [];
+                this.pieceFocus.x = this.sceneBoard.coords[pickedObj[1]-1].x + 1 + this.sceneBoard.width; //alterar
+                this.pieceFocus.y = this.sceneBoard.coords[pickedObj[1]-1].y + 2.8 ; //alterar
+                this.pieceFocus.z= this.sceneBoard.coords[pickedObj[1]-1].z + 1 + this.sceneBoard.heigh; //alterar
             }
             
-            getValidMoves(this.board,1,this.getValidMoves.bind(this));
+
+        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'white' ) {
+
+            if(this.gameStatus === GAMESTATE.NORMAL && this.currentPlayer === PLAYERS.WHITE){
+                this.pieceFocus = pickedObj[0];
+                this.gameStatus = GAMESTATE.PLACE_PIECE;
+                getValidMoves(this.board,1,this.getValidMoves.bind(this));
+            }else{
+                this.validMoves = [];
+                this.gameStatus = GAMESTATE.NORMAL;
+            }
+            
+          
 
 
         } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'black') {
-
-            if(this.gameStatus === GAMESTATE.NORMAL){
-                this.gameStatus == GAMESTATE.PLACE_PIECE;
+            if(this.gameStatus === GAMESTATE.NORMAL && this.currentPlayer === PLAYERS.BLACK){
+                this.pieceFocus = pickedObj[0];
+                this.gameStatus = GAMESTATE.PLACE_PIECE;
+                getValidMoves(this.board,2,this.getValidMoves.bind(this));
+            }else{
+                this.validMoves = [];
+                this.gameStatus = GAMESTATE.NORMAL;
             }
 
-            getValidMoves(this.board,2,this.getValidMoves.bind(this));
+            
 
         } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'mix') {
-
-            if(this.gameStatus === GAMESTATE.NORMAL){
-                this.gameStatus == GAMESTATE.PLACE_PIECE;
+            if(this.gameStatus === GAMESTATE.NORMAL && pickedObj[0].player === this.currentPlayer){
+                this.gameStatus = GAMESTATE.PLACE_PIECE;
+                this.pieceFocus = pickedObj[0];
+                getValidMoves(this.board,3,this.getValidMoves.bind(this));
+            }else {
+                this.validMoves = [];
+                this.gameStatus = GAMESTATE.NORMAL;
             }
+                
 
-            getValidMoves(this.board,3,this.getValidMoves.bind(this));
+            
 
         }
     }
@@ -210,6 +272,33 @@ class Game {
 
         }
 
+    }
+
+    display(){
+        for(let i = 0; i < this.sceneBlackPieces.length; i++){
+            this.scene.pushMatrix();
+            this.scene.registerForPick((i+1+25),this.sceneBlackPieces[i]);
+            this.sceneBlackPieces[i].display();
+            this.scene.clearPickRegistration();
+            this.scene.popMatrix();
+        }
+        for(let i = 0; i < this.sceneWhitePieces.length; i++){
+            this.scene.pushMatrix();
+            this.scene.registerForPick((i+1+35),this.sceneWhitePieces[i]);
+            this.sceneWhitePieces[i].display();
+            this.scene.clearPickRegistration();
+            this.scene.popMatrix();
+        }
+
+        for(let i = 0; i < this.sceneMixPieces.length; i++){
+            this.scene.pushMatrix();
+            this.scene.registerForPick((i+1+45),this.sceneMixPieces[i]);
+            this.sceneMixPieces[i].display();
+            this.scene.clearPickRegistration();
+            this.scene.popMatrix();
+        }
+
+        
     }
 
 }

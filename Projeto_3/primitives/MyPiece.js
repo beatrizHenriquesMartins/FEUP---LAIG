@@ -3,13 +3,21 @@
  * @param {*} scene - scene 
  * @param {*} type_piece - type of piece (white, black, mix)
  */
-function MyPiece(scene, type_piece) {
+function MyPiece(scene,x,y,z,type_piece) {
     CGFobject.call(this, scene);
 
     console.log("entrou no constructor my piece");
     console.log("type = ", type_piece);
 
     this.type_piece = type_piece;
+
+    this.x = x;
+    this.y = y;
+    this.z = z;
+
+    this.animate = false;
+
+    this.isPlayable = true;
 
     if(this.type_piece === "white"){
         console.log("Type of piece is the rigth type");
@@ -31,9 +39,9 @@ function MyPiece(scene, type_piece) {
 
     //white material
     this.material_white = new CGFappearance(this.scene);
-    this.material_white.setAmbient(0.9, 0.95, 0.9, 1);
-    this.material_white.setDiffuse(0.99, 0.99, 0.99, 1);
-    this.material_white.setShininess(1, 1, 1, 1);
+    this.material_white.setAmbient(0.686, 0.686, 0.686, 1);
+    this.material_white.setDiffuse(0.686, 0.686, 0.686, 1);
+    this.material_white.setShininess(0.686, 0.686, 0.686, 1);
     this.material_white.setShininess(120);
 
     //black material
@@ -43,8 +51,8 @@ function MyPiece(scene, type_piece) {
     this.material_black.setShininess(0, 0, 0, 1);
     this.material_black.setShininess(120);
 
-    this.body = new MyCompleteCylinder(this.scene, 1, 0.5, 0.5, 30, 30, 1, 1);
-    this.circle = new MyCircle(this.scene, 30, 0.25);
+    this.body = new MyCompleteCylinder(this.scene, 0.25, 0.25, 0.25, 30, 30, 1, 1);
+    this.circle = new MyCircle(this.scene, 30, 0.125);
 
     this.initBuffers();
 };
@@ -67,7 +75,7 @@ MyPiece.prototype.draw_body = function(){
  */
 MyPiece.prototype.draw_circle = function(){
     this.scene.pushMatrix();
-        this.scene.translate(0, 1.001, 0);
+        this.scene.translate(0, 0.251, 0);
         this.scene.rotate(-(Math.PI)/2, 1, 0, 0);
         this.circle.display();
     this.scene.popMatrix();    
@@ -94,12 +102,15 @@ MyPiece.prototype.draw_mix_piece = function(){
  * Initiates all Webcgf atributes of the primitive
  */
 MyPiece.prototype.display = function () {
+
+    this.scene.pushMatrix()
+
+    this.scene.translate(this.x,this.y,this.z);
+
     if (this.type_piece === "white") {
         this.scene.pushMatrix();
             this.material_white.apply();
-            this.scene.registerForPick(26,this);
             this.draw_body();
-            this.scene.clearPickRegistration();
         this.scene.popMatrix();    
     }else if (this.type_piece === "black") {
         this.scene.pushMatrix();
@@ -109,4 +120,6 @@ MyPiece.prototype.display = function () {
     }else{
         this.draw_mix_piece();
     }
+
+    this.scene.popMatrix();
 };

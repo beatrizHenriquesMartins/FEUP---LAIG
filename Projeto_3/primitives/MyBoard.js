@@ -31,12 +31,22 @@ function MyBoard(scene, width, heigh, len) {
         return;
     }
 
+    this.coords = [];
+
     // material
     this.material_1 = new CGFappearance(this.scene);
 	this.material_1.setAmbient(0.1, 0.1, 0.1, 1);
 	this.material_1.setDiffuse(0.1, 0.19, 0.3, 1);
 	this.material_1.setSpecular(0.5, 0.5, 0.5, 0);	
-	this.material_1.setShininess(100000);
+    this.material_1.setShininess(100000);
+
+    this.material_2 = new CGFappearance(this.scene);
+	this.material_2.setAmbient(1, 0, 0, 1);
+	this.material_2.setDiffuse(1, 0, 0, 1);
+	this.material_2.setSpecular(1, 0.5, 0.5, 0);	
+    this.material_2.setShininess(100000);
+
+    
     
     // primitives
     this.cube = new MyUnitCubeQuad(scene);
@@ -176,13 +186,18 @@ MyBoard.prototype.draw_all_horizontal_splits = function () {
  */
 MyBoard.prototype.drawBallFilled = function(index) {
     this.scene.pushMatrix();
-        this.scene.translate(0, (1/3 + 0.01), 0);
+        this.scene.translate(0, (1/3 + 0.02), 0);
         this.scene.rotate(-(Math.PI / 2), 1, 0, 0);
         if(this.balls[index].pick){
             this.balls[index].circle.pick = 'board';
             this.scene.registerForPick((index+1),this.balls[index].circle);
         }
-        
+        if(this.scene.game.validMoves != null && this.scene.game.validMoves.indexOf(index+1) != -1){
+            this.material_2.apply();
+        }
+        else{
+            this.material_1.apply();
+        }
         this.balls[index].circle.display();
        
     this.scene.popMatrix();
@@ -209,10 +224,12 @@ MyBoard.prototype.draw_all_ball = function() {
 
             for (let m = 0; m < (this.len + 1); m++) {
                 if(m === 0){
+                    this.coords.push({x: 0, y: (1/3 + 0.02), z:((this.heigh * k) - (0.125 / 2))});
                     this.drawBallFilled(ballind);
                 }else{
                     this.scene.pushMatrix();
                         this.scene.translate(((this.width * m) - (0.125 / 2)), 0, 0);
+                        this.coords.push({x: ((this.width * m) - (0.125 / 2)), y: (1/3 + 0.02), z:((this.heigh * k) - (0.125 / 2))});
                         this.drawBallFilled(ballind);
                     this.scene.popMatrix();
                 }
@@ -229,7 +246,7 @@ MyBoard.prototype.draw_all_ball = function() {
  */
 MyBoard.prototype.display = function () {
 
-   
+    this.coords = [];
     //quadrados
     this.drawCube();
     

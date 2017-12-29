@@ -253,6 +253,7 @@ XMLscene.prototype.display = function () {
         // Displays the scene.
         this.interface.setActiveCamera(this.camera);
         this.graph.displayScene();
+        this.game.display();
 
 
     } else {
@@ -317,4 +318,8 @@ function midpoint(pointA, pointB) {
 
 function distance(pointA, pointB) {
     return Math.sqrt(Math.pow(pointA[0] - pointB[0], 2) + Math.pow(pointA[1] - pointB[1], 2) + Math.pow(pointA[2] - pointB[2], 2));
+}
+
+function sortNumber(a,b) {
+    return a - b;
 }
