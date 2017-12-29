@@ -43,7 +43,7 @@ function MyBoard(scene, width, heigh, len) {
     this.split =  new MyQuad(scene, 0.0, 0.5, 0.5, 0.0);
    
 
-    this.balls = Array(25).fill({pick: false, circle : new MyCircle(scene,30,0.25)});
+    this.balls = Array(25).fill({pick: true, circle : new MyCircle(scene,30,0.25)});
 
     this.initBuffers();
 };
@@ -184,6 +184,7 @@ MyBoard.prototype.drawBallFilled = function(index) {
         }
         
         this.balls[index].circle.display();
+       
     this.scene.popMatrix();
 };
 
@@ -243,5 +244,6 @@ MyBoard.prototype.display = function () {
 
         //bolinhas preenchidas
         this.draw_all_ball();
+        this.scene.clearPickRegistration();
     this.scene.popMatrix();    
 };

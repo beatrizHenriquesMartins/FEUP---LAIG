@@ -137,7 +137,8 @@ MyInterface.prototype.loadTheme = function () {
 };
 
 MyInterface.prototype.requestNewConfig = function(){
-    this.scene.newGame.bind(this.scene,this.gameMode,this.botDifficulty);
+    console.log('OLA');
+    this.scene.newGame(this.gameMode,this.botDifficulty);
 }
 
 dat.GUI.prototype.removeFolder = function(name) {

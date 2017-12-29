@@ -97,7 +97,9 @@ MyPiece.prototype.display = function () {
     if (this.type_piece === "white") {
         this.scene.pushMatrix();
             this.material_white.apply();
+            this.scene.registerForPick(26,this);
             this.draw_body();
+            this.scene.clearPickRegistration();
         this.scene.popMatrix();    
     }else if (this.type_piece === "black") {
         this.scene.pushMatrix();
