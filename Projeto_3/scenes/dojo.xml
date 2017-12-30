@@ -156,14 +156,13 @@
                 <NODEREF id="white_piece"/> 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
-                <NODEREF id="japonese_big_window"/>
                 <NODEREF id="pillow"/>
-                <NODEREF id="windows">
                 -->
                 <NODEREF id="walls"/>
                 <NODEREF id="floor"/>
                 <NODEREF id="table"/>
                 <NODEREF id="board_play"/>
+                <NODEREF id="windows"/>
             </DESCENDANTS>
         </NODE>
 
@@ -407,53 +406,152 @@
                 <LEAF type="board" args="1 1 4"/>
             </DESCENDANTS>
         </NODE>
-
-    <!--x
-        <NODE id="pillow">
-            <MATERIAL id="carriageMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="10" y="5" z="10"/>
-
-            <DESCENDANTS>
-                <LEAF type="obj" args="pillowB"/>
-            </DESCENDANTS>
-        </NODE>
-    -->
-        <!-- white piece -->
-        <NODE id="white_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="7" y="3.2" z="1.3"/>
-
-            <DESCENDANTS>
-                <LEAF type="piece" args="white"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- black piece -->
-        <NODE id="black_piece">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="7" y="3.2" z="7"/>
-
-            <DESCENDANTS>
-                <LEAF type="piece" args="black"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- mix piece -->
-        <NODE id="mix_piece">
+        
+        <!-- windows -->
+        <NODE id="windows">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
             <DESCENDANTS>
-                <LEAF type="piece" args="mix"/>
+                <NODEREF id="windows_right"/>
+                <NODEREF id="windows_left"/>                
             </DESCENDANTS>
         </NODE>
 
+        <!-- windows: right side -->
+        <NODE id="windows_right">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <NODEREF id="windows_right_1"/>
+                <NODEREF id="windows_right_2"/>                                 
+                <NODEREF id="windows_right_3"/>
+                <NODEREF id="windows_right_4"/>
+                <NODEREF id="windows_right_5"/>                                 
+                <NODEREF id="windows_right_6"/>
+                <NODEREF id="windows_right_ridge_bottom"/>            
+                <NODEREF id="windows_right_ridge_top"/>                
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- windows: right side, window 1 -->
+        <NODE id="windows_right_1">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="5" y="6" z="0.1"/>
+            <SCALE sx="1.5" sy="1.5" sz="1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="japonese_big_window"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- windows: right side, window 2 -->
+        <NODE id="windows_right_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="9.3" y="6" z="0.2"/>
+            <SCALE sx="1.5" sy="1.5" sz="1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="japonese_big_window"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- windows: right side, window 3 -->
+        <NODE id="windows_right_3">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="13.6" y="6" z="0.1"/>
+            <SCALE sx="1.5" sy="1.5" sz="1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="japonese_big_window"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- windows: right side, window 4 -->
+        <NODE id="windows_right_4">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="17.9" y="6" z="0.2"/>
+            <SCALE sx="1.5" sy="1.5" sz="1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="japonese_big_window"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- windows: right side, window 5 -->
+        <NODE id="windows_right_5">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="22.2" y="6" z="0.1"/>
+            <SCALE sx="1.5" sy="1.5" sz="1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="japonese_big_window"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- windows: right side, window 6 -->
+        <NODE id="windows_right_6">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="26.5" y="6" z="0.2"/>
+            <SCALE sx="1.5" sy="1.5" sz="1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="japonese_big_window"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- window: ridge bottom-->
+        <NODE id="windows_right_ridge_bottom">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="wood_for_windows"/>
+
+            <TRANSLATION x="15.75" y="1" z="0.1"/>
+            <SCALE sx="26.5" sy="0.25" sz="0.25"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- window: ridge top-->
+        <NODE id="windows_right_ridge_top">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="wood_for_windows"/>
+
+            <TRANSLATION x="15.75" y="11" z="0.1"/>
+            <SCALE sx="26.5" sy="0.25" sz="0.25"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- window: left side -->
+        <NODE id="windows_left">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+            
+            <TRANSLATION x="0" y="0" z="36"/>
+            <ROTATION axis="y" angle="90"/>
+
+            <DESCENDANTS>
+                <NODEREF id="windows_right"/>
+            </DESCENDANTS>
+        </NODE>
+        
         <!-- japonese window -->
         <NODE id="japonese_big_window">
             <MATERIAL id="defaultMaterial"/>
@@ -597,6 +695,53 @@
                 <NODEREF id="cube"/>
             </DESCENDANTS>
         </NODE>
+
+    <!--
+        <NODE id="pillow">
+            <MATERIAL id="carriageMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="10" y="5" z="10"/>
+
+            <DESCENDANTS>
+                <LEAF type="obj" args="pillowB"/>
+            </DESCENDANTS>
+        </NODE>
+    -->
+        <!-- white piece -->
+        <NODE id="white_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="7" y="3.2" z="1.3"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="white"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- black piece -->
+        <NODE id="black_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="7" y="3.2" z="7"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="black"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- mix piece -->
+        <NODE id="mix_piece">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <LEAF type="piece" args="mix"/>
+            </DESCENDANTS>
+        </NODE>
+
 <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- --> <!-- -->  <!-- -->
                         <!-- EXTRA -->
         <!-- generic cube -->
