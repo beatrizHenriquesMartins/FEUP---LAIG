@@ -62,7 +62,7 @@ MyInterface.prototype.init = function(application) {
 
     configFolder.add(config, 'botDifficulty', {
         'Easy': BOT_DIFFICULTY.EASY,
-        'Hard': BOT_DIFFICULTY.HARD
+        'Hard': BOT_DIFFICULTY.NORMAL
     }).name('Bot Difficulty');
 
     
@@ -137,8 +137,7 @@ MyInterface.prototype.loadTheme = function () {
 };
 
 MyInterface.prototype.requestNewConfig = function(){
-    console.log('OLA');
-    this.scene.newGame(this.gameMode,this.botDifficulty);
+    this.scene.newGame(Number(this.gameMode),Number(this.botDifficulty));
 }
 
 dat.GUI.prototype.removeFolder = function(name) {
@@ -170,7 +169,11 @@ MyInterface.prototype.processKeyboard = function (event) {
             this.scene.changeCamera();
             console.log(this.scene.game.boards);
             break;
+        case(112):
+        processBotMovement(this.scene.game.difficulties[0], this.scene.game.board, this.scene.game.currentPlayer+1, this.scene.game.compareBoardBot.bind(this.scene.game));
 
+            //makeRequest('quit');
+            break;
 	};
 	var self = this;
 	//Verifires when a key has been released (any key)

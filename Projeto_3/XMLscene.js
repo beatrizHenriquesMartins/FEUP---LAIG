@@ -93,8 +93,10 @@ XMLscene.prototype.initLights = function () {
 
 XMLscene.prototype.newGame = function (gameMode, botDifficulty) {
 
+    console.log('TENTOU');
     this.game.newGame(gameMode,botDifficulty);
     this.game.startGame();
+    this.camera = this.cameras[0];
     this.game.startOverlay();
 }
 

@@ -179,11 +179,11 @@
                 <NODEREF id="floor"/>
                 <NODEREF id="table"/>
                 <NODEREF id="board_play"/>
-                <NODEREF id="windows"/>
+                <!--<NODEREF id="windows"/> -->
                 <NODEREF id="pillows"/>
                 <NODEREF id="img_dragon"/>
-                <NODEREF id="statue_1"/>
-                <NODEREF id="statue_2"/>                                
+             <!--   <NODEREF id="statue_1"/>
+                <NODEREF id="statue_2"/> -->                                
             </DESCENDANTS>
         </NODE>
 

@@ -27,20 +27,29 @@ class Game {
     newGame(gameMode, botDif) {
         this.gameStatus = GAMESTATE.NOT_RUNNING;
         this.gameMode = gameMode;
+        this.board = [];
+        this.boards = [];
         this.pieces = [];
         this.movements = [];
+        this.whitePieces = [];
+        this.blackPieces = [];
+        this.focusedPieces = [];
+        this.pieceFocus = null;
         this.scores = [];
         this.currentPlayer = PLAYERS.WHITE;
         this.botIsPlaying = false;
         this.lastMoves = [];
+     
         this.difficulties = [botDif, BOT_DIFFICULTY.NORMAL];
+        console.log('DIFICULDADE',this.difficulties);
     }
 
     startGame() {
         this.winner = null;
         this.turnCounter = 0;
+        this.createPieces();
         initializeVariables(this.getBoard.bind(this));
-    
+       
         this.updateAuxVars();
         if (this.gameMode == GAMEMODE.BOT_VS_BOT) {
             this.gameMode = GAMEMODE.BOT_VS_BOT;
@@ -161,6 +170,9 @@ class Game {
         this.sceneBlackPieces = [];
         for (var i = 0; i < 10; i++) {
             this.sceneBlackPieces[i] = new MyPiece(this.scene, (i / 2.0) + 17, 2.83, 16, 'black');
+            this.sceneBlackPieces[i].placedBoardIndex = null;
+            this.sceneBlackPieces[i].player = PLAYERS.BLACK;
+
         }
     }
 
@@ -168,6 +180,8 @@ class Game {
         this.sceneWhitePieces = [];
         for (var i = 0; i < 10; i++) {
             this.sceneWhitePieces[i] = new MyPiece(this.scene, (i / 2.0) + 17, 2.83, 7 + 17, 'white');
+            this.sceneWhitePieces[i].placedBoardIndex = null;
+            this.sceneWhitePieces[i].player = PLAYERS.WHITE;
         }
     }
 
@@ -176,9 +190,11 @@ class Game {
         for (var i = 0; i < 5; i++) {
             if (i <= 2) {
                 this.sceneMixPieces[i] = new MyPiece(this.scene, ((i + 10) / 2.0) + 17, 2.83, 7 + 17, 'mix');
+                this.sceneMixPieces[i].placedBoardIndex = null;
                 this.sceneMixPieces[i].player = PLAYERS.WHITE;
             } else {
                 this.sceneMixPieces[i] = new MyPiece(this.scene, ((i + 7) / 2.0) + 17, 2.83, 16, 'mix');
+                this.sceneMixPieces[i].placedBoardIndex = null;
                 this.sceneMixPieces[i].player = PLAYERS.BLACK;
             }
         }
@@ -293,38 +309,56 @@ class Game {
 
     compareBoardBot(data) {
         var newBoard = JSON.parse(data.target.response);
-
-        for (var i = 0; i < this.board.length; i++) {
-            for (var j = 0; j < this.board[i].length; j++) {
-                var aux = newBoard[i][j];
-                if (aux != 0 && this.board[i][j] == 0) {
-                    this.pieceFocus = this.getRandomPieceType(aux);
+        console.log(this.board);
+        console.log(newBoard);
+        var ind = 0;
+        for (var row = 0; row < this.board.length; row++) {
+            console.log('LINHA',this.board[row]);
+            for (var col = 0; col < this.board[row].length; col++) {
+                
+                console.log('AUX' + ind + ' ' +newBoard[row][col] + ' VS BOARD ' + this.board[row][col]);
+                ind++;
+                if (newBoard[row][col] != 0 && this.board[row][col] == 0) {
+                    console.log('ENTROU AQUI QUANTAS VEZES');
+                    this.pieceFocus = this.getRandomPieceType(newBoard[row][col]);
+                    console.log(this.pieceFocus);
+                    this.focusedPieces.unshift(this.pieceFocus);
+                    var aux;
+                    if(row == 0)
+                        aux = ((col + 1) * ((row*5) + 1))
+                    else aux = ((col + 1) + ((row*5)))
+                    this.pieceFocus.placedBoardIndex = aux;
+                    this.pieceFocus.targetx = this.sceneBoard.coords[this.pieceFocus.placedBoardIndex - 1].x + 17 + this.sceneBoard.width; //alterar
+                    this.pieceFocus.targety = this.sceneBoard.coords[this.pieceFocus.placedBoardIndex - 1].y + 2.8; //alterar
+                    this.pieceFocus.targetz = this.sceneBoard.coords[this.pieceFocus.placedBoardIndex - 1].z + 17 + this.sceneBoard.heigh;
                     this.pieceFocus.setBezierPoints();
                     this.pieceFocus.isUsable = false;
                     this.gameStatus = GAMESTATE.MOVEMENT;
-                } else if (aux == 0 && this.board[i][j] != 0) {
-                    (this.getPieceInBoard(i, j)).setRemovalPoints(i, j);
+                } else if (newBoard[row][col] == 0 && this.board[row][col] != 0) {
+                    (this.getPieceInBoard(row, col)).setRemovalPoints(row, col);
                     this.gameStatus = GAMESTATE.MOVEMENT;
                 }
             }
         }
+        this.setBoard(newBoard);
     }
 
     getRandomPieceType(type) {
         if (type == 3) {
-            for (let i = 0; i < this.sceneMixPieces; i++) {
+            for (let i = 0; i < this.sceneMixPieces.length; i++) {
                 if (this.sceneMixPieces[i].isUsable == true && this.sceneMixPieces[i].player == this.currentPlayer) {
                     return this.sceneMixPieces[i];
                 }
             }
         } else if (type == 2) {
-            for (let i = 0; i < this.sceneBlackPieces; i++) {
+
+            for (let i = 0; i < this.sceneBlackPieces.length; i++) {
                 if (this.sceneBlackPieces[i].isUsable == true) {
                     return this.sceneBlackPieces[i];
                 }
             }
         } else if (type == 1) {
-            for (var i = 0; i < this.sceneWhitePieces; i++) {
+            for (let i = 0; i < this.sceneWhitePieces.length; i++) {
                 if (this.sceneWhitePieces[i].isUsable == true) {
                     return this.sceneWhitePieces[i];
                 }
@@ -487,7 +521,7 @@ class Game {
                  console.log(data);
              });
          }*/
-
+        console.log(this.gameStatus);
 
         if(this.gameStatus != GAMESTATE.GAME_OVER){
             this.checkTurnGameEnd();
@@ -509,7 +543,7 @@ class Game {
         }
 
         if (this.gameStatus === GAMESTATE.BOT_PLAY) {
-            processBotMovement(this.difficulties[0], this.board, this.currentPlayer, this.compareBoardBot.bind(this));
+           // processBotMovement(this.difficulties[0], this.board, this.currentPlayer+1, this.compareBoardBot.bind(this));
         }
 
 
