@@ -129,12 +129,12 @@
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
 
-        <MATERIAL id="carriageMaterial">
-            <shininess value="1"/>
-            <specular r="0.807" g="0.807" b="0.0" a="1"/>
-            <diffuse r="0.0" g="0.0" b="0.0" a="1" />
-            <ambient r="0.0" g="0.0" b="0.0" a="1" />
-            <emission r="0.1" g="0.1" b="0.1" a="1" />
+        <MATERIAL id="pillow_material">
+            <shininess value="2"/>
+            <specular r="0.0" g="0.0" b="0.0" a="1"/>
+            <diffuse r="0.64" g="0.81" b="0.94" a="1" />
+            <ambient r="0.64" g="0.81" b="0.94" a="1" />
+            <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
     </MATERIALS>
     
@@ -156,13 +156,13 @@
                 <NODEREF id="white_piece"/> 
                 <NODEREF id="black_piece"/>
                 <NODEREF id="mix_piece"/>
-                <NODEREF id="pillow"/>
                 -->
                 <NODEREF id="walls"/>
                 <NODEREF id="floor"/>
                 <NODEREF id="table"/>
                 <NODEREF id="board_play"/>
                 <NODEREF id="windows"/>
+                <NODEREF id="pillows"/>
             </DESCENDANTS>
         </NODE>
 
@@ -696,18 +696,54 @@
             </DESCENDANTS>
         </NODE>
 
-    <!--
-        <NODE id="pillow">
-            <MATERIAL id="carriageMaterial"/>
+        <!-- pillows -->
+        <NODE id="pillows">
+            <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
 
-            <TRANSLATION x="10" y="5" z="10"/>
+            <DESCENDANTS>
+                <NODEREF id="pillow_right"/>
+                <NODEREF id="pillow_left"/>                
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- pillows: pillow right side -->
+        <NODE id="pillow_right">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="28" y="1.9" z="20"/>
+
+            <DESCENDANTS>
+                <NODEREF id="pillow"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- pillows: pillow left side -->
+        <NODE id="pillow_left">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="11.5" y="1.9" z="20"/>
+
+            <DESCENDANTS>
+                <NODEREF id="pillow"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- pillow -->
+        <NODE id="pillow">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <SCALE sx="2.5" sy="2" sz="2.5"/>
 
             <DESCENDANTS>
                 <LEAF type="obj" args="pillowB"/>
             </DESCENDANTS>
         </NODE>
-    -->
+
+
         <!-- white piece -->
         <NODE id="white_piece">
             <MATERIAL id="defaultMaterial"/>
