@@ -11,6 +11,10 @@ function MyPiece(scene,x,y,z,type_piece) {
 
     this.type_piece = type_piece;
 
+    this.originalX = x;
+    this.originalY = y;
+    this.originalZ = z;
+
     this.x = x;
     this.y = y;
     this.z = z;

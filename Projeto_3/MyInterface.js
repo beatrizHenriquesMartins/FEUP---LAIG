@@ -36,7 +36,7 @@ MyInterface.prototype.init = function(application) {
     
     // add a group of controls (and open/expand by defult)
     let menu = {
-        undo: 'cena',
+        undo: this.scene.game.undo.bind(this.scene.game),
         replay: 'replay',
         scene: this.scene
     };
@@ -168,8 +168,7 @@ MyInterface.prototype.processKeyboard = function (event) {
 	switch (event.keyCode || event.which) {
         case(107):
             //this.scene.changeCamera();
-            console.log(this.scene.game.whitePieces);
-            console.log(this.scene.game.blackPieces);
+            console.log(this.scene.game.boards);
             break;
 
 	};
