@@ -298,7 +298,7 @@ class Game {
             for (var j = 0; j < this.board[i].length; j++) {
                 var aux = newBoard[i][j];
                 if (aux != 0 && this.board[i][j] == 0) {
-                    this.pieceFocus = getRandomPieceType(aux);
+                    this.pieceFocus = this.getRandomPieceType(aux);
                     this.pieceFocus.setBezierPoints();
                     this.pieceFocus.isUsable = false;
                     this.gameStatus = GAMESTATE.MOVEMENT;
@@ -487,7 +487,7 @@ class Game {
                  console.log(data);
              });
          }*/
-        console.log(this.gameStatus);
+
 
         if(this.gameStatus != GAMESTATE.GAME_OVER){
             this.checkTurnGameEnd();

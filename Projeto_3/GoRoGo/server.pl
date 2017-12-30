@@ -126,9 +126,9 @@ parse_input(processMovement(Board,Row,Col,Player,UsedPiece),CapturedBoard) :-
 	addPiece(BoardHenges,UsedPiece,Row,Col,NewBoard),
     tryCapture(NewBoard,Row,Col,Player,CapturedBoard).*/
 
-parse_input(randomBotMovement(Board,PlayerType),[NewBoard,Res]) :- randomBotMovement(Board,PlayerType,NewBoard, Res).
+parse_input(randomBotMovement(Board,PlayerType),NewBoard) :- randomBotMovement(Board,PlayerType,NewBoard, Res).
 
-parse_input(inteligentBotPlay(Board,PlayerType),[NewBoard,Res]) :- inteligentBotPlay(Board,PlayerType,NewBoard,Res).
+parse_input(inteligentBotPlay(Board,PlayerType),NewBoard) :- inteligentBotPlay(Board,PlayerType,NewBoard,Res).
 
 parse_input(setFirstPieceBot(CurrentBoard),NewBoard) :- setFirstPieceBot(CurrentBoard, NewBoard).
 
