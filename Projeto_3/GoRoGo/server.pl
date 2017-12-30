@@ -132,6 +132,8 @@ parse_input(inteligentBotPlay(Board,PlayerType),[NewBoard,Res]) :- inteligentBot
 
 parse_input(setFirstPieceBot(CurrentBoard),NewBoard) :- setFirstPieceBot(CurrentBoard, NewBoard).
 
+parse_input(changeScore(WhiteScore,BlackScore),'Done') :- abolish(score/2), assert(score(1,WhiteScore)) , assert(score(2,BlackScore)).
+
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 

@@ -69,12 +69,7 @@ class Game {
     }
 
     setScore(Score, Player) {
-        if (this.blackScore != null && this.whiteScore != null) {
-            this.scores.unshift({
-                white: this.whiteScore,
-                black: this.blackScore
-            });
-        }
+     
 
         if (Player == PLAYERS.WHITE) {
             this.whiteScore = Score;
@@ -122,6 +117,12 @@ class Game {
     updateAuxVars() {
         getScore(PLAYERS.WHITE, this.getScores.bind(this, PLAYERS.WHITE));
         getScore(PLAYERS.BLACK, this.getScores.bind(this, PLAYERS.BLACK));
+        if (this.blackScore != null && this.whiteScore != null) {
+            this.scores.unshift({
+                white: this.whiteScore,
+                black: this.blackScore
+            });
+        }
         getPieces(PLAYERS.WHITE, this.getPieces.bind(this, PLAYERS.WHITE));
         getPieces(PLAYERS.BLACK, this.getPieces.bind(this, PLAYERS.BLACK));
     }
@@ -246,7 +247,7 @@ class Game {
                 var prevScores = this.scores.shift();
                 this.whiteScore = prevScores.white;
                 this.blackScore = prevScores.black;
-                console.log(currentBoard,this.board);
+                changeScore(prevScores.white,prevScores.black);
                 for(var i = 0; i < currentBoard.length; i++){
                     for(var j = 0; j < currentBoard[i].length;j++){
                         if(currentBoard[i][j] == 0 && this.board[i][j] != 0){
