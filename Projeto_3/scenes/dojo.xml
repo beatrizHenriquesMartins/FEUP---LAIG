@@ -121,6 +121,11 @@
             <file path="images/dragon.jpg"/>
             <amplif_factor s="1" t="1"/>
         </TEXTURE>
+
+        <TEXTURE id="marble">
+            <file path="images/whiteMarble.jpeg"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
     </TEXTURES>
     
     <!-- Materials Group -->
@@ -140,6 +145,14 @@
             <diffuse r="0.64" g="0.81" b="0.94" a="1" />
             <ambient r="0.64" g="0.81" b="0.94" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
+        </MATERIAL>
+        
+        <MATERIAL id="carriageMaterial">
+            <shininess value="1"/>
+            <specular r="0.807" g="0.807" b="0.0" a="1"/>
+            <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+            <ambient r="0.0" g="0.0" b="0.0" a="1" />
+            <emission r="0.1" g="0.1" b="0.1" a="1" />
         </MATERIAL>
     </MATERIALS>
     
@@ -169,6 +182,8 @@
                 <NODEREF id="windows"/>
                 <NODEREF id="pillows"/>
                 <NODEREF id="img_dragon"/>
+                <NODEREF id="statue_1"/>
+                <NODEREF id="statue_2"/>                                
             </DESCENDANTS>
         </NODE>
 
@@ -759,6 +774,135 @@
 
             <DESCENDANTS>
                 <LEAF type="rectangle" args="0 1 1 0"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue 1 -->
+        <NODE id="statue_1">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1" y="0.15" z="4"/>            
+            <ROTATION axis="y" angle="90"/>            
+
+            <DESCENDANTS>
+                <NODEREF id="statue"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue 2 -->
+        <NODE id="statue_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="1" y="0.15" z="36.5"/>            
+            <ROTATION axis="y" angle="90"/>            
+
+            <DESCENDANTS>
+                <NODEREF id="statue"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue -->
+        <NODE id="statue">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <DESCENDANTS>
+                <NODEREF id="statue_support"/>
+                <NODEREF id="monkey"/>                
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue support -->
+        <NODE id="statue_support">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="marble"/>
+
+            <DESCENDANTS>
+                <NODEREF id="base_1_bottom"/>
+                <NODEREF id="base_2_bottom"/>     
+                <NODEREF id="body"/>
+                <NODEREF id="base_1_top"/>
+                <NODEREF id="base_2_top"/>                       
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue: base 1 -->
+        <NODE id="base_1_bottom">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="marble"/>
+
+            <SCALE sx="1.5" sy="0.3" sz="1.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue: base 2 -->
+        <NODE id="base_2_bottom">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="marble"/>
+
+            <TRANSLATION x="0" y="0.3" z="0"/>
+            <SCALE sx="1.1" sy="0.3" sz="1.1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue: body -->
+        <NODE id="body">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="marble"/>
+
+            <TRANSLATION x="0" y="0.3" z="0"/>
+            <ROTATION axis="x" angle="-90"/>
+
+            <DESCENDANTS>
+                <LEAF type="cylinder" args="4 0.4 0.4 5 30 1 1"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue: base 1 -->
+        <NODE id="base_1_top">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="marble"/>
+
+            <TRANSLATION x="0" y="4.7" z="0"/>            
+            <SCALE sx="1.5" sy="0.3" sz="1.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+        
+
+        <!-- statue: base 1 top -->
+        <NODE id="base_2_top">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="marble"/>
+
+            <TRANSLATION x="0" y="4.4" z="0"/>
+            <SCALE sx="1.1" sy="0.3" sz="1.1"/>
+
+            <DESCENDANTS>
+                <NODEREF id="cube"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- statue: monkey -->
+        <NODE id="monkey">
+            <MATERIAL id="carriageMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="0" y="5.7" z="0"/>
+            <SCALE sx="0.9" sy="0.9" sz="0.9"/>
+
+            <DESCENDANTS>
+                <LEAF type="obj" args="suzanne"/>
             </DESCENDANTS>
         </NODE>
 
