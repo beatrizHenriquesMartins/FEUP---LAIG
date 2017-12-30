@@ -1,4 +1,4 @@
-:- dynamic hengeList/1.
+
 :- use_module(library(lists)).
 :- use_module(library(ordsets)).
 :-consult('showBoard.pl').

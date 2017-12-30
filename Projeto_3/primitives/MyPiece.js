@@ -17,7 +17,7 @@ function MyPiece(scene,x,y,z,type_piece) {
 
     this.animate = false;
 
-    this.isPlayable = true;
+    this.isUsable = true;
 
     if(this.type_piece === "white"){
         console.log("Type of piece is the rigth type");
@@ -145,20 +145,45 @@ MyPiece.prototype.setBezierPoints = function(){
     this.animation.enable = 1;
 }
 
+/**
+ * Initializes the 4 points to remove piece from board
+ */
+
+MyPiece.prototype.setRemovalPoints = function(){
+    let p1 = [this.x,this.y,this.z];
+    let p2 = [this.x,this.y+1,this.z];
+
+    if(this.type_piece == 'white'){
+        var p3 = [24,2.83+1,17];
+        var p4 = [24,2.83,17];
+    }else{
+        var p3 = [16,2.83+1,23];
+        var p4 = [16,2.83,23];
+    }
+        
+    
+    
+    var p = [p1,p2,p3,p4];
+
+    var animation = new BezierAnimation(this.scene,'remove',5,p);
+    this.animation = new AnimationRef(mat4.create(),animation);
+    this.animate = true;
+    this.animation.enable = 1;
+}
+
+
 
 /**
  * Updates piece position if it needs to
  */
 MyPiece.prototype.update = function(deltaTime){
-    if(this.animate == false || this.targetx == null){
+    if(this.animate == false){
         return;
     }
 
  
 
     this.animation.update(deltaTime);
-
-    console.log('HELLO',this.animation.Animation.x,this.animation.Animation.y,this.animation.Animation.z);
     this.x = this.animation.Animation.x;
     this.y = this.animation.Animation.y;
     this.z = this.animation.Animation.z;
@@ -168,4 +193,16 @@ MyPiece.prototype.update = function(deltaTime){
 
 
 
+}
+
+/**
+ * Maps piece_type to integer
+ */
+MyPiece.prototype.transPiece = function(){
+    if(this.type_piece == 'white')
+        return PIECES.WHITE;
+    if(this.type_piece == 'black')
+        return PIECES.BLACK;
+    if(this.type_piece == 'mix')
+        return PIECES.MIX; 
 }

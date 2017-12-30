@@ -93,8 +93,9 @@ XMLscene.prototype.initLights = function () {
 
 XMLscene.prototype.newGame = function (gameMode, botDifficulty) {
 
-    this.game.newGame(gameMode);
+    this.game.newGame(gameMode,botDifficulty);
     this.game.startGame();
+    this.game.startOverlay();
 }
 
 XMLscene.prototype.loadTheme = function (theme) {

@@ -179,6 +179,8 @@ initiateGlobalValues :-
                         abolish(score/2),
                         abolish(pieces/2),
                         abolish(turnCounter/1),
+                        abolish(hengeList/1),
+                        assert(hengeList([])),
                         assert(score(2,0)),assert(score(1,0)),
                         assert(turnCounter(0)),
                         availablePiecesWInit(WhitePieces), assert(pieces(1,WhitePieces)),

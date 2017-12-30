@@ -119,11 +119,18 @@ parse_input(getValidMovesMatrix(Board,Piece),FinalList) :- getValidMovesMatrix(B
 
 parse_input(checkGameEnd(Board, Player),EndRes) :- checkGameEnd(Board,Player,EndRes).
 
-parse_input(processMovement(Board,Row,Col,Player,UsedPiece),CapturedBoard) :- processMovement(Board,Row,Col,Player,UsedPiece,CapturedBoard).
+parse_input(processMovement(Board,Row,Col,Player,UsedPiece),CapturedBoard) :- 
+  	processMovement(Board,Row,Col,Player,UsedPiece,CapturedBoard).
+	/*hengeList(ListHenges),
+    verifyHengePieces(Board, Player, ListHenges, _, BoardHenges),
+	addPiece(BoardHenges,UsedPiece,Row,Col,NewBoard),
+    tryCapture(NewBoard,Row,Col,Player,CapturedBoard).*/
 
 parse_input(randomBotMovement(Board,PlayerType),[NewBoard,Res]) :- randomBotMovement(Board,PlayerType,NewBoard, Res).
 
 parse_input(inteligentBotPlay(Board,PlayerType),[NewBoard,Res]) :- inteligentBotPlay(Board,PlayerType,NewBoard,Res).
+
+parse_input(setFirstPieceBot(CurrentBoard),NewBoard) :- setFirstPieceBot(CurrentBoard, NewBoard).
 
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).

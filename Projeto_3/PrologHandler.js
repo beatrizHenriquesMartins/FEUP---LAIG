@@ -74,6 +74,13 @@ function processMovement(board,row,col,player,piece,callback){
     getPrologRequest(requestString,callback);
 }
 
+function botFirstMove(board,callback){
+    let requestString = 'setFirstPieceBot(' +
+    JSON.stringify(board) + ')';
+
+    getPrologRequest(requestString,callback);
+}
+
 function processBotMovement(BotDifficulty,board,PlayerType,callback){
     let requestString;
     if(BotDifficulty === BOT_DIFFICULTY.EASY){

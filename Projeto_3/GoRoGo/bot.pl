@@ -3,10 +3,10 @@
 
 %Function that makes random available moves
 randomBotMovement(Board,PlayerType,NewBoard, Res) :-
-            translatePlayer(PlayerType,NumericPlayer),
-            pieces(NumericPlayer,PlayerPieces),
+            %translatePlayer(PlayerType,NumericPlayer),
+            pieces(PlayerType,PlayerPieces),
             choosePiece(_PieceA, PlayerPieces, Piece),
-            score(NumericPlayer,Score),
+            score(PlayerType,Score),
             %write('The Current Player '), write(PlayerType), write(' score is: '), write(Score),nl,nl,
             getValidMovesMatrix(Board,0,Piece,_List,AvailableMoves),
             length(AvailableMoves,Length),
@@ -15,8 +15,8 @@ randomBotMovement(Board,PlayerType,NewBoard, Res) :-
                     (   random_member(BoardPos,AvailableMoves),
                         nth0(0,BoardPos,Row),
                         nth0(1,BoardPos,Col),
-                        processMovement(Board,Row,Col,NumericPlayer,Piece,NewBoard),
-                        removePiece(PlayerPieces,Piece,NumericPlayer), (Res is 1)
+                        processMovement(Board,Row,Col,PlayerType,Piece,NewBoard),
+                        removePiece(PlayerPieces,Piece,PlayerType), (Res is 1)
                     )
             ).
 
@@ -69,14 +69,14 @@ getNumberofCapturedPieces(Board,Piece,[H|T],[R|E]):-
 
 %Bot randomly chooses a piece, and puts it on the most optimal position (the position where he captures the most enemies), if there is no optimal position it randomly makes a move
 inteligentBotPlay(Board,PlayerType,NewBoard,Res) :-
-            translatePlayer(PlayerType,NumericPlayer),
-            pieces(NumericPlayer,PlayerPieces),
+            %translatePlayer(PlayerType,NumericPlayer),
+            pieces(PlayerType,PlayerPieces),
             choosePiece(_PieceA, PlayerPieces, Piece),
-            score(NumericPlayer,Score),
+            score(PlayerType,Score),
             %write('The Current Player '), write(PlayerType), write(' score is: '), write(Score),nl,nl,
             ite(botGetBestMovement(Board,Piece,FinalOptimalMove),(
                 nth0(0,FinalOptimalMove,Row),
                 nth0(1,FinalOptimalMove,Col),
-                processMovement(Board,Row,Col,NumericPlayer,Piece,NewBoard),
-                removePiece(PlayerPieces,Piece,NumericPlayer),(Res is 1)
+                processMovement(Board,Row,Col,PlayerType,Piece,NewBoard),
+                removePiece(PlayerPieces,Piece,PlayerType),(Res is 1)
             ), (Res is 0)).
