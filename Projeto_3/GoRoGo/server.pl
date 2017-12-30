@@ -134,6 +134,8 @@ parse_input(setFirstPieceBot(CurrentBoard),NewBoard) :- setFirstPieceBot(Current
 
 parse_input(changeScore(WhiteScore,BlackScore),'Done') :- abolish(score/2), assert(score(1,WhiteScore)) , assert(score(2,BlackScore)).
 
+parse_input(changePieces(WhitePieces,BlackPieces),'Done') :- abolish(pieces/2), assert(pieces(1,WhitePieces)), assert(pieces(2,BlackPieces)).
+
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 

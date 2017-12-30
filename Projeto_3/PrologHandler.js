@@ -99,7 +99,7 @@ function getPieces(Player,callback){
 function checkGameEnd(board,playerLetter,callback){
     let requestString = 'checkGameEnd(' +
         JSON.stringify(board) + ',' +
-        JSON.stringify(playerLetter) + ')';
+        playerLetter + ')';
     getPrologRequest(requestString,callback);
 }
 
@@ -166,6 +166,15 @@ function changeScore(whiteScore,blackScore){
     let requestString = 'changeScore(' +
     JSON.stringify(whiteScore) + ',' +
     JSON.stringify(blackScore) + ')';
+
+    getPrologRequest(requestString);
+}
+
+
+function changePieces(whitePieces,blackPieces){
+    let requestString = 'changePieces(' + 
+    JSON.stringify(whitePieces) + ',' +
+    JSON.stringify(blackPieces) + ')';
 
     getPrologRequest(requestString);
 }

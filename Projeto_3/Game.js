@@ -37,9 +37,10 @@ class Game {
     }
 
     startGame() {
-
+        this.winner = null;
+        this.turnCounter = 0;
         initializeVariables(this.getBoard.bind(this));
-
+    
         this.updateAuxVars();
         if (this.gameMode == GAMEMODE.BOT_VS_BOT) {
             this.gameMode = GAMEMODE.BOT_VS_BOT;
@@ -79,12 +80,6 @@ class Game {
     }
 
     setPlayerPieces(Pieces, Player) {
-        if (this.whitePieces != [] && this.blackPieces != []) {
-            this.pieces.unshift({
-                white: this.whitePieces,
-                black: this.blackPieces
-            });
-        }
 
         if (Player == PLAYERS.WHITE) {
             this.whitePieces = Pieces;
@@ -125,6 +120,13 @@ class Game {
         }
         getPieces(PLAYERS.WHITE, this.getPieces.bind(this, PLAYERS.WHITE));
         getPieces(PLAYERS.BLACK, this.getPieces.bind(this, PLAYERS.BLACK));
+        if (this.whitePieces != [] && this.blackPieces != []) {
+            this.pieces.unshift({
+                white: this.whitePieces,
+                black: this.blackPieces
+            });
+        }
+
     }
 
     getGameStatus() {
@@ -138,7 +140,10 @@ class Game {
                 return "Select the tile to move the piece";
 
             case GAMESTATE.GAME_OVER:
-                return "Game Over!";
+                if(this.winner == PLAYERS.WHITE){
+                    return 'White player is the winner!!';
+                }else
+                    return 'Black player is the winner!!';
             case GAMESTATE.FIRST_MOVE:
                 return "White Player choose where to place the first Henge Piece";
             default:
@@ -242,12 +247,17 @@ class Game {
         if (this.gameStatus == GAMESTATE.NORMAL || this.gameStatus == GAMESTATE.PLACE_PIECE) {
             var difference = false;
             if(this.boards.length > 1){
+                this.turnCounter -=1;
                 var currentBoard = this.board;
                 this.board = this.boards.shift();
                 var prevScores = this.scores.shift();
                 this.whiteScore = prevScores.white;
                 this.blackScore = prevScores.black;
+                var prevPieces = this.pieces.shift();
+                this.whitePieces = prevPieces.white;
+                this.blackPieces = prevPieces.black; 
                 changeScore(prevScores.white,prevScores.black);
+                changePieces(prevPieces.white,prevPieces.black);
                 for(var i = 0; i < currentBoard.length; i++){
                     for(var j = 0; j < currentBoard[i].length;j++){
                         if(currentBoard[i][j] == 0 && this.board[i][j] != 0){
@@ -354,6 +364,7 @@ class Game {
     }
 
     updateOverlay() {
+        document.getElementById('counter').innerHTML = this.turnCounter;
         document.getElementById('log').innerHTML = this.getGameStatus();
     }
 
@@ -372,7 +383,7 @@ class Game {
         }
 
         if (pickedObj[0].pick != null && pickedObj[0].pick === 'board' && this.gameStatus === GAMESTATE.FIRST_MOVE) {
-
+            this.turnCounter +=1;
             this.validMoves = [];
             this.focusedPieces.unshift(this.pieceFocus);
             this.pieceFocus.isUsable = false;
@@ -390,7 +401,7 @@ class Game {
         if (pickedObj[0].pick != null && pickedObj[0].pick === 'board' && this.gameStatus === GAMESTATE.PLACE_PIECE) {
             var index;
             if ((this.validMoves.indexOf(pickedObj[1])) != -1) {
-
+                this.turnCounter +=1;
                 this.validMoves = [];
                 this.focusedPieces.unshift(this.pieceFocus);
                 this.pieceFocus.placedBoardIndex = pickedObj[1];
@@ -402,11 +413,10 @@ class Game {
                 console.log('ROW COL', row, column);
                 processMovement(this.board, row, column, this.currentPlayer + 1, this.pieceFocus.transPiece(), this.compareBoard.bind(this));
                 this.updateAuxVars();
-                //this.pieceFocus.setBezierPoints();
             }
 
 
-        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'white' && this.gameStatus === GAMESTATE.NORMAL) {
+        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'white' && this.gameStatus != GAMESTATE.FIRST_MOVE) {
 
             if (this.gameStatus === GAMESTATE.NORMAL && this.currentPlayer === PLAYERS.WHITE) {
                 this.pieceFocus = pickedObj[0];
@@ -420,7 +430,7 @@ class Game {
 
 
 
-        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'black' && this.gameStatus === GAMESTATE.NORMAL) {
+        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'black' && this.gameStatus != GAMESTATE.FIRST_MOVE) {
             if (this.gameStatus === GAMESTATE.NORMAL && this.currentPlayer === PLAYERS.BLACK) {
                 this.pieceFocus = pickedObj[0];
                 this.gameStatus = GAMESTATE.PLACE_PIECE;
@@ -432,7 +442,7 @@ class Game {
 
 
 
-        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'mix' && this.gameStatus === GAMESTATE.NORMAL) {
+        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'mix' && this.gameStatus != GAMESTATE.FIRST_MOVE) {
             if (this.gameStatus === GAMESTATE.NORMAL && pickedObj[0].player === this.currentPlayer) {
                 this.gameStatus = GAMESTATE.PLACE_PIECE;
                 this.pieceFocus = pickedObj[0];
@@ -478,6 +488,17 @@ class Game {
              });
          }*/
         console.log(this.gameStatus);
+
+        if(this.gameStatus != GAMESTATE.GAME_OVER){
+            this.checkTurnGameEnd();
+            if(this.currentPlayer == PLAYERS.WHITE){
+                checkGameEnd(this.board,'X',this.checkGameEnd.bind(this));
+            }else if(this.currentPlayer == PLAYERS.BLACK){
+                checkGameEnd(this.board,'O',this.checkGameEnd.bind(this));
+            }
+        }
+      
+
         if (this.gameStatus === GAMESTATE.FIRST_MOVE) {
             this.pieceFocus = this.sceneMixPieces[2];
         }
@@ -540,6 +561,25 @@ class Game {
         }
 
 
+    }
+
+    checkGameEnd(data){
+        var res = data.target.response;
+        if(res == 0){
+            this.gameStatus = GAMESTATE.GAME_OVER;
+            this.winner = (this.currentPlayer + 1) % 2;
+        }
+    }
+
+    checkTurnGameEnd(){
+        if(this.turnCounter >= 25){
+            this.gameStatus = GAMESTATE.GAME_OVER;
+            if(this.whiteScore == this.blackScore || this.whiteScore > this.blackScore){
+                this.winner = PLAYERS.WHITE;
+            }else{
+                this.winner = PLAYERS.BLACK;
+            }
+        }
     }
 
 
