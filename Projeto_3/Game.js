@@ -240,7 +240,7 @@ class Game {
     undo() {
         if (this.gameStatus == GAMESTATE.NORMAL || this.gameStatus == GAMESTATE.PLACE_PIECE) {
             var difference = false;
-            if(this.boards != [] || this.scores != []){
+            if(this.boards.length > 1){
                 var currentBoard = this.board;
                 this.board = this.boards.shift();
                 var prevScores = this.scores.shift();
