@@ -6,7 +6,7 @@
 function MyGraphLeaf(graph, xmlelem) {
     this.graph = graph;
     var type = this.graph.reader.getItem(xmlelem, 'type', 
-                    ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch', 'obj', 'board', 'piece']);
+                    ['rectangle', 'cylinder', 'sphere', 'triangle', 'circle','patch', 'obj', 'board', 'piece']);
     this.xmlelem = xmlelem;
     this.primitive;
     this.initBuffers(type);
@@ -47,6 +47,9 @@ MyGraphLeaf.prototype.initBuffers = function (type) {
             break;
         case 'triangle':
             this.primitive = new MyTriangle(this.graph.scene, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+            break;
+        case 'circle':
+            this.primitive = new MyCircle(this.graph.scene, args[0], args[1]);
             break;
         case 'patch':
             this.createPatch(args);
