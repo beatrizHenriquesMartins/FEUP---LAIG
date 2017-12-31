@@ -90,16 +90,23 @@ XMLscene.prototype.initLights = function () {
     }
 
 }
-
+/**
+ * Starts a new game
+ * @param {*} gameMode 
+ * @param {*} botDifficulty 
+ */
 XMLscene.prototype.newGame = function (gameMode, botDifficulty) {
 
-    console.log('TENTOU');
     this.game.newGame(gameMode,botDifficulty);
     this.game.startGame();
     this.camera = this.cameras[0];
     this.game.startOverlay();
 }
 
+/**
+ * Changes the current theme of the game
+ * @param {*} theme 
+ */
 XMLscene.prototype.loadTheme = function (theme) {
 
     if (theme === 0) {
@@ -175,6 +182,9 @@ XMLscene.prototype.onGraphLoaded = function () {
     //var suzanne = new MyObj(this, 'suzanne');
 }
 
+/**
+ * Changes the current camera to the next one in the list
+ */
 XMLscene.prototype.changeCamera = function () {
 
     if (!this.changingCamera) {
@@ -268,7 +278,10 @@ XMLscene.prototype.display = function () {
     // ---- END Background, camera and axis setup
 }
 
-
+/**
+ * The animation of changing the camera to another one
+ * @param {*} deltaTime 
+ */
 XMLscene.prototype.animateCamera = function (deltaTime) {
     if (!this.changingCamera) {
         return;
@@ -313,16 +326,29 @@ XMLscene.prototype.animateCamera = function (deltaTime) {
 
 
 }
-
+/**
+ * Calculates the mid point between two points
+ * @param {*} pointA 
+ * @param {*} pointB 
+ */
 function midpoint(pointA, pointB) {
     return [(pointA[0] + pointB[0]) / 2, (pointA[1] + pointB[1]) / 2, (pointA[2] + pointB[2]) / 2, (pointA[3] + pointB[3]) / 2];
 }
 
-
+/**
+ * Calculates the distance between two 3d coord
+ * @param {*} pointA 
+ * @param {*} pointB 
+ */
 function distance(pointA, pointB) {
     return Math.sqrt(Math.pow(pointA[0] - pointB[0], 2) + Math.pow(pointA[1] - pointB[1], 2) + Math.pow(pointA[2] - pointB[2], 2));
 }
 
+/**
+ * Sorting array by number handler
+ * @param {*} a 
+ * @param {*} b 
+ */
 function sortNumber(a,b) {
     return a - b;
 }

@@ -21,8 +21,8 @@ class Game {
     }
     /**
      * Sets new game scene, reset game state, sets gameMode.
-     * @param {*} scene 
-     * @param {*} gameMode 
+     * @param {*} gameMode game to be played 
+     * @param {*} botDif difficulty of the bots
      */
     newGame(gameMode, botDif) {
         this.gameStatus = GAMESTATE.NOT_RUNNING;
@@ -39,11 +39,16 @@ class Game {
         this.currentPlayer = PLAYERS.WHITE;
         this.botIsPlaying = false;
         this.lastMoves = [];
+        this.whiteScore = 0;
+        this.blackScore = 0;
      
         this.difficulties = [botDif, BOT_DIFFICULTY.NORMAL];
         console.log('DIFICULDADE',this.difficulties);
     }
 
+    /**
+     * Starts all the necessary parameter to create start game,such as pieces, board and gameStatus
+     */
     startGame() {
         this.winner = null;
         this.turnCounter = 0;
@@ -54,6 +59,7 @@ class Game {
         if (this.gameMode == GAMEMODE.BOT_VS_BOT) {
             this.gameMode = GAMEMODE.BOT_VS_BOT;
             this.gameStatus = GAMESTATE.FIRST_MOVE;
+            this.botIsPlaying = true;
         } else {
             if (this.gameMode == GAMEMODE.P1_VS_BOT) {
                 this.gameMode = GAMEMODE.P1_VS_BOT;
@@ -69,7 +75,10 @@ class Game {
 
     }
 
-
+    /**
+     * Updates the board parameter saving the previoues one in the stack
+     * @param {*} board newboard to update
+     */
     setBoard(board) {
         if (this.board != null) {
             this.boards.unshift(this.board);
@@ -77,7 +86,11 @@ class Game {
 
         this.board = board;
     }
-
+    /**
+     * Updates the player score parameter 
+     * @param {*} Score the new score to update
+     * @param {*} Player the player that has that score
+     */
     setScore(Score, Player) {
      
 
@@ -88,6 +101,11 @@ class Game {
         }
     }
 
+    /**
+     * Saves each player available pieces
+     * @param {*} Pieces the new pieces list to update
+     * @param {*} Player the player which the pieces are associated
+     */
     setPlayerPieces(Pieces, Player) {
 
         if (Player == PLAYERS.WHITE) {
@@ -97,15 +115,29 @@ class Game {
         }
     }
 
+    /**
+     * Updates de board
+     * @param {*} data 
+     */
     getBoard(data) {
 
         this.setBoard(JSON.parse(data.target.response));
     }
 
+    /**
+     * Updates the player score
+     * @param {*} Player 
+     * @param {*} data 
+     */
     getScores(Player, data) {
         this.setScore(JSON.parse(data.target.response), Player);
     }
 
+    /**
+     * Updates each player pieces list
+     * @param {*} Player 
+     * @param {*} data 
+     */
     getPieces(Player, data) {
         this.setPlayerPieces(JSON.parse(data.target.response), Player);
     }
@@ -118,6 +150,9 @@ class Game {
         return this.currentPlayer;
     }
 
+    /**
+     * Request the prolog application the auxiliary variable so that they can be update, like score and pieces available
+     */
     updateAuxVars() {
         getScore(PLAYERS.WHITE, this.getScores.bind(this, PLAYERS.WHITE));
         getScore(PLAYERS.BLACK, this.getScores.bind(this, PLAYERS.BLACK));
@@ -138,6 +173,9 @@ class Game {
 
     }
 
+    /**
+     * Returns a simple text for each game state
+     */
     getGameStatus() {
         switch (this.gameStatus) {
             case GAMESTATE.NORMAL:
@@ -160,12 +198,18 @@ class Game {
         }
     }
 
+    /**
+     * Creates all the pieces in the scene
+     */
     createPieces() {
         this.createBlackPieces();
         this.createWhitePieces();
         this.createMixPieces();
     }
 
+    /**
+     * creates all black pieces in the scene
+     */
     createBlackPieces() {
         this.sceneBlackPieces = [];
         for (var i = 0; i < 10; i++) {
@@ -175,7 +219,9 @@ class Game {
 
         }
     }
-
+/**
+ * Creates all white pieces in the scene
+ */
     createWhitePieces() {
         this.sceneWhitePieces = [];
         for (var i = 0; i < 10; i++) {
@@ -185,6 +231,9 @@ class Game {
         }
     }
 
+    /**
+     * Creates all henge pieces in the scene with the player owner associated
+     */
     createMixPieces() {
         this.sceneMixPieces = [];
         for (var i = 0; i < 5; i++) {
@@ -200,6 +249,9 @@ class Game {
         }
     }
 
+    /**
+     * Updates the game State
+     */
     updateGameState() {
         switch (this.gameMode) {
             case GAMEMODE.P1_VS_P2:
@@ -217,6 +269,10 @@ class Game {
         }
     }
 
+    /**
+     * Asks the prolog application to get the possible moves the player can make
+     * @param {*} data response from prolog with all indexes of the board where the piece can be placed
+     */
     getValidMoves(data) {
         var validMoves = JSON.parse(data.target.response);
         console.log(validMoves);
@@ -236,12 +292,20 @@ class Game {
         console.log(this.validMoves);
     }
 
+    /**
+     * Changes the player playing
+     * @param {*} flag flag to see if a camera change is necessary
+     */
     nextPlayer(flag) {
         this.currentPlayer = (this.currentPlayer + 1) % 2;
         if (flag == 1)
             this.scene.changeCamera();
     }
 
+    /**
+     * Compares in normal PVP the current board with the new board to see what pieces were moved and where to
+     * @param {*} data 
+     */
     compareBoard(data) {
         var newBoard = JSON.parse(data.target.response);
         console.log(newBoard);
@@ -259,6 +323,37 @@ class Game {
         this.setBoard(newBoard);
     }
 
+    /**
+     * Compares in BOT vs Bot when the bot puts randomly the henge where it was put
+     * @param {*} data 
+     */
+    compareFirstBoard(data) {
+        var newBoard = JSON.parse(data.target.response);
+        console.log(newBoard);
+        for (var i = 0; i < this.board.length; i++) {
+            for (var j = 0; j < this.board[i].length; j++) {
+                if (newBoard[i][j] != 0 && this.board[i][j] == 0) {
+                    this.focusedPieces.unshift(this.pieceFocus);
+                    var aux;
+                    if(i == 0)
+                        aux = ((i + 1) * ((j*5) + 1))
+                    else aux = ((i + 1) + ((j*5)))
+                    this.pieceFocus.placedBoardIndex = aux;
+                    this.pieceFocus.targetx = this.sceneBoard.coords[this.pieceFocus.placedBoardIndex - 1].x + 17 + this.sceneBoard.width; //alterar
+                    this.pieceFocus.targety = this.sceneBoard.coords[this.pieceFocus.placedBoardIndex - 1].y + 2.8; //alterar
+                    this.pieceFocus.targetz = this.sceneBoard.coords[this.pieceFocus.placedBoardIndex - 1].z + 17 + this.sceneBoard.heigh;
+                    this.pieceFocus.setBezierPoints();
+                    this.gameStatus = GAMESTATE.MOVEMENT
+                    this.botIsPlaying = true;
+                }
+            }
+        }
+        this.setBoard(newBoard);
+    }
+
+    /**
+     * Undo the most recent play, vulnerable to bugs
+     */
     undo() {
         if (this.gameStatus == GAMESTATE.NORMAL || this.gameStatus == GAMESTATE.PLACE_PIECE) {
             var difference = false;
@@ -307,6 +402,10 @@ class Game {
 
     }
 
+    /**
+     * Compares the move of a bot with the current board to see which pieces to move
+     * @param {*} data 
+     */
     compareBoardBot(data) {
         var newBoard = JSON.parse(data.target.response);
         console.log(this.board);
@@ -340,9 +439,14 @@ class Game {
                 }
             }
         }
+        this.botIsPlaying = true;
         this.setBoard(newBoard);
     }
 
+    /**
+     * Returns the first available pieces of the type for the specific player
+     * @param {*} type 1 - white piece 2-black 3-henge
+     */
     getRandomPieceType(type) {
         if (type == 3) {
             for (let i = 0; i < this.sceneMixPieces.length; i++) {
@@ -366,6 +470,11 @@ class Game {
         }
     }
 
+    /**
+     * Returns the object piece in the scene placed in the board position
+     * @param {*} Row number of row of the board ,index start on 0
+     * @param {*} Col number of the column of the board, index start on 0
+     */
     getPieceInBoard(Row, Col) {
         for (var i = 0; i < this.sceneBlackPieces.length; i++) {
              if(i <= 4){
@@ -390,6 +499,9 @@ class Game {
         }
     }
 
+    /**
+     * Updates in the log html div the current player score
+     */
     updateScore() {
         let scores = document.getElementsByClassName('score');
 
@@ -397,11 +509,17 @@ class Game {
         scores[1].innerHTML = this.blackScore;
     }
 
+    /**
+     * Updates in the log html div the current turn counter and the game status log message
+     */
     updateOverlay() {
         document.getElementById('counter').innerHTML = this.turnCounter;
         document.getElementById('log').innerHTML = this.getGameStatus();
     }
 
+    /**
+     * Initiates the log html div overlay
+     */
     startOverlay() {
         document.getElementById('overlay').style.display = 'block';
         let scores = document.getElementsByClassName('score');
@@ -410,6 +528,11 @@ class Game {
         scores[1].innerHTML = 0;
     }
 
+    /**
+     * Given an object that was picked check if the object was picked at the right to evolve the game (all accordingly to game state and current player)
+     * for example picking a place in a board only tricks a player movement if the player previously picked a piece that belongs to the current player
+     * @param {*} pickedObj the object picked (detected by webcgf pick)
+     */
     picked(pickedObj) {
 
         if (this.gameStatus === GAMESTATE.NOT_RUNNING || this.gameStatus === GAMESTATE.BOT_PLAY || this.gameStatus === GAMESTATE.GAME_OVER || this.gameStatus === GAMESTATE.REPLAY) {
@@ -493,7 +616,9 @@ class Game {
     }
 
   
-
+    /**
+     * Sees if any of the pieces are moving to a position
+     */
     isAnimationHappening() {
         for (var i = 0; i < this.sceneBlackPieces.length; i++) {
             if (i <= 4) {
@@ -508,28 +633,25 @@ class Game {
         }
     }
 
+    /**
+     * Update of the game 
+     * @param {*} deltaTime 
+     */
     update(deltaTime) {
-        if (this.gameStatus === GAMESTATE.NOT_RUNNING)
+        if (this.gameStatus === GAMESTATE.NOT_RUNNING || this.gameStatus === GAMESTATE.GAME_OVER)
             return;
 
         this.updateScore();
         this.updateOverlay();
-
-        this.flag++;
-        /* if(this.flag == 5){
-             processBotMovement(this.difficulties[0],this.board,this.currentPlayer,function (data) {
-                 console.log(data);
-             });
-         }*/
         console.log(this.gameStatus);
 
         if(this.gameStatus != GAMESTATE.GAME_OVER){
             this.checkTurnGameEnd();
-            if(this.currentPlayer == PLAYERS.WHITE){
+           /* if(this.currentPlayer == PLAYERS.WHITE){
                 checkGameEnd(this.board,'X',this.checkGameEnd.bind(this));
             }else if(this.currentPlayer == PLAYERS.BLACK){
                 checkGameEnd(this.board,'O',this.checkGameEnd.bind(this));
-            }
+            }*/
         }
       
 
@@ -537,13 +659,18 @@ class Game {
             this.pieceFocus = this.sceneMixPieces[2];
         }
 
-        if (this.gameMode == GAMEMODE.BOT_VS_BOT && this.gameStatus == GAMESTATE.FIRST_MOVE) {
+        if (this.gameMode == GAMEMODE.BOT_VS_BOT && this.gameStatus == GAMESTATE.FIRST_MOVE && this.botIsPlaying == true && this.board.length > 1) {
             this.pieceFocus = this.sceneMixPieces[2];
-            botFirstMove(this.board, this.compareBoard.bind(this));
+            this.botIsPlaying = false;
+            botFirstMove(this.board, this.compareFirstBoard.bind(this));
+            this.updateAuxVars();
         }
 
-        if (this.gameStatus === GAMESTATE.BOT_PLAY) {
-           // processBotMovement(this.difficulties[0], this.board, this.currentPlayer+1, this.compareBoardBot.bind(this));
+        if (this.gameStatus === GAMESTATE.BOT_PLAY && this.botIsPlaying == true && ((deltaTime) % 60) != 0) {
+            this.botIsPlaying = false;
+            this.turnCounter++;
+           processBotMovement(this.difficulties[0], this.board, this.currentPlayer+1, this.compareBoardBot.bind(this));
+           this.updateAuxVars();
         }
 
 
@@ -570,6 +697,9 @@ class Game {
 
     }
 
+    /**
+     * Displays all the pieces in the scene
+     */
     display() {
         for (let i = 0; i < this.sceneBlackPieces.length; i++) {
             this.scene.pushMatrix();
@@ -597,14 +727,24 @@ class Game {
 
     }
 
+    /**
+     * Checks in the prolog if the current player looses in the middle of the game because of special circunstances
+     * DEPRECATED because added a lot of bugs to the game
+     * TODO fix
+     * @param {*} data 
+     */
     checkGameEnd(data){
         var res = data.target.response;
         if(res == 0){
             this.gameStatus = GAMESTATE.GAME_OVER;
             this.winner = (this.currentPlayer + 1) % 2;
+            this.updateOverlay();
         }
     }
 
+    /**
+     * Sees in the end of the 25 turns who is the winner of the game
+     */
     checkTurnGameEnd(){
         if(this.turnCounter >= 25){
             this.gameStatus = GAMESTATE.GAME_OVER;
@@ -621,7 +761,9 @@ class Game {
 
 }
 
-
+/**
+ * Various states of the game
+ */
 GAMESTATE = {
     NOT_RUNNING: -1,
     FIRST_MOVE: 0,
@@ -632,23 +774,34 @@ GAMESTATE = {
     BOT_PLAY: 5,
     REPLAY: 6
 };
-
+/**
+ * Gamemodes of the game
+ */
 GAMEMODE = {
     P1_VS_P2: 0,
     P1_VS_BOT: 1,
     BOT_VS_BOT: 2
 };
 
+/**
+ * 2 bot difficulties
+ */
 BOT_DIFFICULTY = {
     EASY: 0,
     NORMAL: 1
 };
 
+/**
+ * 2 players
+ */
 PLAYERS = {
     WHITE: 0,
     BLACK: 1
 };
 
+/**
+ * 3 pieces type
+ */
 PIECES = {
     WHITE: 1,
     BLACK: 2,

@@ -19,6 +19,7 @@ function getPrologRequest(requestString, onSucess, onError, port) {
     };
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     request.send();
+    
 }
 
 /**
