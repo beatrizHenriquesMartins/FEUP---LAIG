@@ -133,7 +133,7 @@ MyInterface.prototype.addLightsGroup = function (lights) {
  * Loads theme.
  */
 MyInterface.prototype.loadTheme = function () {
-    this.scene.loadTheme(this.theme);
+    this.scene.loadTheme(Number(this.theme));
 };
 
 MyInterface.prototype.requestNewConfig = function () {
