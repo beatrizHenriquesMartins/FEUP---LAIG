@@ -108,13 +108,14 @@ XMLscene.prototype.newGame = function (gameMode, botDifficulty) {
  * @param {*} theme 
  */
 XMLscene.prototype.loadTheme = function (theme) {
-
+    console.log("funcao de temas");
     if (theme === 0) {
         let filename = getUrlVars()['file'] || "dojo.xml";
         this.cameras = [];
         this.initCameras();
         this.graph = new MySceneGraph(filename, this);
     } else if (theme === 1) {
+        console.log("theme = ",theme);
         let filename = getUrlVars()['file'] || "garden.xml";
         this.cameras = [];
         this.initCameras();
