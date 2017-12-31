@@ -34,6 +34,7 @@ class Game {
         this.whitePieces = [];
         this.blackPieces = [];
         this.focusedPieces = [];
+        this.boardsIndex = 0;
         this.pieceFocus = null;
         this.scores = [];
         this.currentPlayer = PLAYERS.WHITE;
@@ -63,6 +64,7 @@ class Game {
         } else {
             if (this.gameMode == GAMEMODE.P1_VS_BOT) {
                 this.gameMode = GAMEMODE.P1_VS_BOT;
+                this.botIsPlaying = true;
             } else
                 this.gameMode = GAMEMODE.P1_VS_P2;
             this.gameStatus = GAMESTATE.FIRST_MOVE;
@@ -193,6 +195,17 @@ class Game {
                     return 'Black player is the winner!!';
             case GAMESTATE.FIRST_MOVE:
                 return "White Player choose where to place the first Henge Piece";
+            case GAMESTATE.REPLAY:
+                return "REPLAYING...";
+            case GAMESTATE.PAUSE:
+                return "Game Paused";
+            case GAMESTATE.REPLAY_MOVEMENT:
+                return "REPLAYING...";
+            case GAMESTATE.BOT_PLAY:
+                if(this.currentPlayer == PLAYERS.WHITE)
+                    return 'Is white bot turn!';
+                else 
+                    return 'Is black bot turn!';
             default:
                 return "...";
         }
@@ -321,6 +334,32 @@ class Game {
             }
         }
         this.setBoard(newBoard);
+    }
+
+    /**
+     * Makes replay of the game until now
+     */
+    replay(){
+        if(this.boards[this.boardsIndex] == [] || this.boardsIndex == 0){
+            this.scene.initCameras();
+            this.gameStatus = this.previousState;
+            return;
+        }
+            
+
+        var currentBoard = this.boards[this.boardsIndex];
+        for(var row = 0; row < currentBoard.length; row++){
+            for(var col = 0; col < currentBoard[row].length; col++){
+                if(currentBoard[row][col] == 0 && this.boards[this.boardsIndex-1][row][col] != 0){
+                    var piece = this.focusedPieces[this.focusIndex];
+                    piece.setBezierPoints();
+                    this.gameStatus = GAMESTATE.REPLAY_MOVEMENT;
+                }else if(currentBoard[row][col] != 0 && this.boards[this.boardsIndex-1][row][col] == 0){
+                    (this.getPieceInBoard(row, col)).setRemovalPoints(row, col);
+                    this.gameStatus = GAMESTATE.REPLAY_MOVEMENT;
+                }
+            }
+        }
     }
 
     /**
@@ -505,15 +544,27 @@ class Game {
     updateScore() {
         let scores = document.getElementsByClassName('score');
 
-        scores[0].innerHTML = this.whiteScore;
-        scores[1].innerHTML = this.blackScore;
+        if(this.gameStatus == GAMESTATE.REPLAY || this.gameStatus == GAMESTATE.REPLAY_MOVEMENT){
+            scores[0].innerHTML = this.scores[this.scoreIndex].white;
+            scores[1].innerHTML = this.scores[this.scoreIndex].black;
+        }else{
+            scores[0].innerHTML = this.whiteScore;
+            scores[1].innerHTML = this.blackScore;
+        }
+      
     }
 
     /**
      * Updates in the log html div the current turn counter and the game status log message
      */
     updateOverlay() {
-        document.getElementById('counter').innerHTML = this.turnCounter;
+        if(this.gameStatus == GAMESTATE.REPLAY || this.gameStatus == GAMESTATE.REPLAY_MOVEMENT){
+            document.getElementById('counter').innerHTML = this.turnCounter;
+        }else
+        {
+            document.getElementById('counter').innerHTML = this.turnCounter;
+        }
+        
         document.getElementById('log').innerHTML = this.getGameStatus();
     }
 
@@ -573,7 +624,7 @@ class Game {
             }
 
 
-        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'white' && this.gameStatus != GAMESTATE.FIRST_MOVE) {
+        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'white' && this.gameStatus != GAMESTATE.FIRST_MOVE && this.gameStatus != GAMESTATE.BOT_PLAY) {
 
             if (this.gameStatus === GAMESTATE.NORMAL && this.currentPlayer === PLAYERS.WHITE) {
                 this.pieceFocus = pickedObj[0];
@@ -587,7 +638,7 @@ class Game {
 
 
 
-        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'black' && this.gameStatus != GAMESTATE.FIRST_MOVE) {
+        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'black' && this.gameStatus != GAMESTATE.FIRST_MOVE && this.gameStatus != GAMESTATE.BOT_PLAY) {
             if (this.gameStatus === GAMESTATE.NORMAL && this.currentPlayer === PLAYERS.BLACK) {
                 this.pieceFocus = pickedObj[0];
                 this.gameStatus = GAMESTATE.PLACE_PIECE;
@@ -599,7 +650,7 @@ class Game {
 
 
 
-        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'mix' && this.gameStatus != GAMESTATE.FIRST_MOVE) {
+        } else if (pickedObj[0].type_piece != null && pickedObj[0].type_piece === 'mix' && this.gameStatus != GAMESTATE.FIRST_MOVE && this.gameStatus != GAMESTATE.BOT_PLAY) {
             if (this.gameStatus === GAMESTATE.NORMAL && pickedObj[0].player === this.currentPlayer) {
                 this.gameStatus = GAMESTATE.PLACE_PIECE;
                 this.pieceFocus = pickedObj[0];
@@ -632,19 +683,54 @@ class Game {
                 return true;
         }
     }
+    /**
+     * Starts variables to start a replay
+     */
+    requestReplay(){
+
+        if(this.boards.length >2){
+            this.boards.unshift(this.board);
+            this.scene.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(4, 1, 4));
+            this.previousState = this.gameStatus;
+            this.resetPieces();
+            this.boardsIndex = this.boards.length - 2;
+            this.focusIndex = this.focusedPieces.length -1;
+            this.scoreIndex = this.scores.length -1;
+            this.turnCounter = 0;
+            this.gameStatus = GAMESTATE.REPLAY;
+        }
+     
+    }
 
     /**
      * Update of the game 
      * @param {*} deltaTime 
      */
     update(deltaTime) {
-        if (this.gameStatus === GAMESTATE.NOT_RUNNING || this.gameStatus === GAMESTATE.GAME_OVER)
+        if (this.gameStatus === GAMESTATE.NOT_RUNNING || this.gameStatus === GAMESTATE.GAME_OVER || this.gameStatus === GAMESTATE.PAUSE)
             return;
 
+        
         this.updateScore();
         this.updateOverlay();
         console.log(this.gameStatus);
         this.flag++;
+
+        if(this.gameStatus === GAMESTATE.REPLAY && ((this.flag) % 20) == 0){
+            this.replay();
+        }
+
+        if (this.gameStatus === GAMESTATE.REPLAY_MOVEMENT) {
+            if (!this.isAnimationHappening()) {
+                this.focusIndex -= 1;
+                this.boardsIndex -= 1;
+                this.scoreIndex -= 1;
+                this.turnCounter++;
+                this.gameStatus = GAMESTATE.REPLAY;
+            }
+        }
+
+       
 
         if(this.gameStatus != GAMESTATE.GAME_OVER){
             this.checkTurnGameEnd();
@@ -729,6 +815,8 @@ class Game {
 
     }
 
+    
+
     /**
      * Checks in the prolog if the current player looses in the middle of the game because of special circunstances
      * DEPRECATED because added a lot of bugs to the game
@@ -761,6 +849,28 @@ class Game {
             this.updateOverlay();
         }
     }
+    /**
+     * Resets all the scene pieces to the original positions
+     */
+    resetPieces(){
+        for(let i = 0; i < this.sceneBlackPieces.length; i++){
+            this.sceneBlackPieces[i].x = this.sceneBlackPieces[i].originalX;
+            this.sceneBlackPieces[i].y = this.sceneBlackPieces[i].originalY;
+            this.sceneBlackPieces[i].z = this.sceneBlackPieces[i].originalZ;
+        }
+
+        for(let i = 0; i < this.sceneWhitePieces.length; i++){
+            this.sceneWhitePieces[i].x = this.sceneWhitePieces[i].originalX;
+            this.sceneWhitePieces[i].y = this.sceneWhitePieces[i].originalY;
+            this.sceneWhitePieces[i].z = this.sceneWhitePieces[i].originalZ;
+        }
+
+        for(let i= 0; i < this.sceneMixPieces.length; i++){
+            this.sceneMixPieces[i].x = this.sceneMixPieces[i].originalX;
+            this.sceneMixPieces[i].y = this.sceneMixPieces[i].originalY;
+            this.sceneMixPieces[i].z = this.sceneMixPieces[i].originalZ;
+        }
+    }
 
 
 
@@ -778,7 +888,9 @@ GAMESTATE = {
     PLACE_PIECE: 3,
     GAME_OVER: 4,
     BOT_PLAY: 5,
-    REPLAY: 6
+    REPLAY: 6,
+    PAUSE: 7,
+    REPLAY_MOVEMENT: 8
 };
 /**
  * Gamemodes of the game

@@ -37,7 +37,7 @@ MyInterface.prototype.init = function (application) {
     // add a group of controls (and open/expand by defult)
     let menu = {
         undo: this.scene.game.undo.bind(this.scene.game),
-        replay: 'replay',
+        replay: this.scene.game.requestReplay.bind(this.scene.game),
         scene: this.scene
     };
 
@@ -180,6 +180,17 @@ MyInterface.prototype.processKeyboard = function (event) {
 
         case (99):
             this.scene.initCameras();
+            break;
+
+        case(116):
+            if(this.scene.game.gameStatus === GAMESTATE.PAUSE){
+                this.scene.game.gameStatus = this.scene.previousState;
+            }else{
+                this.scene.previousState = this.scene.game.gameStatus;
+                this.scene.game.gameStatus = GAMESTATE.PAUSE;
+                this.scene.game.updateOverlay();
+            }
+
             break;
 
     };
