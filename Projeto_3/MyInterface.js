@@ -172,15 +172,13 @@ MyInterface.prototype.processKeyboard = function (event) {
         case (112):
             if (this.scene.game.gameStatus == GAMESTATE.BOT_PLAY)
                 processBotMovement(this.scene.game.difficulties[0], this.scene.game.board, this.scene.game.currentPlayer + 1, this.scene.game.compareBoardBot.bind(this.scene.game));
-
-
             break;
         case (113):
             console.log('Try close conection');
             makeRequest('quit');
             break;
 
-        case(99):
+        case (99):
             this.scene.initCameras();
             break;
 

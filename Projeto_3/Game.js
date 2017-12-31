@@ -663,6 +663,7 @@ class Game {
         if (this.gameMode == GAMEMODE.BOT_VS_BOT && this.gameStatus == GAMESTATE.FIRST_MOVE && this.botIsPlaying == true && this.board.length > 1) {
             this.pieceFocus = this.sceneMixPieces[2];
             this.botIsPlaying = false;
+            this.turnCounter++;
             botFirstMove(this.board, this.compareFirstBoard.bind(this));
             this.updateAuxVars();
         }
