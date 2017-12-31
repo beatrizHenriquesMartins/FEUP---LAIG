@@ -146,6 +146,16 @@
             <file path="images/sky.jpg"/>
             <amplif_factor s="1" t="1"/>
         </TEXTURE>
+
+        <TEXTURE id="trunkTexture">
+            <file path="images/trunkTexture.jpeg"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
+
+        <TEXTURE id="flowers">
+            <file path="images/amendoeira.png"/>
+            <amplif_factor s="1" t="1"/>
+        </TEXTURE>
     </TEXTURES>
     
     <!-- Materials Group -->
@@ -421,12 +431,110 @@
             <SCALE sx="2.5" sy="2" sz="2.5"/>
 
             <DESCENDANTS>
-            <!--
-                <LEAF type="obj" args="pillowB"/>
                 <NODEREF id="trunk"/>
+                <NODEREF id="branch_1"/>
+                <NODEREF id="branch_2"/>                
+                <NODEREF id="top_tree_1"/>
+                <NODEREF id="top_tree_2"/>                                            
+                <NODEREF id="top_tree_3"/>                                            
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree: trunk -->
+        <NODE id="trunk">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="trunkTexture"/>
+
+            <TRANSLATION x="2.5" y="0.06" z="2.5"/>
+            <ROTATION axis="x" angle="-90"/>
+
+            <DESCENDANTS>
+                <LEAF type="cylinder" args="4 0.5 0.3 10 15 0 1"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree: branch_1 -->
+        <NODE id="branch_1">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="2.5" y="2" z="2.5"/>
+
+            <DESCENDANTS>
                 <NODEREF id="branch"/>
-                <NODEREF id="top_tree"/>                            
-            -->
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree: branch_2 -->
+        <NODE id="branch_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="2.5" y="1" z="2.5"/>
+            <ROTATION axis="x" angle="-90"/>
+
+            <DESCENDANTS>
+                <NODEREF id="branch"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree: branch -->
+        <NODE id="branch">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="trunkTexture"/>
+
+            <ROTATION axis="x" angle="-30"/>
+
+            <DESCENDANTS>
+                <LEAF type="cylinder" args="2 0.25 0.2 10 15 0 1"/>
+            </DESCENDANTS>
+        </NODE>
+        
+        <!-- tree: top_tree_1 -->
+        <NODE id="top_tree_1">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="2.3" y="2.7" z="4.5"/>
+            <ROTATION axis="x" angle="-30"/>
+            
+            <DESCENDANTS>
+                <NODEREF id="top_tree"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree: top_tree_2 -->
+        <NODE id="top_tree_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="2.5" y="5.25" z="2.5"/>      
+            <SCALE sx="2.5" sy="2.5" sz="2.5"/>      
+            
+            <DESCENDANTS>
+                <NODEREF id="top_tree"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree: top_tree_3 -->
+        <NODE id="top_tree_3">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="2.5" y="3" z="1.5"/>      
+            
+            <DESCENDANTS>
+                <NODEREF id="top_tree"/>
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree: top_tree -->
+        <NODE id="top_tree">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="flowers"/>
+
+            <DESCENDANTS>
+                <LEAF type="sphere" args="1 5 5"/>
             </DESCENDANTS>
         </NODE>
 
