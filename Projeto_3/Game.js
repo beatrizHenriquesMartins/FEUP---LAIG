@@ -535,7 +535,7 @@ class Game {
      */
     picked(pickedObj) {
 
-        if (this.gameStatus === GAMESTATE.NOT_RUNNING || this.gameStatus === GAMESTATE.BOT_PLAY || this.gameStatus === GAMESTATE.GAME_OVER || this.gameStatus === GAMESTATE.REPLAY) {
+        if (this.gameStatus === GAMESTATE.NOT_RUNNING || this.gameStatus === GAMESTATE.BOT_PLAY || this.gameStatus === GAMESTATE.GAME_OVER || this.gameStatus === GAMESTATE.REPLAY || this.gameMode === GAMEMODE.BOT_VS_BOT) {
             return;
         }
 
@@ -644,6 +644,7 @@ class Game {
         this.updateScore();
         this.updateOverlay();
         console.log(this.gameStatus);
+        this.flag++;
 
         if(this.gameStatus != GAMESTATE.GAME_OVER){
             this.checkTurnGameEnd();
@@ -666,7 +667,7 @@ class Game {
             this.updateAuxVars();
         }
 
-        if (this.gameStatus === GAMESTATE.BOT_PLAY && this.botIsPlaying == true && ((deltaTime) % 60) != 0) {
+        if (this.gameStatus === GAMESTATE.BOT_PLAY && this.botIsPlaying == true && ((this.flag) % 30) == 0) {
             this.botIsPlaying = false;
             this.turnCounter++;
            processBotMovement(this.difficulties[0], this.board, this.currentPlayer+1, this.compareBoardBot.bind(this));
@@ -747,12 +748,16 @@ class Game {
      */
     checkTurnGameEnd(){
         if(this.turnCounter >= 25){
+            this.boards.unshift(this.board);
+            console.log('TODOS OS BOARDs',this.boards);
+            console.log('TODAS AS PIECES',this.sceneBlackPieces,this.sceneMixPieces,this.sceneWhitePieces);
             this.gameStatus = GAMESTATE.GAME_OVER;
             if(this.whiteScore == this.blackScore || this.whiteScore > this.blackScore){
                 this.winner = PLAYERS.WHITE;
             }else{
                 this.winner = PLAYERS.BLACK;
             }
+            this.updateOverlay();
         }
     }
 

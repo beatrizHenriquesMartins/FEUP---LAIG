@@ -180,6 +180,10 @@ MyInterface.prototype.processKeyboard = function (event) {
             makeRequest('quit');
             break;
 
+        case(99):
+            this.scene.initCameras();
+            break;
+
     };
     var self = this;
     //Verifires when a key has been released (any key)
