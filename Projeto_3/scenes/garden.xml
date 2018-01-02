@@ -199,49 +199,13 @@
             <TEXTURE id="null"/>
         
             <DESCENDANTS>
-                <NODEREF id="walls"/>
                 <NODEREF id="floor"/>
                 <NODEREF id="table"/>
                 <NODEREF id="board_play"/>
                 <NODEREF id="pillows"/>
-                <NODEREF id="tree"/>                         
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- walls -->
-        <NODE id="walls">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="materialWalls"/>
-
-            <DESCENDANTS>
-                <NODEREF id="wall_1"/>
-                <NODEREF id="wall_2"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- walls: wall 1 -->
-        <NODE id="wall_1">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="20" y="6.5" z="0"/>
-            <SCALE sx="40" sy="13" sz="0.1"/>
-
-            <DESCENDANTS>
-                <NODEREF id="cube"/>
-            </DESCENDANTS>
-        </NODE>
-
-        <!-- walls: wall 2-->
-        <NODE id="wall_2">
-            <MATERIAL id="defaultMaterial"/>
-            <TEXTURE id="null"/>
-
-            <TRANSLATION x="0" y="6.5" z="20"/>
-            <SCALE sx="0.1" sy="13" sz="40"/>
-
-            <DESCENDANTS>
-                <NODEREF id="cube"/>
+                <NODEREF id="tree_1"/>                         
+                <NODEREF id="tree_2"/> 
+                <NODEREF id="tree_3"/> 
             </DESCENDANTS>
         </NODE>
 
@@ -278,7 +242,7 @@
             <ROTATION axis="x" angle="-90"/>
 
             <DESCENDANTS>
-                <LEAF type="circle" args="30 15"/>
+                <LEAF type="circle" args="30 12.5"/>
             </DESCENDANTS>
         </NODE>
 
@@ -422,13 +386,53 @@
                 <LEAF type="obj" args="pillowB"/>
             </DESCENDANTS>
         </NODE>
+        
+        <!-- tree 1 -->
+        <NODE id="tree_1">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="9.5" y="0.06" z="0.4"/>
+            <ROTATION axis="y" angle="-50"/>
+            <SCALE sx="2.5" sy="2" sz="2.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="tree"/>                                           
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree 2 -->
+        <NODE id="tree_2">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="5" y="0.06" z="10"/>
+            <ROTATION axis="y" angle="-50"/>
+            <SCALE sx="2.5" sy="2" sz="2.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="tree"/>                                           
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- tree 3 -->
+        <NODE id="tree_3">
+            <MATERIAL id="defaultMaterial"/>
+            <TEXTURE id="null"/>
+
+            <TRANSLATION x="20" y="0.06" z="-3"/>
+            <ROTATION axis="y" angle="-50"/>
+            <SCALE sx="2.5" sy="2" sz="2.5"/>
+
+            <DESCENDANTS>
+                <NODEREF id="tree"/>                                           
+            </DESCENDANTS>
+        </NODE>
 
         <!-- tree -->
         <NODE id="tree">
             <MATERIAL id="defaultMaterial"/>
             <TEXTURE id="null"/>
-
-            <SCALE sx="2.5" sy="2" sz="2.5"/>
 
             <DESCENDANTS>
                 <NODEREF id="trunk"/>
